@@ -9,6 +9,10 @@
 
 #include <GLFW/glfw3.h>
 
+#include "demos/procedural_brush.h"
+#include "demos/dynamic_resize.h"
+#include "demos/realtime_playback.h"
+
 int main(int argc, const char* argv[])
 {
 	
