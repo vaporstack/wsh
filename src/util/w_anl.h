@@ -10,15 +10,14 @@
 
 #include "../geo/w_line.h"
 
-
 typedef struct WLineAnalysis
 {
 	double* angles;
 	double* deltas;
 
-}	WLineAnalysis;
+} WLineAnalysis;
 
-WLineAnalysis*	w_anl_create(WLine* l);
-void			w_anl_destroy(WLineAnalysis* anl);
+WLineAnalysis* w_anl_create(WLine* l);
+void	   w_anl_destroy(WLineAnalysis* anl);
 
 #endif

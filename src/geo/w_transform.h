@@ -43,8 +43,8 @@ typedef struct WTransform
 } WTransform;
 //#include <stdio.h>
 
-void	w_transform_reset(WTransform* t);
-void 	w_transform_apply(WTransform* t);
-void 	w_transform_deapply(WTransform* t);
+void w_transform_reset(WTransform* t);
+void w_transform_apply(WTransform* t);
+void w_transform_deapply(WTransform* t);
 
 #endif /* w_transform_h */

@@ -12,71 +12,89 @@
 
 #include <stdbool.h>
 
-WDocument*	w_document_create()
+void w_document_meta_clear(WDocumentMeta* meta)
+{
+	meta->path	   = NULL;
+	meta->name	   = NULL;
+	meta->ref	    = NULL;
+	meta->fps	    = 24;
+	meta->fps_repr       = NULL;
+	meta->uuid	   = NULL;
+	meta->canvas_width   = 0;
+	meta->canvas_height  = 0;
+	meta->events	 = NULL;
+	meta->version_string = NULL;
+	meta->version	= 0;
+}
+
+WDocument* w_document_create()
 {
 	WDocument* doc = calloc(1, sizeof(WDocument));
-	//printf("Creating all document attributes\n");
+	// printf("Creating all document attributes\n");
 
 	char buf[128];
-	sprintf(buf, "%d_%d_%d", WSH_V_MAJOR, WSH_V_MINOR, WSH_V_PATCH);
+	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
+		WSH_VERSION_PATCH);
 
-	//printf("buf : %s\n", buf );
-	doc->state = W_DOC_STATE_NEVERSAVED;
-	doc->version = buf;
-	//doc->art.src = NULL;
-	//no guarantees
+	//meta->name = "Untitled";
 
-	doc->layers = NULL;
-	doc->layer_num = 1;
+	// printf("buf : %s\n", buf );
+	doc->state = W_DOC_STATE_CLEAN;
+	//doc->meta.version = buf;
+	// doc->art.src = NULL;
+	// no guarantees
+
+	doc->layers       = NULL;
+	doc->layer_num    = 1;
 	doc->sequence.src = NULL;
 
-	doc->version = buf;
-	doc->path = NULL;
+	//doc->version = buf;
+	//doc->path    = NULL;
 
-	doc->ref = NULL;
-	doc->meta = NULL;
+	//doc->ref  = NULL;
+	//doc->meta = NULL;
+	w_document_meta_clear(&doc->meta);
 
-	doc->uuid = NULL;
-	//doc->tags = NULL;
+	//doc->uuid = NULL;
+	// doc->tags = NULL;
 
 	return doc;
 }
 
-
-void w_document_destroy(WDocument* doc )
+void w_document_destroy(WDocument* doc)
 {
-	if ( doc == NULL )
+	if (doc == NULL)
 	{
 		return;
 	}
 
-	printf("Destroying all document attributes\n");
-	//if ( doc->art.src )
+	//printf("Destroying all document attributes\n");
+	// if ( doc->art.src )
 	//	w_object_destroy(doc->art.src);
 
-	if ( doc->sequence.src )
+	if (doc->sequence.src)
 		w_sequence_destroy(doc->sequence.src);
-
 }
 
-WDocument* w_document_copy(WDocument* old )
+WDocument* w_document_copy(WDocument* old)
 {
 	WDocument* doc = malloc(sizeof(WDocument));
-	//printf("buf : %s\n", buf );
+	// printf("buf : %s\n", buf );
 	doc->state = old->state;
-	doc->version = old->version;
+	//doc->meta = old->meta;
 
 	//	TODO: we haven't done layer logic yet.
-	doc->layers = NULL;
-	doc->layer_num = old->layer_num;
+	doc->layers       = NULL;
+	doc->layer_num    = old->layer_num;
 	doc->sequence.src = w_sequence_copy(old->sequence.src);
+	doc->meta	 = old->meta;
 
-	doc->version = old->version;
-	doc->path = old->path;
+	/*doc->version = old->version;
+	doc->path    = old->path;
 
-	doc->ref = old->ref;
-	doc->meta = old->meta;
+	doc->ref  = old->ref;
 	doc->uuid = old->uuid;
-	//doc->tags = old->tags;
+	*/
+	// doc->tags = old->tags;
 	return doc;
 }

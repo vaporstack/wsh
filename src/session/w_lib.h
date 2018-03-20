@@ -8,10 +8,7 @@
 #ifndef w_lib_h_
 #define w_lib_h_
 
-
-void	w_lib_init(void);
-void	w_lib_deinit(void);
-
-
+void w_lib_init(void);
+void w_lib_deinit(void);
 
 #endif

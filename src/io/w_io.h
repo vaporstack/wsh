@@ -11,10 +11,9 @@
 
 #include <stdio.h>
 
-
-void*			w_read_file_as_bin(const char* path, long* len);
-const char*		w_read_file_as_text(const char*);
-char*			w_read_file_as_text_nc(const char*);
-int				w_write_text_to_file(const char*, const char*);
+void*       w_read_file_as_bin(const char* path, long* len);
+const char* w_read_file_as_text(const char*);
+char*       w_read_file_as_text_nc(const char*);
+int	 w_write_text_to_file(const char*, const char*);
 
 #endif /* w_io_h */

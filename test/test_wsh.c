@@ -3,22 +3,30 @@
 #include "stdlib.h"
 #include <wsh/wsh.h>
 
-int
-main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	//	simple test program for wash.
 	//	create some geometry, write an svg, possibly a png?
 
 	printf("Running wsh tests.\n");
 	printf("making sure header matches library.\n");
+
 	if (wsh_check_version_match(wsh_get_version_string()))
 	{
 		printf("version matches.\n");
 	}
 	else
 	{
-		printf("Version does not match!\n");
+		printf("Version does not match!!\n");
 	}
+
+	WColor c;
+
+	//printf("Note: Commented out GPC code because it does not belong in wsh "
+	//     "which is a core datatype library\n");
+	return 0;
+
+	/*
 
 	WLine *line = w_line_create();
 
@@ -28,4 +36,5 @@ main(int argc, char **argv)
 	w_line_destroy(line);
 	w_object_destroy(obj);
 	return 0;
+	*/
 }

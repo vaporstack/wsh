@@ -9,9 +9,31 @@
 #ifndef wsh_h_
 #define wsh_h_
 
-#define WSH_V_MAJOR 0
-#define WSH_V_MINOR 0
-#define WSH_V_PATCH 1
+#include <stdio.h>
+#include <stdlib.h>
+
+#define WSH_VERSION_MAJOR 0
+#define WSH_VERSION_MINOR 0
+#define WSH_VERSION_PATCH 2
+
+int		    wsh_check_version_match(const char* str);
+int		    wsh_check_compat_match(const char* str);
+char*		    wsh_get_version_string(void);
+char*		    wsh_get_compat_string(void);
+static inline char* wsh_get_compat_string_header(void)
+{
+	char* buf = (char*)calloc(256, sizeof(char));
+	sprintf(buf, "%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR);
+	return buf;
+}
+
+static inline char* wsh_get_version_string_header(void)
+{
+	char* buf = (char*)calloc(256, sizeof(char));
+	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
+		WSH_VERSION_PATCH);
+	return buf;
+}
 
 /*
 #define STR1(x) #x
@@ -29,12 +51,12 @@
 #include "src/geo/w_sequence.h"
 #include "src/geo/w_transform.h"
 
-#include "src/decor/w_brush.h"
-#include "src/decor/w_brush_ops.h"
+#include "src/core/wsh_tool.h"
+
+//#include "src/decor/w_brush.h"
+//#include "src/decor/w_brush_ops.h"
 #include "src/io/w_io.h"
 #include "src/serial/w_serial.h"
 #include "src/util/w_line_ops.h"
-
-char *wsh_get_version_string(void);
 
 #endif /* w_includes_h */

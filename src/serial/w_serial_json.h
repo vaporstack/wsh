@@ -8,17 +8,21 @@
 #ifndef w_serial_json_h_
 #define w_serial_json_h_
 
-//#include <r4/src/r4_config.h>
 #include <wsh/wsh.h>
 
 //#ifndef RPLATFORM_IOS
-#include <include/cJSON.h>
+#include <cjson/cJSON.h>
 
-WObject*		w_unserialize_object_json(cJSON* data);
-WSequence*		w_unserialize_sequence_json(cJSON* data );
+cJSON*      w_serial_json_serialize_color(WColor col);
+cJSON*      w_serial_json_serialize_color16(WColor16 col);
+WColor      w_serial_json_unserialize_color(cJSON* data);
+WColor16    w_serial_json_unserialize_color16(cJSON* data);
+WObject*    w_serial_json_unserialize_object(cJSON* data);
+WSequence*  w_serial_json_unserialize_sequence(cJSON* data);
+const char* w_serial_json_serialize_document(WDocument*);
+WDocument*  w_serial_json_unserialize_document(const char* path);
 
-const char*		w_document_serialize_json(WDocument*);
-WDocument*		w_document_unserialize_json(const char* path);
+//void* w_serial_json_unserialize_document_generic(const char* path);
 
 //#endif
 

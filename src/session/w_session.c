@@ -7,16 +7,6 @@
 
 #include "w_session.h"
 
+int w_session_init() { return 1; }
 
-int w_session_init()
-{
-
-	return 1;
-}
-
-int w_session_deinit()
-{
-
-	return 1;
-}
-
+int w_session_deinit() { return 1; }

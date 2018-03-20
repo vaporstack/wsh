@@ -18,49 +18,50 @@ typedef struct WSequence
 	int num_frames;
 	int current_frame_index;
 	int num_golden_frames;
-	
+
 	int* golden_frames;
 
 	struct WObject** frames;
-	struct WObject* current_frame;
-	struct WObject* parent;
-
-	double anim_duration;
-	int anim_type;
-	WRect bounds;
+	struct WObject*  current_frame;
+	struct WObject*  parent;
+	
+	//double anim_start;
+	//double anim_end;
+	double     anim_duration;
+	int	anim_type;
+	WRect      bounds;
 	WTransform transform;
 
 } WSequence;
-
 
 typedef struct WSequenceHnd
 {
 	WSequence* src;
 } WSequenceHnd;
 
-WSequence*		w_sequence_create(void);
-void			w_sequence_destroy(WSequence* );
+WSequence* w_sequence_create(void);
+void       w_sequence_destroy(WSequence*);
 
-	WSequenceHnd*	w_sequence_hnd_create(void);
-void			w_sequence_hnd_destroy(WSequenceHnd*);
+WSequenceHnd* w_sequence_hnd_create(void);
+void	  w_sequence_hnd_destroy(WSequenceHnd*);
 
-WSequence*		w_sequence_copy(WSequence* seq);
+WSequence* w_sequence_copy(WSequence* seq);
 
-//old
-void 		w_sequence_frame_create(WSequence*,int );
+void w_sequence_normalize_time_continuous(WSequence* seq);
+void w_sequence_normalize_time_exploded(WSequence* seq);
 
-void		w_sequence_frame_set(WSequence *, int);
-void		w_sequence_frame_next(WSequence *);
-void		w_sequence_frame_prev(WSequence*);
-void		w_sequence_frame_add(WSequence* seq);
-void		w_sequence_frame_insert(WSequence* seq);
-void		w_sequence_frame_delete(WSequence* seq);
+void w_sequence_frame_create(WSequence*, int);
+void w_sequence_ensure_frame(WSequence* seq);
 
-void		w_sequence_frame_duplicate(WSequence* seq);
+void w_sequence_frame_set(WSequence*, int);
+void w_sequence_frame_next(WSequence*);
+void w_sequence_frame_prev(WSequence*);
+void w_sequence_frame_add(WSequence* seq);
+void w_sequence_frame_insert(WSequence* seq);
+void w_sequence_frame_delete(WSequence* seq);
 
-void		w_sequence_normalize(WSequence*);
+void w_sequence_frame_duplicate(WSequence* seq);
+
+void w_sequence_normalize(WSequence*);
 
 #endif
-
-
-

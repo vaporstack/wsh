@@ -10,11 +10,13 @@
 
 #include "../geo/w_line.h"
 
-WLine*	w_line_ops_dedupe(WLine*);
-WLine*	w_line_ops_subdiv(WLine*, double);
-WLine*	w_line_ops_smooth(WLine*, double);
-WLine*	w_line_ops_simplify(WLine*, double);
-WLine*	w_line_ops_douglaspeucker(WLine*, double);
-double	w_line_ops_sum(WLine*);
+WLine* w_line_ops_dedupe(WLine*);
+WLine* w_line_ops_subdiv(WLine*, double);
+WLine* w_line_ops_smooth(WLine*, double);
+WLine* w_line_ops_simplify(WLine*, double);
+WLine* w_line_ops_douglaspeucker(WLine*, double);
+double w_line_ops_sum(WLine*);
+
+bool w_line_intersects_rect(WLine* line, WRect* rect);
 
 #endif

@@ -8,8 +8,9 @@
 #ifndef w_session_h_
 #define w_session_h_
 
+#include "../core/wsh_tool.h"
 
-
+/*
 typedef struct ToolDesc
 {
 	char* tool_name;
@@ -19,15 +20,15 @@ typedef struct ToolDesc
 typedef struct StrokeAttr
 {
 	char* stroke_name;
-	int stroke_type;
+	int   stroke_type;
 } StokeAttr;
+*/
 
 int w_session_rec_frame_switch(void);
-
 int w_session_rec_switch_tool(void);
-int w_session_rec_tool_activity(ToolDesc* desc);
-int w_session_rec_tool_cease(ToolDesc* desc);
-int w_session_rec_tool_begin(ToolDesc* desc);
+int w_session_rec_tool_activity(WshToolRec* rec);
+int w_session_rec_tool_cease(WshToolRec* rec);
+int w_session_rec_tool_begin(WshToolRec* rec);
 int w_session_init(void);
 int w_session_deinit(void);
 

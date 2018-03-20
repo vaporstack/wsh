@@ -32,22 +32,22 @@ typedef struct
 } WPoint;
 
 /*
-*
-*/
+ *
+ */
 void w_point_zero(WPoint *);
 
 /**
-*
-*@return WPoint
-*
-*/
+ *
+ *@return WPoint
+ *
+ */
 WPoint *w_point_create(void);
 
 /**
-*
-*@return WPoint
-*
-*/
+ *
+ *@return WPoint
+ *
+ */
 WPoint *w_point_create_2f(double, double);
 
 #endif /* w_point_h */

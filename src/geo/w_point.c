@@ -9,7 +9,6 @@
 #include "w_point.h"
 #include "../w_includes.h"
 
-
 /** @brief Create a point, on the heap.
  *
  *  Create a point
@@ -17,14 +16,14 @@
  *  @return The point structure, allocated on heap.
  */
 
-WPoint* w_point_create(){
+WPoint* w_point_create()
+{
 	WPoint* p = calloc(1, sizeof(WPoint));
-	//WPoint p;
+	// WPoint p;
 	//(*p).x = .7;
 	p->x = 0;
 	return p;
 }
-
 
 /** @brief Create a point, on the heap.
  *
@@ -38,14 +37,13 @@ WPoint* w_point_create(){
 WPoint* w_point_create_2f(double x, double y)
 {
 	WPoint* p = w_point_create();
-	p->x = x;
-	p->y = y;
+	p->x      = x;
+	p->y      = y;
 	return p;
-
 }
 
-void	w_point_zero(WPoint* p)
+void w_point_zero(WPoint* p)
 {
-	p->pressure = p->rotation = p->tilt_x = p->tilt_y = p->time = p->x = p->y = 0;
+	p->pressure = p->rotation = p->tilt_x = p->tilt_y = p->time = p->x =
+	    p->y						    = 0;
 }
-

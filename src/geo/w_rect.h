@@ -9,13 +9,15 @@
 #ifndef w_rect_h
 #define w_rect_h
 
-
 #include "w_point.h"
 
+//	todo : kill this?
 typedef struct
 {
 	WPoint pos;
 	WPoint size;
 } WRect;
+
+int w_rect_within_bounds(WRect* bounds, double x, double y);
 
 #endif /* w_rect_h */

@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DAC88303-AC19-478A-9F31-56D539CB6CC7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>wsh</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)../../../contrib;$(ProjectDir)../../../contrib/platform/win/include;$(ProjectDir)../../../libs;$(ProjectDir)../../../contrib/include;$(HOME)\AppData\Local\Programs\Python\Python36-32\include;C:\Users\standard\AppData\Local\Programs\Python\Python36-32\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(ProjectDir)..\..\..\contrib\platform\win\32</LibraryPath>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <OutDir>$(SolutionDir)../../../build/$(Platform)/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)../../../contrib;$(ProjectDir)../../../contrib/platform/win/include;$(ProjectDir)../../../libs;$(ProjectDir)../../../contrib/include;$(HOME)\AppData\Local\Programs\Python\Python36-32\include;C:\Users\standard\AppData\Local\Programs\Python\Python36-32\include</IncludePath>
+    <OutDir>$(SolutionDir)../../../build/$(Platform)/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)../../../contrib;$(ProjectDir)../../../contrib/platform/win/include;$(ProjectDir)../../../libs;$(ProjectDir)../../../contrib/include;$(HOME)\AppData\Local\Programs\Python\Python36-32\include;C:\Users\standard\AppData\Local\Programs\Python\Python36-32\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;$(ProjectDir)..\..\..\contrib\platform\win\64</LibraryPath>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <OutDir>$(SolutionDir)../../../build/$(Platform)/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir)../../../contrib;$(ProjectDir)../../../contrib/platform/win/include;$(ProjectDir)../../../libs;$(ProjectDir)../../../contrib/include;$(HOME)\AppData\Local\Programs\Python\Python36-32\include;C:\Users\standard\AppData\Local\Programs\Python\Python36-32\include</IncludePath>
+    <OutDir>$(SolutionDir)../../../build/$(Platform)/</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;WASH_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;WASH_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RemoveUnreferencedCodeData>false</RemoveUnreferencedCodeData>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\decor\w_brush.c" />
+    <ClCompile Include="..\src\decor\w_brush_eng.c" />
+    <ClCompile Include="..\src\geo\w_color.c" />
+    <ClCompile Include="..\src\geo\w_document.c" />
+    <ClCompile Include="..\src\geo\w_line.c" />
+    <ClCompile Include="..\src\geo\w_object.c" />
+    <ClCompile Include="..\src\geo\w_point.c" />
+    <ClCompile Include="..\src\geo\w_point_a.c" />
+    <ClCompile Include="..\src\geo\w_rect.c" />
+    <ClCompile Include="..\src\geo\w_sequence.c" />
+    <ClCompile Include="..\src\geo\w_transform.c" />
+    <ClCompile Include="..\src\io\w_io.c" />
+    <ClCompile Include="..\src\serial\w_serial.c" />
+    <ClCompile Include="..\src\serial\w_serial_bin.c" />
+    <ClCompile Include="..\src\serial\w_serial_json.c" />
+    <ClCompile Include="..\src\serial\w_serial_svg.c" />
+    <ClCompile Include="..\src\util\w_gpc.c" />
+    <ClCompile Include="..\src\util\w_line_ops.c" />
+    <ClCompile Include="..\src\util\w_tess.c" />
+    <ClCompile Include="..\src\util\w_triangle.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\decor\w_brush.h" />
+    <ClInclude Include="..\src\decor\w_brush_eng.h" />
+    <ClInclude Include="..\src\geo\w_color.h" />
+    <ClInclude Include="..\src\geo\w_document.h" />
+    <ClInclude Include="..\src\geo\w_line.h" />
+    <ClInclude Include="..\src\geo\w_object.h" />
+    <ClInclude Include="..\src\geo\w_point.h" />
+    <ClInclude Include="..\src\geo\w_point_a.h" />
+    <ClInclude Include="..\src\geo\w_rect.h" />
+    <ClInclude Include="..\src\geo\w_sequence.h" />
+    <ClInclude Include="..\src\geo\w_transform.h" />
+    <ClInclude Include="..\src\io\w_io.h" />
+    <ClInclude Include="..\src\serial\w_serial.h" />
+    <ClInclude Include="..\src\serial\w_serial_bin.h" />
+    <ClInclude Include="..\src\serial\w_serial_json.h" />
+    <ClInclude Include="..\src\serial\w_serial_svg.h" />
+    <ClInclude Include="..\src\util\w_gpc.h" />
+    <ClInclude Include="..\src\util\w_line_ops.h" />
+    <ClInclude Include="..\src\util\w_tess.h" />
+    <ClInclude Include="..\src\util\w_triangle.h" />
+    <ClInclude Include="..\src\w_includes.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

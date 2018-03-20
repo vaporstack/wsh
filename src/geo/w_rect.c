@@ -7,3 +7,9 @@
 //
 
 #include "w_rect.h"
+
+int w_rect_within_bounds(WRect* bounds, double x, double y)
+{
+	return ( x > bounds->pos.x && y > bounds->pos.y && x < bounds->pos.x + bounds->size.x && y < bounds->pos.y + bounds->size.y);
+	
+}

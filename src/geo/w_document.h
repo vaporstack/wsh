@@ -15,33 +15,54 @@
 enum
 {
 	W_DOC_STATE_UNKNOWN,
-	W_DOC_STATE_NEVERSAVED,
+	//W_DOC_STATE_NEVERSAVED,
 	W_DOC_STATE_CLEAN,
 	W_DOC_STATE_DIRTY
 };
 
+typedef struct EventList
+{
+	const char**       descriptions;
+	double**	   times;
+	unsigned long long num;
+} EventList;
+
+typedef struct WDocumentMeta
+{
+	//	session
+	EventList* events;
+
+	//	plugins
+	// ????
+
+	//	canvas
+	int canvas_width;
+	int canvas_height;
+
+	//	info
+	int	 version;
+	const char* version_string;
+	const char* path;
+	const char* name;
+	const char* ref;
+	double      fps;
+	const char* fps_repr;
+	const char* uuid;
+
+} WDocumentMeta;
+
 typedef struct
 {
 
-	//	info - stuff about the document itself
 	int state;
-	char* version;
-	char* path;
-	char* ref;
-		const char* uuid;
 
-	//	meta - info about the creation of the data
-	void* meta;
-	
-	//	not sure if tags belong to meta or not. keeping in for now.
-	//	these probably belong in meta
-	//	const char* tags;
+	WDocumentMeta meta;
 
-	//	the data itself
-	WSequenceHnd sequence;
-	WSequenceHnd ** layers;
+	WSequenceHnd   sequence;
+	WSequenceHnd** layers;
+
 	int layer_num;
-	
+
 } WDocument;
 
 typedef struct WDocumentHnd
@@ -49,11 +70,10 @@ typedef struct WDocumentHnd
 	WDocument* src;
 } WDocumentHnd;
 
+WDocument* w_document_create(void);
+void       w_document_destroy(WDocument*);
 
-WDocument*	w_document_create(void);
-void		w_document_destroy(WDocument* );
-
-WDocument*	w_document_copy(WDocument* );
-
+WDocument* w_document_copy(WDocument*);
+void       w_document_meta_clear(WDocumentMeta* meta);
 
 #endif /* w_document_h */

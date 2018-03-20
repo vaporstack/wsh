@@ -9,11 +9,9 @@
 #ifndef w_includes_h
 #define w_includes_h
 
-#include <r4/src/r4_platform.h>
-
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 #endif /* w_includes_h */
