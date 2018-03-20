@@ -43,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5711BFB82061AEA400DD36E0 /* w_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_math.h; sourceTree = "<group>"; };
 		571EA81A1F6786B100BF579D /* w_node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_node.c; sourceTree = "<group>"; };
 		571EA81B1F6786B100BF579D /* w_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_node.h; sourceTree = "<group>"; };
 		572B31661E5BEC4E00682D82 /* w_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_io.c; sourceTree = "<group>"; };
@@ -194,6 +195,7 @@
 		D1811B0A1EA7F06100927292 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				5711BFB82061AEA400DD36E0 /* w_math.h */,
 				D1811B0E1EA7F06100927292 /* w_line_ops.h */,
 				D1811B0D1EA7F06100927292 /* w_line_ops.c */,
 			);
