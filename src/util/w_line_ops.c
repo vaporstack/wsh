@@ -19,7 +19,7 @@
 #define DEBUG_LINE_OPS true
 
 /*
-static inline double dist2d_p( WPoint* a, WPoint* b)
+static inline double w_dist2d_p( WPoint* a, WPoint* b)
 {
 	return sqrt( (fabs( a->x - b->x)) * (fabs( a->x - b->x)) +
 				(fabs( a->y - b->y)) * (fabs( a->y- b->y)) );
@@ -213,7 +213,7 @@ WLine* w_line_ops_simplify(WLine* line, double r)
 	for (int i = 0; i < line->num - 1; ++i) {
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
-		double d = dist2d_p(&a, &b);
+		double d = w_dist2d_p(&a, &b);
 		if (d > r) {
 			w_line_add_point(cpy, b);
 		}
@@ -231,7 +231,7 @@ double w_line_ops_sum(WLine* line)
 	for (int i = 0; i < line->num - 1; ++i) {
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
-		double d = dist2d_p(&a, &b);
+		double d = w_dist2d_p(&a, &b);
 		r += d;
 	}
 	return r;

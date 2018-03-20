@@ -11,9 +11,12 @@
 
 #include <stdio.h>
 
+
+typedef void(*draw_fn)(void);
+
 typedef struct WashDemo
 {
-	int foo;
+	draw_fn draw;
 } WashDemo;
 
 #endif /* demo_h */

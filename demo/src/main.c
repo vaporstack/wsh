@@ -12,11 +12,15 @@
 #include "demos/procedural_brush.h"
 #include "demos/dynamic_resize.h"
 #include "demos/realtime_playback.h"
-
+#include "demos/cel_animation.h"
 GLFWwindow* window = NULL;
 #include <wsh/wsh.h>
 
 WDocumentHnd document;
+
+#define NUM_DEMOS 4
+WashDemo* demos[NUM_DEMOS] = {&cel_animation, &procedural_brush, &dynamic_resize, &realtime_playback };
+WashDemo* current_demo = NULL;
 
 static void joystick_callback(int joy, int event)
 {
@@ -134,6 +138,8 @@ int main(int argc, const char* argv[])
 	glfwMakeContextCurrent(window);
 	
 	document.src = w_serial_json_unserialize_document("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
+	
+	
 	
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

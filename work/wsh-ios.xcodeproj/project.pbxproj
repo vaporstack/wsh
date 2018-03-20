@@ -107,11 +107,11 @@
 		5760D416205B2B57005A9373 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				5760D418205B2B57005A9373 /* w_line_ops.h */,
 				5711BFC92061B5BB00DD36E0 /* w_math.h */,
-				5760D41A205B2B57005A9373 /* w_anl.c */,
+				5760D418205B2B57005A9373 /* w_line_ops.h */,
 				5760D41D205B2B57005A9373 /* w_line_ops.c */,
 				5760D41E205B2B57005A9373 /* w_anl.h */,
+				5760D41A205B2B57005A9373 /* w_anl.c */,
 			);
 			path = util;
 			sourceTree = "<group>";
