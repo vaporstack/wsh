@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5760D415205B2B13005A9373 /* w_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D414205B2B13005A9373 /* w_color.c */; };
-		5760D41F205B2B57005A9373 /* w_triangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D417205B2B57005A9373 /* w_triangle.c */; };
 		5760D420205B2B57005A9373 /* w_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41A205B2B57005A9373 /* w_anl.c */; };
-		5760D421205B2B57005A9373 /* w_tess.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41C205B2B57005A9373 /* w_tess.c */; };
 		5760D422205B2B57005A9373 /* w_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41D205B2B57005A9373 /* w_line_ops.c */; };
 		5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D432205B3F5C005A9373 /* wsh_tool.c */; };
 		5795CBBF1E5E7B3E0094BF85 /* w_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 5795CBBB1E5E7B3E0094BF85 /* w_io.c */; };
@@ -25,7 +23,6 @@
 		D16AB6271E889FA2008B9072 /* w_serial.c in Sources */ = {isa = PBXBuildFile; fileRef = D16AB61A1E889FA2008B9072 /* w_serial.c */; };
 		D16AB62A1E889FA2008B9072 /* w_serial_bin.c in Sources */ = {isa = PBXBuildFile; fileRef = D16AB61E1E889FA2008B9072 /* w_serial_bin.c */; };
 		D16AB62C1E889FA2008B9072 /* w_serial_json.c in Sources */ = {isa = PBXBuildFile; fileRef = D16AB6211E889FA2008B9072 /* w_serial_json.c */; };
-		D16AB62E1E889FA2008B9072 /* w_serial_svg.c in Sources */ = {isa = PBXBuildFile; fileRef = D16AB6241E889FA2008B9072 /* w_serial_svg.c */; };
 		D16AB6321E88A1E9008B9072 /* w_sequence.c in Sources */ = {isa = PBXBuildFile; fileRef = D16AB6301E88A1E9008B9072 /* w_sequence.c */; };
 /* End PBXBuildFile section */
 
@@ -42,14 +39,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5711BFC92061B5BB00DD36E0 /* w_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_math.h; sourceTree = "<group>"; };
 		5760D413205B2B13005A9373 /* w_color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_color.h; sourceTree = "<group>"; };
 		5760D414205B2B13005A9373 /* w_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_color.c; sourceTree = "<group>"; };
-		5760D417205B2B57005A9373 /* w_triangle.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_triangle.c; sourceTree = "<group>"; };
 		5760D418205B2B57005A9373 /* w_line_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_line_ops.h; sourceTree = "<group>"; };
-		5760D419205B2B57005A9373 /* w_tess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_tess.h; sourceTree = "<group>"; };
 		5760D41A205B2B57005A9373 /* w_anl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_anl.c; sourceTree = "<group>"; };
-		5760D41B205B2B57005A9373 /* w_triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_triangle.h; sourceTree = "<group>"; };
-		5760D41C205B2B57005A9373 /* w_tess.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_tess.c; sourceTree = "<group>"; };
 		5760D41D205B2B57005A9373 /* w_line_ops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_line_ops.c; sourceTree = "<group>"; };
 		5760D41E205B2B57005A9373 /* w_anl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_anl.h; sourceTree = "<group>"; };
 		5760D432205B3F5C005A9373 /* wsh_tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_tool.c; sourceTree = "<group>"; };
@@ -84,8 +78,6 @@
 		D16AB61F1E889FA2008B9072 /* w_serial_bin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_serial_bin.h; sourceTree = "<group>"; };
 		D16AB6211E889FA2008B9072 /* w_serial_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_serial_json.c; sourceTree = "<group>"; };
 		D16AB6221E889FA2008B9072 /* w_serial_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_serial_json.h; sourceTree = "<group>"; };
-		D16AB6241E889FA2008B9072 /* w_serial_svg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_serial_svg.c; sourceTree = "<group>"; };
-		D16AB6251E889FA2008B9072 /* w_serial_svg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_serial_svg.h; sourceTree = "<group>"; };
 		D16AB6301E88A1E9008B9072 /* w_sequence.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_sequence.c; sourceTree = "<group>"; };
 		D16AB6311E88A1E9008B9072 /* w_sequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_sequence.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,12 +107,9 @@
 		5760D416205B2B57005A9373 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				5760D417205B2B57005A9373 /* w_triangle.c */,
 				5760D418205B2B57005A9373 /* w_line_ops.h */,
-				5760D419205B2B57005A9373 /* w_tess.h */,
+				5711BFC92061B5BB00DD36E0 /* w_math.h */,
 				5760D41A205B2B57005A9373 /* w_anl.c */,
-				5760D41B205B2B57005A9373 /* w_triangle.h */,
-				5760D41C205B2B57005A9373 /* w_tess.c */,
 				5760D41D205B2B57005A9373 /* w_line_ops.c */,
 				5760D41E205B2B57005A9373 /* w_anl.h */,
 			);
@@ -229,8 +218,6 @@
 				D16AB61F1E889FA2008B9072 /* w_serial_bin.h */,
 				D16AB6211E889FA2008B9072 /* w_serial_json.c */,
 				D16AB6221E889FA2008B9072 /* w_serial_json.h */,
-				D16AB6241E889FA2008B9072 /* w_serial_svg.c */,
-				D16AB6251E889FA2008B9072 /* w_serial_svg.h */,
 			);
 			path = serial;
 			sourceTree = "<group>";
@@ -297,18 +284,15 @@
 				57F0DD8C1E49338700949D90 /* w_document.c in Sources */,
 				57F0DD951E49338700949D90 /* w_point.c in Sources */,
 				57F0DD8F1E49338700949D90 /* w_line.c in Sources */,
-				D16AB62E1E889FA2008B9072 /* w_serial_svg.c in Sources */,
 				D1225D331EF32B56001CBC22 /* w_layer.c in Sources */,
 				D16AB62C1E889FA2008B9072 /* w_serial_json.c in Sources */,
 				5760D420205B2B57005A9373 /* w_anl.c in Sources */,
 				57F0DD9E1E49338700949D90 /* w_transform.c in Sources */,
 				D16AB6271E889FA2008B9072 /* w_serial.c in Sources */,
-				5760D41F205B2B57005A9373 /* w_triangle.c in Sources */,
 				57F0DD981E49338700949D90 /* w_point_a.c in Sources */,
 				57F0DD921E49338700949D90 /* w_object.c in Sources */,
 				D16AB6321E88A1E9008B9072 /* w_sequence.c in Sources */,
 				5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */,
-				5760D421205B2B57005A9373 /* w_tess.c in Sources */,
 				5795CBBF1E5E7B3E0094BF85 /* w_io.c in Sources */,
 				D16AB62A1E889FA2008B9072 /* w_serial_bin.c in Sources */,
 				5760D422205B2B57005A9373 /* w_line_ops.c in Sources */,
@@ -429,6 +413,8 @@
 					"$(r4_root)/contrib/src",
 					"$(r4_root)/libs",
 					"$(r4_root)/contrib",
+					../../../contrib/deps,
+					../../../contrib/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-ObjC";
@@ -447,6 +433,8 @@
 					"$(r4_root)/contrib/src",
 					"$(r4_root)/libs",
 					"$(r4_root)/contrib",
+					../../../contrib/deps,
+					../../../contrib/include,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-ObjC";

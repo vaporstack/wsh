@@ -6,7 +6,6 @@
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "demo.h"
 #include "dynamic_resize.h"
 
 WashDemo dynamic_resize;

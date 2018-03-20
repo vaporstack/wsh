@@ -434,7 +434,9 @@
 					/usr/local/Cellar/libxml2/2.9.4_2/include/libxml2,
 					/usr/local/include,
 					/opt/X11/include,
-					../contrib/,
+					../../../contrib/include,
+					../../../contrib/deps,
+					../../../contrib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;
@@ -453,7 +455,9 @@
 					/usr/local/Cellar/libxml2/2.9.4_2/include/libxml2,
 					/usr/local/include,
 					/opt/X11/include,
-					../contrib/,
+					../../../contrib/include,
+					../../../contrib/deps,
+					../../../contrib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;

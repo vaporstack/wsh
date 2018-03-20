@@ -13,11 +13,108 @@
 #include "demos/dynamic_resize.h"
 #include "demos/realtime_playback.h"
 
+GLFWwindow* window = NULL;
+#include <wsh/wsh.h>
+
+WDocumentHnd document;
+
+static void joystick_callback(int joy, int event)
+{
+	
+}
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+	
+	
+	
+}
+
+static void window_pos_callback(GLFWwindow* window, int x, int y)
+{
+	
+	
+}
+
+static void window_size_callback(GLFWwindow* window, int width, int height)
+{
+	
+	
+	
+}
+
+// static void draw_joysticks(void);
+
+static void scroll_callback(GLFWwindow* window, double x, double y)
+{
+	
+	
+}
+
+static void mouse_button_callback(GLFWwindow* window, int button, int action,
+				  int mods)
+{
+	
+	
+}
+
+static void cursor_enter_callback(GLFWwindow* window, int entered)
+{
+	
+}
+
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	
+	
+}
+
+static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
+{
+	
+	
+	
+	
+}
+
+static void drop_callback(GLFWwindow* window, int num, const char** paths)
+{
+	
+}
+
+static void setup_callbacks()
+{
+	glfwSetCursorPosCallback(window, cursor_position_callback);
+	glfwSetCursorEnterCallback(window, cursor_enter_callback);
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetWindowPosCallback(window, window_pos_callback);
+	
+	glfwSetWindowSizeCallback(window, window_size_callback);
+	
+	//#ifndef R4_COMPAT_OPENFRAMEWORKS
+	glfwSetJoystickCallback(joystick_callback);
+	//#endif
+	
+	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetDropCallback(window, drop_callback);
+}
+
+static void draw(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	
+	if ( document.src )
+	{
+		
+	}
+}
+
 int main(int argc, const char* argv[])
 {
 	
 	
-	GLFWwindow* window;
 	
 	/* Initialize the library */
 	if (!glfwInit())
@@ -31,14 +128,18 @@ int main(int argc, const char* argv[])
 		return -1;
 	}
 	
+	setup_callbacks();
+	
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+	
+	document.src = w_serial_json_unserialize_document("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
 	
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		draw();
 		
 		/* Swap front and back buffers */
 		glfwSwapBuffers(window);

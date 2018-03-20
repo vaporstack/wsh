@@ -8,6 +8,5 @@
 
 #include "realtime_playback.h"
 
-#include "demo.h"
 
 WashDemo realtime_playback;

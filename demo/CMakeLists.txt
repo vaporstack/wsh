@@ -98,7 +98,8 @@ else (OPENGL_FOUND)
 	MESSAGE("OpenGL environment missing")
 endif (OPENGL_FOUND)
 
-file(GLOB sources src/*.c)
+file(GLOB sources src/*.c src/demos/*.c ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
+
 message(${sources})
 
 add_executable(demo_wash ${sources})

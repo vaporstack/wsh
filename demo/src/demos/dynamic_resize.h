@@ -9,5 +9,8 @@
 #ifndef dynamic_resize_h
 #define dynamic_resize_h
 
+#include "demo.h"
+
+extern WashDemo dynamic_resize;
 
 #endif /* dynamic_resize_h */

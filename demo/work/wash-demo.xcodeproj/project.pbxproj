@@ -11,6 +11,10 @@
 		5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */; };
 		5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFB02061A8E900DD36E0 /* procedural_brush.c */; };
 		5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFB52061A96A00DD36E0 /* realtime_playback.c */; };
+		5711BFD32061C6F900DD36E0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 5711BFD22061C6F900DD36E0 /* data */; };
+		5711BFD62061C7C000DD36E0 /* primitives.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFD52061C7C000DD36E0 /* primitives.c */; };
+		5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDA2061C84600DD36E0 /* cJSON.c */; };
+		5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDD2061C8F400DD36E0 /* cel_animation.c */; };
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
 		5760EC852061798300430B0A /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760EC842061798300430B0A /* libglfw.dylib */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
@@ -44,6 +48,12 @@
 		5711BFB32061A93B00DD36E0 /* dynamic_resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynamic_resize.h; sourceTree = "<group>"; };
 		5711BFB42061A96A00DD36E0 /* realtime_playback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = realtime_playback.h; sourceTree = "<group>"; };
 		5711BFB52061A96A00DD36E0 /* realtime_playback.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = realtime_playback.c; sourceTree = "<group>"; };
+		5711BFD22061C6F900DD36E0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
+		5711BFD42061C7C000DD36E0 /* primitives.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = primitives.h; path = ../demo/src/primitives.h; sourceTree = "<group>"; };
+		5711BFD52061C7C000DD36E0 /* primitives.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = primitives.c; path = ../demo/src/primitives.c; sourceTree = "<group>"; };
+		5711BFDA2061C84600DD36E0 /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
+		5711BFDC2061C8F400DD36E0 /* cel_animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cel_animation.h; sourceTree = "<group>"; };
+		5711BFDD2061C8F400DD36E0 /* cel_animation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cel_animation.c; sourceTree = "<group>"; };
 		5760EC82206178D200430B0A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../demo/src/main.c; sourceTree = "<group>"; };
 		5760EC842061798300430B0A /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		578BCE362061782C00672199 /* wash-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wash-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,8 +95,10 @@
 			isa = PBXGroup;
 			children = (
 				5711BFAD2061A87F00DD36E0 /* demo.h */,
-				5711BFB02061A8E900DD36E0 /* procedural_brush.c */,
+				5711BFDC2061C8F400DD36E0 /* cel_animation.h */,
+				5711BFDD2061C8F400DD36E0 /* cel_animation.c */,
 				5711BFB22061A93400DD36E0 /* procedural_brush.h */,
+				5711BFB02061A8E900DD36E0 /* procedural_brush.c */,
 				5711BFB32061A93B00DD36E0 /* dynamic_resize.h */,
 				5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */,
 				5711BFB42061A96A00DD36E0 /* realtime_playback.h */,
@@ -96,12 +108,22 @@
 			path = ../demo/src/demos;
 			sourceTree = "<group>";
 		};
+		5711BFD92061C84100DD36E0 /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				5711BFDA2061C84600DD36E0 /* cJSON.c */,
+			);
+			path = deps;
+			sourceTree = "<group>";
+		};
 		578BCE2D2061782C00672199 = {
 			isa = PBXGroup;
 			children = (
+				5711BFD22061C6F900DD36E0 /* data */,
 				5711BFA12061919900DD36E0 /* wsh.xcodeproj */,
 				578BCE4D2061788000672199 /* macos */,
 				5760EC842061798300430B0A /* libglfw.dylib */,
+				5711BFD92061C84100DD36E0 /* deps */,
 				578BCE4A2061785300672199 /* src */,
 				578BCE372061782C00672199 /* Products */,
 				5711BFA9206191A500DD36E0 /* Frameworks */,
@@ -121,6 +143,8 @@
 			children = (
 				5711BFAC2061A86F00DD36E0 /* demos */,
 				5760EC82206178D200430B0A /* main.c */,
+				5711BFD42061C7C000DD36E0 /* primitives.h */,
+				5711BFD52061C7C000DD36E0 /* primitives.c */,
 			);
 			name = src;
 			path = ../../src;
@@ -215,6 +239,7 @@
 			files = (
 				578BCE552061788000672199 /* Assets.xcassets in Resources */,
 				578BCE562061788000672199 /* MainMenu.xib in Resources */,
+				5711BFD32061C6F900DD36E0 /* data in Resources */,
 				578BCE582061788000672199 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,9 +251,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */,
 				5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */,
+				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
 				5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */,
 				5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */,
+				5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,7 +394,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W7MSG2FEA9;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					../../../,
+					../../contrib/cjson,
+					../../contrib,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
@@ -383,7 +416,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W7MSG2FEA9;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					../../../,
+					../../contrib/cjson,
+					../../contrib,
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;

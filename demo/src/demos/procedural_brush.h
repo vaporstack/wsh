@@ -8,6 +8,8 @@
 
 #ifndef procedural_brush_h
 #define procedural_brush_h
+#include "demo.h"
 
+extern WashDemo procedural_brush;
 
 #endif /* procedural_brush_h */

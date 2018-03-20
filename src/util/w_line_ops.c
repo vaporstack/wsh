@@ -12,6 +12,7 @@
 #include <wsh/wsh.h>
 
 #include <stdio.h>
+#include "../util/w_math.h"
 
 #define DEBUG_LINE_OPS true
 

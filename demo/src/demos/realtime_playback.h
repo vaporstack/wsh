@@ -9,6 +9,8 @@
 #ifndef realtime_playback_h
 #define realtime_playback_h
 
-#include <stdio.h>
+#include "demo.h"
+
+extern WashDemo realtime_playback;
 
 #endif /* realtime_playback_h */
