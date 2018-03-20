@@ -44,6 +44,7 @@ static inline char* wsh_get_version_string_header(void)
 
 //#error W_LIBWASH_SVER(WASH_V_MAJOR, WASH_V_MINOR, WASH_V_PATCH)
 
+#include "src/util/w_math.h"
 #include "src/geo/w_document.h"
 #include "src/geo/w_line.h"
 #include "src/geo/w_object.h"
