@@ -13,10 +13,16 @@
 #include "demos/dynamic_resize.h"
 #include "demos/realtime_playback.h"
 #include "demos/cel_animation.h"
-GLFWwindow* window = NULL;
+
+#include "primitives.h"
+
 #include <wsh/wsh.h>
 
+GLFWwindow* window = NULL;
 WDocumentHnd document;
+
+#define WINDOW_WIDTH 512
+#define WINDOW_HEIGHT 256
 
 #define NUM_DEMOS 4
 WashDemo* demos[NUM_DEMOS] = {&cel_animation, &procedural_brush, &dynamic_resize, &realtime_playback };
@@ -109,9 +115,14 @@ static void draw(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	
+	d_square(.5);
+	d_square(128);
 	if ( document.src )
 	{
-		
+		WSequence* seq = document.src->sequence.src;
+		WObject* first = seq->frames[0];
+		d_wobject_verts(first);
+		d_wobject_e(first);
 	}
 }
 
@@ -136,10 +147,15 @@ int main(int argc, const char* argv[])
 	
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
+	d_init();
+	d_setup_projection(WINDOW_WIDTH, WINDOW_HEIGHT);
 	
 	document.src = w_serial_json_unserialize_document("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
 	
+	if ( document.src )
+		w_sequence_normalize(document.src->sequence.src);
 	
+	d_color(1,1,1,.5);
 	
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
