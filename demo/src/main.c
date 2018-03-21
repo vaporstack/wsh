@@ -16,6 +16,8 @@
 GLFWwindow* window = NULL;
 #include <wsh/wsh.h>
 
+#include "input/input_tablet.h"
+
 WDocumentHnd document;
 
 #define NUM_DEMOS 4
@@ -133,7 +135,7 @@ int main(int argc, const char* argv[])
 	}
 	
 	setup_callbacks();
-	
+	b_tablet_init();
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 	
@@ -155,6 +157,8 @@ int main(int argc, const char* argv[])
 	}
 	
 	glfwTerminate();
+	b_tablet_deinit();
+	
 	return 0;
 	
 	

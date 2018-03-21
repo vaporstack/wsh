@@ -17,6 +17,10 @@
 		5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDD2061C8F400DD36E0 /* cel_animation.c */; };
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
 		5760EC852061798300430B0A /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760EC842061798300430B0A /* libglfw.dylib */; };
+		5760EC962062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC912062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.m */; };
+		5760EC972062CDF500430B0A /* WacomTabletDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC932062CDF500430B0A /* WacomTabletDriver.m */; };
+		5760EC9A2062CE5400430B0A /* r_input_tablet_cocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC982062CE5400430B0A /* r_input_tablet_cocoa.m */; };
+		5760EC9E2062CEA700430B0A /* input_tablet.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC9D2062CEA700430B0A /* input_tablet.c */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
@@ -56,6 +60,15 @@
 		5711BFDD2061C8F400DD36E0 /* cel_animation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cel_animation.c; sourceTree = "<group>"; };
 		5760EC82206178D200430B0A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../demo/src/main.c; sourceTree = "<group>"; };
 		5760EC842061798300430B0A /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
+		5760EC912062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSAppleEventDescriptorHelperCategory.m; sourceTree = "<group>"; };
+		5760EC922062CDF500430B0A /* TabletAEDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabletAEDictionary.h; sourceTree = "<group>"; };
+		5760EC932062CDF500430B0A /* WacomTabletDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WacomTabletDriver.m; sourceTree = "<group>"; };
+		5760EC942062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSAppleEventDescriptorHelperCategory.h; sourceTree = "<group>"; };
+		5760EC952062CDF500430B0A /* WacomTabletDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WacomTabletDriver.h; sourceTree = "<group>"; };
+		5760EC982062CE5400430B0A /* r_input_tablet_cocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = r_input_tablet_cocoa.m; sourceTree = "<group>"; };
+		5760EC992062CE5400430B0A /* r_input_tablet_cocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_input_tablet_cocoa.h; sourceTree = "<group>"; };
+		5760EC9C2062CEA700430B0A /* input_tablet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = input_tablet.h; sourceTree = "<group>"; };
+		5760EC9D2062CEA700430B0A /* input_tablet.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = input_tablet.c; sourceTree = "<group>"; };
 		578BCE362061782C00672199 /* wash-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wash-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		578BCE4F2061788000672199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -116,6 +129,39 @@
 			path = deps;
 			sourceTree = "<group>";
 		};
+		5760EC8F2062CDF500430B0A /* contrib */ = {
+			isa = PBXGroup;
+			children = (
+				5760EC902062CDF500430B0A /* macos */,
+			);
+			name = contrib;
+			path = ../demo/src/contrib;
+			sourceTree = "<group>";
+		};
+		5760EC902062CDF500430B0A /* macos */ = {
+			isa = PBXGroup;
+			children = (
+				5760EC992062CE5400430B0A /* r_input_tablet_cocoa.h */,
+				5760EC982062CE5400430B0A /* r_input_tablet_cocoa.m */,
+				5760EC912062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.m */,
+				5760EC942062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.h */,
+				5760EC922062CDF500430B0A /* TabletAEDictionary.h */,
+				5760EC932062CDF500430B0A /* WacomTabletDriver.m */,
+				5760EC952062CDF500430B0A /* WacomTabletDriver.h */,
+			);
+			path = macos;
+			sourceTree = "<group>";
+		};
+		5760EC9B2062CE9100430B0A /* input */ = {
+			isa = PBXGroup;
+			children = (
+				5760EC9C2062CEA700430B0A /* input_tablet.h */,
+				5760EC9D2062CEA700430B0A /* input_tablet.c */,
+			);
+			name = input;
+			path = ../demo/src/input;
+			sourceTree = "<group>";
+		};
 		578BCE2D2061782C00672199 = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +187,8 @@
 		578BCE4A2061785300672199 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5760EC9B2062CE9100430B0A /* input */,
+				5760EC8F2062CDF500430B0A /* contrib */,
 				5711BFAC2061A86F00DD36E0 /* demos */,
 				5760EC82206178D200430B0A /* main.c */,
 				5711BFD42061C7C000DD36E0 /* primitives.h */,
@@ -251,13 +299,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5760EC972062CDF500430B0A /* WacomTabletDriver.m in Sources */,
 				5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */,
 				5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
+				5760EC962062CDF500430B0A /* NSAppleEventDescriptorHelperCategory.m in Sources */,
 				5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */,
+				5760EC9E2062CEA700430B0A /* input_tablet.c in Sources */,
 				5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */,
 				5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
+				5760EC9A2062CE5400430B0A /* r_input_tablet_cocoa.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
