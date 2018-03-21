@@ -22,8 +22,8 @@ file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/ses
 add_library(wsh SHARED STATIC ${sources})
 # add_library(wsh SHARED ${sources})
 
-if ( ${have_r4_environment} MATCHES "yes")
-
+if ( ${have_r4_environment} )
+	message("Building within r4 lib structure.")
 else(${have_r4_environment})
 	add_subdirectory(contrib/cjson)
 	add_subdirectory(contrib/glfw)
