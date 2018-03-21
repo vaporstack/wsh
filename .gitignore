@@ -55,3 +55,5 @@ build/
 docs/
 
 .DS_Store
+
+*UserInterfaceState.xcuserstate
