@@ -54,4 +54,5 @@ dkms.conf
 build/
 .DS_Store
 docs/
+UserInterfaceState.xcuserstate
 *.sublime-workspace
