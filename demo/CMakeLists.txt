@@ -79,6 +79,7 @@ if(${OperatingSystem} MATCHES "macos")
 
 endif(${OperatingSystem} MATCHES "macos")
 
+add_subdirectory(contrib/wcm)
 
 find_package(OpenGL)
 if (OPENGL_FOUND)
@@ -96,11 +97,13 @@ add_executable(demo_wash ${sources})
 
 
 target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs)
+target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src)
+target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../contrib)
 target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include)
 target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib)
 
 if(${OperatingSystem} MATCHES "macos")
-	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw
+	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw wcm
 	${GL_LIB}
 	${COCOA_LIB}
 	${CARBON_LIB}
