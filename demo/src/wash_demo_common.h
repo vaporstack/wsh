@@ -9,8 +9,8 @@
 #ifndef wash_demo_common_h
 #define wash_demo_common_h
 
-#include <stdio.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 extern bool wash_demo_has_pressure_sensitivity_of_any_kind;
 

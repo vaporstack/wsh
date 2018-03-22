@@ -11,6 +11,22 @@
 
 #include <wsh/wsh.h>
 
+void d_color_clear(double r, double g, double b, double a);
+void d_clear(void);
+void d_setup(int width, int height);
+void d_setup_view_ortho(int w, int h);
+
+void d_set_dpiscale(double v);
+
+void d_push(void);
+void d_pop(void);
+void d_translate(double x, double y, double z);
+void d_color(double r, double g, double b, double a);
+
+void d_line(double ax, double ay, double bx, double by);
+void d_circle(float);
+void d_ellipse(float, float);
+
 //	wash primitives
 void d_verts(WLine*);
 void d_wobject_verts(WObject* obj);
@@ -22,5 +38,6 @@ void d_wobject_strokeonly_notransform(WObject*);
 void d_wobject_strokeonly(WObject*);
 void d_wobject_notransform(WObject*);
 void d_wobject_e(WObject*);
+
 
 #endif /* primitives_h */
