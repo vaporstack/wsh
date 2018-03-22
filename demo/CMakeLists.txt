@@ -56,26 +56,16 @@ ENDIF (OperatingSystem STREQUAL "linux")
 
 
 if(${OperatingSystem} MATCHES "macos")
-	find_library(SNDFILE_LIB sndfile $ENV{HOME}/art/r4/contrib/platform/darwin/libsndfile)
 	find_library(FTGL_LIB ftgl $ENV{HOME}/art/r4/contrib/platform/darwin)
 	find_library(FREETYPE_LIB freetype $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(SNDFILE_LIB sndfile $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(PHYSFS_LIB physfs $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(VORBIS_LIB vorbis $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(GLFW3_LIB glfw3 $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(LO_LIB lo $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(OGG_LIB ogg $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(FLAC_LIB FLAC $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(VORBISENC_LIB vorbisenc $ENV{HOME}/art/r4/contrib/platform/darwin)
-	find_library(CPLUSPLUS c++ )
-	find_library(SYPHON_LIB Syphon)
 	FIND_LIBRARY(PA_LIB portaudio $ENV{HOME}/art/r4/contrib/platform/darwin)
-	FIND_LIBRARY(COCOA_LIBRARY Cocoa)
+	FIND_LIBRARY(COCOA_LIB Cocoa)
 	FIND_LIBRARY(IL_Library IL)
 	FIND_LIBRARY(PM_LIBRARY portaudio)
 	FIND_LIBRARY(AU_LIB AudioUnit)
 	FIND_LIBRARY(AT_LIB AudioToolbox)
 	FIND_LIBRARY(CA_LIB CoreAudio)
+	FIND_LIBRARY(CARBON_LIB Carbon)
 	FIND_LIBRARY(CM_LIB CoreMidi)
 	FIND_LIBRARY(CV_LIB CoreVideo)
 	FIND_LIBRARY(IO_LIB IOKit)
@@ -98,7 +88,7 @@ else (OPENGL_FOUND)
 	MESSAGE("OpenGL environment missing")
 endif (OPENGL_FOUND)
 
-file(GLOB sources src/*.c src/demos/*.c ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
+file(GLOB sources src/*.c src/demos/*.c src/input/*.c src/contrib/macos/*.m ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
 
 message(${sources})
 
@@ -112,7 +102,8 @@ target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../.
 if(${OperatingSystem} MATCHES "macos")
 	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw
 	${GL_LIB}
-	${COCOA_LIBRARY}
+	${COCOA_LIB}
+	${CARBON_LIB}
 	${IO_LIB}
 	${CV_LIB}
 	)

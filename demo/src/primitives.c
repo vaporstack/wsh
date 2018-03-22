@@ -10,7 +10,10 @@
 
 
 //	this *should* pull in the right opengl header for us? yes.
-#include "GLFW/glfw3.h"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+#include <GLFW/glfw3.h>
+#pragma clang diagnostic pop
 
 static int fill;
 

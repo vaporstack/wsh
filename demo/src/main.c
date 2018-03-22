@@ -7,16 +7,28 @@
 //
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 #include <GLFW/glfw3.h>
+#pragma clang diagnostic pop
+
 
 #include "demos/procedural_brush.h"
 #include "demos/dynamic_resize.h"
 #include "demos/realtime_playback.h"
 #include "demos/cel_animation.h"
-GLFWwindow* window = NULL;
+
 #include <wsh/wsh.h>
 
-#include "input/input_tablet.h"
+#include "wcm.h"
+
+
+#define WIDTH 256
+#define HEIGHT 256
+
+static int window_w = WIDTH;
+static int window_h = HEIGHT;
+GLFWwindow* window = NULL;
 
 WDocumentHnd document;
 
@@ -88,6 +100,33 @@ static void drop_callback(GLFWwindow* window, int num, const char** paths)
 	
 }
 
+
+void my_tablet_prox(int v)
+{
+	printf("got tablet prox? %d\n", v);
+}
+
+void my_tablet_motion(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+{
+	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+void my_tablet_drag(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+{
+	printf("got rich drag? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+void my_tablet_up(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+{
+	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+void my_tablet_down(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+{
+	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+
 static void setup_callbacks()
 {
 	glfwSetCursorPosCallback(window, cursor_position_callback);
@@ -135,7 +174,16 @@ int main(int argc, const char* argv[])
 	}
 	
 	setup_callbacks();
-	b_tablet_init();
+
+	
+	wcm_set_tablet_proximity_func(my_tablet_prox);
+	wcm_set_tablet_up_func(my_tablet_up);
+	wcm_set_tablet_down_func(my_tablet_down);
+	wcm_set_tablet_motion_func(my_tablet_motion);
+	wcm_set_tablet_drag_func(my_tablet_drag);
+	
+	wcm_init(window_w, window_h);
+
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 	
@@ -157,7 +205,7 @@ int main(int argc, const char* argv[])
 	}
 	
 	glfwTerminate();
-	b_tablet_deinit();
+	wcm_deinit();
 	
 	return 0;
 	
