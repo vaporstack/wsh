@@ -29,7 +29,10 @@ static int window_h = HEIGHT;
 
 static double mouse_x = 0;
 static double mouse_y = 0;
-static double dpi     = 1;
+
+static double dpi	    = 1;
+static double display_radius = 1;
+static bool   down	   = false;
 
 GLFWwindow* window = NULL;
 
@@ -72,9 +75,18 @@ static void scroll_callback(GLFWwindow* window, double x, double y)
 {
 }
 
-static void mouse_button_callback(GLFWwindow* window, int button, int action,
-				  int mods)
-{
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
+	down		= action;
+	if (button > 0)
+		return;
+	
+	static int once = 0;
+	if (once == 0)
+	{
+		once = 1;
+		wcm_init(window_w, window_h);
+	}
+
 }
 
 static void cursor_enter_callback(GLFWwindow* window, int entered)
@@ -142,14 +154,22 @@ static void setup_callbacks()
 static void draw(void)
 {
 	d_clear();
-	if (document.src)
-	{
-	}
+	
 	d_line(0, 0, mouse_x, mouse_y);
 	d_push();
-
+	
 	d_translate(mouse_x, mouse_y, 0);
+	
 	d_line(0, 0, 32, 32);
+	if (down)
+	{
+		d_color(0, 0, 0, 1);
+	}
+	else
+	{
+		d_color(0, 0, 0, .33333);
+	}
+	d_circle(display_radius);
 	d_pop();
 }
 

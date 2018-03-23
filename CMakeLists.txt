@@ -20,15 +20,6 @@ endmacro(use_c99)
 # pkg_search_module(GLFW REQUIRED glfw3)
 # option(BUILD_DEMO "Build the demo application(requires glfw)" ${GLFW_FOUND})
 
-find_package(Doxygen)
-option(BUILD_DOCUMENTATION "Create and install the HTML based API
-documentation (requires Doxygen)" ${DOXYGEN_FOUND})
-
-if(BUILD_DOCUMENTATION)
-	set(build_doc YES)
-endif()
-
-set(build_demo YES)
 
 file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
@@ -37,10 +28,20 @@ add_library(wsh SHARED STATIC ${sources})
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
-else(${have_r4_environment})
+else()
 	add_subdirectory(contrib/cjson)
 	add_subdirectory(contrib/glfw)
-endif(${have_r4_environment})
+	set(build_demo YES)
+
+	find_package(Doxygen)
+	option(BUILD_DOCUMENTATION "Create and install the HTML based API
+	documentation (requires Doxygen)" ${DOXYGEN_FOUND})
+
+	if(BUILD_DOCUMENTATION)
+		set(build_doc YES)
+	endif()
+
+endif()
 
 if (${build_demo})
 	message("DEMO!?")

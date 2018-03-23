@@ -14,6 +14,8 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
+#define CIRCLE_PRECISION 16
+
 static int    fill;
 static double dpi = 1;
 
@@ -183,4 +185,69 @@ void d_wobject_verts(WObject* obj)
 		}
 		d_verts(line);
 	}
+}
+
+
+void d_circle(float r)
+{
+	d_ellipse(r, r);
+	/*
+	 float* circle = circle_defs[CIRCLE_PRECISION];
+	 if (circle == NULL) {
+	 printf("calculating circle for %i\n", CIRCLE_PRECISION);
+	 calculate_circle(CIRCLE_PRECISION);
+	 }
+	 circle = circle_defs[CIRCLE_PRECISION];
+	 glVertexPointer(2, GL_FLOAT, 0, circle);
+	 
+	 // cout << "c:" << circleArray[2] << endl;
+	 d_scale_u(r);
+	 fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION)
+	 : glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION);
+	 
+	 //r_ellipse(r, r);
+	 */
+}
+
+void d_ellipse(float _x, float _y)
+{
+	/*if ( _x == _y )
+	 {
+	 d_circle(_x);
+	 return;
+	 }*/
+	
+	// glEnableClientState( GL_VERTEX_ARRAY );
+	
+	// glEnable(GL_BLEND);
+	// glBlendEquation(GL_FUNC_ADD);
+	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
+	float deg2rad = (M_PI / CIRCLE_PRECISION);
+	
+	const int renderLineSize = (CIRCLE_PRECISION * 2);
+	
+	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
+	// GLfloat circleArray[ renderLineSize ];
+	int i;
+	for (i = 0; i < renderLineSize; i += 2) {
+		float degInRad = deg2rad * (float)i;
+		float x	= cos(degInRad + M_PI * .5) * (_x);
+		float y	= sin(degInRad + M_PI * .5) * (_y);
+		arr[i]	 = x;
+		arr[i + 1]     = y;
+	}
+	
+	// cout << '+';
+	glVertexPointer(2, GL_FLOAT, 0, arr);
+	
+	// cout << "c:" << circleArray[2] << endl;
+	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION)
+	: glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION);
+	
+	free(arr);
+	
+	// fill ?
+	// glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION ):
+	// glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION );
 }

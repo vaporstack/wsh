@@ -24,6 +24,8 @@ void d_translate(double x, double y, double z);
 void d_color(double r, double g, double b, double a);
 
 void d_line(double ax, double ay, double bx, double by);
+void d_circle(float);
+void d_ellipse(float, float);
 
 //	wash primitives
 void d_verts(WLine*);
@@ -36,5 +38,6 @@ void d_wobject_strokeonly_notransform(WObject*);
 void d_wobject_strokeonly(WObject*);
 void d_wobject_notransform(WObject*);
 void d_wobject_e(WObject*);
+
 
 #endif /* primitives_h */
