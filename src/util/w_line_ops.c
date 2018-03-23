@@ -7,12 +7,12 @@
 
 #include "w_line_ops.h"
 
-//#include <deps/gl-matrix/gl-matrix.h>
+//#include <gl-matrix/gl-matrix.h>
 #include <math.h>
 #include <wsh/wsh.h>
 
-#include <stdio.h>
 #include "../util/w_math.h"
+#include <stdio.h>
 
 #include "../util/w_math.h"
 
@@ -31,8 +31,9 @@ WLine* w_line_ops_dedupe(WLine* line)
 
 	double px, py;
 	px = py = -INFINITY;
-	
-	for (unsigned long long i = 0; i < line->num; ++i) {
+
+	for (unsigned long long i = 0; i < line->num; ++i)
+	{
 		WPoint p = line->data[i];
 		if (p.x == px && p.y == py)
 			continue;
@@ -49,7 +50,10 @@ WLine* w_line_ops_dedupe(WLine* line)
 	return deduped;
 }
 
-WLine* w_line_ops_subdiv(WLine* line, double r) { return NULL; }
+WLine* w_line_ops_subdiv(WLine* line, double r)
+{
+	return NULL;
+}
 /*
  final float weight = 18;
  final float scale  = 1.0 / (weight + 2);
@@ -75,12 +79,13 @@ WLine* w_line_ops_smooth(WLine* line, double r)
 	if (!line->data)
 		return NULL;
 
-	for (int i = 1; i < nPointsMinusTwo; i++) {
+	for (int i = 1; i < nPointsMinusTwo; i++)
+	{
 		WPoint* lower  = &line->data[i - 1];
 		WPoint* center = &line->data[i];
 		WPoint* upper  = &line->data[i + 1];
-		center->x = (lower->x + weight * center->x + upper->x) * scale;
-		center->y = (lower->y + weight * center->y + upper->y) * scale;
+		center->x      = (lower->x + weight * center->x + upper->x) * scale;
+		center->y      = (lower->y + weight * center->y + upper->y) * scale;
 	}
 
 	return NULL;
@@ -108,13 +113,18 @@ static double perp_dist(WPoint p, WPoint a, WPoint b)
 
 	double xx, yy;
 
-	if (param < 0) {
+	if (param < 0)
+	{
 		xx = x1;
 		yy = y1;
-	} else if (param > 1) {
+	}
+	else if (param > 1)
+	{
 		xx = x2;
 		yy = y2;
-	} else {
+	}
+	else
+	{
 		xx = x1 + param * C;
 		yy = y1 + param * D;
 	}
@@ -129,17 +139,20 @@ WLine* w_line_ops_douglaspeucker(WLine* line, double e)
 	double		   dmax  = 0;
 	int		   index = 0;
 	unsigned long long num   = line->num;
-	for (int i = 1; i < num - 1; ++i) {
+	for (int i = 1; i < num - 1; ++i)
+	{
 		WPoint p = line->data[i];
 		WPoint a = line->data[0];
 		WPoint b = line->data[num - 1];
 		double d = perp_dist(p, a, b);
-		if (d > dmax) {
+		if (d > dmax)
+		{
 			index = i;
 			dmax  = d;
 		}
 	}
-	if (dmax > e) {
+	if (dmax > e)
+	{
 
 		// printf("dm: %f\n", dmax);
 
@@ -165,8 +178,9 @@ WLine* w_line_ops_douglaspeucker(WLine* line, double e)
 		// if ( DEBUG_LINE_OPS )
 		//	printf("%llu -> %llu\n", line->num, res->num );
 		return res;
-
-	} else {
+	}
+	else
+	{
 		WLine* res = w_line_create();
 		w_line_concat(res, line, 0, num);
 		w_line_copy_attribs(res, line);
@@ -210,11 +224,13 @@ WLine* w_line_ops_simplify(WLine* line, double r)
 		return NULL;
 	WLine* cpy = w_line_create();
 	w_line_add_point(cpy, line->data[0]);
-	for (int i = 0; i < line->num - 1; ++i) {
+	for (int i = 0; i < line->num - 1; ++i)
+	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
 		double d = w_dist2d_p(&a, &b);
-		if (d > r) {
+		if (d > r)
+		{
 			w_line_add_point(cpy, b);
 		}
 	}
@@ -228,7 +244,8 @@ WLine* w_line_ops_simplify(WLine* line, double r)
 double w_line_ops_sum(WLine* line)
 {
 	double r = 0;
-	for (int i = 0; i < line->num - 1; ++i) {
+	for (int i = 0; i < line->num - 1; ++i)
+	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
 		double d = w_dist2d_p(&a, &b);
@@ -237,12 +254,12 @@ double w_line_ops_sum(WLine* line)
 	return r;
 }
 
-
 bool w_line_intersects_rect(WLine* line, WRect* rect)
 {
-	for (int i = 0; i < line->num ; ++i) {
+	for (int i = 0; i < line->num; ++i)
+	{
 		WPoint p = line->data[i];
-		if ( w_rect_within_bounds(rect, p.x, p.y))
+		if (w_rect_within_bounds(rect, p.x, p.y))
 			return true;
 	}
 	return false;

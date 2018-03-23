@@ -9,7 +9,7 @@
 
 /*
 #include "w_serial.h"
-#include <deps/binn/binn.h>
+#include <binn/binn.h>
 #include <string.h>
 
 
@@ -203,7 +203,6 @@ int w_document_serialize_bin(WDocument* doc, const char* path)
 
 	return 0;
 }
- 
- 
- */
 
+
+ */
