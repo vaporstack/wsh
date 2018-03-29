@@ -643,7 +643,7 @@ const char* w_serial_json_serialize_document_v001(WDocument* doc, const char* ve
 
 	// printf("buf : %s\n", buf );
 
-	cJSON_AddStringToObject(info, "version", strdup(version_string));
+	cJSON_AddStringToObject(info, "version", version_string);
 
 	/*if (doc->path)
 		cJSON_AddStringToObject(info, "path", strdup(doc->path));
@@ -686,7 +686,6 @@ const char* w_serial_json_serialize_document(WDocument* doc)
 		WSH_VERSION_PATCH);
 
 	working_version = strdup(buf);
-	free(buf);
 
 	if (0 == strcmp(working_version, "0_0_1"))
 	{
@@ -702,6 +701,7 @@ const char* w_serial_json_serialize_document(WDocument* doc)
 	{
 		printf("NO known code paths to serialize this format: %s\n", buf);
 	}
+	free(buf);
 
 	return NULL;
 }
@@ -930,10 +930,10 @@ static int index_of_char(const char* sdata)
 static void w_serial_json_postprocess_document(WDocument* doc)
 {
 	//	read the fps_repr into the fps
-	printf("Reading fps repr: [%s]\n", doc->meta.fps_repr);
-	if (doc->meta.fps_repr != NULL)
-	{
-		doc->meta.fps = strtod(doc->meta.fps_repr, (char**)NULL);
+	////printf("Reading fps repr: [%s]\n", doc->meta.fps_repr);
+	//if (doc->meta.fps_repr != NULL)
+	//{
+	//	doc->meta.fps = strtod(doc->meta.fps_repr, (char**)NULL);
 
 		/*int pos = index_of_char(doc->meta.fps_repr);
 		if (pos == -1) {
@@ -955,7 +955,7 @@ static void w_serial_json_postprocess_document(WDocument* doc)
 			printf("[%f]\n", doc->meta.fps);
 		}
 		 */
-	}
+	//}
 }
 
 WDocument* w_serial_json_unserialize_document(const char* path)
@@ -1017,10 +1017,11 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 		}
 	}
 
-	if (meta)
-	{
-		w_serial_json_postprocess_document(doc);
-	}
+	//if (meta)
+	//{
+	
+	w_serial_json_postprocess_document(doc);
+	//}
 	/*
 	cJSON* version = cJSON_GetObjectItem(info, "version");
 	if (version) {

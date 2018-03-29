@@ -114,3 +114,8 @@ if(${OperatingSystem} MATCHES "macos")
 endif(${OperatingSystem} MATCHES "macos")
 
 
+if(${OperatingSystem} MATCHES "linux")
+	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw wcm GL m X11 Xi
+	)
+
+endif()

@@ -7,15 +7,6 @@ set (wsh_VERSION_MAJOR 0)
 set (wsh_VERSION_MINOR 0)
 set (wsh_VERSION_PATCH 1)
 
-macro(use_c99)
-  if (CMAKE_VERSION VERSION_LESS "3.1")
-    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-      set (CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
-    endif ()
-  else ()
-    set (CMAKE_C_STANDARD 99)
-  endif ()
-endmacro(use_c99)
 
 # pkg_search_module(GLFW REQUIRED glfw3)
 # option(BUILD_DEMO "Build the demo application(requires glfw)" ${GLFW_FOUND})
@@ -29,6 +20,17 @@ add_library(wsh SHARED STATIC ${sources})
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
 else()
+
+	macro(use_c99)
+		if (CMAKE_VERSION VERSION_LESS "3.1")
+			if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+				set (CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+			endif ()
+		else ()
+			set (CMAKE_C_STANDARD 99)
+		endif ()
+	endmacro(use_c99)
+
 	add_subdirectory(contrib/cjson)
 	add_subdirectory(contrib/glfw)
 	set(build_demo YES)
@@ -59,10 +61,10 @@ if (${build_doc})
 	message("Doxygen build started.")
 	add_custom_target(
 		doc ALL
- 		COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile_in}
-                      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                      COMMENT "Generating API documentation with Doxygen"
-                      VERBATIM)
+		COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile_in}
+		      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+		      COMMENT "Generating API documentation with Doxygen"
+		      VERBATIM)
 
 endif(${build_doc})
 
