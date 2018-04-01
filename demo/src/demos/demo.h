@@ -19,4 +19,7 @@ typedef struct WashDemo
 	draw_fn draw;
 } WashDemo;
 
+int demos_init(void);
+int demos_deinit(void);
+
 #endif /* demo_h */
