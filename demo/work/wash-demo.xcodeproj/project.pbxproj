@@ -22,9 +22,6 @@
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
-		57D732872070671300726D51 /* simulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 57D732862070671300726D51 /* simulator.c */; };
-		57D7328A2070676800726D51 /* wsh_session.c in Sources */ = {isa = PBXBuildFile; fileRef = 57D732892070676800726D51 /* wsh_session.c */; };
-		57D732A12070688000726D51 /* demo.c in Sources */ = {isa = PBXBuildFile; fileRef = 57D732A02070688000726D51 /* demo.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,11 +80,6 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57D732852070671300726D51 /* simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; };
-		57D732862070671300726D51 /* simulator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = simulator.c; sourceTree = "<group>"; };
-		57D732882070676800726D51 /* wsh_session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_session.h; sourceTree = "<group>"; };
-		57D732892070676800726D51 /* wsh_session.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_session.c; sourceTree = "<group>"; };
-		57D732A02070688000726D51 /* demo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = demo.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,9 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				5711BFAD2061A87F00DD36E0 /* demo.h */,
-				57D732A02070688000726D51 /* demo.c */,
-				57D732852070671300726D51 /* simulator.h */,
-				57D732862070671300726D51 /* simulator.c */,
 				5711BFDC2061C8F400DD36E0 /* cel_animation.h */,
 				5711BFDD2061C8F400DD36E0 /* cel_animation.c */,
 				5711BFB22061A93400DD36E0 /* procedural_brush.h */,
@@ -134,8 +123,6 @@
 				5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */,
 				5711BFB42061A96A00DD36E0 /* realtime_playback.h */,
 				5711BFB52061A96A00DD36E0 /* realtime_playback.c */,
-				57D732882070676800726D51 /* wsh_session.h */,
-				57D732892070676800726D51 /* wsh_session.c */,
 			);
 			name = demos;
 			path = ../demo/src/demos;
@@ -311,11 +298,8 @@
 				5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */,
 				5760ECF02063343300430B0A /* wash_demo_common.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
-				57D732872070671300726D51 /* simulator.c in Sources */,
 				5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */,
 				5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */,
-				57D7328A2070676800726D51 /* wsh_session.c in Sources */,
-				57D732A12070688000726D51 /* demo.c in Sources */,
 				5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
 			);

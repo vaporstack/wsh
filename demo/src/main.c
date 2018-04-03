@@ -213,7 +213,7 @@ int main(int argc, const char* argv[])
 
 	document.src = w_serial_json_unserialize_document("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
 	d_setup(window_w, window_h);
-	demos_init();
+
 	d_color_clear(1, 1, 1, 1);
 	d_color(0, 0, 0, 1);
 
@@ -232,6 +232,6 @@ int main(int argc, const char* argv[])
 
 	glfwTerminate();
 	wcm_deinit();
-	demos_deinit();
+
 	return 0;
 }
