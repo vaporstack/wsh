@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5711BFAA206191A500DD36E0 /* libwsh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5711BFA62061919900DD36E0 /* libwsh.a */; };
-		5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */; };
-		5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFB02061A8E900DD36E0 /* procedural_brush.c */; };
-		5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFB52061A96A00DD36E0 /* realtime_playback.c */; };
 		5711BFD32061C6F900DD36E0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 5711BFD22061C6F900DD36E0 /* data */; };
 		5711BFD62061C7C000DD36E0 /* primitives.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFD52061C7C000DD36E0 /* primitives.c */; };
 		5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDA2061C84600DD36E0 /* cJSON.c */; };
-		5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDD2061C8F400DD36E0 /* cel_animation.c */; };
+		5721DC7D2076D6B000C141BB /* simulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC762076D6B000C141BB /* simulator.c */; };
+		5721DC7E2076D6B000C141BB /* session.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC772076D6B000C141BB /* session.c */; };
+		5721DC7F2076D6B000C141BB /* resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC782076D6B000C141BB /* resize.c */; };
+		5721DC802076D6B000C141BB /* brush.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC792076D6B000C141BB /* brush.c */; };
+		5721DC812076D6B000C141BB /* animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7A2076D6B000C141BB /* animation.c */; };
+		5721DC822076D6B000C141BB /* playback.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7B2076D6B000C141BB /* playback.c */; };
+		5721DC832076D6B000C141BB /* operations.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7C2076D6B000C141BB /* operations.c */; };
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
 		5760EC852061798300430B0A /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760EC842061798300430B0A /* libglfw.dylib */; };
 		5760ECF02063343300430B0A /* wash_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wash_demo_common.c */; };
@@ -22,7 +25,6 @@
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
-		57DF319F2076D0F300EF02D1 /* line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 57DF319E2076D0F300EF02D1 /* line_ops.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,19 +60,17 @@
 
 /* Begin PBXFileReference section */
 		5711BFA12061919900DD36E0 /* wsh.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wsh.xcodeproj; path = ../../work/wsh.xcodeproj; sourceTree = "<group>"; };
-		5711BFAD2061A87F00DD36E0 /* demo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = demo.h; sourceTree = "<group>"; };
-		5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = dynamic_resize.c; sourceTree = "<group>"; };
-		5711BFB02061A8E900DD36E0 /* procedural_brush.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = procedural_brush.c; sourceTree = "<group>"; };
-		5711BFB22061A93400DD36E0 /* procedural_brush.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = procedural_brush.h; sourceTree = "<group>"; };
-		5711BFB32061A93B00DD36E0 /* dynamic_resize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dynamic_resize.h; sourceTree = "<group>"; };
-		5711BFB42061A96A00DD36E0 /* realtime_playback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = realtime_playback.h; sourceTree = "<group>"; };
-		5711BFB52061A96A00DD36E0 /* realtime_playback.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = realtime_playback.c; sourceTree = "<group>"; };
 		5711BFD22061C6F900DD36E0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
 		5711BFD42061C7C000DD36E0 /* primitives.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = primitives.h; path = ../demo/src/primitives.h; sourceTree = "<group>"; };
 		5711BFD52061C7C000DD36E0 /* primitives.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = primitives.c; path = ../demo/src/primitives.c; sourceTree = "<group>"; };
 		5711BFDA2061C84600DD36E0 /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
-		5711BFDC2061C8F400DD36E0 /* cel_animation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cel_animation.h; sourceTree = "<group>"; };
-		5711BFDD2061C8F400DD36E0 /* cel_animation.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cel_animation.c; sourceTree = "<group>"; };
+		5721DC762076D6B000C141BB /* simulator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = simulator.c; sourceTree = "<group>"; };
+		5721DC772076D6B000C141BB /* session.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = session.c; sourceTree = "<group>"; };
+		5721DC782076D6B000C141BB /* resize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = resize.c; sourceTree = "<group>"; };
+		5721DC792076D6B000C141BB /* brush.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = brush.c; sourceTree = "<group>"; };
+		5721DC7A2076D6B000C141BB /* animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = animation.c; sourceTree = "<group>"; };
+		5721DC7B2076D6B000C141BB /* playback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = playback.c; sourceTree = "<group>"; };
+		5721DC7C2076D6B000C141BB /* operations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = operations.c; sourceTree = "<group>"; };
 		5760EC82206178D200430B0A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../demo/src/main.c; sourceTree = "<group>"; };
 		5760EC842061798300430B0A /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		5760ECEE2063343300430B0A /* wash_demo_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wash_demo_common.h; path = ../demo/src/wash_demo_common.h; sourceTree = "<group>"; };
@@ -81,8 +81,6 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57DF319D2076D0F300EF02D1 /* line_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = line_ops.h; sourceTree = "<group>"; };
-		57DF319E2076D0F300EF02D1 /* line_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = line_ops.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,31 +112,27 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5711BFAC2061A86F00DD36E0 /* demos */ = {
-			isa = PBXGroup;
-			children = (
-				5711BFAD2061A87F00DD36E0 /* demo.h */,
-				5711BFDC2061C8F400DD36E0 /* cel_animation.h */,
-				5711BFDD2061C8F400DD36E0 /* cel_animation.c */,
-				5711BFB22061A93400DD36E0 /* procedural_brush.h */,
-				5711BFB02061A8E900DD36E0 /* procedural_brush.c */,
-				5711BFB32061A93B00DD36E0 /* dynamic_resize.h */,
-				5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */,
-				5711BFB42061A96A00DD36E0 /* realtime_playback.h */,
-				5711BFB52061A96A00DD36E0 /* realtime_playback.c */,
-				57DF319D2076D0F300EF02D1 /* line_ops.h */,
-				57DF319E2076D0F300EF02D1 /* line_ops.c */,
-			);
-			name = demos;
-			path = ../demo/src/demos;
-			sourceTree = "<group>";
-		};
 		5711BFD92061C84100DD36E0 /* deps */ = {
 			isa = PBXGroup;
 			children = (
 				5711BFDA2061C84600DD36E0 /* cJSON.c */,
 			);
 			path = deps;
+			sourceTree = "<group>";
+		};
+		5721DC752076D6B000C141BB /* demos */ = {
+			isa = PBXGroup;
+			children = (
+				5721DC762076D6B000C141BB /* simulator.c */,
+				5721DC772076D6B000C141BB /* session.c */,
+				5721DC782076D6B000C141BB /* resize.c */,
+				5721DC792076D6B000C141BB /* brush.c */,
+				5721DC7A2076D6B000C141BB /* animation.c */,
+				5721DC7B2076D6B000C141BB /* playback.c */,
+				5721DC7C2076D6B000C141BB /* operations.c */,
+			);
+			name = demos;
+			path = ../demo/src/demos;
 			sourceTree = "<group>";
 		};
 		5760ECF2206334A100430B0A /* Products */ = {
@@ -176,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				5760EC82206178D200430B0A /* main.c */,
-				5711BFAC2061A86F00DD36E0 /* demos */,
+				5721DC752076D6B000C141BB /* demos */,
 				5711BFD42061C7C000DD36E0 /* primitives.h */,
 				5711BFD52061C7C000DD36E0 /* primitives.c */,
 				5760ECEE2063343300430B0A /* wash_demo_common.h */,
@@ -299,14 +293,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5721DC832076D6B000C141BB /* operations.c in Sources */,
+				5721DC7F2076D6B000C141BB /* resize.c in Sources */,
 				5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */,
-				5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */,
-				57DF319F2076D0F300EF02D1 /* line_ops.c in Sources */,
+				5721DC7D2076D6B000C141BB /* simulator.c in Sources */,
 				5760ECF02063343300430B0A /* wash_demo_common.c in Sources */,
+				5721DC802076D6B000C141BB /* brush.c in Sources */,
+				5721DC812076D6B000C141BB /* animation.c in Sources */,
+				5721DC822076D6B000C141BB /* playback.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
-				5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */,
-				5711BFB12061A8E900DD36E0 /* procedural_brush.c in Sources */,
-				5711BFDE2061C8F400DD36E0 /* cel_animation.c in Sources */,
+				5721DC7E2076D6B000C141BB /* session.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

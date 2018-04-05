@@ -12,12 +12,17 @@
 #pragma clang diagnostic pop
 
 #include "demo.h"
-extern WashDemo cel_animation;
-//#include "demos/cel_animation.c"
-#include "demos/dynamic_resize.h"
-#include "demos/procedural_brush.h"
-#include "demos/realtime_playback.h"
-#include "demos/line_ops.h"
+extern WashDemo animation;
+extern WashDemo resize;
+extern WashDemo brush;
+extern WashDemo playback;
+extern WashDemo operations;
+extern WashDemo simulator;
+//#include "demos/animation.c"
+//#include "demos/resize.h"
+//#include "demos/brush.h"
+//#include "demos/playback.h"
+//#include "demos/operations.h"
 
 #include "primitives.h"
 #include <wsh/wsh.h>
@@ -44,8 +49,8 @@ GLFWwindow* window = NULL;
 
 WDocumentHnd document;
 
-#define NUM_DEMOS 5
-WashDemo* demos[NUM_DEMOS] = {&line_ops, &cel_animation, &procedural_brush, &dynamic_resize, &realtime_playback};
+#define NUM_DEMOS 6
+WashDemo* demos[NUM_DEMOS] = {&animation, &operations, &animation, &brush, &resize, &playback};
 WashDemo* current_demo     = NULL;
 
 static void joystick_callback(int joy, int event)
@@ -107,7 +112,7 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
 {
-	if ( action == 1 )
+	if ( action == 0 )
 	{
 		return;
 	}
