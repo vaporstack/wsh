@@ -1,15 +1,16 @@
 //
-//  demo.c
+//  line_ops.c
 //  wash-demo
 //
-//  Created by vs on 3/20/18.
+//  Created by vs on 4/5/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "procedural_brush.h"
+#include "line_ops.h"
 
-#define DEMO_NAME "procedural_brush"
-#define DEMO_NICENAME "Procedural Brush"
+#define DEMO_NAME "line_ops"
+#define DEMO_NICENAME "Line Ops"
+
 static void key(int action, int key)
 {
 	
@@ -38,7 +39,7 @@ static void draw(void)
 	
 }
 
-WashDemo procedural_brush =
+WashDemo line_ops =
 {
 	DEMO_NICENAME,
 	1.0/60.0,
@@ -48,3 +49,4 @@ WashDemo procedural_brush =
 	draw,
 	key
 };
+

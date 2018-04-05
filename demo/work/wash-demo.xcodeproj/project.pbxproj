@@ -22,6 +22,7 @@
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
+		57DF319F2076D0F300EF02D1 /* line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 57DF319E2076D0F300EF02D1 /* line_ops.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57DF319D2076D0F300EF02D1 /* line_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = line_ops.h; sourceTree = "<group>"; };
+		57DF319E2076D0F300EF02D1 /* line_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = line_ops.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				5711BFAE2061A87F00DD36E0 /* dynamic_resize.c */,
 				5711BFB42061A96A00DD36E0 /* realtime_playback.h */,
 				5711BFB52061A96A00DD36E0 /* realtime_playback.c */,
+				57DF319D2076D0F300EF02D1 /* line_ops.h */,
+				57DF319E2076D0F300EF02D1 /* line_ops.c */,
 			);
 			name = demos;
 			path = ../demo/src/demos;
@@ -170,8 +175,8 @@
 		578BCE4A2061785300672199 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				5711BFAC2061A86F00DD36E0 /* demos */,
 				5760EC82206178D200430B0A /* main.c */,
+				5711BFAC2061A86F00DD36E0 /* demos */,
 				5711BFD42061C7C000DD36E0 /* primitives.h */,
 				5711BFD52061C7C000DD36E0 /* primitives.c */,
 				5760ECEE2063343300430B0A /* wash_demo_common.h */,
@@ -296,6 +301,7 @@
 			files = (
 				5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */,
 				5711BFAF2061A87F00DD36E0 /* dynamic_resize.c in Sources */,
+				57DF319F2076D0F300EF02D1 /* line_ops.c in Sources */,
 				5760ECF02063343300430B0A /* wash_demo_common.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
 				5711BFB62061A96A00DD36E0 /* realtime_playback.c in Sources */,

@@ -11,10 +11,13 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
-#include "demos/cel_animation.h"
+#include "demo.h"
+extern WashDemo cel_animation;
+//#include "demos/cel_animation.c"
 #include "demos/dynamic_resize.h"
 #include "demos/procedural_brush.h"
 #include "demos/realtime_playback.h"
+#include "demos/line_ops.h"
 
 #include "primitives.h"
 #include <wsh/wsh.h>
@@ -23,6 +26,9 @@
 
 #define WIDTH 256
 #define HEIGHT 256
+
+static void switch_demo(int i);
+static int current_demo_index = 0;
 
 static int window_w = WIDTH;
 static int window_h = HEIGHT;
@@ -38,8 +44,8 @@ GLFWwindow* window = NULL;
 
 WDocumentHnd document;
 
-#define NUM_DEMOS 4
-WashDemo* demos[NUM_DEMOS] = {&cel_animation, &procedural_brush, &dynamic_resize, &realtime_playback};
+#define NUM_DEMOS 5
+WashDemo* demos[NUM_DEMOS] = {&line_ops, &cel_animation, &procedural_brush, &dynamic_resize, &realtime_playback};
 WashDemo* current_demo     = NULL;
 
 static void joystick_callback(int joy, int event)
@@ -75,18 +81,18 @@ static void scroll_callback(GLFWwindow* window, double x, double y)
 {
 }
 
-static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
-	down		= action;
+static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	down = action;
 	if (button > 0)
 		return;
-	
+
 	static int once = 0;
 	if (once == 0)
 	{
 		once = 1;
 		wcm_init(window_w, window_h);
 	}
-
 }
 
 static void cursor_enter_callback(GLFWwindow* window, int entered)
@@ -101,6 +107,21 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 
 static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
 {
+	if ( action == 1 )
+	{
+		return;
+	}
+	
+	if ( key >= GLFW_KEY_1 && key < GLFW_KEY_9 )
+	{
+		int v = key - GLFW_KEY_1;
+		if ( v != current_demo_index )
+		{
+			switch_demo(v);
+			
+		}
+		
+	}
 }
 
 static void drop_callback(GLFWwindow* window, int num, const char** paths)
@@ -112,22 +133,22 @@ void my_tablet_prox(int v)
 	printf("got tablet prox? %d\n", v);
 }
 
-void my_tablet_motion(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+void my_tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
-void my_tablet_drag(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+void my_tablet_drag(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich drag? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
-void my_tablet_up(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+void my_tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
-void my_tablet_down(double x, double y, double p, double r, double tx, double ty, double altitude, double azimuth)
+void my_tablet_down(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
@@ -154,12 +175,12 @@ static void setup_callbacks()
 static void draw(void)
 {
 	d_clear();
-	
+
 	d_line(0, 0, mouse_x, mouse_y);
 	d_push();
-	
+
 	d_translate(mouse_x, mouse_y, 0);
-	
+
 	d_line(0, 0, 32, 32);
 	if (down)
 	{
@@ -171,6 +192,35 @@ static void draw(void)
 	}
 	d_circle(display_radius);
 	d_pop();
+}
+
+
+static void switch_demo(int i)
+{
+	printf("Switching demo: %d\n", i );
+	
+	if ( current_demo )
+	{
+		current_demo->deinit();
+	}
+	
+	
+	current_demo_index = i;
+	if ( current_demo_index >= NUM_DEMOS )
+	{
+		printf("Asked for a demo beyond our range.\n");
+		return;
+		
+	}
+	current_demo = demos[current_demo_index];
+	
+	if ( !current_demo )
+	{
+		printf("Error, got a NULL demo at position %d\n", i);
+		return;
+	}
+	
+	current_demo->init();
 }
 
 int main(int argc, const char* argv[])

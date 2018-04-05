@@ -12,11 +12,18 @@
 #include <stdio.h>
 
 
-typedef void(*draw_fn)(void);
+typedef void(*demo_fn)(void);
+typedef void(*key_fn)(int key, int action);
 
 typedef struct WashDemo
 {
-	draw_fn draw;
+	const char* name;
+	double fps;
+	demo_fn init;
+	demo_fn deinit;
+	demo_fn update;
+	demo_fn draw;
+	key_fn key;
 } WashDemo;
 
 #endif /* demo_h */
