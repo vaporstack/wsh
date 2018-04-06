@@ -14,7 +14,40 @@
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"
 
-static void key(int action, int key)
+static void tablet_prox(int v)
+{
+	printf("got tablet prox? %d\n", v);
+}
+
+static void tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+static void tablet_down(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+static void tablet_drag(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	printf("got rich drag? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+static void tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+}
+
+static void key(int action, int key, int mods)
+{
+}
+
+static void mouse_move(double x, double y)
+{
+}
+
+static void mouse_button(int button, int action, int mods)
 {
 }
 
@@ -44,6 +77,12 @@ WashDemo animation =
 	deinit,
 	update,
 	draw,
-	key};
+	key,
+	mouse_move,
+	mouse_button,
+	tablet_up,
+	tablet_down,
+	tablet_motion,
+	tablet_drag};
 
 #endif

@@ -11,7 +11,10 @@
 #include <GLFW/glfw3.h>
 #pragma clang diagnostic pop
 
+#include "wash_demo_common.h"
+
 #include "demo.h"
+
 extern WashDemo animation;
 extern WashDemo resize;
 extern WashDemo brush;
@@ -25,12 +28,16 @@ extern WashDemo simulator;
 //#include "demos/operations.h"
 
 #include "primitives.h"
+#include "recorder.h"
+#include "simulator.h"
+
 #include <wsh/wsh.h>
 
 #include "wcm.h"
 
 #define WIDTH 256
 #define HEIGHT 256
+
 
 static void switch_demo(int i);
 static int current_demo_index = 0;
@@ -44,7 +51,7 @@ static double mouse_y = 0;
 static double dpi	    = 1;
 static double display_radius = 1;
 static bool   down	   = false;
-
+static bool faking_it = false;
 GLFWwindow* window = NULL;
 
 WDocumentHnd document;
@@ -52,10 +59,6 @@ WDocumentHnd document;
 #define NUM_DEMOS 6
 WashDemo* demos[NUM_DEMOS] = {&animation, &operations, &animation, &brush, &resize, &playback};
 WashDemo* current_demo     = NULL;
-
-static void joystick_callback(int joy, int event)
-{
-}
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -86,6 +89,20 @@ static void scroll_callback(GLFWwindow* window, double x, double y)
 {
 }
 
+static void start_faking_it(void)
+{
+	printf("Starting to fake it.\n");
+	faking_it = true;
+}
+
+static void stop_faking_it(double x, double y)
+{
+	recorder_end_line(x, y);
+
+	faking_it = false;
+	printf("No longer faking it.\n");
+}
+
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	down = action;
@@ -98,6 +115,22 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		once = 1;
 		wcm_init(window_w, window_h);
 	}
+	
+	if ( action == 1 )
+	{
+		if( !faking_it )
+		{
+			if ( !wash_demo_has_pressure_sensitivity_of_any_kind)
+			{
+				start_faking_it();
+			};
+		}
+	}else{
+		if ( faking_it )
+		{
+			stop_faking_it(mouse_x, mouse_y);
+		}
+	}
 }
 
 static void cursor_enter_callback(GLFWwindow* window, int entered)
@@ -108,6 +141,12 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 {
 	mouse_x = xpos * dpi;
 	mouse_y = ypos * dpi;
+	
+	if ( faking_it ) {
+		WPoint p = simulator_simulate_point(xpos, ypos);
+		recorder_record_manual_point(p);
+	}
+	
 }
 
 static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
@@ -123,9 +162,14 @@ static void key_callback(GLFWwindow* window, int key, int scan, int action, int 
 		if ( v != current_demo_index )
 		{
 			switch_demo(v);
-			
+			return;
 		}
 		
+	}
+	
+	if ( current_demo )
+	{
+		current_demo->key(key, action, mods);
 	}
 }
 
@@ -138,24 +182,43 @@ void my_tablet_prox(int v)
 	printf("got tablet prox? %d\n", v);
 }
 
+void my_tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+	recorder_end_line(x, y);
+}
+
+static void have_pressure(void)
+{
+	
+	wash_demo_has_pressure_sensitivity_of_any_kind = true;
+	printf("Have pressure! Should probably tell the user that we're disabling the mouse...\n");
+	
+}
+
+
+void my_tablet_down(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+{
+	if( !wash_demo_has_pressure_sensitivity_of_any_kind)
+	{
+		have_pressure();
+	}
+	
+	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+	recorder_record_point(x, y, button, p, r, tx, ty, altitude, azimuth, idk);
+}
+
 void my_tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
+	
 }
 
 void my_tablet_drag(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 	printf("got rich drag? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-}
+	recorder_record_point(x, y, button, p, r, tx, ty, altitude, azimuth, idk);
 
-void my_tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
-{
-	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-}
-
-void my_tablet_down(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
-{
-	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
 static void setup_callbacks()
@@ -169,18 +232,41 @@ static void setup_callbacks()
 
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
-	//#ifndef R4_COMPAT_OPENFRAMEWORKS
-	glfwSetJoystickCallback(joystick_callback);
-	//#endif
+
 
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetDropCallback(window, drop_callback);
 }
 
+static void update(void)
+{
+	if ( current_demo )
+	{
+		current_demo->update();
+	}
+	
+}
+
 static void draw(void)
 {
 	d_clear();
-
+	
+	
+	if ( test_geometry.src )
+	{
+		d_wobject(test_geometry.src);
+	}
+	if ( work_line.src )
+	{
+		d_wline(work_line.src);
+	}
+	
+	
+	if ( current_demo )
+	{
+		current_demo->draw();
+	}
+	
 	d_line(0, 0, mouse_x, mouse_y);
 	d_push();
 
@@ -262,7 +348,9 @@ int main(int argc, const char* argv[])
 	glfwGetFramebufferSize(window, &fw, &fh);
 
 	dpi = (double)fw / ww;
-
+	
+	recorder_init();
+	
 	d_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
@@ -275,6 +363,7 @@ int main(int argc, const char* argv[])
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
+		update();
 		/* Render here */
 		draw();
 
@@ -287,6 +376,8 @@ int main(int argc, const char* argv[])
 
 	glfwTerminate();
 	wcm_deinit();
-
+	recorder_deinit();
+	
+	
 	return 0;
 }

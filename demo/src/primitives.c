@@ -251,3 +251,158 @@ void d_ellipse(float _x, float _y)
 	// glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION ):
 	// glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION );
 }
+
+
+void d_wobject(WObject* obj)
+{
+	
+	// d_rect_w(obj->bounds);
+	
+	if (!obj)
+	{
+		printf("Error, tried to render a null obj!\n");
+		return;
+	}
+	if (!obj->lines)
+	{
+		// printf("no lines either!?\n");
+		return;
+	}
+	
+	d_push();
+	//d_transform_apply(obj->transform);
+	int i;
+	for (i = 0; i < obj->num_lines; ++i)
+	{
+		
+		WLine* l = obj->lines[i];
+		if (!l)
+			continue;
+		
+		if (!l)
+		{
+			printf("ack!\n");
+			continue;
+		}
+		if (!l->data)
+		{
+			printf("AAACK\n");
+			continue;
+		}
+		d_wline(l);
+	}
+	d_pop();
+}
+
+
+void d_wline(WLine* l)
+{
+	if (l == NULL)
+	{
+		printf("Tried to render a null line!\n");
+		return;
+	}
+	
+	//if (!color_bypass)
+	//{
+		if (l->has_stroke)
+		{
+			//WColor16 c = l->stroke;
+			//d_color(c.r, c.g, c.b, c.a * alpha_mult);
+			/// dirty hack to have color and also transparent onion
+			/// skins oops
+			//r_alpha(c.a * alpha_mult);
+		}
+		if (l->closed)
+		{
+			//d_set_fill(l->closed);
+			d_poly(l);
+			//d_pop_fill();
+		}
+		if (l->has_stroke)
+		{
+			//r_alpha_pop();
+		}
+	//}
+	//else
+	//{
+	//}
+#ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
+	
+	if (l->brush)
+	{
+		if (l->tess)
+		{
+			d_gpc_tristrip(l->tess);
+			return;
+		}
+		
+		if (l->brush->stroke)
+		{
+			if (l->brush->stroke->tess)
+			{
+				d_gpc_tristrip(l->brush->stroke->tess);
+			}
+			else
+			{
+				
+				d_triangle_strip(l->brush->stroke);
+			}
+		}
+		// else{
+		
+		//  d_poly(l->brush->stroke);
+		//}
+	}
+	else
+	{
+		
+		if (l->tess)
+		{
+			d_gpc_tristrip(l->tess);
+		}
+		else
+		{
+			d_poly(l);
+		}
+	}
+#else
+	d_poly(l);
+#endif
+//}
+	//  TODO color pop?
+}
+
+
+
+void d_poly(WLine* line)
+{
+	int			 i, j;
+	const unsigned long long renderLineSize = (line->num * 2);
+	
+	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
+	
+	for (i = 0, j = 0; i < line->num; i++, j += 2)
+	{
+		WPoint* p = &line->data[i];
+		//  todo: REMOVE THIS HACK
+		
+		arr[j]     = p->x;
+		arr[j + 1] = p->y;
+	}
+	
+	glVertexPointer(2, GL_FLOAT, 0, arr);
+	
+	if (line->closed)
+	{
+		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
+		free(arr);
+		return;
+	}
+	
+	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
+	: glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	free(arr);
+}
+
+

@@ -26,6 +26,7 @@ void d_color(double r, double g, double b, double a);
 void d_line(double ax, double ay, double bx, double by);
 void d_circle(float);
 void d_ellipse(float, float);
+void d_poly(WLine*);
 
 //	wash primitives
 void d_verts(WLine*);

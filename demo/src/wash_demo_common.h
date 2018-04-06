@@ -11,6 +11,10 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <wsh/wsh.h>
+
+extern WLineHnd work_line;
+extern WObjectHnd test_geometry;
 
 extern bool wash_demo_has_pressure_sensitivity_of_any_kind;
 
