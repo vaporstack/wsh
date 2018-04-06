@@ -38,9 +38,8 @@ extern WashDemo simulator;
 #define WIDTH 256
 #define HEIGHT 256
 
-
 static void switch_demo(int i);
-static int current_demo_index = 0;
+static int  current_demo_index = 0;
 
 static int window_w = WIDTH;
 static int window_h = HEIGHT;
@@ -51,8 +50,8 @@ static double mouse_y = 0;
 static double dpi	    = 1;
 static double display_radius = 1;
 static bool   down	   = false;
-static bool faking_it = false;
-GLFWwindow* window = NULL;
+static bool   faking_it      = false;
+GLFWwindow*   window	 = NULL;
 
 WDocumentHnd document;
 
@@ -107,7 +106,7 @@ static void normalize_coordinates(double* x, double* y)
 {
 	*x *= dpi;
 	*y *= dpi;
-	
+
 	//*y *= -1;
 	//	wacoms upside down? wooo
 	//mouse_y = window_h - mouse_y;
@@ -125,18 +124,20 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		once = 1;
 		wcm_init(window_w, window_h);
 	}
-	
-	if ( action == 1 )
+
+	if (action == 1)
 	{
-		if( !faking_it )
+		if (!faking_it)
 		{
-			if ( !wash_demo_has_pressure_sensitivity_of_any_kind)
+			if (!wash_demo_has_pressure_sensitivity_of_any_kind)
 			{
 				start_faking_it();
 			};
 		}
-	}else{
-		if ( faking_it )
+	}
+	else
+	{
+		if (faking_it)
 		{
 			stop_faking_it(mouse_x, mouse_y);
 		}
@@ -151,35 +152,34 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 {
 	mouse_x = xpos;
 	mouse_y = ypos;
-	
+
 	normalize_coordinates(&mouse_x, &mouse_y);
-	
-	if ( faking_it ) {
+
+	if (faking_it)
+	{
 		WPoint p = simulator_simulate_point(mouse_x, mouse_y);
 		recorder_record_manual_point(p);
 	}
-	
 }
 
 static void key_callback(GLFWwindow* window, int key, int scan, int action, int mods)
 {
-	if ( action == 0 )
+	if (action == 0)
 	{
 		return;
 	}
-	
-	if ( key >= GLFW_KEY_1 && key < GLFW_KEY_9 )
+
+	if (key >= GLFW_KEY_1 && key < GLFW_KEY_9)
 	{
 		int v = key - GLFW_KEY_1;
-		if ( v != current_demo_index )
+		if (v != current_demo_index)
 		{
 			switch_demo(v);
 			return;
 		}
-		
 	}
-	
-	if ( current_demo )
+
+	if (current_demo)
 	{
 		current_demo->key(key, action, mods);
 	}
@@ -196,36 +196,34 @@ void my_tablet_prox(int v)
 
 void my_tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
-	
+
 	mouse_x = x;
 	mouse_y = y;
-	
+
 	normalize_coordinates(&mouse_x, &mouse_y);
-	
+
 	printf("got rich up? %f %f %f %f %f %f\n", mouse_x, mouse_y, p, r, tx, ty);
 	recorder_end_line(mouse_x, mouse_y);
 }
 
 static void have_pressure(void)
 {
-	
+
 	wash_demo_has_pressure_sensitivity_of_any_kind = true;
 	printf("Have pressure! Should probably tell the user that we're disabling the mouse...\n");
-	
 }
-
 
 void my_tablet_down(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
-	if( !wash_demo_has_pressure_sensitivity_of_any_kind)
+	if (!wash_demo_has_pressure_sensitivity_of_any_kind)
 	{
 		have_pressure();
 	}
-	
+
 	mouse_x = x;
 	mouse_y = y;
 	normalize_coordinates(&mouse_x, &mouse_y);
-	
+
 	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
@@ -235,9 +233,8 @@ void my_tablet_motion(double x, double y, int button, double p, double r, double
 	mouse_x = x;
 	mouse_y = y;
 	normalize_coordinates(&mouse_x, &mouse_y);
-	
+
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	
 }
 
 void my_tablet_drag(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
@@ -247,10 +244,8 @@ void my_tablet_drag(double x, double y, int button, double p, double r, double t
 	mouse_x = x;
 	mouse_y = y;
 	normalize_coordinates(&mouse_x, &mouse_y);
-	
-	
-	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 
+	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 static void setup_callbacks()
@@ -264,41 +259,36 @@ static void setup_callbacks()
 
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
-
-
 	glfwSetScrollCallback(window, scroll_callback);
 	glfwSetDropCallback(window, drop_callback);
 }
 
 static void update(void)
 {
-	if ( current_demo )
+	if (current_demo)
 	{
 		current_demo->update();
 	}
-	
 }
 
 static void draw(void)
 {
 	d_clear();
-	
-	
-	if ( test_geometry.src )
+
+	if (test_geometry.src)
 	{
 		d_wobject(test_geometry.src);
 	}
-	if ( work_line.src )
+	if (work_line.src)
 	{
 		d_wline(work_line.src);
 	}
-	
-	
-	if ( current_demo )
+
+	if (current_demo)
 	{
 		current_demo->draw();
 	}
-	
+
 	d_line(0, 0, mouse_x, mouse_y);
 	d_push();
 
@@ -317,32 +307,29 @@ static void draw(void)
 	d_pop();
 }
 
-
 static void switch_demo(int i)
 {
-	printf("Switching demo: %d\n", i );
-	
-	if ( current_demo )
+	printf("Switching demo: %d\n", i);
+
+	if (current_demo)
 	{
 		current_demo->deinit();
 	}
-	
-	
+
 	current_demo_index = i;
-	if ( current_demo_index >= NUM_DEMOS )
+	if (current_demo_index >= NUM_DEMOS)
 	{
 		printf("Asked for a demo beyond our range.\n");
 		return;
-		
 	}
 	current_demo = demos[current_demo_index];
-	
-	if ( !current_demo )
+
+	if (!current_demo)
 	{
 		printf("Error, got a NULL demo at position %d\n", i);
 		return;
 	}
-	
+
 	current_demo->init();
 }
 
@@ -380,13 +367,13 @@ int main(int argc, const char* argv[])
 	glfwGetFramebufferSize(window, &fw, &fh);
 
 	dpi = (double)fw / ww;
-	
+
 	recorder_init();
-	
+
 	d_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
-	document.src = w_serial_json_unserialize_document("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
+	document.src = w_serial_document_unserialize("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
 	d_setup(window_w, window_h);
 
 	d_color_clear(1, 1, 1, 1);
@@ -409,7 +396,6 @@ int main(int argc, const char* argv[])
 	glfwTerminate();
 	wcm_deinit();
 	recorder_deinit();
-	
-	
+
 	return 0;
 }

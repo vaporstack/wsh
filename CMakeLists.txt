@@ -32,6 +32,10 @@ else()
 
 endif ()
 
+if (${have_r4_environment})
+	message("Enabling the JSON backend?")
+	add_definitions(-DWSH_ENABLE_SERIAL_BACKEND_JSON)
+endif()
 
 file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
@@ -40,6 +44,8 @@ add_library(wsh SHARED STATIC ${sources})
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
+	target_include_directories (wsh PUBLIC ${CMAKE_SOURCE_DIR}/contrib/deps)
+
 else()
 	message("Building standalone.")
 	macro(use_c99)

@@ -58,7 +58,15 @@ static inline char* wsh_get_version_string_header(void)
 #include "src/serial/w_serial.h"
 #include "src/util/w_line_ops.h"
 
-//#ifdef WSH_ENABLE_JSON_BACKEND
+#ifdef R4_PRESENT
+#define WSH_ENABLE_SERIAL_BACKEND_JSON
+#endif
+
+#define WSH_ENABLE_SERIAL_BACKEND_BIN
+#define WSH_ENABLE_SERIAL_BACKEND_OBF
+
+
+//#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 //	#include "wsrc/serial/w_serial_json.h"
 //#endif
 

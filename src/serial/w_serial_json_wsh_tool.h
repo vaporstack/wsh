@@ -9,7 +9,7 @@
 #ifndef w_serial_json_wsh_tool_h
 #define w_serial_json_wsh_tool_h
 
-#ifdef WSH_ENABLE_BACKEND_JSON
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
 #include "../core/wsh_tool.h"
 

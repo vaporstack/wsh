@@ -7,7 +7,7 @@
 
 #include "w_serial_json.h"
 
-#ifdef WSH_ENABLE_BACKEND_JSON
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
 #include <cjson/cJSON.h>
 #include <string.h>
@@ -589,7 +589,7 @@ int w_serial_json_unserialize_meta(cJSON* data, WDocumentMeta* meta)
 	return false;
 }
 */
-const char* w_serial_json_serialize_document_v002(WDocument* doc, const char* version_string)
+const char* w_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
 {
 
 	cJSON* root = cJSON_CreateObject();
@@ -627,7 +627,7 @@ const char* w_serial_json_serialize_document_v002(WDocument* doc, const char* ve
 	return cJSON_Print(root);
 }
 
-const char* w_serial_json_serialize_document_v001(WDocument* doc, const char* version_string)
+const char* w_serial_json_document_serialize_v001(WDocument* doc, const char* version_string)
 {
 
 	if (DEBUG_SERIAL)
@@ -678,7 +678,7 @@ const char* w_serial_json_serialize_document_v001(WDocument* doc, const char* ve
 	return result;
 }
 
-const char* w_serial_json_serialize_document(WDocument* doc)
+const char* w_serial_json_document_serialize(WDocument* doc)
 {
 	char* buf = calloc(128, sizeof(char));
 	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
@@ -689,12 +689,12 @@ const char* w_serial_json_serialize_document(WDocument* doc)
 	if (0 == strcmp(working_version, "0_0_1"))
 	{
 		printf("Serialize: %s\n", working_version);
-		return w_serial_json_serialize_document_v001(doc, buf);
+		return w_serial_json_document_serialize_v001(doc, buf);
 	}
 	else if (0 == strcmp(working_version, "0_0_2"))
 	{
 		printf("Serialize: %s\n", working_version);
-		return w_serial_json_serialize_document_v002(doc, buf);
+		return w_serial_json_document_serialize_v002(doc, buf);
 	}
 	else
 	{
@@ -819,12 +819,12 @@ WObject* w_serial_json_unserialize_object(cJSON* data)
 	return w_serial_json_unserialize_object_v_0_0_1(data);
 }
 /*
-void* w_serial_json_unserialize_document_generic(const char* path)
+void* w_serial_document_unserialize_generic(const char* path)
 {
-	return w_serial_json_unserialize_document(path);
+	return w_serial_document_unserialize(path);
 }
 */
-WDocument* w_serial_json_unserialize_document_v002(const char* path, cJSON* root)
+WDocument* w_serial_document_unserialize_v002(const char* path, cJSON* root)
 {
 	WDocument* doc = w_document_create();
 
@@ -865,7 +865,7 @@ WDocument* w_serial_json_unserialize_document_v002(const char* path, cJSON* root
 	return doc;
 }
 
-WDocument* w_serial_json_unserialize_document_v001(const char* path, cJSON* root)
+WDocument* w_serial_document_unserialize_v001(const char* path, cJSON* root)
 {
 	printf("Unserializing at v001\n");
 
@@ -959,7 +959,7 @@ static void w_serial_json_postprocess_document(WDocument* doc)
 	//}
 }
 
-WDocument* w_serial_json_unserialize_document(const char* path)
+WDocument* w_serial_json_document_unserialize(const char* path)
 {
 	WDocument* doc  = NULL;
 	char*      data = w_read_file_as_text_nc(path);
@@ -986,7 +986,7 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 			working_version = version->valuestring;
 			printf("version detected: %s\n", working_version);
 		}
-		doc = w_serial_json_unserialize_document_v001(path, root);
+		doc = w_serial_document_unserialize_v001(path, root);
 	}
 	else
 	{
@@ -1008,7 +1008,7 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 
 				if (0 == strcmp(working_version, "0_0_2"))
 				{
-					doc = w_serial_json_unserialize_document_v002(path, root);
+					doc = w_serial_document_unserialize_v002(path, root);
 				}
 				else
 				{
@@ -1046,4 +1046,4 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 	return doc;
 }
 
-#endif // end WSH_ENABLE_BACKEND_JSON
+#endif // end WSH_ENABLE_SERIAL_BACKEND_JSON

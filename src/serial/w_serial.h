@@ -9,26 +9,10 @@
 #ifndef w_serial_h
 #define w_serial_h
 
-#include "../../wsh.h"
-#include "w_serial_bin.h"
-#include "w_serial_json.h"
-//#include "w_serial_svg.h"
+#include <wsh/src/geo/w_document.h>
 
-// const char*		w_serialize_object_json(WObject* obj);
-// WObject*		w_serial_json_unserialize_object(const char* path);
+WDocument* w_serial_document_unserialize(const char* path);
+int	w_serial_document_serialize(WDocument* doc);
 
-// const char*		w_serialize_object_svg(WObject* obj);
-// WObject*		w_unserialize_object_svg(const char* path);
-
-// void			w_serialize_line(WObject*, FILE* );
-// void			w_serialize_point(WPoint*, FILE* );
-
-char* w_create_version_string(void);
-
-// int				w_document_serialize_bin(WDocument*);
-// WDocument 		w_document_unserialize_bin(const char* path);
-
-// int				w_serialize_document_svg(WDocument*);
-// WDocument*		w_document_unserialize_svg(const char* path);
 
 #endif /* w_serial_h */

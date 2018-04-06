@@ -26,7 +26,7 @@ add_executable(test_wsh ${sources})
 # same here
 # target_include_directories (test_wsh PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs)
 # target_include_directories (test_wsh PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include)
-# target_include_directories (test_wsh PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib)
+target_include_directories (test_wsh PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/deps)
 
 # find_library(GPC_LIBRARY gpc HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/platform/linux2/x86_64)
 

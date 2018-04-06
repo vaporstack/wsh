@@ -72,8 +72,8 @@ EXPORTS
 	w_create_version_string
 	w_document_serialize_bin
 	w_document_unserialize_bin
-	w_serial_json_unserialize_document
-	w_serial_json_unserialize_document
+	w_serial_document_unserialize
+	w_serial_document_unserialize
 	w_serial_json_unserialize_object
 	w_serial_json_unserialize_sequence
 	w_document_unserialize_svg

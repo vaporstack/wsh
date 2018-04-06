@@ -8,7 +8,7 @@
 
 #include "w_serial_json_wsh_tool.h"
 
-#ifdef WSH_ENABLE_BACKEND_JSON
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
 #include "w_serial_json.h"
 #include <cjson/cJSON.h>
