@@ -25,6 +25,8 @@
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
+		57BE55F52076F352003E3408 /* recorder.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BE55F42076F352003E3408 /* recorder.c */; };
+		57BE55FF2076FC0F003E3408 /* simulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BE55FE2076FC0F003E3408 /* simulator.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +83,11 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
+		57BE55F32076F352003E3408 /* recorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = recorder.h; path = ../demo/src/recorder.h; sourceTree = "<group>"; };
+		57BE55F42076F352003E3408 /* recorder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = recorder.c; path = ../demo/src/recorder.c; sourceTree = "<group>"; };
+		57BE55FD2076FC0F003E3408 /* simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = simulator.h; path = ../demo/src/simulator.h; sourceTree = "<group>"; };
+		57BE55FE2076FC0F003E3408 /* simulator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = simulator.c; path = ../demo/src/simulator.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,12 +176,17 @@
 		578BCE4A2061785300672199 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				57BE55F22076EEFE003E3408 /* demo.h */,
 				5760EC82206178D200430B0A /* main.c */,
 				5721DC752076D6B000C141BB /* demos */,
 				5711BFD42061C7C000DD36E0 /* primitives.h */,
 				5711BFD52061C7C000DD36E0 /* primitives.c */,
 				5760ECEE2063343300430B0A /* wash_demo_common.h */,
 				5760ECEF2063343300430B0A /* wash_demo_common.c */,
+				57BE55F32076F352003E3408 /* recorder.h */,
+				57BE55F42076F352003E3408 /* recorder.c */,
+				57BE55FD2076FC0F003E3408 /* simulator.h */,
+				57BE55FE2076FC0F003E3408 /* simulator.c */,
 			);
 			name = src;
 			path = ../../src;
@@ -302,8 +314,10 @@
 				5721DC812076D6B000C141BB /* animation.c in Sources */,
 				5721DC822076D6B000C141BB /* playback.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
+				57BE55F52076F352003E3408 /* recorder.c in Sources */,
 				5721DC7E2076D6B000C141BB /* session.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
+				57BE55FF2076FC0F003E3408 /* simulator.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
