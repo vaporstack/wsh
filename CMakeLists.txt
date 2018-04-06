@@ -11,7 +11,7 @@ set (wsh_VERSION_PATCH 1)
 
 option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" OFF)
-option(BuildTest "BuildTest" OFF)
+option(BuildTest "BuildTest" ON)
 
 file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
@@ -81,8 +81,11 @@ if (${build_doc})
 		      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		      COMMENT "Generating API documentation with Doxygen"
 		      VERBATIM)
-
 endif(${build_doc})
+
+if(${BuildTest})
+	add_subdirectory(test)
+endif()
 
 target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
 target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)

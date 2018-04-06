@@ -3,6 +3,12 @@
 #include "stdlib.h"
 #include <wsh/wsh.h>
 
+//#include "geometry.c"
+//#include "serial.c"
+
+int test_serial_backends(void);
+int test_geometry(void);
+
 int main(int argc, char** argv)
 {
 	//	simple test program for wash.
@@ -20,21 +26,20 @@ int main(int argc, char** argv)
 		printf("Version does not match!!\n");
 	}
 
-	WColor c;
+	int err = test_geometry();
+	if (err)
+	{
+		printf("Err code: %d\n", err);
+	}
 
-	//printf("Note: Commented out GPC code because it does not belong in wsh "
-	//     "which is a core datatype library\n");
+	err = test_serial_backends();
+	if (err)
+	{
+		printf("Err code: %d\n", err);
+	}
 	return 0;
-
 	/*
 
-	WLine *line = w_line_create();
 
-	WObject *obj = w_object_create(NULL);
-	w_object_add_line(obj, line);
-
-	w_line_destroy(line);
-	w_object_destroy(obj);
-	return 0;
 	*/
 }
