@@ -21,10 +21,11 @@ build:
   artifacts:
     paths:
       - build/libwsh.a
+      - build/test/test_wsh
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-  # cache:
-  #   paths:
-  #     - "*.o"
+  cache:
+    paths:
+      - "*.o"
 
 # run tests using the binary built before
 test:
