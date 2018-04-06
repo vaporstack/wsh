@@ -31,8 +31,8 @@ build:
       - "*.o"
 
 # run tests using the binary built before
-test:
-  stage: test
-  script:
-    - ./build/test/test_wsh
+#test:
+#  stage: test
+#  script:
+#    - ./build/test/test_wsh
 
