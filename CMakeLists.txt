@@ -11,7 +11,27 @@ set (wsh_VERSION_PATCH 1)
 
 option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" OFF)
-option(BuildTest "BuildTest" ON)
+option(BuildTest "BuildTest" OFF)
+
+if(CMAKE_BUILD_TYPE)
+	if (${CMAKE_BUILD_TYPE} STREQUAL "release")
+		set(BuildDocumentation ON)
+	else()
+		set(CMAKE_BUILD_TYPE "debug")
+	endif()
+else()
+	set(CMAKE_BUILD_TYPE "debug")
+endif()
+
+message("\n\nCMAKE build type:" ${CMAKE_BUILD_TYPE})
+
+
+if (CMAKE_BUILD_TYPE EQUAL "debug")
+
+else()
+
+endif ()
+
 
 file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
@@ -40,9 +60,12 @@ else()
 	option(BUILD_DOCUMENTATION "Create and install the HTML based API
 	documentation (requires Doxygen)" ${DOXYGEN_FOUND})
 
+
 	if(BUILD_DOCUMENTATION)
 		if(BuildDocumentation)
-			set(build_doc YES)
+			if (${CMAKE_BUILD_TYPE} STREQUAL "release")
+				set(build_doc YES)
+			endif()
 		endif()
 	endif()
 
@@ -54,6 +77,9 @@ include_directories(${LibGLFW_INCLUDE_DIRS})
 set(LIBS ${LIBS} ${LibGLFW_LIBRARIES})
 
 if (GLFW_FOUND)
+	if (${CMAKE_BUILD_TYPE} STREQUAL "release")
+		set(BuildDemo YES)
+	endif()
 	if(BuildDemo)
 		set(build_demo YES)
 	endif()
@@ -62,12 +88,12 @@ else()
 endif()
 
 if (${build_demo})
-	message("DEMO!?")
+	message("Adding demo to build targets.")
 	add_subdirectory(demo)
 endif(${build_demo})
 
 if (${build_doc})
-	message("DOCS!?")
+	message("Adding documentation to build targets.")
 
 	set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
 	set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -88,7 +114,9 @@ if(${BuildTest})
 endif()
 
 target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)
-target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib)
-target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps)
+
+
+#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)
+#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib)
+#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps)
 
