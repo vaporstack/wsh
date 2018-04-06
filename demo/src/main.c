@@ -33,7 +33,7 @@ extern WashDemo simulator;
 
 #include <wsh/wsh.h>
 
-#include "wcm.h"
+#include <wcm/wcm.h>
 
 #define WIDTH 256
 #define HEIGHT 256
