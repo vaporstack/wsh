@@ -18,6 +18,8 @@ build:
     - mkdir build
     - cd build
     - cmake ..
+    - ./test/test_wsh
+  
   artifacts:
     paths:
       - build/libwsh.a
