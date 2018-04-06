@@ -30,4 +30,4 @@ add_executable(test_wsh ${sources})
 
 # find_library(GPC_LIBRARY gpc HINTS ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/platform/linux2/x86_64)
 
-target_link_libraries(test_wsh LINK_PUBLIC wsh)
+target_link_libraries(test_wsh LINK_PUBLIC wsh m)
