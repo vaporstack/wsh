@@ -13,14 +13,14 @@ build:
   # before_script: 
   #   - apt update && apt -y install make autoconf 
   script: 
-    - git submodule init
-    - git submodule update
+    #- git submodule init
+    #- git submodule update
     - mkdir build
     - cd build
     - cmake ..
   artifacts:
     paths:
-      - mybinary
+      - build/libwsh.a
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
   # cache:
   #   paths:
@@ -30,5 +30,5 @@ build:
 test:
   stage: test
   script:
-    - ./runmytests.sh
+    - ./build/test/test_wsh
 
