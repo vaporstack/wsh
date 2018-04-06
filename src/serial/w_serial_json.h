@@ -10,7 +10,8 @@
 
 #include <wsh/wsh.h>
 
-//#ifndef RPLATFORM_IOS
+#ifdef WSH_ENABLE_BACKEND_JSON
+
 #include <cjson/cJSON.h>
 
 cJSON*      w_serial_json_serialize_color(WColor col);
@@ -22,8 +23,6 @@ WSequence*  w_serial_json_unserialize_sequence(cJSON* data);
 const char* w_serial_json_serialize_document(WDocument*);
 WDocument*  w_serial_json_unserialize_document(const char* path);
 
-//void* w_serial_json_unserialize_document_generic(const char* path);
-
-//#endif
+#endif
 
 #endif

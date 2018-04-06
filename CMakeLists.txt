@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 3.0)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
 project(wsh)
 set(project_name wsh)
 
@@ -7,10 +9,9 @@ set (wsh_VERSION_MAJOR 0)
 set (wsh_VERSION_MINOR 0)
 set (wsh_VERSION_PATCH 1)
 
-
-# pkg_search_module(GLFW REQUIRED glfw3)
-# option(BUILD_DEMO "Build the demo application(requires glfw)" ${GLFW_FOUND})
-
+option(BuildDocumentation "BuildDocumentation" OFF)
+option(BuildDemo "BuildDemo" OFF)
+option(BuildTest "BuildTest" OFF)
 
 file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
@@ -20,7 +21,7 @@ add_library(wsh SHARED STATIC ${sources})
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
 else()
-
+	message("Building standalone.")
 	macro(use_c99)
 		if (CMAKE_VERSION VERSION_LESS "3.1")
 			if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
@@ -31,18 +32,33 @@ else()
 		endif ()
 	endmacro(use_c99)
 
-	add_subdirectory(contrib/cjson)
-	add_subdirectory(contrib/glfw)
-	set(build_demo YES)
+	# add_subdirectory(contrib/cjson)
+	# add_subdirectory(contrib/glfw)
+	# set(build_demo YES)
 
 	find_package(Doxygen)
 	option(BUILD_DOCUMENTATION "Create and install the HTML based API
 	documentation (requires Doxygen)" ${DOXYGEN_FOUND})
 
 	if(BUILD_DOCUMENTATION)
-		set(build_doc YES)
+		if(BuildDocumentation)
+			set(build_doc YES)
+		endif()
 	endif()
 
+endif()
+
+
+find_package(LibGLFW )
+include_directories(${LibGLFW_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${LibGLFW_LIBRARIES})
+
+if (GLFW_FOUND)
+	if(BuildDemo)
+		set(build_demo YES)
+	endif()
+else()
+	message("Did not find GLFW, cannot build demo.")
 endif()
 
 if (${build_demo})

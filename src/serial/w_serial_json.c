@@ -7,11 +7,10 @@
 
 #include "w_serial_json.h"
 
-//#ifndef RPLATFORM_IOS
+#ifdef WSH_ENABLE_BACKEND_JSON
 
 #include <cjson/cJSON.h>
 #include <string.h>
-
 
 /*
 #define REGISTER(ns, id, type)                                          \
@@ -70,21 +69,21 @@ WColor16 w_serial_json_unserialize_color16(cJSON* data)
 {
 	WColor16 c;
 	w_color_16_clear(&c);
-	
+
 	cJSON* v = NULL;
-	v = cJSON_GetObjectItem(data, "r");
-	if ( v)
+	v	= cJSON_GetObjectItem(data, "r");
+	if (v)
 		c.r = v->valuedouble;
 	v = cJSON_GetObjectItem(data, "g");
-	if ( v)
+	if (v)
 		c.g = v->valuedouble;
 	v = cJSON_GetObjectItem(data, "b");
-	if ( v)
+	if (v)
 		c.b = v->valuedouble;
 	v = cJSON_GetObjectItem(data, "a");
-	if ( v)
+	if (v)
 		c.a = v->valuedouble;
-	
+
 	return c;
 }
 
@@ -320,7 +319,7 @@ WSequence* w_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	num = cJSON_GetArraySize(jframes);
 
 	seq->num_frames		 = num;
-	seq->current_frame_index = 0; // TODO read this back in properly?
+	seq->current_frame_index = 0;  // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
 	struct WObject** frames;
@@ -769,13 +768,15 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		line->stroke.g = cJSON_GetArrayItem(stroke, 1)->valuedouble;
 		line->stroke.b = cJSON_GetArrayItem(stroke, 2)->valuedouble;
 		line->stroke.a = cJSON_GetArrayItem(stroke, 3)->valuedouble;
-	}else{
+	}
+	else
+	{
 		printf("Error loading stroke!\n");
 		line->has_stroke = true;
-		line->stroke.r = 0;
-		line->stroke.g = 0;
-		line->stroke.b = 0;
-		line->stroke.a = 0;
+		line->stroke.r   = 0;
+		line->stroke.g   = 0;
+		line->stroke.b   = 0;
+		line->stroke.a   = 0;
 	}
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
 
@@ -935,7 +936,7 @@ static void w_serial_json_postprocess_document(WDocument* doc)
 	//{
 	//	doc->meta.fps = strtod(doc->meta.fps_repr, (char**)NULL);
 
-		/*int pos = index_of_char(doc->meta.fps_repr);
+	/*int pos = index_of_char(doc->meta.fps_repr);
 		if (pos == -1) {
 			printf("parsing an integer fps val\n");
 			int fps = atoi(doc->meta.fps_repr);
@@ -1019,7 +1020,7 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 
 	//if (meta)
 	//{
-	
+
 	w_serial_json_postprocess_document(doc);
 	//}
 	/*
@@ -1045,4 +1046,4 @@ WDocument* w_serial_json_unserialize_document(const char* path)
 	return doc;
 }
 
-//#endif
+#endif // end WSH_ENABLE_BACKEND_JSON
