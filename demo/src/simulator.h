@@ -12,6 +12,7 @@
 #include <wsh/wsh.h>
 
 void simulator_init(void);
+void simulator_reset_sims(void);
 WPoint simulator_simulate_point(double x, double y);
 
 #endif /* simulator_h */

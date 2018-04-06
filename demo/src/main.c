@@ -103,6 +103,16 @@ static void stop_faking_it(double x, double y)
 	printf("No longer faking it.\n");
 }
 
+static void normalize_coordinates(double* x, double* y)
+{
+	*x *= dpi;
+	*y *= dpi;
+	
+	//*y *= -1;
+	//	wacoms upside down? wooo
+	//mouse_y = window_h - mouse_y;
+}
+
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	down = action;
@@ -139,11 +149,13 @@ static void cursor_enter_callback(GLFWwindow* window, int entered)
 
 static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	mouse_x = xpos * dpi;
-	mouse_y = ypos * dpi;
+	mouse_x = xpos;
+	mouse_y = ypos;
+	
+	normalize_coordinates(&mouse_x, &mouse_y);
 	
 	if ( faking_it ) {
-		WPoint p = simulator_simulate_point(xpos, ypos);
+		WPoint p = simulator_simulate_point(mouse_x, mouse_y);
 		recorder_record_manual_point(p);
 	}
 	
@@ -184,8 +196,14 @@ void my_tablet_prox(int v)
 
 void my_tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
-	printf("got rich up? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	recorder_end_line(x, y);
+	
+	mouse_x = x;
+	mouse_y = y;
+	
+	normalize_coordinates(&mouse_x, &mouse_y);
+	
+	printf("got rich up? %f %f %f %f %f %f\n", mouse_x, mouse_y, p, r, tx, ty);
+	recorder_end_line(mouse_x, mouse_y);
 }
 
 static void have_pressure(void)
@@ -204,20 +222,34 @@ void my_tablet_down(double x, double y, int button, double p, double r, double t
 		have_pressure();
 	}
 	
+	mouse_x = x;
+	mouse_y = y;
+	normalize_coordinates(&mouse_x, &mouse_y);
+	
 	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	recorder_record_point(x, y, button, p, r, tx, ty, altitude, azimuth, idk);
+	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 void my_tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
+	mouse_x = x;
+	mouse_y = y;
+	normalize_coordinates(&mouse_x, &mouse_y);
+	
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 	
 }
 
 void my_tablet_drag(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
-	printf("got rich drag? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	recorder_record_point(x, y, button, p, r, tx, ty, altitude, azimuth, idk);
+	printf("got rich drag? %f %f %f %f %f %f\n", mouse_x, mouse_y, p, r, tx, ty);
+
+	mouse_x = x;
+	mouse_y = y;
+	normalize_coordinates(&mouse_x, &mouse_y);
+	
+	
+	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 
 }
 
