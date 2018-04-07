@@ -31,14 +31,14 @@ WLineHnd* w_line_hnd_create(void)
 WLineHnd* w_line_hnd_create_with_data(void)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
-	hnd->src = w_line_create();
+	hnd->src      = w_line_create();
 	return hnd;
 }
 
 WLineHnd* w_line_hnd_create_with_addr(WLine* addr)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
-	hnd->src = addr;
+	hnd->src      = addr;
 	return hnd;
 }
 
@@ -68,8 +68,8 @@ WLine* w_line_create()
 	l->has_stroke = false;
 	//l->tess       = NULL;
 	//l->brush      = NULL;
-	l->closed     = false;
-	l->z 		= 0;
+	l->closed = false;
+	l->z      = 0;
 
 	WRect b;
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
@@ -89,34 +89,33 @@ WLine* w_line_create()
 void w_line_calc_bounds(WLine* src)
 {
 	double minx, miny, maxx, maxy;
-	
+
 	minx = miny = INFINITY;
 	maxx = maxy = -INFINITY;
 
-	
-	for (int i = 0; i < src->num; ++i) {
-		
+	for (int i = 0; i < src->num; ++i)
+	{
+
 		WPoint* p = &src->data[i];
-		double   x = p->x;
-		double   y = p->y;
-		
-		if ( x < minx )
+		double  x = p->x;
+		double  y = p->y;
+
+		if (x < minx)
 			minx = x;
-		if ( x > maxx)
+		if (x > maxx)
 			maxx = x;
-		if ( y < miny)
+		if (y < miny)
 			miny = y;
-		if ( y > maxy)
+		if (y > maxy)
 			maxy = y;
 	}
-	
+
 	src->bounds.pos.x  = minx;
 	src->bounds.pos.y  = miny;
 	src->bounds.size.x = maxx - minx;
 	src->bounds.size.y = maxy - miny;
-	
 }
-void	w_line_add_point2f(WLine* line, double x, double y)
+void w_line_add_point2f(WLine* line, double x, double y)
 {
 	WPoint p;
 	p.x = x;
@@ -126,18 +125,21 @@ void	w_line_add_point2f(WLine* line, double x, double y)
 
 void w_line_add_point(WLine* line, WPoint p)
 {
-	if (!line) {
+	if (!line)
+	{
 		printf("Bad codepath, point was added via (drag) but line was "
 		       "never started!\n");
 		return;
 	}
-	if (!line->data) {
+	if (!line->data)
+	{
 		line->reserved = LINE_START_SIZE;
 		line->data     = calloc(line->reserved, sizeof *line->data);
 		//(WPoint*)malloc( sizeof *line->data * line->reserved );
 	}
 
-	if (line->num == line->reserved) {
+	if (line->num == line->reserved)
+	{
 		(line->reserved) *= 2;
 		line->data =
 		    realloc(line->data, sizeof *line->data * line->reserved);
@@ -148,38 +150,47 @@ void w_line_add_point(WLine* line, WPoint p)
 
 	line->num++;
 
-	// TODO move this somewhere higher level, line is a core data type and
-	// shouldn't know about
-	//	tesselation and such
+// TODO move this somewhere higher level, line is a core data type and
+// shouldn't know about
+//	tesselation and such
 #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
-	if (line->closed) {
-		if (line->tess) {
+	if (line->closed)
+	{
+		if (line->tess)
+		{
 			w_gpc_tess_destroy(line);
 		}
 
 		w_gpc_tess_create(line);
 		// w_line_ops_smooth(line->brush->stroke->tess, 8);
-		if (line->brush) {
-			if (line->brush->stroke) {
+		if (line->brush)
+		{
+			if (line->brush->stroke)
+			{
 				// w_line_ops_smooth(line->brush->stroke->tess,
 				// 8);
-			} else {
+			}
+			else
+			{
 				printf("!");
 			}
 		}
-	} else {
-		if (line->tess) {
+	}
+	else
+	{
+		if (line->tess)
+		{
 			w_gpc_tess_destroy(line);
 		}
 	}
 #endif
-	
 }
 
 void w_line_concat(WLine* dst, WLine* src, ull start, ull end)
 {
-	for (ull i = start; i < end; ++i) {
+	for (ull i = start; i < end; ++i)
+	{
 		w_line_add_point(dst, src->data[i]);
 	}
 }
@@ -187,10 +198,13 @@ void w_line_concat(WLine* dst, WLine* src, ull start, ull end)
 WLine* w_line_copy(WLine* old)
 {
 
-	if (old == NULL) {
+	if (old == NULL)
+	{
 		printf("tried to copy a null line.\n");
 		return NULL;
-	} else if (old->data == NULL) {
+	}
+	else if (old->data == NULL)
+	{
 		printf("Tried to copy a line with no data!\n");
 		return NULL;
 	}
@@ -206,8 +220,9 @@ WLine* w_line_copy(WLine* old)
 	new->closed     = old->closed;
 	new->fill       = old->fill;
 	new->stroke     = old->stroke;
-	new->bounds = old->bounds;
-	for (int i = 0; i < new->num; ++i) {
+	new->bounds     = old->bounds;
+	for (int i = 0; i < new->num; ++i)
+	{
 
 		new->data[i].x	= old->data[i].x;
 		new->data[i].y	= old->data[i].y;
@@ -231,10 +246,13 @@ WLine* w_line_copy(WLine* old)
 
 WLine* w_line_copy_percentage(WLine* old, double v)
 {
-	if (old == NULL) {
+	if (old == NULL)
+	{
 		printf("tried to copy a null line.\n");
 		return NULL;
-	} else if (old->data == NULL) {
+	}
+	else if (old->data == NULL)
+	{
 		printf("Tried to copy a line with no data!\n");
 		return NULL;
 	}
@@ -251,7 +269,8 @@ WLine* w_line_copy_percentage(WLine* old, double v)
 	new->fill       = old->fill;
 	new->stroke     = old->stroke;
 
-	for (int i = 0; i < old->num; ++i) {
+	for (int i = 0; i < old->num; ++i)
+	{
 
 		WPoint p = old->data[i];
 		if (p.time > v)
@@ -292,12 +311,13 @@ void w_line_copy_attribs(WLine* to, WLine* from)
 
 void w_line_destroy(WLine* line)
 {
-	if (!line) {
+	if (!line)
+	{
 		printf("I refuse to destroy something that is already "
 		       "destroyed lol\n");
 		return;
 	}
-	
+
 	if (line->data != NULL)
 		free(line->data);
 	line->num      = 0;
@@ -317,11 +337,13 @@ void w_line_find_mins(WLine* line, double* o_x, double* o_y)
 	unsigned long long np = line->num;
 	double		   mx, my;
 	mx = my = 0;
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 		WPoint* p = &line->data[j];
 		double  x = p->x;
 		double  y = p->y;
-		if (j == 0) {
+		if (j == 0)
+		{
 			mx = x;
 			my = y;
 		}
@@ -335,48 +357,50 @@ void w_line_find_mins(WLine* line, double* o_x, double* o_y)
 	*o_y = my;
 }
 
-void w_line_offset(WLine* line, double x, double y)
+void w_line_move(WLine* line, double x, double y)
 {
 	//printf("offset line by %f %f\n", x, y);
 	unsigned long long np = line->num;
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 		WPoint* p = &line->data[j];
 		p->x += x;
 		p->y += y;
 	}
 	w_line_calc_bounds(line);
-	
-	
+
 	//w_brush_update(line->brush);
 	//if ( line->brush )
 	//{
-	//	w_line_offset(line->brush->stroke, x, y);
-//	}
+	//	w_line_move(line->brush->stroke, x, y);
+	//	}
 }
 
 void w_line_scale(WLine* line, double x, double y)
 {
 	unsigned long long np = line->num;
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 		WPoint* p = &line->data[j];
 		p->x *= x;
 		p->y *= y;
 	}
 	w_line_calc_bounds(line);
-
 }
 
 void w_line_normalize_time(WLine* l)
 {
-	if (!l) {
+	if (!l)
+	{
 		printf("Tried to normalize time for a NULL line.\n");
 		return;
 	}
 	double first = l->data[0].time;
 	printf("First time is %f\n", first);
-	for (int i = 0; i < l->num; i++) {
+	for (int i = 0; i < l->num; i++)
+	{
 		l->data[i].time -= first;
 	}
 }
@@ -397,18 +421,21 @@ WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
 	i = j		      = 0;
 	unsigned long long np = l->num;
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 
 		WPoint p = l->data[j];
 		double x = p.x;
 		double y = p.y;
 
-		if (j == 0) {
+		if (j == 0)
+		{
 			minx = maxx = x;
 			miny = maxy = y;
 		}
 
-		if (j == 0 && i == 0) {
+		if (j == 0 && i == 0)
+		{
 			minx = maxx = x;
 			miny = maxy = y;
 		}
@@ -440,7 +467,8 @@ WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
 
 	// printf("ar: %f\n", ar);
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 		WPoint* p  = &l->data[j];
 		WPoint* np = w_point_create();
 		np->x      = p->x;
@@ -477,18 +505,21 @@ void w_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 	i = j		      = 0;
 	unsigned long long np = l->num;
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 
 		WPoint p = l->data[j];
 		double x = p.x;
 		double y = p.y;
 
-		if (j == 0) {
+		if (j == 0)
+		{
 			minx = maxx = x;
 			miny = maxy = y;
 		}
 
-		if (j == 0 && i == 0) {
+		if (j == 0 && i == 0)
+		{
 			minx = maxx = x;
 			miny = maxy = y;
 		}
@@ -520,7 +551,8 @@ void w_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 
 	// printf("ar: %f\n", ar);
 
-	for (int j = 0; j < np; ++j) {
+	for (int j = 0; j < np; ++j)
+	{
 		WPoint* p = &l->data[j];
 		// WPoint* np = w_point_create();
 		// np->x = p->x;

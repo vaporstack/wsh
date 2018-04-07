@@ -486,3 +486,27 @@ void w_sequence_normalize(WSequence* seq)
 	}
 	
 }
+
+void w_sequence_move(WSequence* seq, double dx, double dy)
+{
+	for ( unsigned int i = 0 ;i < seq->num_frames; i++ )
+	{
+		WObject* frame = seq->frames[i];
+		w_object_move(frame, dx, dy);
+	}
+	//printf("did nothing! \\o/ \n");
+	//printf("did more nothing! \\o/ \n");
+}
+
+void w_sequence_scale(WSequence* seq, double modx, double mody)
+{
+	for ( unsigned int i = 0 ;i < seq->num_frames; i++ )
+	{
+		WObject* frame = seq->frames[i];
+		w_object_scale(frame, modx, mody);
+	}
+	//printf("did nothing! \\o/ \n");
+	
+}
+
+

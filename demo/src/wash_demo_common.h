@@ -13,6 +13,12 @@
 #include <stdio.h>
 #include <wsh/wsh.h>
 
+
+extern int window_w;
+extern int window_h;
+extern int framebuffer_w ;
+extern int framebuffer_h;
+
 extern WLineHnd work_line;
 extern WObjectHnd test_geometry;
 

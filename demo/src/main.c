@@ -51,10 +51,6 @@ extern WashDemo simulator;
 static void switch_demo(int i);
 static int  current_demo_index = 0;
 
-static int window_w = WIDTH;
-static int window_h = HEIGHT;
-static int framebuffer_x = 0;
-static int framebuffer_y = 0;
 static double mouse_x = 0;
 static double mouse_y = 0;
 
@@ -72,10 +68,10 @@ WashDemo* current_demo     = NULL;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	framebuffer_x = height;
-	framebuffer_y = width;
+	framebuffer_w = height;
+	framebuffer_h = width;
 
-	d_setup(framebuffer_x, framebuffer_x);
+	d_setup(framebuffer_w, framebuffer_w);
 }
 
 static void window_pos_callback(GLFWwindow* window, int x, int y)
@@ -355,6 +351,8 @@ int main(int argc, const char* argv[])
 	if (!glfwInit())
 		return -1;
 
+	window_w = WIDTH;
+	window_h = HEIGHT;
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(window_w, window_h, "Hello World", NULL, NULL);
 	if (!window)

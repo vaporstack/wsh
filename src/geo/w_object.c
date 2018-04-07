@@ -272,6 +272,24 @@ void w_object_douglaspeucker(WObject* obj, double r)
 #endif
 }
 
+void	w_object_scale(WObject* obj, double modx, double mody)
+{
+	for ( unsigned long i = 0 ;i < obj->num_lines; i++ )
+	{
+		WLine* l = obj->lines[i];
+		w_line_scale(l, modx, mody);
+	}
+}
+
+void w_object_move(WObject* obj, double dx, double dy)
+{
+	for ( unsigned long i = 0 ;i < obj->num_lines; i++ )
+	{
+		WLine* l = obj->lines[i];
+		w_line_move(l, dx, dy);
+	}
+	
+}
 void w_object_center(WObject* obj)
 {
 	w_object_calc_bounds(obj);

@@ -30,7 +30,7 @@ EXPORTS
 	w_line_hnd_destroy
 	w_line_normalize
 	w_line_normalize_inplace
-	w_line_offset
+	w_line_move
 	w_line_scale
 	*w_node_create
 	w_node_destroy

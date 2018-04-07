@@ -11,4 +11,10 @@
 WLineHnd work_line;
 WObjectHnd test_geometry;
 
+
+ int window_w = 0;
+ int window_h = 0;
+ int framebuffer_w = 0;
+ int framebuffer_h = 0;
+
 bool wash_demo_has_pressure_sensitivity_of_any_kind = false;

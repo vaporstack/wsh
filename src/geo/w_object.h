@@ -64,7 +64,8 @@ void w_object_normalize_time_exploded_accurate(WObject* obj);
 void     w_object_normalize(WObject* obj);
 void     w_object_simplify(WObject*, double r);
 void     w_object_douglaspeucker(WObject*, double r);
-
+void	w_object_scale(WObject* obj, double modx, double mody);
+void w_object_move(WObject* obj, double dx, double dy);
 void w_object_calc_bounds(WObject*);
 
 /*
