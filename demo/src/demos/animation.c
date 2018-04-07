@@ -69,6 +69,8 @@ static void init(void)
 	}
 	printf("%s init!\n", DEMO_NICENAME);
 	//w_sequence_normalize(document.src->sequence.src);
+	WSequence* seq = document.src->sequence.src;
+	w_sequence_calc_bounds(seq);
 	
 }
 
@@ -101,6 +103,11 @@ static void draw(void)
 	double tmp = fmod(t, 1);
 	int which = tmp * num;
 	//printf("Which: %d\n", which);
+	WRect bounds = seq->bounds;
+	WRect bnd = bounds;
+
+	d_color(1,0,0,1);
+	d_rect(bnd.pos.x, bnd.pos.y, bnd.pos.x + bnd.size.x, bnd.pos.y + bnd.size.y);
 	
 	WObject* frame = seq->frames[which];
 	

@@ -50,11 +50,11 @@ void d_setup_view_ortho(int w, int h)
 
 	double l = w * -.5;
 	double r = w * .5;
-	double t = h * -.5;
-	double b = h * .5;
+	double t = h * .5;
+	double b = h * -.5;
 	double n = -w;
 	double f = w;
-	glOrtho(0, w * dpi, h * dpi, 0, n, f);
+	glOrtho(0, w * dpi, 0, h * dpi, n, f);
 }
 
 void d_setup(int width, int height)

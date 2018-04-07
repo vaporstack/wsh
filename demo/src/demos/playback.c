@@ -85,6 +85,8 @@ static void draw(void)
 	if ( !seq )
 		return;
 	
+	
+	
 	WObject* frame = seq->frames[4];
 	
 	if ( frame)

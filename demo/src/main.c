@@ -53,7 +53,8 @@ static int  current_demo_index = 0;
 
 static int window_w = WIDTH;
 static int window_h = HEIGHT;
-
+static int framebuffer_x = 0;
+static int framebuffer_y = 0;
 static double mouse_x = 0;
 static double mouse_y = 0;
 
@@ -66,15 +67,15 @@ GLFWwindow*   window	 = NULL;
 WDocumentHnd document;
 
 #define NUM_DEMOS 6
-WashDemo* demos[NUM_DEMOS] = {&animation, &operations, &animation, &brush, &resize, &playback};
+WashDemo* demos[NUM_DEMOS] = {&animation, &playback, &operations, &brush, &resize, &simulator};
 WashDemo* current_demo     = NULL;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	window_h = height;
-	window_w = width;
+	framebuffer_x = height;
+	framebuffer_y = width;
 
-	d_setup(window_w, window_h);
+	d_setup(framebuffer_x, framebuffer_x);
 }
 
 static void window_pos_callback(GLFWwindow* window, int x, int y)
@@ -119,7 +120,7 @@ static void normalize_coordinates(double* x, double* y)
 
 	//*y *= -1;
 	//	wacoms upside down? wooo
-	//mouse_y = window_h - mouse_y;
+	mouse_y = (window_h - mouse_y) + window_h ;
 }
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -284,6 +285,7 @@ static void update(void)
 static void draw(void)
 {
 	d_clear();
+	d_color(0,0,0,1);
 
 	if (test_geometry.src)
 	{
@@ -315,8 +317,9 @@ static void draw(void)
 	}
 	d_circle(display_radius);
 	d_pop();
+	d_color(0,0,0,1);
 	
-	text_ftgl_draw_text("asdfasdf", 32, 32);
+	text_ftgl_draw_text("switch demo: 1-6", 32, 32);
 }
 
 static void switch_demo(int i)
@@ -386,8 +389,12 @@ int main(int argc, const char* argv[])
 	printf("dpi: %f\n", dpi);
 
 	document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
+	
+	
 	d_setup(window_w, window_h);
 
+	switch_demo(0);
+	
 	d_color_clear(1, 1, 1, 1);
 	d_color(0, 0, 0, 1);
 

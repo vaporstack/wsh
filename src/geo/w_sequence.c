@@ -236,10 +236,6 @@ void w_sequence_frame_insert(WSequence* seq)
 	printf("insert frame at %d\n", pos);
 	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->num_frames);
 
-	// WObject* orig = seq->frames[pos];
-	//	new thingy
-	// WObject* cpy = w_object_copy(orig);
-
 	// move everything after n up
 	for (int i = seq->num_frames; i > pos; --i) {
 		seq->frames[i] = seq->frames[i - 1];
@@ -279,12 +275,13 @@ void w_sequence_destroy(WSequence* seq)
 {
 	for ( int i = 0 ; i < seq->num_frames; i++ )
 	{
-		w_object_destroy(seq->frames[i]);
+		WObject* frame = seq->frames[i];
 		
+		if ( frame )
+			w_object_destroy(frame);
 	}
-	
-	//printf("IMPLEMENT THIS!\n");
 }
+
 void w_sequence_frame_next(WSequence* seq)
 {
 
@@ -360,6 +357,47 @@ void w_sequence_normalize_time_exploded(WSequence* seq)
 }
 
 #define SWAP(T, a, b) do { T tmp = a; a = b; b = tmp; } while (0)
+
+void w_sequence_calc_bounds(WSequence* seq)
+{
+	if (!seq) {
+		printf("tried to calc bounds for a null sequence.\n");
+		return;
+	}
+	
+	for (int i = 0; i < seq->num_frames; ++i) {
+		WObject* o = seq->frames[i];
+		w_object_calc_bounds(o);
+	}
+	
+	double minx, miny, maxx, maxy;
+	
+	minx = miny = INFINITY;
+	maxx = maxy = -INFINITY;
+
+	for (int i = 0; i < seq->num_frames; ++i) {
+		WObject* fr = seq->frames[i];
+		double   x1 = fr->bounds.pos.x;
+		double   y1 = fr->bounds.pos.y;
+		double   x2 = fr->bounds.pos.x + fr->bounds.size.x;
+		double   y2 = fr->bounds.pos.y + fr->bounds.size.y;
+		
+		if ( x1 < minx )
+			minx = x1;
+		if ( x2 > maxx)
+			maxx = x2;
+		if ( y1 < miny)
+			miny = y1;
+		if ( y2 > maxy)
+			maxy = y2;
+	}
+	
+	seq->bounds.pos.x  = minx;
+	seq->bounds.pos.y  = miny;
+	seq->bounds.size.x = maxx - minx;
+	seq->bounds.size.y = maxy - miny;
+	
+}
 
 void w_sequence_normalize(WSequence* seq)
 {

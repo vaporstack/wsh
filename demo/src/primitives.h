@@ -40,5 +40,8 @@ void d_wobject_strokeonly(WObject*);
 void d_wobject_notransform(WObject*);
 void d_wobject_e(WObject*);
 
+void d_rect(float, float, float, float);
+
+
 
 #endif /* primitives_h */

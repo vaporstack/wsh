@@ -34,7 +34,7 @@ static int init(void)
 		return -1;
 	
 	/* Set the font size and render a small text. */
-	ftglSetFontFaceSize(font, 72, 72);
+	ftglSetFontFaceSize(font, 36, 36);
 	
 	/* Destroy the font object. */
 	return 0;
