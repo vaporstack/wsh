@@ -37,6 +37,7 @@ static int init(void)
 	ftglSetFontFaceSize(font, 36, 36);
 	
 	/* Destroy the font object. */
+	initted = true;
 	return 0;
 }
 void text_ftgl_draw_text(const char* text, double x, double y)

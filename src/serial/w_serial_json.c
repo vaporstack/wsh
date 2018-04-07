@@ -323,7 +323,7 @@ WSequence* w_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	num = cJSON_GetArraySize(jframes);
 
 	seq->num_frames		 = num;
-	seq->current_frame_index = 0;  // TODO read this back in properly?
+	seq->current_frame_index = 0; // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
 	struct WObject** frames;
@@ -1041,7 +1041,7 @@ WDocument* w_serial_json_document_unserialize(const char* path)
 	// may change.
 
 	free(data);
-
+	cJSON_Delete(root);
 	//cJSON* meta = (cJSON*) doc->meta;
 
 	//cJSON* tval = cJSON_GetObjectItem(meta, "plugins");
