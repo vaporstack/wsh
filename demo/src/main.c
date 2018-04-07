@@ -385,7 +385,7 @@ int main(int argc, const char* argv[])
 	d_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
-	document.src = w_serial_document_unserialize("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
+	document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
 	d_setup(window_w, window_h);
 
 	d_color_clear(1, 1, 1, 1);

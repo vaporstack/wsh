@@ -24,7 +24,6 @@
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
 		57B175F12079750200BCF8E8 /* text.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F02079750200BCF8E8 /* text.c */; };
-		57B175F4207977A900BCF8E8 /* text_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F3207977A900BCF8E8 /* text_sdl.c */; };
 		57B175F7207978E700BCF8E8 /* text_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F6207978E700BCF8E8 /* text_ftgl.c */; };
 		57B175FE20797AE700BCF8E8 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FD20797AE700BCF8E8 /* libftgl.a */; };
 		57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FF20797AF800BCF8E8 /* libglfw.dylib */; };
@@ -86,8 +85,6 @@
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57B175EF2079750100BCF8E8 /* text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../demo/src/text.h; sourceTree = "<group>"; };
 		57B175F02079750200BCF8E8 /* text.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = text.c; path = ../demo/src/text.c; sourceTree = "<group>"; };
-		57B175F2207977A900BCF8E8 /* text_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = text_sdl.h; path = ../demo/src/text_sdl.h; sourceTree = "<group>"; };
-		57B175F3207977A900BCF8E8 /* text_sdl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = text_sdl.c; path = ../demo/src/text_sdl.c; sourceTree = "<group>"; };
 		57B175F5207978E700BCF8E8 /* text_ftgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = text_ftgl.h; path = ../demo/src/text_ftgl.h; sourceTree = "<group>"; };
 		57B175F6207978E700BCF8E8 /* text_ftgl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = text_ftgl.c; path = ../demo/src/text_ftgl.c; sourceTree = "<group>"; };
 		57B175FD20797AE700BCF8E8 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../../../../../../../usr/local/lib/libftgl.a; sourceTree = "<group>"; };
@@ -194,8 +191,6 @@
 				57B175EF2079750100BCF8E8 /* text.h */,
 				57B175F5207978E700BCF8E8 /* text_ftgl.h */,
 				57B175F6207978E700BCF8E8 /* text_ftgl.c */,
-				57B175F2207977A900BCF8E8 /* text_sdl.h */,
-				57B175F3207977A900BCF8E8 /* text_sdl.c */,
 				5760ECEE2063343300430B0A /* wash_demo_common.h */,
 				5760ECEF2063343300430B0A /* wash_demo_common.c */,
 				57BE55F32076F352003E3408 /* recorder.h */,
@@ -337,7 +332,6 @@
 				5721DC802076D6B000C141BB /* brush.c in Sources */,
 				5721DC812076D6B000C141BB /* animation.c in Sources */,
 				5721DC822076D6B000C141BB /* playback.c in Sources */,
-				57B175F4207977A900BCF8E8 /* text_sdl.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
 				57B175F7207978E700BCF8E8 /* text_ftgl.c in Sources */,
 				57BE55F52076F352003E3408 /* recorder.c in Sources */,
