@@ -19,11 +19,15 @@
 		5721DC822076D6B000C141BB /* playback.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7B2076D6B000C141BB /* playback.c */; };
 		5721DC832076D6B000C141BB /* operations.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7C2076D6B000C141BB /* operations.c */; };
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
-		5760EC852061798300430B0A /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760EC842061798300430B0A /* libglfw.dylib */; };
 		5760ECF02063343300430B0A /* wash_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wash_demo_common.c */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
+		57B175F12079750200BCF8E8 /* text.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F02079750200BCF8E8 /* text.c */; };
+		57B175F4207977A900BCF8E8 /* text_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F3207977A900BCF8E8 /* text_sdl.c */; };
+		57B175F7207978E700BCF8E8 /* text_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B175F6207978E700BCF8E8 /* text_ftgl.c */; };
+		57B175FE20797AE700BCF8E8 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FD20797AE700BCF8E8 /* libftgl.a */; };
+		57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FF20797AF800BCF8E8 /* libglfw.dylib */; };
 		57BE55F52076F352003E3408 /* recorder.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BE55F42076F352003E3408 /* recorder.c */; };
 		57BE55FF2076FC0F003E3408 /* simulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BE55FE2076FC0F003E3408 /* simulator.c */; };
 /* End PBXBuildFile section */
@@ -73,7 +77,6 @@
 		5721DC7B2076D6B000C141BB /* playback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = playback.c; sourceTree = "<group>"; };
 		5721DC7C2076D6B000C141BB /* operations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = operations.c; sourceTree = "<group>"; };
 		5760EC82206178D200430B0A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../demo/src/main.c; sourceTree = "<group>"; };
-		5760EC842061798300430B0A /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		5760ECEE2063343300430B0A /* wash_demo_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wash_demo_common.h; path = ../demo/src/wash_demo_common.h; sourceTree = "<group>"; };
 		5760ECEF2063343300430B0A /* wash_demo_common.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wash_demo_common.c; path = ../demo/src/wash_demo_common.c; sourceTree = "<group>"; };
 		578BCE362061782C00672199 /* wash-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wash-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +84,14 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57B175EF2079750100BCF8E8 /* text.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = text.h; path = ../demo/src/text.h; sourceTree = "<group>"; };
+		57B175F02079750200BCF8E8 /* text.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = text.c; path = ../demo/src/text.c; sourceTree = "<group>"; };
+		57B175F2207977A900BCF8E8 /* text_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = text_sdl.h; path = ../demo/src/text_sdl.h; sourceTree = "<group>"; };
+		57B175F3207977A900BCF8E8 /* text_sdl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = text_sdl.c; path = ../demo/src/text_sdl.c; sourceTree = "<group>"; };
+		57B175F5207978E700BCF8E8 /* text_ftgl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = text_ftgl.h; path = ../demo/src/text_ftgl.h; sourceTree = "<group>"; };
+		57B175F6207978E700BCF8E8 /* text_ftgl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = text_ftgl.c; path = ../demo/src/text_ftgl.c; sourceTree = "<group>"; };
+		57B175FD20797AE700BCF8E8 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../../../../../../../usr/local/lib/libftgl.a; sourceTree = "<group>"; };
+		57B175FF20797AF800BCF8E8 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
 		57BE55F32076F352003E3408 /* recorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = recorder.h; path = ../demo/src/recorder.h; sourceTree = "<group>"; };
 		57BE55F42076F352003E3408 /* recorder.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = recorder.c; path = ../demo/src/recorder.c; sourceTree = "<group>"; };
@@ -95,7 +106,8 @@
 			files = (
 				5716704F207862220005E15A /* libwcm.a in Frameworks */,
 				5711BFAA206191A500DD36E0 /* libwsh.a in Frameworks */,
-				5760EC852061798300430B0A /* libglfw.dylib in Frameworks */,
+				57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */,
+				57B175FE20797AE700BCF8E8 /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +166,7 @@
 				5711BFA12061919900DD36E0 /* wsh.xcodeproj */,
 				57167047207862110005E15A /* wcm.xcodeproj */,
 				578BCE4D2061788000672199 /* macos */,
-				5760EC842061798300430B0A /* libglfw.dylib */,
+				57B175FA20797ACC00BCF8E8 /* lib */,
 				5711BFD92061C84100DD36E0 /* deps */,
 				578BCE4A2061785300672199 /* src */,
 				578BCE372061782C00672199 /* Products */,
@@ -178,6 +190,12 @@
 				5721DC752076D6B000C141BB /* demos */,
 				5711BFD42061C7C000DD36E0 /* primitives.h */,
 				5711BFD52061C7C000DD36E0 /* primitives.c */,
+				57B175F02079750200BCF8E8 /* text.c */,
+				57B175EF2079750100BCF8E8 /* text.h */,
+				57B175F5207978E700BCF8E8 /* text_ftgl.h */,
+				57B175F6207978E700BCF8E8 /* text_ftgl.c */,
+				57B175F2207977A900BCF8E8 /* text_sdl.h */,
+				57B175F3207977A900BCF8E8 /* text_sdl.c */,
 				5760ECEE2063343300430B0A /* wash_demo_common.h */,
 				5760ECEF2063343300430B0A /* wash_demo_common.c */,
 				57BE55F32076F352003E3408 /* recorder.h */,
@@ -199,6 +217,15 @@
 			);
 			name = macos;
 			path = ../res/macos;
+			sourceTree = "<group>";
+		};
+		57B175FA20797ACC00BCF8E8 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				57B175FF20797AF800BCF8E8 /* libglfw.dylib */,
+				57B175FD20797AE700BCF8E8 /* libftgl.a */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57B175F12079750200BCF8E8 /* text.c in Sources */,
 				5721DC832076D6B000C141BB /* operations.c in Sources */,
 				5721DC7F2076D6B000C141BB /* resize.c in Sources */,
 				5721DC7D2076D6B000C141BB /* simulator.c in Sources */,
@@ -309,7 +337,9 @@
 				5721DC802076D6B000C141BB /* brush.c in Sources */,
 				5721DC812076D6B000C141BB /* animation.c in Sources */,
 				5721DC822076D6B000C141BB /* playback.c in Sources */,
+				57B175F4207977A900BCF8E8 /* text_sdl.c in Sources */,
 				5711BFD62061C7C000DD36E0 /* primitives.c in Sources */,
+				57B175F7207978E700BCF8E8 /* text_ftgl.c in Sources */,
 				57BE55F52076F352003E3408 /* recorder.c in Sources */,
 				5721DC7E2076D6B000C141BB /* session.c in Sources */,
 				5760EC83206178D200430B0A /* main.c in Sources */,
@@ -451,6 +481,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = ../res/macos/wash_demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -462,6 +493,7 @@
 					../../contrib,
 					../contrib/wcm/src,
 					../contrib,
+					/opt/X11/include/freetype2,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -475,6 +507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = ../res/macos/wash_demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -486,6 +519,7 @@
 					../../contrib,
 					../contrib/wcm/src,
 					../contrib,
+					/opt/X11/include/freetype2,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

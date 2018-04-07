@@ -13,6 +13,16 @@
 
 #include "wash_demo_common.h"
 
+//#define ENABLE_SDL_TEXT
+
+#ifdef ENABLE_SDL_TEXT
+	#include "text_sdl.h"
+#endif
+
+#ifdef ENABLE_FTGL_TEXT
+	#include "text_ftgl.h"
+#endif
+
 #include "demo.h"
 
 extern WashDemo animation;
@@ -305,6 +315,8 @@ static void draw(void)
 	}
 	d_circle(display_radius);
 	d_pop();
+	
+	text_ftgl_draw_text("asdfasdf", 32, 32);
 }
 
 static void switch_demo(int i)
@@ -397,5 +409,6 @@ int main(int argc, const char* argv[])
 	wcm_deinit();
 	recorder_deinit();
 
+	text_ftgl_deinit();
 	return 0;
 }
