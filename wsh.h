@@ -16,6 +16,8 @@
 #define WSH_VERSION_MINOR 0
 #define WSH_VERSION_PATCH 2
 
+#define WSH_COMPAT
+
 int		    wsh_check_version_match(const char* str);
 int		    wsh_check_compat_match(const char* str);
 char*		    wsh_get_version_string(void);
@@ -64,7 +66,6 @@ static inline char* wsh_get_version_string_header(void)
 
 #define WSH_ENABLE_SERIAL_BACKEND_BIN
 #define WSH_ENABLE_SERIAL_BACKEND_OBF
-
 
 //#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 //	#include "wsrc/serial/w_serial_json.h"
