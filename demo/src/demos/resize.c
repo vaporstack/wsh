@@ -53,12 +53,12 @@ static void mouse_button(int button, int action, int mods)
 
 static void init(void)
 {
-	printf("Realtime playback init!\n");
+	printf("%s  init!\n", DEMO_NICENAME);
 }
 
 static void deinit(void)
 {
-	printf("Realtime playback deinit!\n");
+	printf("%s  deinit!\n", DEMO_NICENAME);
 }
 
 static void update(void)

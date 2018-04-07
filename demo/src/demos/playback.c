@@ -10,11 +10,13 @@
 #define playback_c
 
 #include "../demo.h"
+#include <wsh/wsh.h>
+#include "../primitives.h"
 
 #define DEMO_NAME "playback"
 #define DEMO_NICENAME "Playback"
 
-
+static WDocumentHnd document;
 
 static void tablet_up(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
@@ -51,6 +53,17 @@ static void mouse_button(int button, int action, int mods)
 static void init(void)
 {
 	printf("Realtime playback init!\n");
+	if ( !document.src)
+	{
+		document.src = w_serial_document_unserialize("data/wash/drawing-ios-2018_2_17-16_21_59.wash");
+		if ( !document.src )
+		{
+			printf("Load failed!\n");
+			return;
+		}
+	}
+	printf("%s init!\n", DEMO_NICENAME);
+	//w_sequence_normalize(document.src->sequence.src);
 }
 
 static void deinit(void)
@@ -64,6 +77,20 @@ static void update(void)
 
 static void draw(void)
 {
+	if ( !document.src)
+		return;
+	
+	WSequence* seq = document.src->sequence.src;
+	
+	if ( !seq )
+		return;
+	
+	WObject* frame = seq->frames[4];
+	
+	if ( frame)
+	{
+		d_wobject(frame);
+	}
 }
 
 WashDemo playback =
