@@ -10,11 +10,14 @@
 #define animation_c
 
 #include "../demo.h"
+#include "../primitives.h"
 
 #include <wsh/wsh.h>
 
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"
+
+static WDocumentHnd document;
 
 static void tablet_prox(int v)
 {
@@ -55,13 +58,29 @@ static void mouse_button(int button, int action, int mods)
 
 static void init(void)
 {
+	if ( !document.src)
+	{
+		document.src = w_serial_document_unserialize("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
+		if ( !document.src )
+		{
+			printf("Load failed!\n");
+			return;
+		}
+	}
 	printf("%s init!\n", DEMO_NICENAME);
+	//w_sequence_normalize(document.src->sequence.src);
 	
 }
 
 static void deinit(void)
 {
 	printf("%s deinit!\n", DEMO_NICENAME);
+	if(document.src)
+	{
+		w_document_destroy(document.src);
+		
+	}
+	
 }
 
 static void update(void)
@@ -70,6 +89,26 @@ static void update(void)
 
 static void draw(void)
 {
+	if ( !document.src )
+		return;
+	
+	static double t = 0;
+	t += .05;
+	
+	WSequence* seq = document.src->sequence.src;
+	int num = seq->num_frames;
+	
+	double tmp = fmod(t, 1);
+	int which = tmp * num;
+	//printf("Which: %d\n", which);
+	
+	WObject* frame = seq->frames[which];
+	
+	if ( !frame )
+		return;
+	
+	d_wobject(frame);
+	
 }
 
 WashDemo animation =

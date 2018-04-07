@@ -367,6 +367,7 @@ void d_wline(WLine* l)
 		}
 	}
 #else
+	d_color(0,0,0,1);
 	d_poly(l);
 #endif
 //}
