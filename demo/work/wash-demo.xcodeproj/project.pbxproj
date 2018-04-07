@@ -10,7 +10,7 @@
 		5711BFAA206191A500DD36E0 /* libwsh.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5711BFA62061919900DD36E0 /* libwsh.a */; };
 		5711BFD32061C6F900DD36E0 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 5711BFD22061C6F900DD36E0 /* data */; };
 		5711BFD62061C7C000DD36E0 /* primitives.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFD52061C7C000DD36E0 /* primitives.c */; };
-		5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 5711BFDA2061C84600DD36E0 /* cJSON.c */; };
+		5716704F207862220005E15A /* libwcm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5716704C207862110005E15A /* libwcm.a */; };
 		5721DC7D2076D6B000C141BB /* simulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC762076D6B000C141BB /* simulator.c */; };
 		5721DC7E2076D6B000C141BB /* session.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC772076D6B000C141BB /* session.c */; };
 		5721DC7F2076D6B000C141BB /* resize.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC782076D6B000C141BB /* resize.c */; };
@@ -21,7 +21,6 @@
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
 		5760EC852061798300430B0A /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760EC842061798300430B0A /* libglfw.dylib */; };
 		5760ECF02063343300430B0A /* wash_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wash_demo_common.c */; };
-		5760ECF92063352E00430B0A /* libwcm.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5760ECF6206334A200430B0A /* libwcm.a */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
@@ -44,16 +43,16 @@
 			remoteGlobalIDString = D13617E61DFB772900FD1F83;
 			remoteInfo = wsh;
 		};
-		5760ECF5206334A200430B0A /* PBXContainerItemProxy */ = {
+		5716704B207862110005E15A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5760ECF1206334A100430B0A /* wcm.xcodeproj */;
+			containerPortal = 57167047207862110005E15A /* wcm.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 5760ECAF2062D68C00430B0A;
 			remoteInfo = wcm;
 		};
-		5760ECF72063352900430B0A /* PBXContainerItemProxy */ = {
+		5716704D2078621D0005E15A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5760ECF1206334A100430B0A /* wcm.xcodeproj */;
+			containerPortal = 57167047207862110005E15A /* wcm.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 5760ECAE2062D68C00430B0A;
 			remoteInfo = wcm;
@@ -65,7 +64,7 @@
 		5711BFD22061C6F900DD36E0 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = ../data; sourceTree = "<group>"; };
 		5711BFD42061C7C000DD36E0 /* primitives.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = primitives.h; path = ../demo/src/primitives.h; sourceTree = "<group>"; };
 		5711BFD52061C7C000DD36E0 /* primitives.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = primitives.c; path = ../demo/src/primitives.c; sourceTree = "<group>"; };
-		5711BFDA2061C84600DD36E0 /* cJSON.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
+		57167047207862110005E15A /* wcm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wcm.xcodeproj; path = ../contrib/wcm/work/wcm.xcodeproj; sourceTree = "<group>"; };
 		5721DC762076D6B000C141BB /* simulator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = simulator.c; sourceTree = "<group>"; };
 		5721DC772076D6B000C141BB /* session.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = session.c; sourceTree = "<group>"; };
 		5721DC782076D6B000C141BB /* resize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = resize.c; sourceTree = "<group>"; };
@@ -77,7 +76,6 @@
 		5760EC842061798300430B0A /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		5760ECEE2063343300430B0A /* wash_demo_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wash_demo_common.h; path = ../demo/src/wash_demo_common.h; sourceTree = "<group>"; };
 		5760ECEF2063343300430B0A /* wash_demo_common.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wash_demo_common.c; path = ../demo/src/wash_demo_common.c; sourceTree = "<group>"; };
-		5760ECF1206334A100430B0A /* wcm.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = wcm.xcodeproj; path = ../contrib/wcm/work/wcm.xcodeproj; sourceTree = "<group>"; };
 		578BCE362061782C00672199 /* wash-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wash-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		578BCE4F2061788000672199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -95,7 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5760ECF92063352E00430B0A /* libwcm.a in Frameworks */,
+				5716704F207862220005E15A /* libwcm.a in Frameworks */,
 				5711BFAA206191A500DD36E0 /* libwsh.a in Frameworks */,
 				5760EC852061798300430B0A /* libglfw.dylib in Frameworks */,
 			);
@@ -122,9 +120,16 @@
 		5711BFD92061C84100DD36E0 /* deps */ = {
 			isa = PBXGroup;
 			children = (
-				5711BFDA2061C84600DD36E0 /* cJSON.c */,
 			);
 			path = deps;
+			sourceTree = "<group>";
+		};
+		57167048207862110005E15A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5716704C207862110005E15A /* libwcm.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		5721DC752076D6B000C141BB /* demos */ = {
@@ -142,20 +147,12 @@
 			path = ../demo/src/demos;
 			sourceTree = "<group>";
 		};
-		5760ECF2206334A100430B0A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5760ECF6206334A200430B0A /* libwcm.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		578BCE2D2061782C00672199 = {
 			isa = PBXGroup;
 			children = (
 				5711BFD22061C6F900DD36E0 /* data */,
 				5711BFA12061919900DD36E0 /* wsh.xcodeproj */,
-				5760ECF1206334A100430B0A /* wcm.xcodeproj */,
+				57167047207862110005E15A /* wcm.xcodeproj */,
 				578BCE4D2061788000672199 /* macos */,
 				5760EC842061798300430B0A /* libglfw.dylib */,
 				5711BFD92061C84100DD36E0 /* deps */,
@@ -218,7 +215,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				5760ECF82063352900430B0A /* PBXTargetDependency */,
+				5716704E2078621D0005E15A /* PBXTargetDependency */,
 				5711BFA8206191A100DD36E0 /* PBXTargetDependency */,
 			);
 			name = "wash-demo";
@@ -254,8 +251,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 5760ECF2206334A100430B0A /* Products */;
-					ProjectRef = 5760ECF1206334A100430B0A /* wcm.xcodeproj */;
+					ProductGroup = 57167048207862110005E15A /* Products */;
+					ProjectRef = 57167047207862110005E15A /* wcm.xcodeproj */;
 				},
 				{
 					ProductGroup = 5711BFA22061919900DD36E0 /* Products */;
@@ -277,11 +274,11 @@
 			remoteRef = 5711BFA52061919900DD36E0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		5760ECF6206334A200430B0A /* libwcm.a */ = {
+		5716704C207862110005E15A /* libwcm.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libwcm.a;
-			remoteRef = 5760ECF5206334A200430B0A /* PBXContainerItemProxy */;
+			remoteRef = 5716704B207862110005E15A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -307,7 +304,6 @@
 			files = (
 				5721DC832076D6B000C141BB /* operations.c in Sources */,
 				5721DC7F2076D6B000C141BB /* resize.c in Sources */,
-				5711BFDB2061C85A00DD36E0 /* cJSON.c in Sources */,
 				5721DC7D2076D6B000C141BB /* simulator.c in Sources */,
 				5760ECF02063343300430B0A /* wash_demo_common.c in Sources */,
 				5721DC802076D6B000C141BB /* brush.c in Sources */,
@@ -329,10 +325,10 @@
 			name = wsh;
 			targetProxy = 5711BFA7206191A100DD36E0 /* PBXContainerItemProxy */;
 		};
-		5760ECF82063352900430B0A /* PBXTargetDependency */ = {
+		5716704E2078621D0005E15A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = wcm;
-			targetProxy = 5760ECF72063352900430B0A /* PBXContainerItemProxy */;
+			targetProxy = 5716704D2078621D0005E15A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

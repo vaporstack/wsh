@@ -62,6 +62,10 @@ cJSON* w_serial_json_serialize_color16(WColor16 col)
 WColor w_serial_json_unserialize_color(cJSON* data)
 {
 	WColor c;
+	c.a = 1.;
+	c.r = 1.;
+	c.g = 1.;
+	c.b = 1.;
 	return c;
 }
 

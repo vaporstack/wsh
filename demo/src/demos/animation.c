@@ -11,6 +11,8 @@
 
 #include "../demo.h"
 
+#include <wsh/wsh.h>
+
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"
 
@@ -54,6 +56,7 @@ static void mouse_button(int button, int action, int mods)
 static void init(void)
 {
 	printf("%s init!\n", DEMO_NICENAME);
+	
 }
 
 static void deinit(void)

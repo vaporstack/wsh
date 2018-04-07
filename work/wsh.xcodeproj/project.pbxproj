@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57167043207860AB0005E15A /* cJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 57167041207860AB0005E15A /* cJSON.h */; };
+		57167044207860AB0005E15A /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 57167042207860AB0005E15A /* cJSON.c */; };
 		571EA81C1F6786B100BF579D /* w_node.c in Sources */ = {isa = PBXBuildFile; fileRef = 571EA81A1F6786B100BF579D /* w_node.c */; };
 		572B31681E5BEC4E00682D82 /* w_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 572B31661E5BEC4E00682D82 /* w_io.c */; };
 		572B31691E5BEC4E00682D82 /* w_io.h in Headers */ = {isa = PBXBuildFile; fileRef = 572B31671E5BEC4E00682D82 /* w_io.h */; };
@@ -44,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		5711BFB82061AEA400DD36E0 /* w_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_math.h; sourceTree = "<group>"; };
+		57167041207860AB0005E15A /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
+		57167042207860AB0005E15A /* cJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
 		571EA81A1F6786B100BF579D /* w_node.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_node.c; sourceTree = "<group>"; };
 		571EA81B1F6786B100BF579D /* w_node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_node.h; sourceTree = "<group>"; };
 		572B31661E5BEC4E00682D82 /* w_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_io.c; sourceTree = "<group>"; };
@@ -99,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57167040207860AB0005E15A /* cjson */ = {
+			isa = PBXGroup;
+			children = (
+				57167041207860AB0005E15A /* cJSON.h */,
+				57167042207860AB0005E15A /* cJSON.c */,
+			);
+			name = cjson;
+			path = ../contrib/cjson;
+			sourceTree = "<group>";
+		};
 		572B31651E5BEC4E00682D82 /* io */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +176,7 @@
 		D13617DE1DFB772900FD1F83 = {
 			isa = PBXGroup;
 			children = (
+				57167040207860AB0005E15A /* cjson */,
 				57F12DDA1F806D3000564D7C /* wsh.c */,
 				D1DB879F1F1431BA00BA023B /* wsh.h */,
 				D147D4DF1DFB7B920017077F /* src */,
@@ -232,6 +247,7 @@
 				572B31691E5BEC4E00682D82 /* w_io.h in Headers */,
 				D1811B121EA7F06100927292 /* w_line_ops.h in Headers */,
 				D1DB879E1F14315E00BA023B /* w_session.h in Headers */,
+				57167043207860AB0005E15A /* cJSON.h in Headers */,
 				5760D42D205B2DDF005A9373 /* wsh_tool.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +326,7 @@
 				D11A30A11E2E781B00A8FB8F /* w_rect.c in Sources */,
 				D160F6CB1E81E6B500373E60 /* w_serial_json.c in Sources */,
 				5760D42C205B2DDF005A9373 /* wsh_tool.c in Sources */,
+				57167044207860AB0005E15A /* cJSON.c in Sources */,
 				D11A30A21E2E781B00A8FB8F /* w_transform.c in Sources */,
 				D118EC891E1C650600A6D8E0 /* w_serial.c in Sources */,
 			);
@@ -440,6 +457,7 @@
 					../../../contrib/deps,
 					../../../contrib,
 				);
+				OTHER_CFLAGS = "-DR4_PRESENT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;
 				r4_root = "$(HOME)/art/r4";
@@ -461,6 +479,7 @@
 					../../../contrib/deps,
 					../../../contrib,
 				);
+				OTHER_CFLAGS = "-DR4_PRESENT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;
 				r4_root = "$(HOME)/art/r4";

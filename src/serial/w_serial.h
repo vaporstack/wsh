@@ -9,7 +9,7 @@
 #ifndef w_serial_h
 #define w_serial_h
 
-#include <wsh/src/geo/w_document.h>
+#include "../geo/w_document.h"
 
 WDocument* w_serial_document_unserialize(const char* path);
 int	w_serial_document_serialize(WDocument* doc);

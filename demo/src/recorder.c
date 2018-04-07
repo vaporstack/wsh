@@ -94,7 +94,7 @@ void recorder_end_line(double x, double y)
 	if ( !dst )
 		return;
 	
-	w_object_add_line(dst, src);
+	w_object_add_line(dst, w_line_copy(src));
 	printf("Recorded line with %llu points\n", src->num );
 	
 	w_line_destroy(src);
