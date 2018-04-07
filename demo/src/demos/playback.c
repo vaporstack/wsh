@@ -55,7 +55,7 @@ static void init(void)
 	printf("Realtime playback init!\n");
 	if ( !document.src)
 	{
-		document.src = w_serial_document_unserialize("data/wash/drawing-ios-2018_2_17-16_21_59.wash");
+		document.src = w_serial_document_unserialize("data/wash/crab.wash");
 		if ( !document.src )
 		{
 			printf("Load failed!\n");

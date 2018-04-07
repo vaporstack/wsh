@@ -60,7 +60,7 @@ static void init(void)
 {
 	if ( !document.src)
 	{
-		document.src = w_serial_document_unserialize("data/wash/test-square-anim-2018_3_16-23_17_24.wash");
+		document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
 		if ( !document.src )
 		{
 			printf("Load failed!\n");
