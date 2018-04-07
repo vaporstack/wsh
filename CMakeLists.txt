@@ -11,7 +11,7 @@ set (wsh_VERSION_PATCH 1)
 
 option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" OFF)
-option(BuildTest "BuildTest" OFF)
+option(BuildTest "BuildTest" ON)
 
 if(CMAKE_BUILD_TYPE)
 	if (${CMAKE_BUILD_TYPE} STREQUAL "release")
