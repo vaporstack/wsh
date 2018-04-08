@@ -12,6 +12,7 @@
 #include "../demo.h"
 #include <wsh/wsh.h>
 #include "../primitives.h"
+#include "../ops.h"
 
 #define DEMO_NAME "playback"
 #define DEMO_NICENAME "Playback"
@@ -63,7 +64,10 @@ static void init(void)
 		}
 	}
 	printf("%s init!\n", DEMO_NICENAME);
-	//w_sequence_normalize(document.src->sequence.src);
+	
+	scale_sequence_to_window(document.src->sequence.src);
+	
+	
 }
 
 static void deinit(void)

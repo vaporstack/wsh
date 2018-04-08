@@ -293,15 +293,7 @@ void w_sequence_frame_next(WSequence* seq)
 		return;
 	}
 	seq->current_frame_index++;
-	/*
-	if (seq->current_frame_index == seq->num_frames) {
-		seq->current_frame_index = 0;
-	}
 
-	seq->current_frame = seq->frames[seq->current_frame_index];
-	printf("Set object frame %d %p\n", seq->current_frame_index,
-	       seq->current_frame);
-	 */
 	w_sequence_ensure_frame(seq);
 }
 
@@ -316,12 +308,7 @@ void w_sequence_frame_prev(WSequence* seq)
 	}
 
 	seq->current_frame_index--;
-	/*
-	 if (seq->current_frame_index < 0) {
-		seq->current_frame_index = seq->num_frames - 1;
-	}
-	seq->current_frame = seq->frames[seq->current_frame_index];
-*/
+
 	w_sequence_ensure_frame(seq);
 }
 
@@ -333,13 +320,7 @@ void w_sequence_normalize_time_continuous(WSequence* seq)
 		WObject* fr = seq->frames[i];
 		w_object_normalize_time_continuous(fr);
 	}
-	// SHOW HACKS HAX
-	//return;
-	
-	//for (int i = 0; i < seq->num_frames; ++i) {
-		//WObject* fr = seq->frames[i];
 
-	//}
 }
 
 
@@ -414,12 +395,6 @@ void w_sequence_normalize(WSequence* seq)
 	
 	minx = miny = INFINITY;
 	maxx = maxy = -INFINITY;
-	//miny = INFINITY;
-	//maxy = -INFINITY;
-	//WObject* first = seq->frames[0];
-
-	//minx = maxx = first->bounds.pos.x;
-	// miny = maxy = first->bounds.pos.y;
 
 	for (int i = 0; i < seq->num_frames; ++i) {
 		WObject* fr = seq->frames[i];
@@ -442,24 +417,9 @@ void w_sequence_normalize(WSequence* seq)
 	seq->bounds.pos.y  = miny;
 	seq->bounds.size.x = maxx - minx;
 	seq->bounds.size.y = maxy - miny;
-	/*
-	if ( miny > maxy )
-	{
-		SWAP(double, miny, maxy);
-	}
-	if ( minx > maxx )
-	{
-		SWAP(double, minx, maxx);
-	}
-	*/
-	
+
 	double dx = maxx - minx;
 	double dy = maxy - miny;
-
-	// double cx = minx + (.5 * (maxx - minx));
-	// double cy = miny + (.5 * (maxy - miny));
-
-	// double ar = fabs(dy /dx);
 	
 	seq->transform.scale.x = dx;
 	seq->transform.scale.y = dy;
@@ -494,8 +454,6 @@ void w_sequence_move(WSequence* seq, double dx, double dy)
 		WObject* frame = seq->frames[i];
 		w_object_move(frame, dx, dy);
 	}
-	//printf("did nothing! \\o/ \n");
-	//printf("did more nothing! \\o/ \n");
 }
 
 void w_sequence_scale(WSequence* seq, double modx, double mody)
@@ -505,8 +463,6 @@ void w_sequence_scale(WSequence* seq, double modx, double mody)
 		WObject* frame = seq->frames[i];
 		w_object_scale(frame, modx, mody);
 	}
-	//printf("did nothing! \\o/ \n");
-	
 }
 
 

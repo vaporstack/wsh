@@ -76,6 +76,7 @@ static void init(void)
 	//w_sequence_normalize(document.src->sequence.src);
 	WSequence* seq = document.src->sequence.src;
 	scale_sequence_to_window(seq);
+	//	moved this code into the above function
 	/*
 	w_sequence_calc_bounds(seq);
 	WRect bounds = seq->bounds;
