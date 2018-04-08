@@ -12,6 +12,7 @@
 #include "../demo.h"
 #include "../primitives.h"
 #include "../wash_demo_common.h"
+#include "../ops.h"
 
 #include <wsh/wsh.h>
 
@@ -68,9 +69,14 @@ static void init(void)
 			return;
 		}
 	}
+	
 	printf("%s init!\n", DEMO_NICENAME);
+	
+	
 	//w_sequence_normalize(document.src->sequence.src);
 	WSequence* seq = document.src->sequence.src;
+	scale_sequence_to_window(seq);
+	/*
 	w_sequence_calc_bounds(seq);
 	WRect bounds = seq->bounds;
 
@@ -93,6 +99,7 @@ static void init(void)
 	 w_sequence_calc_bounds(seq);
 	w_sequence_move(seq, window_w* -.5, window_h * -.5);
 	w_sequence_calc_bounds(seq);
+	*/
 	
 }
 
