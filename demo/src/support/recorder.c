@@ -9,7 +9,7 @@
 
 #include "recorder.h"
 
-#include "wash_demo_common.h"
+#include "../wash_demo_common.h"
 
 #include <stdbool.h>
 

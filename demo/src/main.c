@@ -34,16 +34,12 @@ extern WashDemo simulator;
 //#include "demos/playback.h"
 //#include "demos/operations.h"
 
-#include "primitives.h"
-#include "recorder.h"
-#include "simulator.h"
-
 #include <wsh/wsh.h>
 
 #include <wcm/wcm.h>
 
-#define WIDTH 256
-#define HEIGHT 256
+#define WIDTH 512
+#define HEIGHT 512
 
 static void reset_current_demo(void);
 static void switch_demo(int i);

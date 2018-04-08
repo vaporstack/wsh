@@ -7,7 +7,7 @@
 //
 
 #include "ops.h"
-#include "wash_demo_common.h"
+#include "../wash_demo_common.h"
 #include <stdlib.h>
 
 void scale_sequence_to_window(WSequence* seq )

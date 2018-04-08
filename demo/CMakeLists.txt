@@ -56,7 +56,6 @@ ENDIF (OperatingSystem STREQUAL "linux")
 
 
 if(${OperatingSystem} MATCHES "macos")
-	find_library(FTGL_LIB ftgl $ENV{HOME}/art/r4/contrib/platform/darwin)
 	find_library(FREETYPE_LIB freetype $ENV{HOME}/art/r4/contrib/platform/darwin)
 	FIND_LIBRARY(PA_LIB portaudio $ENV{HOME}/art/r4/contrib/platform/darwin)
 	FIND_LIBRARY(COCOA_LIB Cocoa)
@@ -89,7 +88,7 @@ else (OPENGL_FOUND)
 	MESSAGE("OpenGL environment missing")
 endif (OPENGL_FOUND)
 
-file(GLOB sources src/*.c src/demos/*.c src/input/*.c src/contrib/macos/*.m ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
+file(GLOB sources src/*.c src/demos/*.c src/support/*.c src/input/*.c src/contrib/macos/*.m ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
 
 message(${sources})
 
@@ -103,7 +102,7 @@ target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../.
 target_include_directories (demo_wash PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib)
 
 if(${OperatingSystem} MATCHES "macos")
-	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw wcm
+	target_link_libraries(demo_wash LINK_PUBLIC wsh glfw wcm ftgl
 	${GL_LIB}
 	${COCOA_LIB}
 	${CARBON_LIB}

@@ -13,8 +13,10 @@
 #include <stdio.h>
 #include <wsh/wsh.h>
 
-#include "primitives.h"
-#include "ops.h"
+#include "support/primitives.h"
+#include "support/recorder.h"
+#include "support/simulator.h"
+#include "support/ops.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdocumentation"
