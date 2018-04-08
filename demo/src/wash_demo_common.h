@@ -17,6 +17,7 @@
 #include "support/recorder.h"
 #include "support/simulator.h"
 #include "support/ops.h"
+#include "support/text.h"
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdocumentation"
@@ -25,8 +26,8 @@
 
 extern int window_w;
 extern int window_h;
-extern int framebuffer_w ;
-extern int framebuffer_h;
+extern int frame_w ;
+extern int frame_h;
 
 extern WLineHnd work_line;
 extern WObjectHnd test_geometry;

@@ -12,6 +12,7 @@
 #include <stdbool.h>
 
 #include <GLFW/glfw3.h>
+#include "primitives.h"
 
 #include <FTGL/ftgl.h>
 
@@ -57,8 +58,10 @@ void text_ftgl_draw_text(const char* text, double x, double y)
 		return;
 	}
 	
+	d_push();
+	d_translate(x,y,0);
 	ftglRenderFont(font, text, FTGL_RENDER_ALL);
-
+	d_pop();
 
 	
 }

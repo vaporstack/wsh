@@ -62,10 +62,10 @@ WashDemo* current_demo     = NULL;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-	framebuffer_w = height;
-	framebuffer_h = width;
+	frame_w = height;
+	frame_h = width;
 
-	d_setup(framebuffer_w, framebuffer_w);
+	d_setup(frame_w, frame_w);
 }
 
 static void window_pos_callback(GLFWwindow* window, int x, int y)
@@ -359,6 +359,8 @@ int main(int argc, const char* argv[])
 
 	window_w = WIDTH;
 	window_h = HEIGHT;
+	frame_w = WIDTH;
+	frame_h = HEIGHT;
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(window_w, window_h, "Hello World", NULL, NULL);
 	if (!window)

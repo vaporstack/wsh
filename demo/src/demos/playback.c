@@ -187,6 +187,9 @@ static void draw(void)
 	w_object_normalize_time_exploded(timeslice);
 
 	draw_points_until_given_time(timeslice, playhead - start);
+	
+	wash_demo_text("space - toggle modes", frame_w * .125, frame_h * (1-.125));
+	wash_demo_text("left/right - switch art", frame_w * .125, frame_h * (1-.125*2));
 }
 
 WashDemo playback =

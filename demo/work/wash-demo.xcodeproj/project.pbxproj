@@ -139,17 +139,17 @@
 		5712C747207ABA5C004B2CC3 /* support */ = {
 			isa = PBXGroup;
 			children = (
-				5712C748207ABA5C004B2CC3 /* simulator.c */,
-				5712C749207ABA5C004B2CC3 /* text_ftgl.c */,
-				5712C74A207ABA5C004B2CC3 /* recorder.c */,
 				5712C74B207ABA5C004B2CC3 /* text.h */,
-				5712C74C207ABA5C004B2CC3 /* primitives.c */,
-				5712C74D207ABA5C004B2CC3 /* ops.c */,
-				5712C74E207ABA5C004B2CC3 /* recorder.h */,
-				5712C74F207ABA5C004B2CC3 /* text_ftgl.h */,
-				5712C750207ABA5C004B2CC3 /* simulator.h */,
 				5712C751207ABA5C004B2CC3 /* text.c */,
+				5712C74F207ABA5C004B2CC3 /* text_ftgl.h */,
+				5712C749207ABA5C004B2CC3 /* text_ftgl.c */,
+				5712C750207ABA5C004B2CC3 /* simulator.h */,
+				5712C748207ABA5C004B2CC3 /* simulator.c */,
+				5712C74E207ABA5C004B2CC3 /* recorder.h */,
+				5712C74A207ABA5C004B2CC3 /* recorder.c */,
+				5712C74D207ABA5C004B2CC3 /* ops.c */,
 				5712C752207ABA5C004B2CC3 /* ops.h */,
+				5712C74C207ABA5C004B2CC3 /* primitives.c */,
 				5712C753207ABA5C004B2CC3 /* primitives.h */,
 			);
 			name = support;
