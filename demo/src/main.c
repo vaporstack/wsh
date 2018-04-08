@@ -6,10 +6,7 @@
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdocumentation"
-#include <GLFW/glfw3.h>
-#pragma clang diagnostic pop
+
 
 #include "wash_demo_common.h"
 
@@ -48,6 +45,7 @@ extern WashDemo simulator;
 #define WIDTH 256
 #define HEIGHT 256
 
+static void reset_current_demo(void);
 static void switch_demo(int i);
 static int  current_demo_index = 0;
 
@@ -87,12 +85,24 @@ static void window_size_callback(GLFWwindow* window, int width, int height)
 	window_w = width;
 
 	d_setup(window_w, window_h);
+	reset_current_demo();
+
 }
 
 // static void draw_joysticks(void);
 
 static void scroll_callback(GLFWwindow* window, double x, double y)
 {
+}
+
+static void reset_current_demo(void)
+{
+	if (!current_demo )
+		return;
+	
+	
+	current_demo->deinit();
+	current_demo->init();
 }
 
 static void start_faking_it(void)

@@ -10,6 +10,7 @@
 #define simulator_c
 
 #include "../demo.h"
+#include "../wash_demo_common.h"
 
 #define DEMO_NAME "simulator"
 #define DEMO_NICENAME "Simulator"
@@ -39,7 +40,7 @@ static void tablet_motion(double x, double y, int button, double p, double r, do
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
-static void key(int action, int key, int mods)
+static void key(int key, int action, int mods)
 {
 }
 
@@ -70,7 +71,7 @@ static void draw(void)
 }
 
 WashDemo simulator =
-{
+    {
 	DEMO_NICENAME,
 	1.0 / 60.0,
 	init,

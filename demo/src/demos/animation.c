@@ -10,11 +10,7 @@
 #define animation_c
 
 #include "../demo.h"
-#include "../primitives.h"
 #include "../wash_demo_common.h"
-#include "../ops.h"
-
-#include <wsh/wsh.h>
 
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"
@@ -46,7 +42,7 @@ static void tablet_motion(double x, double y, int button, double p, double r, do
 	printf("got rich motion? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
 }
 
-static void key(int action, int key, int mods)
+static void key(int key, int action, int mods)
 {
 }
 
@@ -60,19 +56,18 @@ static void mouse_button(int button, int action, int mods)
 
 static void init(void)
 {
-	if ( !document.src)
+	if (!document.src)
 	{
 		document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
-		if ( !document.src )
+		if (!document.src)
 		{
 			printf("Load failed!\n");
 			return;
 		}
 	}
-	
+
 	printf("%s init!\n", DEMO_NICENAME);
-	
-	
+
 	//w_sequence_normalize(document.src->sequence.src);
 	WSequence* seq = document.src->sequence.src;
 	scale_sequence_to_window(seq);
@@ -85,34 +80,32 @@ static void init(void)
 	w_sequence_move(seq, bounds.size.x * 1, bounds.size.y * 1);
 	w_sequence_calc_bounds(seq);
 
-	
-	
+
+
 	double dx = seq->bounds.size.x /window_w;
 	double dy = seq->bounds.size.y / window_h;
-	
+
 	dx = window_w / seq->bounds.size.x;
 	dx = window_h / seq->bounds.size.y;
-	
+
 	printf("Should scale sequence to %f %f\n", dx, dy);
 	//	dx here twice on purpose for testing
 	w_sequence_scale(seq, dx, dx);
-	
+
 	 w_sequence_calc_bounds(seq);
 	w_sequence_move(seq, window_w* -.5, window_h * -.5);
 	w_sequence_calc_bounds(seq);
 	*/
-	
 }
 
 static void deinit(void)
 {
 	printf("%s deinit!\n", DEMO_NICENAME);
-	if(document.src)
+	if (document.src)
 	{
 		w_document_destroy(document.src);
-		
+		document.src = NULL;
 	}
-	
 }
 
 static void update(void)
@@ -121,31 +114,30 @@ static void update(void)
 
 static void draw(void)
 {
-	if ( !document.src )
+	if (!document.src)
 		return;
-	
+
 	static double t = 0;
 	t += .05;
-	
+
 	WSequence* seq = document.src->sequence.src;
-	int num = seq->num_frames;
-	
-	double tmp = fmod(t, 1);
-	int which = tmp * num;
+	int	num = seq->num_frames;
+
+	double tmp   = fmod(t, 1);
+	int    which = tmp * num;
 	//printf("Which: %d\n", which);
 	WRect bounds = seq->bounds;
-	WRect bnd = bounds;
+	WRect bnd    = bounds;
 
-	d_color(1,0,0,1);
+	d_color(1, 0, 0, 1);
 	d_rect(bnd.pos.x, bnd.pos.y, bnd.pos.x + bnd.size.x, bnd.pos.y + bnd.size.y);
-	
+
 	WObject* frame = seq->frames[which];
-	
-	if ( !frame )
+
+	if (!frame)
 		return;
-	
+
 	d_wobject(frame);
-	
 }
 
 WashDemo animation =

@@ -13,6 +13,13 @@
 #include <stdio.h>
 #include <wsh/wsh.h>
 
+#include "primitives.h"
+#include "ops.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+#include <GLFW/glfw3.h>
+#pragma clang diagnostic pop
 
 extern int window_w;
 extern int window_h;

@@ -400,7 +400,7 @@ void w_object_normalize_time_exploded(WObject* obj)
 		}
 	}
 	
-	printf("longest for obj is %llu with %f\n", longest, longest_duration);
+	//printf("longest for obj is %llu with %f\n", longest, longest_duration);
 	double scale = 1 / longest_duration;
 	//printf("timescale is %f\n", scale);
 	
