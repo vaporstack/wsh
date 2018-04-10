@@ -341,9 +341,9 @@ void w_object_normalize_time_continuous(WObject* obj)
 		return;
 	}
 	
-	printf("Normalizing frame to %f->%f\n", first, last);
+	//printf("Normalizing frame to %f->%f\n", first, last);
 	double delta = last - first;
-	printf("delta %f\n", delta);
+	//printf("delta %f\n", delta);
 	for ( int j = 0; j < obj->num_lines; j++ )
 	{
 		WLine* l = obj->lines[j];
@@ -352,7 +352,7 @@ void w_object_normalize_time_continuous(WObject* obj)
 			WPoint* p = &l->data[k];
 			p->time -= first;
 			p->time /= delta;
-			printf("%f\n", p->time);
+			//printf("%f\n", p->time);
 		}
 	}
 	

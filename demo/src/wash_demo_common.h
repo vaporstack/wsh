@@ -28,6 +28,7 @@ extern int window_w;
 extern int window_h;
 extern int frame_w ;
 extern int frame_h;
+extern double dpi;
 
 extern WLineHnd work_line;
 extern WObjectHnd test_geometry;

@@ -16,6 +16,7 @@ typedef void (*key_fn)(int key, int action, int mods);
 typedef void (*tablet_fn)(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk);
 typedef void (*mouse_move_fn)(double x, double y);
 typedef void (*mouse_click_fn)(int btn, int action, int mods);
+typedef void (*drop_fn)(int num, const char** paths);
 
 typedef struct WashDemo
 {
@@ -32,6 +33,7 @@ typedef struct WashDemo
 	tablet_fn      down;
 	tablet_fn      motion;
 	tablet_fn      drag;
+	drop_fn		drop;
 } WashDemo;
 
 #endif /* demo_h */

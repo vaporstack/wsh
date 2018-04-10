@@ -48,7 +48,7 @@ static int  current_demo_index = 0;
 static double mouse_x = 0;
 static double mouse_y = 0;
 
-static double dpi	    = 1;
+//static double dpi	    = 1;
 static double display_radius = 1;
 static bool   down	   = false;
 static bool   faking_it      = false;
@@ -200,6 +200,10 @@ static void key_callback(GLFWwindow* window, int key, int scan, int action, int 
 
 static void drop_callback(GLFWwindow* window, int num, const char** paths)
 {
+	if(current_demo)
+	{
+		current_demo->drop(num, paths);
+	}
 }
 
 void my_tablet_prox(int v)

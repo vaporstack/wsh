@@ -108,6 +108,11 @@ static void deinit(void)
 	}
 }
 
+static void drop(int num, const char** paths)
+{
+	
+}
+
 static void update(void)
 {
 }
@@ -154,6 +159,8 @@ WashDemo animation =
 	tablet_up,
 	tablet_down,
 	tablet_motion,
-	tablet_drag};
+	tablet_drag,
+	    drop
+    };
 
 #endif

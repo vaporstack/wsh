@@ -70,6 +70,11 @@ static void draw(void)
 {
 }
 
+static void drop(int num, const char** paths)
+{
+	
+}
+
 WashDemo operations =
     {
 	DEMO_NICENAME,
@@ -84,6 +89,8 @@ WashDemo operations =
 	tablet_up,
 	tablet_down,
 	tablet_motion,
-	tablet_drag};
+	tablet_drag,
+	    drop
+    };
 
 #endif

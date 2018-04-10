@@ -23,8 +23,8 @@ void scale_sequence_to_window(WSequence* seq )
 	
 	
 	
-	double dx = seq->bounds.size.x /window_w;
-	double dy = seq->bounds.size.y / window_h;
+	double dx = seq->bounds.size.x / frame_h;
+	double dy = seq->bounds.size.y / frame_w;
 	
 	dx = window_w / seq->bounds.size.x;
 	dx = window_h / seq->bounds.size.y;
@@ -34,6 +34,6 @@ void scale_sequence_to_window(WSequence* seq )
 	w_sequence_scale(seq, dx, dx);
 	
 	w_sequence_calc_bounds(seq);
-	w_sequence_move(seq, window_w* -.5, window_h * -.5);
+	//w_sequence_move(seq, frame_h* -.5, frame_w * -.5);
 	w_sequence_calc_bounds(seq);
 }
