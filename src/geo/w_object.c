@@ -54,7 +54,7 @@ void w_object_destroy(WObject* obj)
 
 		w_line_destroy(l);
 	}
-
+	free(obj->lines);
 	free(obj);
 }
 

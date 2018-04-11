@@ -329,7 +329,8 @@ void w_line_destroy(WLine* line)
 	//if (line->tess) {
 	//	w_gpc_tess_destroy(line);
 	//}
-	line = NULL;
+	free(line);
+	
 }
 
 void w_line_find_mins(WLine* line, double* o_x, double* o_y)
