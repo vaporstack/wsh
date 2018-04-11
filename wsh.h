@@ -60,6 +60,9 @@ static inline char* wsh_get_version_string_header(void)
 #include "src/serial/w_serial.h"
 #include "src/util/w_line_ops.h"
 
+//	hack / todo
+#define R4_PRESENT
+
 #ifdef R4_PRESENT
 #define WSH_ENABLE_SERIAL_BACKEND_JSON
 #endif

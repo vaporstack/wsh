@@ -58,6 +58,9 @@ static void tablet_motion(double x, double y, int button, double p, double r, do
 
 static void switch_art(int v)
 {
+	if (!document.src )
+		return;
+	
 	int num = document.src->sequence.src->num_frames;
 	if ( num <= 1 )
 		return;
@@ -136,7 +139,13 @@ static void init(void)
 	printf("Realtime playback init!\n");
 	if (!document.src)
 	{
-		load_file("data/wash/crab.wash");
+		if(path)
+		{
+			load_file(path);
+
+		}else{
+			load_file("data/wash/crab.wash");
+		}
 	}
 	printf("%s init!\n", DEMO_NICENAME);
 	//w_object_normalize_time_exploded(document.src);
