@@ -55,6 +55,20 @@ static void mouse_button(int button, int action, int mods)
 {
 }
 
+static void setup_tools(void)
+{
+	WshToolRec* pencil = wsh_tool_rec_create();
+	pencil->identifier = "space.ruminant.wsh.demo_pencil";
+	pencil->name = "My awesome pencil";
+	
+	
+	w_session_rec_tool_register(pencil);
+	w_session_rec_tool_register(pencil);
+	w_session_rec_tool_register(pencil);
+
+
+}
+
 static void init(void)
 {
 	int err = 0;
@@ -70,13 +84,16 @@ static void init(void)
 		printf("Something went wrong!\n");
 		
 	}
-	w_session_start();
+	
+	setup_tools();
+	w_session_start(glfwGetTime());
+	
 }
 
 static void deinit(void)
 {
 	printf("%s deinit!\n", DEMO_NICENAME);
-	w_session_stop();
+	w_session_stop(glfwGetTime());
 	w_session_deinit();
 }
 

@@ -7,6 +7,7 @@
 
 #include "w_session.h"
 
+#include "../geo/w_document.h"
 #include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -15,9 +16,65 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-static const char* path      = NULL;
-static int	 recording = 0;
-void*		   data      = NULL; //T B VERY MUCH D
+#define IDENTIFIER_MAX 256
+
+static const char*  path      = NULL;
+static int	  recording = 0;
+static void*	data      = NULL; //T B VERY MUCH D
+static WDocumentHnd document;
+static const char** names     = NULL;
+static int	  num_tools = 0;
+
+int w_session_rec_tool_register(WshToolRec* rec)
+{
+	if (strlen(rec->identifier) > IDENTIFIER_MAX)
+	{
+		printf("Identifier too long!\n");
+		return false;
+	}
+	for ( int i = 0 ;i < num_tools; i++ )
+	{
+		if ( 0 == strcmp(rec->identifier, names[i]))
+		{
+			printf("Already have this tool!\n");
+			return false;
+		}
+	}
+	num_tools++;
+	if (names == NULL)
+	{
+		names = calloc(IDENTIFIER_MAX, sizeof(char));
+	}
+	else
+	{
+		names = realloc(names, IDENTIFIER_MAX * sizeof(char));
+	}
+	names[num_tools - 1] = rec->identifier;
+	printf("Registered tool: %s\n", names[num_tools - 1]);
+	return true;
+}
+
+int w_session_rec_tool_change(WshToolRec* rec, double ts)
+{
+	return 0;
+}
+
+int w_session_rec_tool_activity(WshToolRec* rec, double ts)
+{
+	return 0;
+}
+
+int w_session_rec_tool_cease(WshToolRec* rec, double ts)
+{
+	return 0;
+}
+
+int w_session_rec_tool_begin(WshToolRec* rec, double ts)
+{
+	return 0;
+}
+
+#pragma mark core
 
 static int check_if_directory_exists(const char* path)
 {
@@ -68,17 +125,21 @@ int w_session_init()
 		return false;
 	}
 	printf("Pretending our session was successfully initialized!\n");
+	document.src = w_document_create();
 	return true;
 }
 
 int w_session_deinit()
 {
-
 	//	do stuff
+
+	//	write our document to disk?
+	//	keep it single file for simplicity?
+
 	return 1;
 }
 
-int w_session_start(void)
+int w_session_start(double ts)
 {
 	printf("Starting wsh recording session.\n");
 	if (recording)
@@ -91,7 +152,7 @@ int w_session_start(void)
 	return true;
 }
 
-int w_session_stop(void)
+int w_session_stop(double ts)
 {
 	if (!recording)
 	{
