@@ -1,17 +1,20 @@
 cmake_minimum_required (VERSION 3.0)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-project(wsh)
 set(project_name wsh)
 
-set (wsh_VERSION_MAJOR 0)
-set (wsh_VERSION_MINOR 0)
-set (wsh_VERSION_PATCH 1)
+project("wsh")
 
+set (${project_name}_VERSION_MAJOR 0)
+set (${project_name}_VERSION_MINOR 0)
+set (${project_name}_VERSION_PATCH 1)
+
+option(BuildLibrary "Build ${project_name} static library" ON)
 option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" OFF)
 option(BuildTest "BuildTest" ON)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
 
 if(CMAKE_BUILD_TYPE)
 	if (${CMAKE_BUILD_TYPE} STREQUAL "release")
@@ -23,8 +26,9 @@ else()
 	set(CMAKE_BUILD_TYPE "debug")
 endif()
 
-message("\n\nCMAKE build type:" ${CMAKE_BUILD_TYPE})
+message("CMAKE build type:" ${CMAKE_BUILD_TYPE})
 
+message(${project_name})
 
 if (CMAKE_BUILD_TYPE EQUAL "debug")
 
@@ -35,19 +39,33 @@ endif ()
 if (${have_r4_environment})
 	message("Enabling the JSON backend?")
 	add_definitions(-DWSH_ENABLE_SERIAL_BACKEND_JSON)
+
 endif()
 
-file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 
-add_library(wsh SHARED STATIC ${sources})
-# add_library(wsh SHARED ${sources})
+file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
+message(${project_name})
+
+if(BuildLibrary)
+	message("Adding library target.")
+	add_library(${project_name} STATIC ${sources})
+	# add_library(wsh SHARED ${sources})
+endif()
+message(${project_name})
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
-	target_include_directories (wsh PUBLIC ${CMAKE_SOURCE_DIR}/contrib/deps)
+	message(${project_name})
+
+	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib)
+
 
 else()
 	message("Building standalone.")
+	message(${project_name})
+
+	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib)
+
 	macro(use_c99)
 		if (CMAKE_VERSION VERSION_LESS "3.1")
 			if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
