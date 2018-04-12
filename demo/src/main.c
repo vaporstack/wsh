@@ -27,6 +27,7 @@ extern WashDemo resize;
 extern WashDemo brush;
 extern WashDemo playback;
 extern WashDemo operations;
+extern WashDemo session;
 extern WashDemo simulator;
 //#include "demos/animation.c"
 //#include "demos/resize.h"
@@ -56,8 +57,8 @@ GLFWwindow*   window	 = NULL;
 
 WDocumentHnd document;
 
-#define NUM_DEMOS 6
-WashDemo* demos[NUM_DEMOS] = {&animation, &playback, &operations, &brush, &resize, &simulator};
+#define NUM_DEMOS 7
+WashDemo* demos[NUM_DEMOS] = {&animation, &playback, &operations, &brush, &resize, &simulator, &session};
 WashDemo* current_demo     = NULL;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
@@ -403,7 +404,7 @@ int main(int argc, const char* argv[])
 	
 	d_setup(window_w, window_h);
 
-	switch_demo(0);
+	switch_demo(6);
 	
 	d_color_clear(1, 1, 1, 1);
 	d_color(0, 0, 0, 1);
@@ -423,9 +424,14 @@ int main(int argc, const char* argv[])
 	}
 
 	glfwTerminate();
-	wcm_deinit();
-	recorder_deinit();
+	if ( current_demo )
+	{
+		current_demo->deinit();
+	}
 
+	recorder_deinit();
 	text_ftgl_deinit();
+	wcm_deinit();
+
 	return 0;
 }

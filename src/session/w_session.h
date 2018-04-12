@@ -31,5 +31,9 @@ int w_session_rec_tool_cease(WshToolRec* rec);
 int w_session_rec_tool_begin(WshToolRec* rec);
 int w_session_init(void);
 int w_session_deinit(void);
+int w_session_set_path(const char* path);
+int w_session_set_name(void);
+int w_session_start(void);
+int w_session_stop(void);
 
 #endif
