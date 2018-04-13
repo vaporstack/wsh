@@ -19,7 +19,7 @@
 #include "primitives.h"
 
 #ifdef WSH_DEMO_ENABLE_FTGL
-#error hi
+
 #include <FTGL/ftgl.h>
 
 FTGLfont *font = NULL;

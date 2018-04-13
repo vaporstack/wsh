@@ -12,5 +12,6 @@
 #include <wsh/wsh.h>
 
 void scale_sequence_to_window(WSequence* seq);
+void scale_object_to_window(WObject* obj);
 
 #endif /* ops_h */

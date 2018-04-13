@@ -13,10 +13,18 @@
 #include "../wash_demo_common.h"
 #include <wsh/wsh.h>
 
-const char* path = "wash_session.wshs";
 
 #define DEMO_NAME "session"
 #define DEMO_NICENAME "Recording Session"
+
+static void switch_tool(WshToolRec* rec );
+
+const char* path = "wash_session.wshs";
+
+static WshToolRec* pencil = NULL;
+static WshToolRec* brush = NULL;
+static WshToolRec* eraser = NULL;
+static WshToolRec* current = NULL;
 
 static void tablet_prox(int v)
 {
@@ -45,27 +53,52 @@ static void tablet_motion(double x, double y, int button, double p, double r, do
 
 static void key(int key, int action, int mods)
 {
+	switch (key) {
+		case GLFW_KEY_Q:
+			switch_tool(pencil);
+			break;
+		case GLFW_KEY_W:
+			switch_tool(brush);
+			break;
+		case GLFW_KEY_E:
+			switch_tool(eraser);
+			break;
+			
+		default:
+			break;
+	}
 }
 
 static void mouse_move(double x, double y)
 {
+	
 }
 
 static void mouse_button(int button, int action, int mods)
 {
 }
 
+
+static void switch_tool(WshToolRec* rec )
+{
+	w_session_rec_tool_change(rec, glfwGetTime());
+	current = rec;
+	
+}
+
+
+
 static void setup_tools(void)
 {
-	WshToolRec* pencil = wsh_tool_rec_create();
+	pencil = wsh_tool_rec_create();
 	pencil->identifier = "space.ruminant.wsh.demo_pencil";
 	pencil->name = "My awesome pencil";
 	
-	WshToolRec* brush = wsh_tool_rec_create();
+	brush = wsh_tool_rec_create();
 	brush->identifier = "space.ruminant.wsh.demo_brush";
 	brush->name = "My awesome brush";
 	
-	WshToolRec* eraser = wsh_tool_rec_create();
+	eraser = wsh_tool_rec_create();
 	eraser->identifier = "space.ruminant.wsh.demo_eraser";
 	eraser->name = "My awesome brush";
 	
@@ -94,8 +127,6 @@ static void init(void)
 	
 	setup_tools();
 	
-	
-	
 	w_session_start(glfwGetTime());
 	
 }
@@ -114,8 +145,17 @@ static void update(void)
 {
 }
 
+static void draw_cursor(void)
+{
+	d_push();
+	d_translate(mouse_x, mouse_y, 0);
+	d_line(0,0,33,-33);
+	d_pop();
+}
+
 static void draw(void)
 {
+	draw_cursor();
 }
 
 static void drop(int num, const char** paths)

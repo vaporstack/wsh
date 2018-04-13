@@ -19,5 +19,6 @@ void recorder_record_manual_point(WPoint p);
 void recorder_record_point(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk);
 void recorder_end_line(double x, double y);
 void recorder_clear(void);
+WObject* recorder_get_art(void);
 
 #endif /* recorder_h */

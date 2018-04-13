@@ -29,7 +29,10 @@ extern int window_h;
 extern int frame_w ;
 extern int frame_h;
 extern double dpi;
-
+extern double mouse_x;
+extern double mouse_y;
+extern int mouse_down;
+extern int mouse_present;
 extern WLineHnd work_line;
 extern WObjectHnd test_geometry;
 

@@ -10,13 +10,12 @@
 
 #include "wash_demo_common.h"
 
-//#define ENABLE_SDL_TEXT
 
-#ifdef ENABLE_SDL_TEXT
+#ifdef WSH_DEMO_ENABLE_SDL
 	#include "text_sdl.h"
 #endif
 
-#ifdef ENABLE_FTGL_TEXT
+#ifdef WSH_DEMO_ENABLE_FTGL
 	#include "text_ftgl.h"
 #endif
 
@@ -40,7 +39,7 @@ extern WashDemo simulator;
 #include <wcm/wcm.h>
 
 #include "support/text.h"
-
+#include "wash_demo_common.h"
 #define WIDTH 512
 #define HEIGHT 512
 
@@ -48,12 +47,8 @@ static void reset_current_demo(void);
 static void switch_demo(int i);
 static int  current_demo_index = 0;
 
-static double mouse_x = 0;
-static double mouse_y = 0;
-
 //static double dpi	    = 1;
 static double display_radius = 1;
-static bool   down	   = false;
 static bool   faking_it      = false;
 GLFWwindow*   window	 = NULL;
 
@@ -75,6 +70,9 @@ static void window_pos_callback(GLFWwindow* window, int x, int y)
 {
 	mouse_x = x;
 	mouse_y = y;
+	if ( current_demo )
+		current_demo->mouse_move(x, y);
+	
 }
 
 static void window_size_callback(GLFWwindow* window, int width, int height)
@@ -130,9 +128,9 @@ static void normalize_coordinates(double* x, double* y)
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	down = action;
-	if (button > 0)
-		return;
+	mouse_down = action;
+	//(button > 0)
+	//	return;
 
 	static int once = 0;
 	if (once == 0)
@@ -158,6 +156,11 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 			stop_faking_it(mouse_x, mouse_y);
 		}
 	}
+	
+	if ( current_demo )
+		current_demo->mouse_click(button, action, mods);
+	
+	//if
 }
 
 static void cursor_enter_callback(GLFWwindow* window, int entered)
@@ -316,7 +319,7 @@ static void draw(void)
 	d_translate(mouse_x, mouse_y, 0);
 
 	d_line(0, 0, 32, 32);
-	if (down)
+	if (mouse_down)
 	{
 		d_color(0, 0, 0, 1);
 	}
@@ -406,7 +409,7 @@ int main(int argc, const char* argv[])
 	
 	d_setup(window_w, window_h);
 
-	switch_demo(6);
+	switch_demo(2);
 	
 	d_color_clear(1, 1, 1, 1);
 	d_color(0, 0, 0, 1);

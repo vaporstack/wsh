@@ -24,6 +24,7 @@ static void*	data      = NULL; //T B VERY MUCH D
 static WDocumentHnd document;
 static const char** tool_names = NULL;
 static int	  num_tools  = 0;
+const WshToolRec* current_tool_rec = NULL;
 
 int w_session_rec_tool_register(WshToolRec* rec)
 {
@@ -56,8 +57,13 @@ int w_session_rec_tool_register(WshToolRec* rec)
 
 int w_session_rec_tool_change(WshToolRec* rec, double ts)
 {
-
-	return 0;
+	if (current_tool_rec == rec )
+	{
+		printf("Already using this tool, not changing.\n");
+		return false;
+	}
+	current_tool_rec = rec;
+	return true;
 }
 
 int w_session_rec_tool_activity(WshToolRec* rec, double ts)

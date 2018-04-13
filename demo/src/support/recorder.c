@@ -102,6 +102,10 @@ void recorder_end_line(double x, double y)
 	
 	work_line.src = w_line_create();
 }
+WObject* recorder_get_art(void)
+{
+	return test_geometry.src;
+}
 
 void recorder_clear(void)
 {

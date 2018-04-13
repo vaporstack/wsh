@@ -10,6 +10,34 @@
 #include "../wash_demo_common.h"
 #include <stdlib.h>
 
+
+void scale_object_to_window(WObject* obj)
+{
+	w_object_calc_bounds(obj);
+	WRect bounds = obj->bounds;
+	
+	//shift it so lower left corner is 0,0
+	w_object_move(obj, bounds.pos.x * -1, bounds.pos.y * -1);
+	w_object_calc_bounds(obj);
+
+	
+	double dx = obj->bounds.size.x / frame_h;
+	double dy = obj->bounds.size.y / frame_w;
+	
+	dx = window_w / obj->bounds.size.x;
+	dy = window_h / obj->bounds.size.y;
+	
+	
+	printf("Should scale object to %f %f\n", dx, dy);
+
+	double d = (dx > dy ) ? dx : dy;
+
+	w_object_scale(obj, d, d );
+
+	w_object_calc_bounds(obj);
+	
+}
+
 void scale_sequence_to_window(WSequence* seq )
 {
 	//w_sequence_normalize(document.src->sequence.src);

@@ -15,6 +15,8 @@
 #define DEMO_NAME "operations"
 #define DEMO_NICENAME "Line Ops"
 
+WObject* subject = NULL;
+
 static void tablet_prox(int v)
 {
 	printf("got tablet prox? %d\n", v);
@@ -48,8 +50,31 @@ static void mouse_move(double x, double y)
 {
 }
 
+static void wipe_canvas_and_scale(void)
+{
+	WObject* art = recorder_get_art();
+	if ( subject )
+	{
+		w_object_destroy(subject);
+	}
+	subject = w_object_copy(art);
+	recorder_clear();
+	
+	scale_object_to_window(subject);
+}
+
 static void mouse_button(int button, int action, int mods)
 {
+	if( button > 0 )
+		return;
+	if ( action )
+	{
+		printf("mdown\n");
+		
+	}else{
+		printf("mup!\n");
+		wipe_canvas_and_scale();
+	}
 }
 
 static void init(void)
@@ -68,6 +93,11 @@ static void update(void)
 
 static void draw(void)
 {
+	d_color(0,1,0,1);
+	if (!subject)
+		return;
+	
+	d_wobject(subject);
 }
 
 static void drop(int num, const char** paths)
