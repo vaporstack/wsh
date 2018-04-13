@@ -9,12 +9,23 @@
 #include "wsh_tool.h"
 
 #include <stdlib.h>
+#define NUM_FIELDS 4
+#include <stdio.h>
 
-WshToolRec* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
+WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 {
 	WshToolRec* result = wsh_tool_rec_create();
-	double**     fields = {&(a->attack), &(a->sustain), &(a->decay), &(a->release)};
-	double**     fields = {&(b->attack), &(b->sustain), &(b->decay), &(b->release)};
+	double*     fields_a[NUM_FIELDS] = {&(a->attack), &(a->sustain), &(a->decay), &(a->release)};
+	double*   fields_b[NUM_FIELDS]= {&(b->attack), &(b->sustain), &(b->decay), &(b->release)};
+	for ( int i = 0 ;i < NUM_FIELDS; i++ )
+	{
+		double* a = fields_a[i];
+		double* b = fields_b[i];
+		//if ( )
+		double diff = *b - *a;
+		printf("%f\n", diff);
+		
+	}
 	
 	return result;
 }

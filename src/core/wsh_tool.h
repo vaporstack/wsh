@@ -39,10 +39,17 @@ typedef struct WshToolRec
 
 typedef struct WshToolRecDelta
 {
-	int foo;
+	double* attack, decay, sustain, release;
+	double* size_base, size_inner, size_outer, size_perim;
+	double* size_mod;
+	WColor16* color;
+	WColor16** colors;
+	int* color_num;
+	void* textures;
+	int* texture_num;
 } WshToolRecDelta;
 
-WshToolRec* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b);
+WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b);
 
 WshToolRec* wsh_tool_rec_create(void);
 void	wsh_tool_rec_destroy(WshToolRec* rec);
