@@ -61,10 +61,17 @@ static void setup_tools(void)
 	pencil->identifier = "space.ruminant.wsh.demo_pencil";
 	pencil->name = "My awesome pencil";
 	
+	WshToolRec* brush = wsh_tool_rec_create();
+	brush->identifier = "space.ruminant.wsh.demo_brush";
+	brush->name = "My awesome brush";
+	
+	WshToolRec* eraser = wsh_tool_rec_create();
+	eraser->identifier = "space.ruminant.wsh.demo_eraser";
+	eraser->name = "My awesome brush";
 	
 	w_session_rec_tool_register(pencil);
-	w_session_rec_tool_register(pencil);
-	w_session_rec_tool_register(pencil);
+	w_session_rec_tool_register(brush);
+	w_session_rec_tool_register(eraser);
 
 
 }

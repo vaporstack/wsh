@@ -12,21 +12,45 @@
 #define NUM_FIELDS 4
 #include <stdio.h>
 
+WshToolRecDelta* wsh_tool_rec_delta_create(void)
+{
+	WshToolRecDelta* delta = calloc(1, sizeof(WshToolRecDelta));
+
+	return delta;
+}
+
 WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 {
-	WshToolRec* result		 = wsh_tool_rec_create();
-	double*     fields_a[NUM_FIELDS] = {&(a->attack), &(a->sustain), &(a->decay), &(a->release)};
-	double*     fields_b[NUM_FIELDS] = {&(b->attack), &(b->sustain), &(b->decay), &(b->release)};
+	WshToolRecDelta* r		      = wsh_tool_rec_delta_create();
+	double*		 fields_a[NUM_FIELDS] = {&(a->attack), &(a->decay), &(a->sustain), &(a->release)};
+	double*		 fields_b[NUM_FIELDS] = {&(b->attack), &(b->decay), &(b->sustain), &(b->release)};
+	double*		 fields_r[NUM_FIELDS] = {(r->attack), (r->decay), (r->sustain), (r->release)};
 	for (int i = 0; i < NUM_FIELDS; i++)
 	{
 		double* a = fields_a[i];
 		double* b = fields_b[i];
-		//if ( )
-		double diff = *b - *a;
-		printf("%f\n", diff);
+		if (*a != *b)
+		{
+			fields_r[i]  = calloc(1, sizeof(double));
+			*fields_r[i] = *b;
+		}
+		//double diff = *b - *a;
+		//printf("%f\n", diff);
 	}
 
-	return NULL;
+	if (r->attack)
+	{
+		printf("A: %f\n", *r->attack);
+	}
+
+	if (r->decay)
+	{
+		printf("D: %f\n", *r->decay);
+	}
+
+	//	todo: fill out the rest of these fields in the diff
+
+	return r;
 }
 
 WshToolRec* wsh_tool_rec_create(void)
@@ -39,6 +63,13 @@ WshToolRec* wsh_tool_rec_create(void)
 	rec->size_inner = .5;
 	rec->size_outer = .75;
 	rec->size_perim = 1.;
+	
+	rec->attack = .25;
+	rec->decay = .125;
+	rec->sustain = 3;
+	rec->release = .125;
+	
+	rec->size_mod	 = 1.;
 
 	return rec;
 }

@@ -39,6 +39,8 @@ extern WashDemo simulator;
 
 #include <wcm/wcm.h>
 
+#include "support/text.h"
+
 #define WIDTH 512
 #define HEIGHT 512
 
@@ -326,7 +328,7 @@ static void draw(void)
 	d_pop();
 	d_color(0,0,0,1);
 	
-	text_ftgl_draw_text("switch demo: 1-6", 32, 32);
+	wash_demo_text("switch demo: 1-6", 32, 32);
 }
 
 static void switch_demo(int i)
@@ -430,7 +432,7 @@ int main(int argc, const char* argv[])
 	}
 
 	recorder_deinit();
-	text_ftgl_deinit();
+	wash_demo_text_deinit();
 	wcm_deinit();
 
 	return 0;

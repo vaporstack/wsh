@@ -27,8 +27,6 @@
 		5760ECF02063343300430B0A /* wash_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wash_demo_common.c */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
-		578BCE582061788000672199 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE542061788000672199 /* Info.plist */; };
-		57B175FE20797AE700BCF8E8 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FD20797AE700BCF8E8 /* libftgl.a */; };
 		57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FF20797AF800BCF8E8 /* libglfw.dylib */; };
 /* End PBXBuildFile section */
 
@@ -94,7 +92,6 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		57B175FD20797AE700BCF8E8 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../../../../../../../usr/local/lib/libftgl.a; sourceTree = "<group>"; };
 		57B175FF20797AF800BCF8E8 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +104,6 @@
 				5716704F207862220005E15A /* libwcm.a in Frameworks */,
 				5711BFAA206191A500DD36E0 /* libwsh.a in Frameworks */,
 				57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */,
-				57B175FE20797AE700BCF8E8 /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +228,6 @@
 			isa = PBXGroup;
 			children = (
 				57B175FF20797AF800BCF8E8 /* libglfw.dylib */,
-				57B175FD20797AE700BCF8E8 /* libftgl.a */,
 			);
 			path = lib;
 			sourceTree = "<group>";
@@ -265,7 +260,7 @@
 		578BCE2E2061782C00672199 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = ruminant;
 				TargetAttributes = {
 					578BCE352061782C00672199 = {
@@ -327,7 +322,6 @@
 				578BCE552061788000672199 /* Assets.xcassets in Resources */,
 				578BCE562061788000672199 /* MainMenu.xib in Resources */,
 				5711BFD32061C6F900DD36E0 /* data in Resources */,
-				578BCE582061788000672199 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +391,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -404,6 +399,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -452,6 +448,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -459,6 +456,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -15,7 +15,8 @@ typedef struct WshToolRec
 {
 	const char* name;
 	const char* identifier;
-
+	const char* desc;
+	
 	double attack;
 	double decay;
 	double sustain;
@@ -39,16 +40,20 @@ typedef struct WshToolRec
 
 typedef struct WshToolRecDelta
 {
-	double* attack, decay, sustain, release;
-	double* size_base, size_inner, size_outer, size_perim;
-	double* size_mod;
-	WColor16* color;
+	double*    attack;
+	double*    decay;
+	double*    sustain;
+	double*    release;
+	double *   size_base, size_inner, size_outer, size_perim;
+	double*    size_mod;
+	WColor16*  color;
 	WColor16** colors;
-	int* color_num;
-	void* textures;
-	int* texture_num;
+	int*       color_num;
+	void*      textures;
+	int*       texture_num;
 } WshToolRecDelta;
 
+WshToolRecDelta* wsh_tool_rec_delta_create(void);
 WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b);
 
 WshToolRec* wsh_tool_rec_create(void);

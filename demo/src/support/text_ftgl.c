@@ -11,9 +11,15 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
 #include <GLFW/glfw3.h>
+#pragma clang diagnostic pop
+
 #include "primitives.h"
 
+#ifdef WSH_DEMO_ENABLE_FTGL
+#error hi
 #include <FTGL/ftgl.h>
 
 FTGLfont *font = NULL;
@@ -65,3 +71,5 @@ void text_ftgl_draw_text(const char* text, double x, double y)
 
 	
 }
+
+#endif

@@ -11,7 +11,7 @@ set (${project_name}_VERSION_PATCH 1)
 
 option(BuildLibrary "Build ${project_name} static library" ON)
 option(BuildDocumentation "BuildDocumentation" OFF)
-option(BuildDemo "BuildDemo" OFF)
+option(BuildDemo "BuildDemo" ON)
 option(BuildTest "BuildTest" ON)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
@@ -43,27 +43,20 @@ if (${have_r4_environment})
 endif()
 
 
-file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
-message(${project_name})
 
 if(BuildLibrary)
 	message("Adding library target.")
+	file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 	add_library(${project_name} STATIC ${sources})
 	# add_library(wsh SHARED ${sources})
 endif()
-message(${project_name})
+
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
-	message(${project_name})
-
 	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib)
-
-
 else()
 	message("Building standalone.")
-	message(${project_name})
-
 	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib)
 
 	macro(use_c99)
@@ -109,6 +102,19 @@ if (GLFW_FOUND)
 	endif()
 else()
 	message("Did not find GLFW, cannot build demo.")
+endif()
+
+
+
+find_package(LibFTGL )
+include_directories(${LibGLFW_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${LibGLFW_LIBRARIES})
+
+if (FTGL_FOUND)
+	add_definitions(-DWSH_DEMO_ENABLE_FTGL)
+
+else()
+	message("Did not find FTGL.")
 endif()
 
 if (${build_demo})

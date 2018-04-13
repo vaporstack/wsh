@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 
+message("configuring demo.")
+
 project(demo_wash)
 
 set(demo_wash_VERSION_MAJOR 0)
@@ -67,6 +69,7 @@ if(${OperatingSystem} MATCHES "macos")
 endif(${OperatingSystem} MATCHES "macos")
 
 add_subdirectory(contrib/wcm)
+add_subdirectory(contrib/ftgl)
 
 find_package(OpenGL)
 if(OPENGL_FOUND)
@@ -89,15 +92,12 @@ message(${sources})
 add_executable(demo_wash ${sources})
 
 target_include_directories(demo_wash PUBLIC
-                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs)
-target_include_directories(demo_wash PUBLIC
-                           ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src)
-target_include_directories(demo_wash PUBLIC
-                           ${CMAKE_CURRENT_SOURCE_DIR}/../contrib)
-target_include_directories(demo_wash PUBLIC
-                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include)
-target_include_directories(demo_wash PUBLIC
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs
+                           ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../contrib
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib)
+                           ${CMAKE_CURRENT_SOURCE_DIR}/contrib/ftgl/src)
 
 if(${OperatingSystem} MATCHES "macos")
   target_link_libraries(demo_wash
