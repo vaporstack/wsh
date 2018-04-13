@@ -37,6 +37,11 @@ typedef struct WshToolRec
 
 } WshToolRec;
 
+typedef struct WshToolRecDelta
+{
+	int foo;
+} WshToolRecDelta;
+
 WshToolRec* wsh_tool_rec_create(void);
 void	wsh_tool_rec_destroy(WshToolRec* rec);
 
