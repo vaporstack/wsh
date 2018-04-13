@@ -62,7 +62,7 @@ static inline char* wsh_get_version_string_header(void)
 #include "src/session/w_session.h"
 
 //	hack / todo
-#define R4_PRESENT
+//#define R4_PRESENT
 
 #ifdef R4_PRESENT
 #define WSH_ENABLE_SERIAL_BACKEND_JSON
