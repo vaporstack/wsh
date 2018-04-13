@@ -22,8 +22,8 @@ static const char*  path      = NULL;
 static int	  recording = 0;
 static void*	data      = NULL; //T B VERY MUCH D
 static WDocumentHnd document;
-static const char** names     = NULL;
-static int	  num_tools = 0;
+static const char** tool_names = NULL;
+static int	  num_tools  = 0;
 
 int w_session_rec_tool_register(WshToolRec* rec)
 {
@@ -32,30 +32,31 @@ int w_session_rec_tool_register(WshToolRec* rec)
 		printf("Identifier too long!\n");
 		return false;
 	}
-	for ( int i = 0 ;i < num_tools; i++ )
+	for (int i = 0; i < num_tools; i++)
 	{
-		if ( 0 == strcmp(rec->identifier, names[i]))
+		if (0 == strcmp(rec->identifier, tool_names[i]))
 		{
 			printf("Already have this tool!\n");
 			return false;
 		}
 	}
 	num_tools++;
-	if (names == NULL)
+	if (tool_names == NULL)
 	{
-		names = calloc(IDENTIFIER_MAX, sizeof(char));
+		tool_names = calloc(IDENTIFIER_MAX, sizeof(char));
 	}
 	else
 	{
-		names = realloc(names, IDENTIFIER_MAX * sizeof(char));
+		tool_names = realloc(tool_names, IDENTIFIER_MAX * sizeof(char));
 	}
-	names[num_tools - 1] = rec->identifier;
-	printf("Registered tool: %s\n", names[num_tools - 1]);
+	tool_names[num_tools - 1] = rec->identifier;
+	printf("Registered tool: %s\n", tool_names[num_tools - 1]);
 	return true;
 }
 
 int w_session_rec_tool_change(WshToolRec* rec, double ts)
 {
+
 	return 0;
 }
 
@@ -163,4 +164,13 @@ int w_session_stop(double ts)
 
 	printf("Stopping wsh recording session.\n");
 	return true;
+}
+
+void w_session_print_debug_info(void)
+{
+	printf("Tools:\n");
+	for (int i = 0; i < num_tools; i++)
+	{
+		printf("Tool: %s\n", tool_names[i]);
+	}
 }

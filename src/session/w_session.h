@@ -39,4 +39,6 @@ int w_session_set_name(void);
 int w_session_start(double ts);
 int w_session_stop(double ts);
 
+void w_session_print_debug_info(void);
+
 #endif

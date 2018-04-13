@@ -86,6 +86,9 @@ static void init(void)
 	}
 	
 	setup_tools();
+	
+	
+	
 	w_session_start(glfwGetTime());
 	
 }
@@ -95,6 +98,9 @@ static void deinit(void)
 	printf("%s deinit!\n", DEMO_NICENAME);
 	w_session_stop(glfwGetTime());
 	w_session_deinit();
+	
+	w_session_print_debug_info();
+	
 }
 
 static void update(void)
