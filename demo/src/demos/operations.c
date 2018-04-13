@@ -95,7 +95,7 @@ static void draw(void)
 {
 	static double d = 1;
 	
-	d = d * .999;
+	d = d * .99;
 	if ( d == 0 )
 		d = 1;
 	//double v = d * 128;
