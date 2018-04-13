@@ -58,8 +58,8 @@ static inline char* wsh_get_version_string_header(void)
 
 #include "src/io/w_io.h"
 #include "src/serial/w_serial.h"
-#include "src/util/w_line_ops.h"
 #include "src/session/w_session.h"
+#include "src/util/w_line_ops.h"
 
 //	hack / todo
 //#define R4_PRESENT

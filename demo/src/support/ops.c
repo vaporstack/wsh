@@ -16,10 +16,15 @@ void scale_object_to_window(WObject* obj)
 	w_object_calc_bounds(obj);
 	WRect bounds = obj->bounds;
 	
+	w_object_normalize(obj);
+	
+	/*
 	//shift it so lower left corner is 0,0
 	w_object_move(obj, bounds.pos.x * -1, bounds.pos.y * -1);
 	w_object_calc_bounds(obj);
-
+	
+	w_object_move(obj, bounds.size.x * -.5, bounds.size.x * -.5);
+	w_object_move(obj, frame_w * .5 * dpi, frame_h * .5 * dpi);
 	
 	double dx = obj->bounds.size.x / frame_h;
 	double dy = obj->bounds.size.y / frame_w;
@@ -32,9 +37,12 @@ void scale_object_to_window(WObject* obj)
 
 	double d = (dx > dy ) ? dx : dy;
 
-	w_object_scale(obj, d, d );
+	//w_object_scale(obj, d, d );
 
 	w_object_calc_bounds(obj);
+	 */
+	w_object_scale(obj, frame_w, frame_h);
+	w_object_move(obj, frame_w * .5, frame_h * .5);
 	
 }
 

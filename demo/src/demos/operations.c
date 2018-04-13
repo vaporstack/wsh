@@ -93,11 +93,36 @@ static void update(void)
 
 static void draw(void)
 {
-	d_color(0,1,0,1);
+	static double d = 1;
+	
+	d = d * .999;
+	if ( d == 0 )
+		d = 1;
+	//double v = d * 128;
+	printf("%f\n", d);
+	d_color(0,.25,0,1);
 	if (!subject)
 		return;
 	
-	d_wobject(subject);
+	WLine* first = subject->lines[0];
+	if ( !first )
+		return;
+	
+	d_wline(first);
+	d_verts(first);
+	d_push();
+	//WLine* mod = w_line_copy(first);
+	
+	WLine* mod = w_line_ops_douglaspeucker(first, d);
+	
+	d_color(.5,0,0,1);
+	d_translate(0,32,0);
+	d_verts(mod);
+	d_wline(mod);
+	w_line_destroy(mod);
+	d_pop();
+	
+	//d_wobject(subject);
 }
 
 static void drop(int num, const char** paths)

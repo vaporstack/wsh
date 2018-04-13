@@ -154,6 +154,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 		if (faking_it)
 		{
 			stop_faking_it(mouse_x, mouse_y);
+			simulator_reset_sims();
 		}
 	}
 	
