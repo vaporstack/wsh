@@ -14,20 +14,19 @@
 
 WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 {
-	WshToolRec* result = wsh_tool_rec_create();
+	WshToolRec* result		 = wsh_tool_rec_create();
 	double*     fields_a[NUM_FIELDS] = {&(a->attack), &(a->sustain), &(a->decay), &(a->release)};
-	double*   fields_b[NUM_FIELDS]= {&(b->attack), &(b->sustain), &(b->decay), &(b->release)};
-	for ( int i = 0 ;i < NUM_FIELDS; i++ )
+	double*     fields_b[NUM_FIELDS] = {&(b->attack), &(b->sustain), &(b->decay), &(b->release)};
+	for (int i = 0; i < NUM_FIELDS; i++)
 	{
 		double* a = fields_a[i];
 		double* b = fields_b[i];
 		//if ( )
 		double diff = *b - *a;
 		printf("%f\n", diff);
-		
 	}
-	
-	return result;
+
+	return NULL;
 }
 
 WshToolRec* wsh_tool_rec_create(void)
