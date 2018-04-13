@@ -42,6 +42,8 @@ typedef struct WshToolRecDelta
 	int foo;
 } WshToolRecDelta;
 
+WshToolRec* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b);
+
 WshToolRec* wsh_tool_rec_create(void);
 void	wsh_tool_rec_destroy(WshToolRec* rec);
 
