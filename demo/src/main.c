@@ -6,17 +6,14 @@
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-
-
 #include "wash_demo_common.h"
 
-
 #ifdef WSH_DEMO_ENABLE_SDL
-	#include "text_sdl.h"
+#include "text_sdl.h"
 #endif
 
 #ifdef WSH_DEMO_ENABLE_FTGL
-	#include "text_ftgl.h"
+#include "support/text_ftgl.h"
 #endif
 
 #include "demo.h"
@@ -70,9 +67,8 @@ static void window_pos_callback(GLFWwindow* window, int x, int y)
 {
 	mouse_x = x;
 	mouse_y = y;
-	if ( current_demo )
+	if (current_demo)
 		current_demo->mouse_move(x, y);
-	
 }
 
 static void window_size_callback(GLFWwindow* window, int width, int height)
@@ -83,7 +79,6 @@ static void window_size_callback(GLFWwindow* window, int width, int height)
 
 	d_setup(window_w, window_h);
 	reset_current_demo();
-
 }
 
 // static void draw_joysticks(void);
@@ -94,10 +89,9 @@ static void scroll_callback(GLFWwindow* window, double x, double y)
 
 static void reset_current_demo(void)
 {
-	if (!current_demo )
+	if (!current_demo)
 		return;
-	
-	
+
 	current_demo->deinit();
 	current_demo->init();
 }
@@ -123,7 +117,7 @@ static void normalize_coordinates(double* x, double* y)
 
 	//*y *= -1;
 	//	wacoms upside down? wooo
-	mouse_y = (window_h - mouse_y) + window_h ;
+	mouse_y = (window_h - mouse_y) + window_h;
 }
 
 static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -157,10 +151,10 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 			simulator_reset_sims();
 		}
 	}
-	
-	if ( current_demo )
+
+	if (current_demo)
 		current_demo->mouse_click(button, action, mods);
-	
+
 	//if
 }
 
@@ -207,7 +201,7 @@ static void key_callback(GLFWwindow* window, int key, int scan, int action, int 
 
 static void drop_callback(GLFWwindow* window, int num, const char** paths)
 {
-	if(current_demo)
+	if (current_demo)
 	{
 		current_demo->drop(num, paths);
 	}
@@ -298,7 +292,7 @@ static void update(void)
 static void draw(void)
 {
 	d_clear();
-	d_color(0,0,0,1);
+	d_color(0, 0, 0, 1);
 
 	if (test_geometry.src)
 	{
@@ -330,8 +324,8 @@ static void draw(void)
 	}
 	d_circle(display_radius);
 	d_pop();
-	d_color(0,0,0,1);
-	
+	d_color(0, 0, 0, 1);
+
 	wash_demo_text("switch demo: 1-6", 32, 32);
 }
 
@@ -370,8 +364,8 @@ int main(int argc, const char* argv[])
 
 	window_w = WIDTH;
 	window_h = HEIGHT;
-	frame_w = WIDTH;
-	frame_h = HEIGHT;
+	frame_w  = WIDTH;
+	frame_h  = HEIGHT;
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(window_w, window_h, "Hello World", NULL, NULL);
 	if (!window)
@@ -406,12 +400,11 @@ int main(int argc, const char* argv[])
 	printf("dpi: %f\n", dpi);
 
 	document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
-	
-	
+
 	d_setup(window_w, window_h);
 
 	switch_demo(2);
-	
+
 	d_color_clear(1, 1, 1, 1);
 	d_color(0, 0, 0, 1);
 
@@ -430,7 +423,7 @@ int main(int argc, const char* argv[])
 	}
 
 	glfwTerminate();
-	if ( current_demo )
+	if (current_demo)
 	{
 		current_demo->deinit();
 	}

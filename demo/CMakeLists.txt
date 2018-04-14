@@ -96,7 +96,7 @@ target_include_directories(demo_wash PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src
                            ${CMAKE_CURRENT_SOURCE_DIR}/../contrib
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include
-                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib)
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib/ftgl/src)
 
 if(${OperatingSystem} MATCHES "macos")
