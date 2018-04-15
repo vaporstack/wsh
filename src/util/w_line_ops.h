@@ -10,6 +10,11 @@
 
 #include "../geo/w_line.h"
 
+//	todo: clarify (decide) whether all of these operations
+//	work in-place or if they actually return a modified copy
+//	right now it's like 50/50.  probably should return copies
+//	across the board
+
 WLine* w_line_ops_dedupe(WLine*);
 WLine* w_line_ops_subdiv(WLine*, double);
 WLine* w_line_ops_smooth(WLine*, double);

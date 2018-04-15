@@ -25,6 +25,7 @@ static inline double w_dist2d_p( WPoint* a, WPoint* b)
 				(fabs( a->y - b->y)) * (fabs( a->y- b->y)) );
 }
 */
+
 WLine* w_line_ops_dedupe(WLine* line)
 {
 	WLine* deduped = w_line_create();
@@ -38,10 +39,25 @@ WLine* w_line_ops_dedupe(WLine* line)
 		if (p.x == px && p.y == py)
 			continue;
 
+		//	todo:  add check for first and last being the same
+		//	todo: added below, debug it?
+		if (i == line->num - 1)
+		{
+			//	this is the last point,
+			//	check it against the first
+
+			WPoint first = deduped->data[0];
+			if (first.x == p.x && first.y == p.y)
+			{
+				//	first
+				continue;
+			}
+		}
+
+		
 		w_line_add_point(deduped, p);
 		px = p.x;
 		py = p.y;
-		//	todo:  add check for first and last being the same
 	}
 
 	if (DEBUG_LINE_OPS)
@@ -54,6 +70,7 @@ WLine* w_line_ops_subdiv(WLine* line, double r)
 {
 	return NULL;
 }
+
 /*
  final float weight = 18;
  final float scale  = 1.0 / (weight + 2);
