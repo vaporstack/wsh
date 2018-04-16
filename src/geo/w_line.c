@@ -75,6 +75,7 @@ WLine* w_line_create()
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
 	l->bounds				= b;
 
+	/*
 	WTransform t;
 	t.scale.x = t.scale.y = t.scale.z = 1;
 	t.position.x = t.position.y = t.position.z = 0;
@@ -83,6 +84,7 @@ WLine* w_line_create()
 	t.anchor.x = t.anchor.y = t.anchor.z = 0;
 
 	l->transform = t;
+	*/
 	return l;
 }
 
@@ -127,72 +129,81 @@ void w_line_add_point(WLine* line, WPoint p)
 {
 	if (!line)
 	{
-		printf("Bad codepath, point was added via (drag) but line was "
-		       "never started!\n");
+		printf("Cannot add to a NULL line!\n");
 		return;
 	}
+	
 	if (!line->data)
 	{
 		line->reserved = LINE_START_SIZE;
-		line->data     = calloc(line->reserved, sizeof *line->data);
-		//(WPoint*)malloc( sizeof *line->data * line->reserved );
+		//	leaky
+		//line->data     = calloc(line->reserved, sizeof *line->data);
+		line->data     = calloc(line->reserved, sizeof(WPoint));
 	}
 
 	if (line->num == line->reserved)
 	{
 		(line->reserved) *= 2;
-		line->data =
-		    realloc(line->data, sizeof *line->data * line->reserved);
-		// printf("reallocated to %llu points\n", line->reserved);
+	//	line->data = realloc(line->data, sizeof *line->data * line->reserved);
+		line->data = realloc(line->data, sizeof (WPoint) * line->reserved);
 	}
 
 	line->data[line->num] = p;
 
 	line->num++;
 
+}
+
+
 // TODO move this somewhere higher level, line is a core data type and
 // shouldn't know about
 //	tesselation and such
-#ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
-	if (line->closed)
-	{
-		if (line->tess)
-		{
-			w_gpc_tess_destroy(line);
-		}
-
-		w_gpc_tess_create(line);
-		// w_line_ops_smooth(line->brush->stroke->tess, 8);
-		if (line->brush)
-		{
-			if (line->brush->stroke)
-			{
-				// w_line_ops_smooth(line->brush->stroke->tess,
-				// 8);
-			}
-			else
-			{
-				printf("!");
-			}
-		}
-	}
-	else
-	{
-		if (line->tess)
-		{
-			w_gpc_tess_destroy(line);
-		}
-	}
-#endif
-}
+//	update, this HAS been moved higher level
+/*
+ #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
+ 
+ if (line->closed)
+ {
+ if (line->tess)
+ {
+ w_gpc_tess_destroy(line);
+ }
+ 
+ w_gpc_tess_create(line);
+ // w_line_ops_smooth(line->brush->stroke->tess, 8);
+ if (line->brush)
+ {
+ if (line->brush->stroke)
+ {
+ // w_line_ops_smooth(line->brush->stroke->tess,
+ // 8);
+ }
+ else
+ {
+ printf("!");
+ }
+ }
+ }
+ else
+ {
+ if (line->tess)
+ {
+ w_gpc_tess_destroy(line);
+ }
+ }
+ #endif
+ */
 
 void w_line_concat(WLine* dst, WLine* src, ull start, ull end)
 {
+	
+	//while( start < end )
 	for (ull i = start; i < end; ++i)
 	{
 		w_line_add_point(dst, src->data[i]);
 	}
+	
 }
 
 WLine* w_line_copy(WLine* old)

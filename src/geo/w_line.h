@@ -34,17 +34,18 @@ typedef struct WLine
 	int		   z;
 	unsigned long long num;
 	unsigned long long reserved;
-	//void*		   tess;
 	WPoint* data;
+	//void*		   tess;
 	//	todo:
 	//	refactor to have the brush owned elsewhere, it is not a core
 	// datatype
 	//struct WBrush* brush;
 	//	todo: change stroke and fill to pointers to be able to remove the has_stroke  and has_fill params?
+	//	no,  remove stroke and fill, this is now a pure storage class.
 	WColor16   fill;
 	WColor16   stroke;
 	WRect      bounds;
-	WTransform transform;
+	//WTransform transform;
 } WLine;
 
 typedef struct WLineHnd
