@@ -276,9 +276,9 @@ cJSON* w_serialize_sequence_json_v_0_0_1(WSequence* seq)
 	cJSON* jseq    = cJSON_CreateObject();
 	cJSON* jframes = cJSON_CreateArray();
 
-	int num = seq->num_frames;
+	//int num = seq->num_frames;
 	if (DEBUG_SERIAL)
-		printf("Have %d frames to serialize.\n", num);
+		printf("Have %d frames to serialize.\n", seq->num_frames);
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
 		WObject* fr    = seq->frames[i];
@@ -556,43 +556,6 @@ int w_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 	return true;
 }
 
-/*
-int w_serial_json_unserialize_meta(cJSON* data, WDocumentMeta* meta)
-{
-
-	if ( 0 == strcmp(data->string, "info" ))
-	{
-		cJSON* v = cJSON_GetObjectItem(data, "version");
-		if ( 0 == strcmp(v->valuestring, "0_0_1")){
-			return w_serial_json_unserialize_meta_v0_0_1(data, meta);
-
-		}
-		printf("idk!?\n");
-		//return w_serial_json_unserialize_meta_v0_0_1(data, meta);
-
-	}
-	if ( 0 == strcmp(data->string, "meta"))
-	{
-
-	}
-
-
-
-	//	working version DOES NOT dictate how we act at unserialize.  Only at serialize.
-	/*
-	if (0 == strcmp(working_version, "0_0_1")) {
-		return w_serial_json_unserialize_meta_v0_0_1(data, meta);
-	} else if (0 == strcmp(working_version, "0_0_2")) {
-		return w_serial_json_unserialize_meta_v0_0_2(data, meta);
-	}
-
-
-
-	printf("No code for this version!\n");
-
-	return false;
-}
-*/
 const char* w_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
 {
 

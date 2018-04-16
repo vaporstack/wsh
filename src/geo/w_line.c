@@ -233,8 +233,8 @@ WLine* w_line_copy(WLine* old)
 		new->data[i].time     = old->data[i].time;
 	}
 
-	WLineHnd* new_hnd = w_line_hnd_create();
-	new_hnd->src      = new;
+	//WLineHnd* new_hnd = w_line_hnd_create();
+	//new_hnd->src      = new;
 
 	//if (old->brush != NULL) {
 	//	new->brush = w_brush_copy(old->brush, new_hnd);

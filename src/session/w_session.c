@@ -44,11 +44,11 @@ int w_session_rec_tool_register(WshToolRec* rec)
 	num_tools++;
 	if (tool_names == NULL)
 	{
-		tool_names = calloc(IDENTIFIER_MAX, sizeof(char));
+		tool_names = calloc(IDENTIFIER_MAX, sizeof(char*));
 	}
 	else
 	{
-		tool_names = realloc(tool_names, IDENTIFIER_MAX * sizeof(char));
+		tool_names = realloc(tool_names, IDENTIFIER_MAX * sizeof(char*));
 	}
 	tool_names[num_tools - 1] = rec->identifier;
 	printf("Registered tool: %s\n", tool_names[num_tools - 1]);

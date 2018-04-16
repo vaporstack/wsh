@@ -68,7 +68,7 @@ void w_object_add_line(WObject* obj, WLine* line)
 	obj->num_lines++;
 	if (obj->lines == NULL) {
 		// printf("malloc\n");
-		obj->lines = calloc(1, sizeof(WLine**));
+		obj->lines = calloc(1, sizeof(WLine*));
 	} else {
 		// printf("realloc %d\n", obj->num_lines);
 		obj->lines =
@@ -369,11 +369,11 @@ void w_object_normalize_time_exploded(WObject* obj)
 	//double last = -INFINITY;
 	//double delta = -INFINITY;
 	
-	unsigned long long longest = 0;
+	//unsigned long long longest = 0;
 	double longest_duration = -INFINITY;
 	double longest_start = -INFINITY;
-	double longest_end = -INFINITY;
-	double leader = -INFINITY;
+	//double longest_end = -INFINITY;
+	//double leader = -INFINITY;
 	for ( int j = 0; j < obj->num_lines; j++ )
 	{
 		WLine* l = obj->lines[j];
@@ -396,12 +396,12 @@ void w_object_normalize_time_exploded(WObject* obj)
 		{
 			longest_start = first;
 			longest_duration = delta;
-			longest = j;
+			//longest = j;
 		}
 	}
 	
 	//printf("longest for obj is %llu with %f\n", longest, longest_duration);
-	double scale = 1 / longest_duration;
+	//double scale = 1 / longest_duration;
 	//printf("timescale is %f\n", scale);
 	
 	for ( int j = 0; j < obj->num_lines; j++ )
@@ -419,7 +419,7 @@ void w_object_normalize_time_exploded(WObject* obj)
 				last = t;
 		}
 		double delta = last - first;
-		double doff =  longest_start - first;
+		//double doff =  longest_start - first;
 		
 		//printf("line %d %.02f %.02f \n", j, first, last);
 		//printf("Offseting line %d by %f\n", j, doff);
@@ -570,7 +570,7 @@ void w_object_normalize(WObject* obj)
 		}
 	}
 
-	double ar = fabs(dy / dx);
+	//double ar = fabs(dy / dx);
 
 	/*
 	 //	these are normalized coords.  THey no longer apply. Normalized
