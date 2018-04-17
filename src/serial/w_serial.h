@@ -12,7 +12,7 @@
 #include "../geo/w_document.h"
 
 WDocument* w_serial_document_unserialize(const char* path);
-int	w_serial_document_serialize(WDocument* doc);
+const char*	w_serial_document_serialize(WDocument* doc);
 
 
 #endif /* w_serial_h */

@@ -8,10 +8,13 @@
 
 #include "w_serial.h"
 
+#include <wsh/wsh_internal.h>
+
 #include "w_serial_bin.h"
 #include <wsh/wsh.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
+
 #include "w_serial_json.h"
 #endif
 
@@ -37,12 +40,14 @@ WDocument* w_serial_document_unserialize(const char* path)
 #endif
 }
 
-int w_serial_document_serialize(WDocument* doc)
+const char* w_serial_document_serialize(WDocument* doc)
 {
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 	return w_serial_json_document_serialize(doc);
+	
+	//w_write_text_to_file(data, doc-w_document)
 #else
 	printf("Bottleneck interface not yet connected to anything! doing nothing\n");
-	return -88;
+	return NULL;
 #endif
 }
