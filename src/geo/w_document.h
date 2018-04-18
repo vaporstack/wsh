@@ -45,13 +45,14 @@ typedef struct WDocumentMeta
 	const char* path;
 	const char* name;
 	const char* ref;
+	
 	double      fps;
 	const char* fps_repr;
 	const char* uuid;
 
 } WDocumentMeta;
 
-typedef struct
+typedef struct WDocument
 {
 
 	int state;
