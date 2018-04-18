@@ -11,6 +11,7 @@
 		5760D420205B2B57005A9373 /* w_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41A205B2B57005A9373 /* w_anl.c */; };
 		5760D422205B2B57005A9373 /* w_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41D205B2B57005A9373 /* w_line_ops.c */; };
 		5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D432205B3F5C005A9373 /* wsh_tool.c */; };
+		5781AFD52086B3A3003659FD /* wsh.c in Sources */ = {isa = PBXBuildFile; fileRef = 5781AFD32086B3A3003659FD /* wsh.c */; };
 		5795CBBF1E5E7B3E0094BF85 /* w_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 5795CBBB1E5E7B3E0094BF85 /* w_io.c */; };
 		57F0DD8C1E49338700949D90 /* w_document.c in Sources */ = {isa = PBXBuildFile; fileRef = 57F0DD621E49338700949D90 /* w_document.c */; };
 		57F0DD8F1E49338700949D90 /* w_line.c in Sources */ = {isa = PBXBuildFile; fileRef = 57F0DD661E49338700949D90 /* w_line.c */; };
@@ -50,6 +51,9 @@
 		5760D433205B3F5C005A9373 /* wsh_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_tool.h; sourceTree = "<group>"; };
 		576359FC1EB3A57E00FF292C /* w_serial_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_serial_json.c; sourceTree = "<group>"; };
 		576359FD1EB3A57E00FF292C /* w_serial_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_serial_json.h; sourceTree = "<group>"; };
+		5781AFD32086B3A3003659FD /* wsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wsh.c; path = ../wsh.c; sourceTree = "<group>"; };
+		5781AFD42086B3A3003659FD /* wsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh.h; path = ../wsh.h; sourceTree = "<group>"; };
+		5781AFD72086B59D003659FD /* wsh_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wsh_internal.h; path = ../wsh_internal.h; sourceTree = "<group>"; };
 		5795CBBB1E5E7B3E0094BF85 /* w_io.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = w_io.c; sourceTree = "<group>"; };
 		5795CBBC1E5E7B3E0094BF85 /* w_io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = w_io.h; sourceTree = "<group>"; };
 		57F0DCFF1E4925C000949D90 /* libwsh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwsh.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +148,9 @@
 		57F0DCF61E4925C000949D90 = {
 			isa = PBXGroup;
 			children = (
+				5781AFD32086B3A3003659FD /* wsh.c */,
+				5781AFD42086B3A3003659FD /* wsh.h */,
+				5781AFD72086B59D003659FD /* wsh_internal.h */,
 				57DFB0E91EB665EB00DDC1EF /* contrib */,
 				57F0DD5C1E49338700949D90 /* src */,
 				57F0DD001E4925C000949D90 /* Products */,
@@ -248,7 +255,7 @@
 		57F0DCF71E4925C000949D90 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = vaporstack;
 				TargetAttributes = {
 					57F0DCFE1E4925C000949D90 = {
@@ -292,6 +299,7 @@
 				57F0DD981E49338700949D90 /* w_point_a.c in Sources */,
 				57F0DD921E49338700949D90 /* w_object.c in Sources */,
 				D16AB6321E88A1E9008B9072 /* w_sequence.c in Sources */,
+				5781AFD52086B3A3003659FD /* wsh.c in Sources */,
 				5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */,
 				5795CBBF1E5E7B3E0094BF85 /* w_io.c in Sources */,
 				D16AB62A1E889FA2008B9072 /* w_serial_bin.c in Sources */,
@@ -316,6 +324,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -323,6 +332,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -370,6 +380,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -377,6 +388,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

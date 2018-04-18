@@ -8,6 +8,8 @@
 #ifndef w_serial_json_h_
 #define w_serial_json_h_
 
+#include <wsh/wsh_internal.h>
+
 #include <wsh/wsh.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON

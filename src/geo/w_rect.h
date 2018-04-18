@@ -18,6 +18,7 @@ typedef struct
 	WPoint size;
 } WRect;
 
+void w_rect_reset(WRect* bounds);
 int w_rect_within_bounds(WRect* bounds, double x, double y);
 
 #endif /* w_rect_h */
