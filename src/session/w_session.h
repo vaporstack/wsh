@@ -10,20 +10,6 @@
 
 #include "../core/wsh_tool.h"
 
-/*
-typedef struct ToolDesc
-{
-	char* tool_name;
-
-} ToolDesc;
-
-typedef struct StrokeAttr
-{
-	char* stroke_name;
-	int   stroke_type;
-} StokeAttr;
-*/
-
 int w_session_rec_frame_switch(void);
 
 int w_session_rec_tool_register(WshToolRec* rec);
