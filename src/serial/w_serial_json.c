@@ -1003,8 +1003,8 @@ WDocument* w_serial_json_document_unserialize(const char* path)
 	// 	for now, we depend on the sequence for our doc structure.  this
 	// may change.
 
-	//cJSON_Delete(root);
 	free(data);
+	//cJSON_Delete(root);
 
 	//cJSON* meta = (cJSON*) doc->meta;
 

@@ -276,6 +276,7 @@ static void draw(void)
 	
 	wash_demo_text("space - toggle modes", frame_w * .125, frame_h * (1-.125));
 	wash_demo_text("left/right - switch art", frame_w * .125, frame_h * (1-.125*2));
+	w_object_destroy(timeslice);
 }
 
 WashDemo playback =
