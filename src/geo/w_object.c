@@ -31,15 +31,19 @@ WObject* w_object_create(WObject* parent)
 
 void w_object_destroy_void(void* obj)
 {
+#ifdef DEBUG
 	printf("Destroying void pointer (from map?\n");
+#endif
 	w_object_destroy((WObject*)obj);
 }
 
 void w_object_destroy(WObject* obj)
 {
 	if (!obj) {
+#ifdef DEBUG
 
 		printf("Trying to free a null\n");
+#endif
 		return;
 	}
 	/*
@@ -61,7 +65,9 @@ void w_object_destroy(WObject* obj)
 void w_object_add_line(WObject* obj, WLine* line)
 {
 	if (obj == NULL) {
-		printf("Can't add a line to a NULL object.\n");
+#ifdef DEBUG
+	printf("Can't add a line to a NULL object.\n");
+#endif
 		return;
 	}
 
@@ -92,15 +98,19 @@ void w_object_remove_line(WObject* obj, WLine* line )
 	}
 	if ( idx == -1 )
 	{
-		printf("Error, did not find requested line.\n");
+#ifdef DEBUG
+	printf("Error, did not find requested line.\n");
+#endif
 		return;
 	}
+#ifdef DEBUG
 	printf("found line %d\n", idx);
-	
+#endif
 	for ( int i = idx; i < obj->num_lines -1; i++ )
 	{
-		printf("Shuffling %d tp %d.\n", i+1, i);
-		
+#ifdef DEBUG
+	printf("Shuffling %d tp %d.\n", i+1, i);
+#endif
 		
 	}
 	obj->num_lines--;
@@ -195,7 +205,9 @@ WObject* w_object_copy(WObject* old)
 	// cpy = (WObject*)memcpy(cpy, old, sizeof(WObject));
 
 	if (!old) {
-		printf("Error, tried to copy a NULL OBject!\n");
+#ifdef DEBUG
+printf("Error, tried to copy a NULL OBject!\n");
+#endif
 		return NULL;
 	}
 
@@ -229,7 +241,9 @@ WObject* w_object_copy_from_percentage(WObject* old, double t)
 {
 
 	if (!old) {
-		printf("Error, tried to copy a NULL OBject!\n");
+#ifdef DEBUG
+	printf("Error, tried to copy a NULL OBject!\n");
+#endif
 		return NULL;
 	}
 
@@ -268,7 +282,9 @@ void w_object_douglaspeucker(WObject* obj, double r)
 		obj->lines[i] = new;
 	}
 #ifdef WOBJECT_DEBUG
-	printf("dp: %llu -> %llu\n", old, w_object_sum_points(obj));
+#ifdef DEBUG
+printf("dp: %llu -> %llu\n", old, w_object_sum_points(obj));
+#endif
 #endif
 }
 
@@ -337,8 +353,11 @@ void w_object_normalize_time_continuous(WObject* obj)
 	
 	if ( first == INFINITY)
 	{
-		printf("no geometry? time was still INF\n");
+#ifdef DEBUG
+	printf("no geometry? time was still INF\n");
+#endif
 		return;
+
 	}
 	
 	//printf("Normalizing frame to %f->%f\n", first, last);

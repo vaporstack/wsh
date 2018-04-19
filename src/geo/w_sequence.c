@@ -23,7 +23,11 @@ void w_sequence_ensure_frame(WSequence* seq)
 	}
 	if (adj != pos) {
 		seq->current_frame_index = adj;
+#ifdef DEBUG
+
 		printf("Adjusted bad frame!\n");
+#endif
+		
 	}
 	seq->current_frame = seq->frames[seq->current_frame_index];
 
@@ -56,7 +60,10 @@ static void _check_realloc(WSequence* seq)
 		for (int i = seq->current_frame_index; i < seq->reserved; ++i) {
 			seq->frames[i] = NULL;
 		}
-		printf("Frame realloc! %d\n", seq->reserved);
+#ifdef DEBUG
+printf("Frame realloc! %d\n", seq->reserved);
+#endif
+		
 	}
 }
 
@@ -151,18 +158,26 @@ void w_sequence_frame_create(WSequence* seq, int pos)
 		// printf("creating frame at %d\n", pos);
 
 		assert(false);
-		printf("IMPLEMENT THIS!\n");
+#ifdef DEBUG
+	printf("IMPLEMENT THIS!\n");
+
+#endif
+		
 	}
 }
 
 void w_sequence_frame_set(WSequence* seq, int ind)
 {
 	if (!seq) {
-		printf("I can't do that dave\n");
+#ifdef DEBUG
+printf("I can't do that dave\n");
+#endif
 		return;
 	}
 	if (ind >= seq->num_frames) {
-		printf("I _really_ can't do that dave\n");
+#ifdef DEBUG
+printf("I _really_ can't do that dave\n");
+#endif
 		return;
 	}
 
@@ -186,9 +201,9 @@ void w_sequence_frame_add(WSequence* seq)
 		seq->current_frame_index++;
 
 	seq->frames[seq->current_frame_index] = fr;
-	printf("added frame %d (%d)\n", seq->current_frame_index,
-	       seq->num_frames);
-
+#ifdef DEBUG
+printf("added frame %d (%d)\n", seq->current_frame_index, seq->num_frames);
+#endif
 	// seq->current_frame_index = cfi;
 	seq->current_frame = seq->frames[seq->current_frame_index];
 	
@@ -204,9 +219,10 @@ void w_sequence_frame_duplicate(WSequence* seq)
 	int pos = seq->current_frame_index;
 
 	seq->num_frames++;
+#ifdef DEBUG
 
 	printf("duplicate frame at %d\n", pos);
-
+#endif
 	_check_realloc(seq);
 
 	WObject* orig = seq->frames[pos];
@@ -232,8 +248,10 @@ void w_sequence_frame_insert(WSequence* seq)
 	int pos = seq->current_frame_index;
 
 	seq->num_frames++;
+#ifdef DEBUG
 
 	printf("insert frame at %d\n", pos);
+#endif
 	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->num_frames);
 
 	// move everything after n up
@@ -255,7 +273,9 @@ void w_sequence_frame_delete(WSequence* seq)
 
 	int num = seq->num_frames;
 	if (num <= 1) {
-		printf("Can't delete last frame :O\n");
+#ifdef DEBUG
+	printf("Can't delete last frame :O\n");
+#endif
 		return;
 	}
 	WObject* fr = seq->frames[pos];
@@ -289,7 +309,9 @@ void w_sequence_frame_next(WSequence* seq)
 		return;
 
 	if (seq->num_frames == 0) {
-		printf("can't do next frame, no frames!\n");
+#ifdef DEBUG
+	printf("can't do next frame, no frames!\n");
+#endif
 		return;
 	}
 	seq->current_frame_index++;
@@ -303,7 +325,9 @@ void w_sequence_frame_prev(WSequence* seq)
 		return;
 
 	if (seq->num_frames == 0) {
-		printf("can't do next frame, no frames!\n");
+#ifdef DEBUG
+	printf("can't do next frame, no frames!\n");
+#endif
 		return;
 	}
 
@@ -342,7 +366,10 @@ void w_sequence_normalize_time_exploded(WSequence* seq)
 void w_sequence_calc_bounds(WSequence* seq)
 {
 	if (!seq) {
+#ifdef DEBUG
+
 		printf("tried to calc bounds for a null sequence.\n");
+#endif
 		return;
 	}
 	
@@ -383,7 +410,9 @@ void w_sequence_calc_bounds(WSequence* seq)
 void w_sequence_normalize(WSequence* seq)
 {
 	if (!seq) {
-		printf("tried to normalize a null sequence.\n");
+#ifdef DEBUG
+	printf("tried to normalize a null sequence.\n");
+#endif
 		return;
 	}
 	for (int i = 0; i < seq->num_frames; ++i) {

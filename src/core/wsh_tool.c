@@ -43,12 +43,19 @@ WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 
 	if (r->attack)
 	{
+#ifdef DEBUG
+
 		printf("A: %f\n", *r->attack);
+#endif
 	}
 
 	if (r->decay)
 	{
+#ifdef DEBUG
+
 		printf("D: %f\n", *r->decay);
+#endif
+		
 	}
 
 	//	todo: fill out the rest of these fields in the diff

@@ -128,7 +128,9 @@ void w_line_add_point(WLine* line, WPoint p)
 {
 	if (!line)
 	{
+#ifdef DEBUG
 		printf("Cannot add to a NULL line!\n");
+#endif
 		return;
 	}
 	
@@ -210,12 +212,17 @@ WLine* w_line_copy(WLine* old)
 
 	if (old == NULL)
 	{
+#ifdef DEBUG
+
 		printf("tried to copy a null line.\n");
+#endif
 		return NULL;
 	}
 	else if (old->data == NULL)
 	{
-		printf("Tried to copy a line with no data!\n");
+#ifdef DEBUG
+	printf("Tried to copy a line with no data!\n");
+#endif
 		return NULL;
 	}
 
@@ -258,12 +265,16 @@ WLine* w_line_copy_percentage(WLine* old, double v)
 {
 	if (old == NULL)
 	{
-		printf("tried to copy a null line.\n");
+#ifdef DEBUG
+	printf("tried to copy a null line.\n");
+#endif
 		return NULL;
 	}
 	else if (old->data == NULL)
 	{
-		printf("Tried to copy a line with no data!\n");
+#ifdef DEBUG
+	printf("Tried to copy a line with no data!\n");
+#endif
 		return NULL;
 	}
 
@@ -323,8 +334,10 @@ void w_line_destroy(WLine* line)
 {
 	if (!line)
 	{
-		printf("I refuse to destroy something that is already "
+#ifdef DEBUG
+	printf("I refuse to destroy something that is already "
 		       "destroyed lol\n");
+#endif
 		return;
 	}
 
@@ -405,11 +418,13 @@ void w_line_normalize_time(WLine* l)
 {
 	if (!l)
 	{
-		printf("Tried to normalize time for a NULL line.\n");
+#ifdef DEBUG
+	printf("Tried to normalize time for a NULL line.\n");
+#endif
 		return;
 	}
 	double first = l->data[0].time;
-	printf("First time is %f\n", first);
+	//printf("First time is %f\n", first);
 	for (int i = 0; i < l->num; i++)
 	{
 		l->data[i].time -= first;
