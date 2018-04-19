@@ -10,7 +10,11 @@
 #define w_includes_h
 
 #include <math.h>
+
+#ifdef DEBUG
 #include <stdio.h>
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 

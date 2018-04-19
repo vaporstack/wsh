@@ -19,7 +19,6 @@
 //#include "../util/w_gpc.h"
 //#include "../util/w_line_ops.h"
 #include <math.h>
-#include <stdio.h>
 #include <string.h>
 
 WLineHnd* w_line_hnd_create(void)

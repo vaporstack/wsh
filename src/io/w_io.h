@@ -9,7 +9,6 @@
 #ifndef w_io_h
 #define w_io_h
 
-#include <stdio.h>
 
 void*       w_read_file_as_bin(const char* path, long* len);
 const char* w_read_file_as_text(const char*);

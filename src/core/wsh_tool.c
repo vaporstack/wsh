@@ -10,7 +10,10 @@
 
 #include <stdlib.h>
 #define NUM_FIELDS 4
+
+#ifdef DEBUG
 #include <stdio.h>
+#endif
 
 WshToolRecDelta* wsh_tool_rec_delta_create(void)
 {

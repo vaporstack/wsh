@@ -41,7 +41,6 @@ typedef struct WTransform
 	WVec3d scale;
 	double opacity;
 } WTransform;
-//#include <stdio.h>
 
 void w_transform_reset(WTransform* t);
 void w_transform_apply(WTransform* t);

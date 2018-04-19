@@ -9,9 +9,11 @@
 #ifndef wsh_h_
 #define wsh_h_
 
-#include <stdio.h>
+
+
 #include <stdlib.h>
 
+#include <stdio.h>
 #define WSH_VERSION_MAJOR 0
 #define WSH_VERSION_MINOR 0
 #define WSH_VERSION_PATCH 2

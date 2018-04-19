@@ -10,7 +10,6 @@
 #include "../geo/w_document.h"
 #include <errno.h>
 #include <stdbool.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -30,14 +29,18 @@ int w_session_rec_tool_register(WshToolRec* rec)
 {
 	if (strlen(rec->identifier) > IDENTIFIER_MAX)
 	{
+#ifdef DEBUG
 		printf("Identifier too long!\n");
+#endif
 		return false;
 	}
 	for (int i = 0; i < num_tools; i++)
 	{
 		if (0 == strcmp(rec->identifier, tool_names[i]))
 		{
+#ifdef DEBUG
 			printf("Already have this tool!\n");
+#endif
 			return false;
 		}
 	}
@@ -51,7 +54,9 @@ int w_session_rec_tool_register(WshToolRec* rec)
 		tool_names = realloc(tool_names, IDENTIFIER_MAX * sizeof(char*));
 	}
 	tool_names[num_tools - 1] = rec->identifier;
-	printf("Registered tool: %s\n", tool_names[num_tools - 1]);
+#ifdef DEBUG
+printf("Registered tool: %s\n", tool_names[num_tools - 1]);
+#endif
 	return true;
 }
 

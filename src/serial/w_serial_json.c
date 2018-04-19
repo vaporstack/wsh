@@ -12,6 +12,7 @@
 #include <cjson/cJSON.h>
 #include <string.h>
 
+#include <stdio.h>
 /*
 #define REGISTER(ns, id, type)                                          \
 inline Inst* type##Activate() { return new type(); }                 \
