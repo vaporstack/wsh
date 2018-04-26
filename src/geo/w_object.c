@@ -413,7 +413,7 @@ void w_object_normalize_time_exploded(WObject* obj)
 		//printf("linedelta %f\n", delta);
 		if( delta > longest_duration)
 		{
-			longest_start = first;
+			//longest_start = first;
 			longest_duration = delta;
 			//longest = j;
 		}
