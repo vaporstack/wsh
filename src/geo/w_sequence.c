@@ -201,9 +201,11 @@ void w_sequence_frame_add(WSequence* seq)
 		seq->current_frame_index++;
 
 	seq->frames[seq->current_frame_index] = fr;
+	
 #ifdef DEBUG
-printf("added frame %d (%d)\n", seq->current_frame_index, seq->num_frames);
+//printf("added frame %d (%d)\n", seq->current_frame_index, seq->num_frames);
 #endif
+
 	// seq->current_frame_index = cfi;
 	seq->current_frame = seq->frames[seq->current_frame_index];
 	

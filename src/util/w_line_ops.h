@@ -22,6 +22,7 @@ WLine* w_line_ops_simplify(WLine*, double);
 WLine* w_line_ops_douglaspeucker(WLine*, double);
 double w_line_ops_sum(WLine*);
 
-bool w_line_intersects_rect(WLine* line, WRect* rect);
+bool w_line_ops_rect_intersects(WLine* line, WRect* rect);
+bool w_line_ops_rect_contains(WLine* line, WRect* rect);
 
 #endif

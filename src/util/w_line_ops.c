@@ -51,7 +51,6 @@ WLine* w_line_ops_dedupe(WLine* line)
 			}
 		}
 
-		
 		w_line_add_point(deduped, p);
 		px = p.x;
 		py = p.y;
@@ -268,7 +267,18 @@ double w_line_ops_sum(WLine* line)
 	return r;
 }
 
-bool w_line_intersects_rect(WLine* line, WRect* rect)
+bool w_line_ops_rect_contains(WLine* line, WRect* rect)
+{
+	for (int i = 0; i < line->num; i++)
+	{
+		WPoint p = line->data[i];
+		if (! w_rect_within_bounds(rect, p.x, p.y))
+			return false;
+	}
+	return true;
+}
+
+bool w_line_ops_rect_intersects(WLine* line, WRect* rect)
 {
 	for (int i = 0; i < line->num; ++i)
 	{
