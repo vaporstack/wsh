@@ -67,5 +67,7 @@ void w_sequence_normalize(WSequence* seq);;
 
 void w_sequence_move(WSequence* seq, double dx, double dy);
 void w_sequence_scale(WSequence* seq, double modx, double mody);
+void w_sequence_center(WSequence* seq);
+void w_sequence_set_closed(WSequence* seq, bool val);
 
 #endif

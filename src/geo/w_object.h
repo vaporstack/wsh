@@ -67,6 +67,7 @@ void     w_object_douglaspeucker(WObject*, double r);
 void	w_object_scale(WObject* obj, double modx, double mody);
 void w_object_move(WObject* obj, double dx, double dy);
 void w_object_calc_bounds(WObject*);
+void w_object_set_closed(WObject* obj, bool val);
 
 /*
 void		w_object_frame_next(WObject*);

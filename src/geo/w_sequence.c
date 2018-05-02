@@ -364,6 +364,15 @@ void w_sequence_normalize_time_exploded(WSequence* seq)
 }
 
 #define SWAP(T, a, b) do { T tmp = a; a = b; b = tmp; } while (0)
+static void _calc_subobjects(WSequence* seq )
+{
+	for (int i = 0; i < seq->num_frames; ++i) {
+		WObject* o = seq->frames[i];
+		w_object_calc_bounds(o);
+	}
+
+	
+}
 
 void w_sequence_calc_bounds(WSequence* seq)
 {
@@ -417,18 +426,22 @@ void w_sequence_normalize(WSequence* seq)
 #endif
 		return;
 	}
-	for (int i = 0; i < seq->num_frames; ++i) {
-		WObject* o = seq->frames[i];
-		w_object_calc_bounds(o);
-	}
-
+	
+	_calc_subobjects(seq);
+	
 	double minx, miny, maxx, maxy;
 	
 	minx = miny = INFINITY;
 	maxx = maxy = -INFINITY;
 
 	for (int i = 0; i < seq->num_frames; ++i) {
+	
 		WObject* fr = seq->frames[i];
+		
+		//	you have no geo, you don't get to vote!
+		if ( fr->num_lines == 0 )
+			continue;
+		
 		double   x1 = fr->bounds.pos.x;
 		double   y1 = fr->bounds.pos.y;
 		double   x2 = fr->bounds.pos.x + fr->bounds.size.x;
@@ -470,11 +483,8 @@ void w_sequence_normalize(WSequence* seq)
 		fr->transform.scale.y = seq->transform.scale.y;
 	}
 	
-	//	todo: sort this out.  calling calcbounds twice
-	for (int i = 0; i < seq->num_frames; ++i) {
-		WObject* o = seq->frames[i];
-		w_object_calc_bounds(o);
-	}
+	_calc_subobjects(seq);
+
 	
 }
 
@@ -497,3 +507,29 @@ void w_sequence_scale(WSequence* seq, double modx, double mody)
 }
 
 
+void w_sequence_center(WSequence* seq)
+{
+
+	//	todo: collapse this into a single call
+	
+	//double dx = seq->bounds.pos.x + (seq->bounds.size.x * .5);
+	//double dy = seq->bounds.pos.y + (seq->bounds.size.y * .5);
+	//printf("Centering to %f %f\n", dx, dy );
+	for ( unsigned int i = 0 ;i < seq->num_frames; i++ )
+	{
+		WObject* frame = seq->frames[i];
+		w_object_move(frame, -seq->bounds.pos.x, -seq->bounds.pos.y);
+		w_object_move(frame, -seq->bounds.size.x * .5, -seq->bounds.size.y * .5);
+	}
+	
+}
+
+void w_sequence_set_closed(WSequence* seq, bool val)
+{
+	for ( unsigned int i = 0 ;i < seq->num_frames; i++ )
+	{
+		WObject* frame = seq->frames[i];
+		w_object_set_closed(frame, val);
+	}
+	
+}

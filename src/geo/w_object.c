@@ -626,6 +626,7 @@ void w_object_calc_bounds(WObject* obj)
 	int num     = obj->num_lines;
 	int total   = 0;
 
+	
 	for (int i = 0; i < num; ++i) {
 		WLine* l = obj->lines[i];
 		w_line_calc_bounds(l);
@@ -687,4 +688,13 @@ unsigned long long w_object_sum_points(WObject* obj)
 		sum += obj->lines[i]->num;
 	}
 	return sum;
+}
+
+void w_object_set_closed(WObject* obj, bool val)
+{
+	for (int i = 0; i < obj->num_lines; i++)
+	{
+		obj->lines[i]->closed = val;
+	}
+
 }
