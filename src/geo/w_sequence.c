@@ -533,3 +533,13 @@ void w_sequence_set_closed(WSequence* seq, bool val)
 	}
 	
 }
+
+void w_sequence_transform_reset(WSequence* seq)
+{
+	for ( unsigned int i = 0 ;i < seq->num_frames; i++ )
+	{
+		WObject* frame = seq->frames[i];
+		w_transform_reset(&frame->transform);
+	}
+
+}

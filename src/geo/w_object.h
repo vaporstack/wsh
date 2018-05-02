@@ -60,14 +60,17 @@ void w_object_normalize_time_exploded(WObject* obj);
 //	all lines in the frame draw at timed to the line that took the longest to draw
 void w_object_normalize_time_exploded_accurate(WObject* obj);
 
-
+void     w_object_center(WObject* obj);
+WObject* w_object_copy(WObject* obj);
+WObject* w_object_copy_from_percentage(WObject* obj, double t);
 void     w_object_normalize(WObject* obj);
 void     w_object_simplify(WObject*, double r);
 void     w_object_douglaspeucker(WObject*, double r);
-void	w_object_scale(WObject* obj, double modx, double mody);
-void w_object_move(WObject* obj, double dx, double dy);
-void w_object_calc_bounds(WObject*);
-void w_object_set_closed(WObject* obj, bool val);
+void     w_object_scale(WObject* obj, double modx, double mody);
+void     w_object_move(WObject* obj, double dx, double dy);
+void     w_object_calc_bounds(WObject*);
+void     w_object_set_closed(WObject* obj, bool val);
+void     w_object_transform_reset(WObject* obj);
 
 /*
 void		w_object_frame_next(WObject*);

@@ -70,4 +70,6 @@ void w_sequence_scale(WSequence* seq, double modx, double mody);
 void w_sequence_center(WSequence* seq);
 void w_sequence_set_closed(WSequence* seq, bool val);
 
+void w_sequence_transform_reset(WSequence* seq);
+
 #endif
