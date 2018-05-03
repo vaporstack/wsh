@@ -358,6 +358,8 @@ WSequence* w_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	}
 
 	seq->frames = frames;
+	seq->current_frame = seq->frames[seq->current_frame_index];
+	
 	return seq;
 }
 
