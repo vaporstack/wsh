@@ -45,11 +45,15 @@ typedef struct WDocumentMeta
 	const char* path;
 	const char* name;
 	const char* ref;
-	
 	double      fps;
-	const char* fps_repr;
 	const char* uuid;
+	const char* fps_repr;
 
+	//	hints
+	bool animated;
+	
+	
+	
 } WDocumentMeta;
 
 typedef struct WDocument

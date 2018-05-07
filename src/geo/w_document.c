@@ -25,6 +25,8 @@ void w_document_meta_clear(WDocumentMeta* meta)
 	meta->events	 = NULL;
 	meta->version_string = NULL;
 	meta->version	= 0;
+	meta->animated = false;
+	
 }
 
 WDocument* w_document_create()
