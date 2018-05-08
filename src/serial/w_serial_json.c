@@ -493,6 +493,7 @@ cJSON* w_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	}
 	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
 
+
 	//	todo: add fps
 	cJSON_AddItemToObject(jmeta, "info", info);
 	//cJSON_AddItemToObject(ret, t, )
@@ -656,6 +657,7 @@ const char* w_serial_json_document_serialize(WDocument* doc)
 
 	working_version = strdup(buf);
 
+	
 	if (0 == strcmp(working_version, "0_0_1"))
 	{
 		printf("Serialize: %s\n", working_version);
