@@ -629,6 +629,11 @@ void w_object_calc_bounds(WObject* obj)
 	
 	for (int i = 0; i < num; ++i) {
 		WLine* l = obj->lines[i];
+		if ( !l )
+		{
+			printf("Something went wrong!\n");
+			continue;
+		}
 		w_line_calc_bounds(l);
 		unsigned long long np = l->num;
 

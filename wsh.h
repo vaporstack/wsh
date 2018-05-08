@@ -55,6 +55,7 @@ static inline char* wsh_get_version_string_header(void)
 #include "src/geo/w_sequence.h"
 #include "src/geo/w_transform.h"
 #include "src/util/w_math.h"
+//#include "src/util/w_util_selection.h"
 
 #include "src/core/wsh_tool.h"
 
