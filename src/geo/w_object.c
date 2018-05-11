@@ -631,7 +631,7 @@ void w_object_calc_bounds(WObject* obj)
 		WLine* l = obj->lines[i];
 		if ( !l )
 		{
-			printf("Something went wrong!\n");
+			printf("Something went wrong!a\n");
 			continue;
 		}
 		w_line_calc_bounds(l);
