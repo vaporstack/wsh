@@ -39,21 +39,17 @@ void w_object_destroy_void(void* obj)
 
 void w_object_destroy(WObject* obj)
 {
-	if (!obj) {
-#ifdef DEBUG
+	if (!obj)
+	{
 
+#ifdef DEBUG
 		printf("Trying to free a null\n");
 #endif
 		return;
 	}
-	/*
-	 for ( int i = 0; i < obj->num_frames; ++i )
-	 {
-		free(obj->frames[i]);
-	 }
-	 */
 
-	for (int i = 0; i < obj->num_lines; ++i) {
+	for (int i = 0; i < obj->num_lines; ++i)
+	{
 		WLine* l = obj->lines[i];
 
 		w_line_destroy(l);
@@ -64,59 +60,56 @@ void w_object_destroy(WObject* obj)
 
 void w_object_add_line(WObject* obj, WLine* line)
 {
-	if (obj == NULL) {
+	if (obj == NULL)
+	{
 #ifdef DEBUG
-	printf("Can't add a line to a NULL object.\n");
+		printf("Can't add a line to a NULL object.\n");
 #endif
 		return;
 	}
 
 	obj->num_lines++;
-	if (obj->lines == NULL) {
-		// printf("malloc\n");
+	if (obj->lines == NULL)
+	{
 		obj->lines = calloc(1, sizeof(WLine*));
-	} else {
-		// printf("realloc %d\n", obj->num_lines);
-		obj->lines =
-		    realloc(obj->lines, sizeof(WLine*) * obj->num_lines);
+	}
+	else
+	{
+		obj->lines = realloc(obj->lines, sizeof(WLine*) * obj->num_lines);
 	}
 
 	obj->lines[obj->num_lines - 1] = line;
 }
 
-void w_object_remove_line(WObject* obj, WLine* line )
+void w_object_remove_line(WObject* obj, WLine* line)
 {
 	int idx = -1;
-	for ( int i=0; i < obj->num_lines; i++ )
+	for (int i = 0; i < obj->num_lines; i++)
 	{
 		WLine* test = obj->lines[i];
-		if ( test == line )
+		if (test == line)
 		{
 			idx = i;
 			break;
 		}
 	}
-	if ( idx == -1 )
+	if (idx == -1)
 	{
 #ifdef DEBUG
-	printf("Error, did not find requested line.\n");
+		printf("Error, did not find requested line.\n");
 #endif
 		return;
 	}
 #ifdef DEBUG
 	printf("found line %d\n", idx);
 #endif
-	for ( int i = idx; i < obj->num_lines -1; i++ )
+	for (int i = idx; i < obj->num_lines - 1; i++)
 	{
 #ifdef DEBUG
-	printf("Shuffling %d tp %d.\n", i+1, i);
+		printf("Shuffling %d tp %d.\n", i + 1, i);
 #endif
-		
 	}
 	obj->num_lines--;
-
-	
-	
 }
 
 /*
@@ -204,9 +197,10 @@ WObject* w_object_copy(WObject* old)
 	// WObject* cpy = malloc(sizeof(WObject));
 	// cpy = (WObject*)memcpy(cpy, old, sizeof(WObject));
 
-	if (!old) {
+	if (!old)
+	{
 #ifdef DEBUG
-printf("Error, tried to copy a NULL OBject!\n");
+		printf("Error, tried to copy a NULL OBject!\n");
 #endif
 		return NULL;
 	}
@@ -227,7 +221,8 @@ printf("Error, tried to copy a NULL OBject!\n");
 	obj->lines     = NULL;
 	obj->lines     = malloc(sizeof(WLine*) * num);
 
-	for (i = 0; i < num; ++i) {
+	for (i = 0; i < num; ++i)
+	{
 		WLine* old_line = old->lines[i];
 		WLine* line     = w_line_copy(old_line);
 		obj->lines[i]   = line;
@@ -240,9 +235,10 @@ printf("Error, tried to copy a NULL OBject!\n");
 WObject* w_object_copy_from_percentage(WObject* old, double t)
 {
 
-	if (!old) {
+	if (!old)
+	{
 #ifdef DEBUG
-	printf("Error, tried to copy a NULL OBject!\n");
+		printf("Error, tried to copy a NULL OBject!\n");
 #endif
 		return NULL;
 	}
@@ -260,7 +256,8 @@ WObject* w_object_copy_from_percentage(WObject* old, double t)
 	obj->lines     = NULL;
 	obj->lines     = malloc(sizeof(WLine*) * num);
 
-	for (i = 0; i < num; ++i) {
+	for (i = 0; i < num; ++i)
+	{
 		WLine* old_line = old->lines[i];
 		WLine* line     = w_line_copy_percentage(old_line, t);
 		obj->lines[i]   = line;
@@ -275,7 +272,8 @@ void w_object_douglaspeucker(WObject* obj, double r)
 	unsigned long long old = w_object_sum_points(obj);
 #endif
 
-	for (int i = 0; i < obj->num_lines; i++) {
+	for (int i = 0; i < obj->num_lines; i++)
+	{
 		WLine* l   = obj->lines[i];
 		WLine* new = w_line_ops_douglaspeucker(l, r);
 		free(l);
@@ -283,14 +281,14 @@ void w_object_douglaspeucker(WObject* obj, double r)
 	}
 #ifdef WOBJECT_DEBUG
 #ifdef DEBUG
-printf("dp: %llu -> %llu\n", old, w_object_sum_points(obj));
+	printf("dp: %llu -> %llu\n", old, w_object_sum_points(obj));
 #endif
 #endif
 }
 
-void	w_object_scale(WObject* obj, double modx, double mody)
+void w_object_scale(WObject* obj, double modx, double mody)
 {
-	for ( unsigned long i = 0 ;i < obj->num_lines; i++ )
+	for (unsigned long i = 0; i < obj->num_lines; i++)
 	{
 		WLine* l = obj->lines[i];
 		w_line_scale(l, modx, mody);
@@ -299,13 +297,13 @@ void	w_object_scale(WObject* obj, double modx, double mody)
 
 void w_object_move(WObject* obj, double dx, double dy)
 {
-	for ( unsigned long i = 0 ;i < obj->num_lines; i++ )
+	for (unsigned long i = 0; i < obj->num_lines; i++)
 	{
 		WLine* l = obj->lines[i];
 		w_line_move(l, dx, dy);
 	}
-	
 }
+
 void w_object_center(WObject* obj)
 {
 	w_object_calc_bounds(obj);
@@ -315,9 +313,11 @@ void w_object_center(WObject* obj)
 	double cx = obj->bounds.pos.x + (dx * .5);
 	double cy = obj->bounds.pos.y + (dy * .5);
 
-	for (int i = 0; i < obj->num_lines; i++) {
+	for (int i = 0; i < obj->num_lines; i++)
+	{
 		WLine* l = obj->lines[i];
-		for (int j = 0; j < l->num; j++) {
+		for (int j = 0; j < l->num; j++)
+		{
 			l->data[j].x -= cx;
 			l->data[j].y -= cy;
 		}
@@ -326,15 +326,16 @@ void w_object_center(WObject* obj)
 
 void w_object_simplify(WObject* obj, double r)
 {
-	for (int i = 0; i < obj->num_lines; i++) {
+	for (int i = 0; i < obj->num_lines; i++)
+	{
 		WLine* l = obj->lines[i];
 		w_line_ops_simplify(l, r);
 	}
 }
 
-void	 w_object_rotate(WObject* obj, double cx, double cy, double r)
+void w_object_rotate(WObject* obj, double cx, double cy, double r)
 {
-	for ( int i = 0; i < obj->num_lines; i++ )
+	for (int i = 0; i < obj->num_lines; i++)
 	{
 		w_line_rotate(obj->lines[i], cx, cy, r);
 	}
@@ -343,37 +344,36 @@ void	 w_object_rotate(WObject* obj, double cx, double cy, double r)
 void w_object_normalize_time_continuous(WObject* obj)
 {
 	double first = INFINITY;
-	double last = -INFINITY;
-	for ( int j = 0; j < obj->num_lines; j++ )
+	double last  = -INFINITY;
+	for (int j = 0; j < obj->num_lines; j++)
 	{
 		WLine* l = obj->lines[j];
-		for ( int k = 0; k < l->num; k++)
+		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
-			double t = p->time;
-			if ( t < first )
+			double  t = p->time;
+			if (t < first)
 				first = t;
-			if ( t > last )
+			if (t > last)
 				last = t;
 		}
 	}
-	
-	if ( first == INFINITY)
+
+	if (first == INFINITY)
 	{
 #ifdef DEBUG
-	printf("no geometry? time was still INF\n");
+		printf("no geometry? time was still INF\n");
 #endif
 		return;
-
 	}
-	
+
 	//printf("Normalizing frame to %f->%f\n", first, last);
 	double delta = last - first;
 	//printf("delta %f\n", delta);
-	for ( int j = 0; j < obj->num_lines; j++ )
+	for (int j = 0; j < obj->num_lines; j++)
 	{
 		WLine* l = obj->lines[j];
-		for ( int k = 0; k < l->num; k++)
+		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
 			p->time -= first;
@@ -381,89 +381,81 @@ void w_object_normalize_time_continuous(WObject* obj)
 			//printf("%f\n", p->time);
 		}
 	}
-	
-	
-	
-	
 }
-
 
 void w_object_normalize_time_exploded(WObject* obj)
 {
-	
+
 	//double first = INFINITY;
 	//double last = -INFINITY;
 	//double delta = -INFINITY;
-	
+
 	//unsigned long long longest = 0;
 	double longest_duration = -INFINITY;
-	double longest_start = -INFINITY;
+	double longest_start    = -INFINITY;
 	//double longest_end = -INFINITY;
 	//double leader = -INFINITY;
-	for ( int j = 0; j < obj->num_lines; j++ )
+	for (int j = 0; j < obj->num_lines; j++)
 	{
 		WLine* l = obj->lines[j];
-		
 
 		double first = INFINITY;
-		double last = -INFINITY;
-		for ( int k = 0; k < l->num; k++)
+		double last  = -INFINITY;
+		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
-			double t = p->time;
-			if ( t < first )
+			double  t = p->time;
+			if (t < first)
 				first = t;
-			if ( t > last )
+			if (t > last)
 				last = t;
 		}
 		double delta = last - first;
 		//printf("linedelta %f\n", delta);
-		if( delta > longest_duration)
+		if (delta > longest_duration)
 		{
 			//longest_start = first;
 			longest_duration = delta;
 			//longest = j;
 		}
 	}
-	
+
 	//printf("longest for obj is %llu with %f\n", longest, longest_duration);
 	//double scale = 1 / longest_duration;
 	//printf("timescale is %f\n", scale);
-	
-	for ( int j = 0; j < obj->num_lines; j++ )
+
+	for (int j = 0; j < obj->num_lines; j++)
 	{
-		WLine* l = obj->lines[j];
+		WLine* l     = obj->lines[j];
 		double first = INFINITY;
-		double last = -INFINITY;
-		for ( int k = 0; k < l->num; k++)
+		double last  = -INFINITY;
+		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
-			double t = p->time;
-			if ( t < first )
+			double  t = p->time;
+			if (t < first)
 				first = t;
-			if ( t > last )
+			if (t > last)
 				last = t;
 		}
 		double delta = last - first;
 		//double doff =  longest_start - first;
-		
+
 		//printf("line %d %.02f %.02f \n", j, first, last);
 		//printf("Offseting line %d by %f\n", j, doff);
 		//printf("Scaling line %d by %f\n", j, duration);
-		for ( int k = 0; k < l->num; k++)
+		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
 			p->time -= first;
-			p->time *= 1/delta;
+			p->time *= 1 / delta;
 			//p->time -= doff;
-			
+
 			//p->time /= longest_duration;
 			//p->time *= scale;
-
 		}
 	}
-	
-	
+
 	/*
 	 //for ( int j = 0; j < obj->num_lines; j++ )
 	 //{
@@ -477,22 +469,21 @@ void w_object_normalize_time_exploded(WObject* obj)
 	 if ( t > last )
 	 last = t;
 	 }
-	 
+
 	 printf("Longest line goes from %f %f\n", first, last);
 	 double delta = last - first;
-	 
+
 	 printf("delta %f seconds\n", delta);
 	 */
 	//}
-	
-	
+
 	/*
 	 if ( first == INFINITY)
 	 {
 	 printf("no geometry? time was still INF\n");
 	 continue;
 	 }
-	 
+
 	 printf("Normalizing frame %d to %f->%f\n", i, first, last);
 	 double delta = last - first;
 	 printf("delta %f\n", delta);
@@ -523,17 +514,20 @@ void w_object_normalize(WObject* obj)
 	int num     = obj->num_lines;
 	int total   = 0;
 
-	for (int i = 0; i < num; ++i) {
+	for (int i = 0; i < num; ++i)
+	{
 		WLine* l = obj->lines[i];
 
 		unsigned long long np = l->num;
 
-		for (int j = 0; j < np; ++j) {
+		for (int j = 0; j < np; ++j)
+		{
 
 			WPoint p = l->data[j];
 			double x = p.x;
 			double y = p.y;
-			if (j == 0 && i == 0) {
+			if (j == 0 && i == 0)
+			{
 				minx = maxx = x;
 				miny = maxy = y;
 			}
@@ -577,11 +571,13 @@ void w_object_normalize(WObject* obj)
 	obj->transform.anchor.x = offx;
 	obj->transform.anchor.y = offy;
 
-	for (int i = 0; i < num; ++i) {
+	for (int i = 0; i < num; ++i)
+	{
 		WLine* l = obj->lines[i];
 
 		unsigned long long np = l->num;
-		for (unsigned long long j = 0; j < np; ++j) {
+		for (unsigned long long j = 0; j < np; ++j)
+		{
 			//	shift all geometry to the average
 			//	No, DON'T do that, average is a terrible
 			//	metric for where the center should be..tsk.
@@ -615,8 +611,6 @@ void w_object_normalize(WObject* obj)
 	obj->bounds.pos.x  = minx - (.5 * dx);
 	obj->bounds.pos.y  = miny - (.5 * dx);
 
-	
-	
 	w_object_calc_bounds(obj);
 
 	obj->normalized = true;
@@ -633,10 +627,10 @@ void w_object_calc_bounds(WObject* obj)
 	int num     = obj->num_lines;
 	int total   = 0;
 
-	
-	for (int i = 0; i < num; ++i) {
+	for (int i = 0; i < num; ++i)
+	{
 		WLine* l = obj->lines[i];
-		if ( !l )
+		if (!l)
 		{
 			printf("Something went wrong!a\n");
 			continue;
@@ -644,10 +638,11 @@ void w_object_calc_bounds(WObject* obj)
 		w_line_calc_bounds(l);
 		unsigned long long np = l->num;
 
-		for (int j = 0; j < np; ++j) {
+		for (int j = 0; j < np; ++j)
+		{
 
 			WPoint p = l->data[j];
-			
+
 			double x = p.x;
 			double y = p.y;
 			//if (j == 0 && i == 0) {
@@ -670,9 +665,9 @@ void w_object_calc_bounds(WObject* obj)
 		}
 		l->bounds.pos.x = minx;
 		l->bounds.pos.y = miny;
-		
-		double ldx = maxx - minx;
-		double ldy = maxy - miny;
+
+		double ldx       = maxx - minx;
+		double ldy       = maxy - miny;
 		l->bounds.size.x = ldx;
 		l->bounds.size.y = ldy;
 		//printf("bnd %f %f %f %f\n", minx, miny, ldx, ldy);
@@ -696,7 +691,8 @@ void w_object_calc_bounds(WObject* obj)
 unsigned long long w_object_sum_points(WObject* obj)
 {
 	unsigned long long sum = 0;
-	for (int i = 0; i < obj->num_lines; i++) {
+	for (int i = 0; i < obj->num_lines; i++)
+	{
 		sum += obj->lines[i]->num;
 	}
 	return sum;
@@ -708,5 +704,4 @@ void w_object_set_closed(WObject* obj, bool val)
 	{
 		obj->lines[i]->closed = val;
 	}
-
 }

@@ -34,21 +34,21 @@ typedef struct
 /*
  *
  */
-void w_point_zero(WPoint *);
+void w_point_zero(WPoint*);
 
 /**
  *
  *@return WPoint
  *
  */
-WPoint *w_point_create(void);
+WPoint* w_point_create(void);
 
 /**
  *
  *@return WPoint
  *
  */
-WPoint *w_point_create_2f(double, double);
+WPoint* w_point_create_2f(double, double);
 
 /**
  *
