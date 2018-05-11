@@ -43,7 +43,6 @@ if (${have_r4_environment})
 endif()
 
 
-
 if(BuildLibrary)
 	message("Adding library target.")
 	file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
@@ -112,9 +111,19 @@ set(LIBS ${LIBS} ${LibGLFW_LIBRARIES})
 
 if (FTGL_FOUND)
 	add_definitions(-DWSH_DEMO_ENABLE_FTGL)
-
 else()
 	message("Did not find FTGL.")
+endif()
+
+
+find_package(LibWCM )
+include_directories(${LibWCM_INCLUDE_DIRS})
+set(LIBS ${LIBS} ${LibGWCM_LIBRARIES})
+
+if (WCM_FOUND)
+	add_definitions(-DWSH_DEMO_ENABLE_WCM)
+else()
+	message("Did not find WCM.")
 endif()
 
 if (${build_demo})
