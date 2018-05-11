@@ -33,7 +33,10 @@ extern WashDemo simulator;
 
 #include <wsh/wsh.h>
 
+#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
+//#error hi
 #include <wcm/wcm.h>
+#endif
 
 #include "support/text.h"
 #include "wash_demo_common.h"
@@ -130,7 +133,10 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 	if (once == 0)
 	{
 		once = 1;
+#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
 		wcm_init(window_w, window_h);
+#endif
+		
 	}
 
 	if (action == 1)
@@ -375,7 +381,7 @@ int main(int argc, const char* argv[])
 	}
 
 	setup_callbacks();
-
+#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
 	wcm_set_tablet_proximity_func(my_tablet_prox);
 	wcm_set_tablet_up_func(my_tablet_up);
 	wcm_set_tablet_down_func(my_tablet_down);
@@ -383,7 +389,8 @@ int main(int argc, const char* argv[])
 	wcm_set_tablet_drag_func(my_tablet_drag);
 
 	wcm_init(window_w, window_h);
-
+#endif
+	
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 
@@ -430,7 +437,10 @@ int main(int argc, const char* argv[])
 
 	recorder_deinit();
 	wash_demo_text_deinit();
+	
+#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
 	wcm_deinit();
+#endif
 
 	return 0;
 }

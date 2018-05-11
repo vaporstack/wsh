@@ -31,6 +31,7 @@
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
 		57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FF20797AF800BCF8E8 /* libglfw.dylib */; };
+		57CE090A20A6175300243A4A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57CE090920A6175200243A4A /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57B175FF20797AF800BCF8E8 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
+		57CE090920A6175200243A4A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57CE090A20A6175300243A4A /* OpenGL.framework in Frameworks */,
 				57862B1120813A9A000DF3E0 /* libc++.tbd in Frameworks */,
 				57862B0D20813A76000DF3E0 /* libftgl.a in Frameworks */,
 				5716704F207862220005E15A /* libwcm.a in Frameworks */,
@@ -130,6 +133,7 @@
 		5711BFA9206191A500DD36E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				57CE090920A6175200243A4A /* OpenGL.framework */,
 				57862B1020813A9A000DF3E0 /* libc++.tbd */,
 			);
 			name = Frameworks;
@@ -521,6 +525,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CFLAGS = (
+					"-DWSH_DEMO_ENABLE_FTGL",
+					"-DWSH_DEMO_ENABLE_WCM",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wash-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -547,6 +555,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/../res/macos/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_CFLAGS = (
+					"-DWSH_DEMO_ENABLE_FTGL",
+					"-DWSH_DEMO_ENABLE_WCM",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wash-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
