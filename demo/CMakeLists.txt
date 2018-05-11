@@ -8,13 +8,15 @@ set(demo_wash_VERSION_MAJOR 0)
 set(demo_wash_VERSION_MINOR 0)
 set(demo_wash_VERSION_PATCH 1)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules/")
+
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(OperatingSystem "macos")
-ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+ENDIF()
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
   SET(OperatingSystem "linux")
-ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+ENDIF()
 
 IF(WIN32)
   SET(OperatingSystem "windows")
@@ -63,12 +65,13 @@ if(${OperatingSystem} MATCHES "macos")
   FIND_LIBRARY(GL_LIB OpenGL)
   LINK_DIRECTORIES(${CMAKE_BINARY_DIR}
                    ${CMAKE_BINARY_DIR}/contrib/glfw/src
-                   ${CMAKE_SOURCE_DIR}/contrib/platform/darwin
+                   ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
                    /usr/local/lib)
 
-endif(${OperatingSystem} MATCHES "macos")
+endif()
 
-add_subdirectory(contrib/wcm)
+# add_subdirectory(contrib/wcm)
+
 add_subdirectory(contrib/ftgl)
 
 find_package(OpenGL)
@@ -87,13 +90,14 @@ file(GLOB sources
           src/contrib/macos/*.m
           ${CMAKE_CURRENT_SOURCE_DIR}/../cjson/cJSON.c)
 
-message(${sources})
+# message(${sources})
 
 add_executable(demo_wash ${sources})
 
 target_include_directories(demo_wash PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src
+                           ${CMAKE_CURRENT_SOURCE_DIR}/contrib
                            ${CMAKE_CURRENT_SOURCE_DIR}/../contrib
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib/include
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../contrib
