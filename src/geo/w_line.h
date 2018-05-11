@@ -69,6 +69,9 @@ void w_line_hnd_add_point(WLineHnd*, WPoint);
 void w_line_hnd_add_point2f(WLineHnd* hnd, double x, double y);
 void w_line_calc_bounds(WLine* src);
 void w_line_move(WLine* src, double x, double y);
+void w_line_rotate(WLine* line, double cx, double cy, double r);
+
+
 void w_line_scale(WLine* src, double x, double y);
 
 void   w_line_find_mins(WLine* src, double* x, double* y);

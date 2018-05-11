@@ -332,6 +332,13 @@ void w_object_simplify(WObject* obj, double r)
 	}
 }
 
+void	 w_object_rotate(WObject* obj, double cx, double cy, double r)
+{
+	for ( int i = 0; i < obj->num_lines; i++ )
+	{
+		w_line_rotate(obj->lines[i], cx, cy, r);
+	}
+}
 
 void w_object_normalize_time_continuous(WObject* obj)
 {

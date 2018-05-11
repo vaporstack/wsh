@@ -381,6 +381,18 @@ void w_line_find_mins(WLine* line, double* o_x, double* o_y)
 	*o_y = my;
 }
 
+void w_line_rotate(WLine* line, double cx, double cy, double r)
+{
+	for (int i = 0; i < line->num; i++ )
+	{
+		WPoint* p = &line->data[i];
+		
+		w_point_rotate(p, cx, cy, r);
+	}
+	
+}
+
+
 void w_line_move(WLine* line, double x, double y)
 {
 	//printf("offset line by %f %f\n", x, y);

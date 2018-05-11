@@ -50,4 +50,11 @@ WPoint *w_point_create(void);
  */
 WPoint *w_point_create_2f(double, double);
 
+/**
+ *
+ *
+ *
+ */
+void w_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees);
+
 #endif /* w_point_h */
