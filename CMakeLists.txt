@@ -14,6 +14,10 @@ option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" ON)
 option(BuildTest "BuildTest" ON)
 
+if(${BuildTest})
+	add_subdirectory(test)
+endif()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/")
 
 if(CMAKE_BUILD_TYPE)
@@ -148,9 +152,6 @@ if (${build_doc})
 		      VERBATIM)
 endif(${build_doc})
 
-if(${BuildTest})
-	add_subdirectory(test)
-endif()
 
 target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
