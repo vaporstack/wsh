@@ -8,6 +8,8 @@
 
 #include "w_transform.h"
 
+
+
 void w_transform_reset(WTransform* t)
 {
 	t->anchor.x = t->anchor.y = t->anchor.z = 0;
@@ -17,6 +19,9 @@ void w_transform_reset(WTransform* t)
 	t->opacity			     = 1.;
 }
 
-void w_transform_apply(WTransform* t) {}
+void w_transform_apply(WTransform* t) {
+	
+	
+};
 
 void w_transform_deapply(WTransform* t) {}
