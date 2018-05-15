@@ -103,8 +103,17 @@ static void draw(void)
 	//printf("drawing line %lu\n", which);
 	WLine*   line = source->lines[which];
 	WObject* tmp  = source;
-	d_wline(line);
+	drw_wline(line);
 
+	
+	
+	drw_line(mouse_x, mouse_y, window_w * .5 * dpi, window_h * .5 * dpi);
+	
+	drw_push();
+	drw_translate(0, 32, 0);
+	
+	
+	drw_pop();
 	//unsigned long which = rand
 	//if (!document.src)
 	//	return;

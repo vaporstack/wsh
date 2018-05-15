@@ -47,6 +47,13 @@ endif()
 
 
 
+if(BuildLibrary)
+	message("Adding library target.")
+	file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
+	add_library(${project_name} STATIC ${sources})
+	# add_library(wsh SHARED ${sources})
+endif()
+
 
 
 if ( ${have_r4_environment} )
@@ -83,13 +90,6 @@ else()
 		endif()
 	endif()
 
-endif()
-
-if(BuildLibrary)
-	message("Adding library target.")
-	file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
-	add_library(${project_name} STATIC ${sources})
-	# add_library(wsh SHARED ${sources})
 endif()
 
 

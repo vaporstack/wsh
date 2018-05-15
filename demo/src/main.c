@@ -59,12 +59,25 @@ WDocumentHnd document;
 WashDemo* demos[NUM_DEMOS] = {&mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
 WashDemo* current_demo     = NULL;
 
+
+static void calculate_retina_scale(void)
+{
+	dpi = frame_w / window_w;
+	
+	printf("dpi updated? is %f\n", dpi);
+	
+	
+}
+
+
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
 	frame_w = height;
 	frame_h = width;
 
-	d_setup(frame_w, frame_w);
+	drw_setup(frame_w, frame_w);
+	
+	calculate_retina_scale();
 }
 
 static void window_pos_callback(GLFWwindow* window, int x, int y)
@@ -81,8 +94,11 @@ static void window_size_callback(GLFWwindow* window, int width, int height)
 	window_h = height;
 	window_w = width;
 
-	d_setup(window_w, window_h);
+	drw_setup(window_w, window_h);
 	reset_current_demo();
+	calculate_retina_scale();
+
+	
 }
 
 // static void draw_joysticks(void);
@@ -249,7 +265,7 @@ void my_tablet_down(double x, double y, int button, double p, double r, double t
 	normalize_coordinates(&mouse_x, &mouse_y);
 
 	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
+	recorder_recordrw_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 void my_tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
@@ -269,7 +285,7 @@ void my_tablet_drag(double x, double y, int button, double p, double r, double t
 	mouse_y = y;
 	normalize_coordinates(&mouse_x, &mouse_y);
 
-	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
+	recorder_recordrw_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 static void setup_callbacks()
@@ -297,16 +313,16 @@ static void update(void)
 
 static void draw(void)
 {
-	d_clear();
-	d_color(0, 0, 0, 1);
+	drw_clear();
+	drw_color(0, 0, 0, 1);
 
 	if (test_geometry.src)
 	{
-		d_wobject(test_geometry.src);
+		drw_wobject(test_geometry.src);
 	}
 	if (work_line.src)
 	{
-		d_wline(work_line.src);
+		drw_wline(work_line.src);
 	}
 
 	if (current_demo)
@@ -317,20 +333,20 @@ static void draw(void)
 	drw_line(0, 0, mouse_x, mouse_y);
 	drw_push();
 
-	d_translate(mouse_x, mouse_y, 0);
+	drw_translate(mouse_x, mouse_y, 0);
 
 	drw_line(0, 0, 32, 32);
 	if (mouse_down)
 	{
-		d_color(0, 0, 0, 1);
+		drw_color(0, 0, 0, 1);
 	}
 	else
 	{
-		d_color(0, 0, 0, .33333);
+		drw_color(0, 0, 0, .33333);
 	}
-	d_circle(display_radius);
-	d_pop();
-	d_color(0, 0, 0, 1);
+	drw_circle(display_radius);
+	drw_pop();
+	drw_color(0, 0, 0, 1);
 
 	wash_demo_text("switch demo: 1-6", 32, 32);
 }
@@ -398,22 +414,23 @@ int main(int argc, const char* argv[])
 	glfwGetWindowSize(window, &ww, &wh);
 	int fw, fh;
 	glfwGetFramebufferSize(window, &fw, &fh);
-
+	
+	
 	dpi = (double)fw / ww;
 
 	recorder_init();
 
-	d_set_dpiscale(dpi);
+	drw_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
 	document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
 
-	d_setup(window_w, window_h);
+	drw_setup(window_w, window_h);
 
 	switch_demo(2);
 
-	d_color_clear(1, 1, 1, 1);
-	d_color(0, 0, 0, 1);
+	drw_color_clear(1, 1, 1, 1);
+	drw_color(0, 0, 0, 1);
 
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))

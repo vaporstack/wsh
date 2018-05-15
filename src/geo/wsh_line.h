@@ -65,8 +65,8 @@ WLineHnd* wsh_line_hnd_copy(WLineHnd*);
 //	todo: ask people what the convention is here
 void wsh_line_copy_attribs(WLine* to, WLine* from);
 void wsh_line_hnd_destroy(WLineHnd*);
-void wsh_line_hnd_add_point(WLineHnd*, WPoint);
-void wsh_line_hnd_add_point2f(WLineHnd* hnd, double x, double y);
+void wsh_line_hnd_addrw_point(WLineHnd*, WPoint);
+void wsh_line_hnd_addrw_point2f(WLineHnd* hnd, double x, double y);
 void wsh_line_calc_bounds(WLine* src);
 void wsh_line_move(WLine* src, double x, double y);
 void wsh_line_rotate(WLine* line, double cx, double cy, double r);
@@ -81,8 +81,8 @@ WLine* wsh_line_copy_percentage(WLine*, double v);
 void   wsh_line_concat(WLine* dst, WLine* src, ull, ull);
 
 void   wsh_line_destroy(WLine*);
-void   wsh_line_add_point(WLine* line, WPoint p);
-void   wsh_line_add_point2f(WLine* line, double x, double y);
+void   wsh_line_addrw_point(WLine* line, WPoint p);
+void   wsh_line_addrw_point2f(WLine* line, double x, double y);
 void   wsh_line_normalize_time(WLine* l);
 WLine* wsh_line_normalize(WLine*, double* dx, double* dy);
 void   wsh_line_normalize_inplace(WLine*, double* dx, double* dy);

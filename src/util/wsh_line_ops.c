@@ -52,7 +52,7 @@ WLine* wsh_line_ops_dedupe(WLine* line)
 			}
 		}
 
-		wsh_line_add_point(deduped, p);
+		wsh_line_addrw_point(deduped, p);
 		px = p.x;
 		py = p.y;
 	}
@@ -263,7 +263,7 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 	if (!line->data)
 		return NULL;
 	WLine* cpy = wsh_line_create();
-	wsh_line_add_point(cpy, line->data[0]);
+	wsh_line_addrw_point(cpy, line->data[0]);
 	for (int i = 0; i < line->num - 1; ++i)
 	{
 		WPoint a = line->data[i];
@@ -271,10 +271,10 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 		double d = w_dist2d_p(&a, &b);
 		if (d > r)
 		{
-			wsh_line_add_point(cpy, b);
+			wsh_line_addrw_point(cpy, b);
 		}
 	}
-	wsh_line_add_point(cpy, line->data[line->num - 1]);
+	wsh_line_addrw_point(cpy, line->data[line->num - 1]);
 	if (DEBUG_LINE_OPS)
 		printf("%llu -> %llu\n", line->num, cpy->num);
 	// this is probably needlessly expensive, but hey

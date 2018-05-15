@@ -728,7 +728,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 			p.rotation =
 			    cJSON_GetArrayItem(jrotation, i)->valuedouble;
 
-		wsh_line_add_point(line, p);
+		wsh_line_addrw_point(line, p);
 	}
 
 	if (line->num > 100000000)

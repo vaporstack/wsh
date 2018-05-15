@@ -11,35 +11,35 @@
 
 #include <wsh/wsh.h>
 
-void d_color_clear(double r, double g, double b, double a);
-void d_clear(void);
-void d_setup(int width, int height);
-void d_setup_view_ortho(int w, int h);
+void drw_color_clear(double r, double g, double b, double a);
+void drw_clear(void);
+void drw_setup(int width, int height);
+void drw_setup_view_ortho(int w, int h);
 
-void d_set_dpiscale(double v);
+void drw_set_dpiscale(double v);
 
 void drw_push(void);
-void d_pop(void);
-void d_translate(double x, double y, double z);
-void d_color(double r, double g, double b, double a);
+void drw_pop(void);
+void drw_translate(double x, double y, double z);
+void drw_color(double r, double g, double b, double a);
 
 void drw_line(double ax, double ay, double bx, double by);
-void d_circle(float);
-void d_ellipse(float, float);
-void d_poly(WLine*);
+void drw_circle(float);
+void drw_ellipse(float, float);
+void drw_poly(WLine*);
 
 //	wash primitives
-void d_verts(WLine*);
-void d_wobject_verts(WObject* obj);
-void d_wline_fill(WLine* line);
-void d_wline(WLine* line);
-void d_wline_strokeonly(WLine* line);
-void d_wobject(WObject*);
-void d_wobject_strokeonly_notransform(WObject*);
-void d_wobject_strokeonly(WObject*);
-void d_wobject_notransform(WObject*);
-void d_wobject_e(WObject*);
+void drw_verts(WLine*);
+void drw_wobject_verts(WObject* obj);
+void drw_wline_fill(WLine* line);
+void drw_wline(WLine* line);
+void drw_wline_strokeonly(WLine* line);
+void drw_wobject(WObject*);
+void drw_wobject_strokeonly_notransform(WObject*);
+void drw_wobject_strokeonly(WObject*);
+void drw_wobject_notransform(WObject*);
+void drw_wobject_e(WObject*);
 
-void d_rect(float, float, float, float);
+void drw_rect(float, float, float, float);
 
 #endif /* primitives_h */

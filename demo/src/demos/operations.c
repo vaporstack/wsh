@@ -50,7 +50,7 @@ static void mouse_move(double x, double y)
 {
 }
 
-static void wipe_canvas_and_scale(void)
+static void wipe_canvas_andrw_scale(void)
 {
 	WObject* art = recorder_get_art();
 	if (subject)
@@ -74,7 +74,7 @@ static void mouse_button(int button, int action, int mods)
 	else
 	{
 		printf("mup!\n");
-		wipe_canvas_and_scale();
+		wipe_canvas_andrw_scale();
 	}
 }
 
@@ -101,7 +101,7 @@ static void draw(void)
 		d = 1;
 	//double v = d * 128;
 	printf("%f\n", d);
-	d_color(0, .25, 0, 1);
+	drw_color(0, .25, 0, 1);
 	if (!subject)
 		return;
 
@@ -109,21 +109,21 @@ static void draw(void)
 	if (!first)
 		return;
 
-	d_wline(first);
-	d_verts(first);
+	drw_wline(first);
+	drw_verts(first);
 	drw_push();
 	//WLine* mod = wsh_line_copy(first);
 
 	WLine* mod = wsh_line_ops_douglaspeucker(first, d);
 
-	d_color(.5, 0, 0, 1);
-	d_translate(0, 32, 0);
-	d_verts(mod);
-	d_wline(mod);
+	drw_color(.5, 0, 0, 1);
+	drw_translate(0, 32, 0);
+	drw_verts(mod);
+	drw_wline(mod);
 	wsh_line_destroy(mod);
-	d_pop();
+	drw_pop();
 
-	//d_wobject(subject);
+	//drw_wobject(subject);
 }
 
 static void drop(int num, const char** paths)

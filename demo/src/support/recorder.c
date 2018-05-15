@@ -50,10 +50,10 @@ void recorder_record_manual_point(WPoint p)
 		return;
 	}
 
-	wsh_line_add_point(src, p);
+	wsh_line_addrw_point(src, p);
 }
 
-void recorder_record_point(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+void recorder_recordrw_point(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 
 	WLine* src = sanity_check();
@@ -68,7 +68,7 @@ void recorder_record_point(double x, double y, int button, double p, double r, d
 	point->tilt_y   = ty;
 
 	printf(".");
-	wsh_line_add_point(src, *point);
+	wsh_line_addrw_point(src, *point);
 }
 
 void recorder_endrw_line(double x, double y)

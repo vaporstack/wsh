@@ -63,9 +63,9 @@ void text_ftgl_draw_text(const char* text, double x, double y)
 	}
 
 	drw_push();
-	d_translate(x, y, 0);
+	drw_translate(x, y, 0);
 	ftglRenderFont(font, text, FTGL_RENDER_ALL);
-	d_pop();
+	drw_pop();
 }
 
 #endif

@@ -133,15 +133,15 @@ static void draw(void)
 	WRect bounds = seq->bounds;
 	WRect bnd    = bounds;
 
-	d_color(1, 0, 0, 1);
-	d_rect(bnd.pos.x, bnd.pos.y, bnd.pos.x + bnd.size.x, bnd.pos.y + bnd.size.y);
+	drw_color(1, 0, 0, 1);
+	drw_rect(bnd.pos.x, bnd.pos.y, bnd.pos.x + bnd.size.x, bnd.pos.y + bnd.size.y);
 
 	WObject* frame = seq->frames[which];
 
 	if (!frame)
 		return;
 
-	d_wobject(frame);
+	drw_wobject(frame);
 }
 
 WashDemo animation =

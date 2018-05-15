@@ -138,9 +138,9 @@ static void update(void)
 static void draw_cursor(void)
 {
 	drw_push();
-	d_translate(mouse_x, mouse_y, 0);
+	drw_translate(mouse_x, mouse_y, 0);
 	drw_line(0, 0, 33, -33);
-	d_pop();
+	drw_pop();
 }
 
 static void draw(void)
