@@ -12,6 +12,10 @@
 
 #include "../util/wsh_line_ops.h"
 
+#ifdef DEBUG
+#include <stdio.h>
+#endif
+
 WObject* wsh_object_create(WObject* parent)
 {
 	WObject* obj;
@@ -77,10 +81,14 @@ void wsh_object_addrw_line(WObject* obj, WLine* line)
 	{
 		obj->lines = realloc(obj->lines, sizeof(WLine*) * obj->num_lines);
 	}
+
+#ifdef DEBUG
 	if (line->num > 4096)
 	{
 		printf("abnormally huge line, what happened\n");
 	}
+#endif
+
 	obj->lines[obj->num_lines - 1] = line;
 }
 
@@ -635,7 +643,9 @@ void wsh_object_calc_bounds(WObject* obj)
 		WLine* l = obj->lines[i];
 		if (!l)
 		{
+#ifdef DEBUG
 			printf("Something went wrong!a\n");
+#endif
 			continue;
 		}
 		wsh_line_calc_bounds(l);

@@ -11,6 +11,8 @@
 		5760D420205B2B57005A9373 /* wsh_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41A205B2B57005A9373 /* wsh_anl.c */; };
 		5760D422205B2B57005A9373 /* wsh_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41D205B2B57005A9373 /* wsh_line_ops.c */; };
 		5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D432205B3F5C005A9373 /* wsh_tool.c */; };
+		5767768E20AB52BE00479DE5 /* wsh_sequence_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 5767768C20AB52BE00479DE5 /* wsh_sequence_ops.c */; };
+		5767768F20AB52BE00479DE5 /* wsh_ops_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 5767768D20AB52BE00479DE5 /* wsh_ops_point.c */; };
 		5781AFD52086B3A3003659FD /* wsh.c in Sources */ = {isa = PBXBuildFile; fileRef = 5781AFD32086B3A3003659FD /* wsh.c */; };
 		5795CBBF1E5E7B3E0094BF85 /* wsh_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 5795CBBB1E5E7B3E0094BF85 /* wsh_io.c */; };
 		57F0DD8C1E49338700949D90 /* wsh_document.c in Sources */ = {isa = PBXBuildFile; fileRef = 57F0DD621E49338700949D90 /* wsh_document.c */; };
@@ -51,6 +53,10 @@
 		5760D433205B3F5C005A9373 /* wsh_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_tool.h; sourceTree = "<group>"; };
 		576359FC1EB3A57E00FF292C /* wsh_serial_json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_serial_json.c; sourceTree = "<group>"; };
 		576359FD1EB3A57E00FF292C /* wsh_serial_json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_serial_json.h; sourceTree = "<group>"; };
+		5767768A20AB52BE00479DE5 /* wsh_sequence_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_sequence_ops.h; sourceTree = "<group>"; };
+		5767768B20AB52BE00479DE5 /* wsh_ops_point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_ops_point.h; sourceTree = "<group>"; };
+		5767768C20AB52BE00479DE5 /* wsh_sequence_ops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_sequence_ops.c; sourceTree = "<group>"; };
+		5767768D20AB52BE00479DE5 /* wsh_ops_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_ops_point.c; sourceTree = "<group>"; };
 		5781AFD32086B3A3003659FD /* wsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wsh.c; path = ../wsh.c; sourceTree = "<group>"; };
 		5781AFD42086B3A3003659FD /* wsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh.h; path = ../wsh.h; sourceTree = "<group>"; };
 		5781AFD72086B59D003659FD /* wsh_internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wsh_internal.h; path = ../wsh_internal.h; sourceTree = "<group>"; };
@@ -112,6 +118,10 @@
 			isa = PBXGroup;
 			children = (
 				5711BFC92061B5BB00DD36E0 /* wsh_math.h */,
+				5767768D20AB52BE00479DE5 /* wsh_ops_point.c */,
+				5767768B20AB52BE00479DE5 /* wsh_ops_point.h */,
+				5767768C20AB52BE00479DE5 /* wsh_sequence_ops.c */,
+				5767768A20AB52BE00479DE5 /* wsh_sequence_ops.h */,
 				5760D418205B2B57005A9373 /* wsh_line_ops.h */,
 				5760D41D205B2B57005A9373 /* wsh_line_ops.c */,
 				5760D41E205B2B57005A9373 /* wsh_anl.h */,
@@ -294,10 +304,12 @@
 				D1225D331EF32B56001CBC22 /* wsh_layer.c in Sources */,
 				D16AB62C1E889FA2008B9072 /* wsh_serial_json.c in Sources */,
 				5760D420205B2B57005A9373 /* wsh_anl.c in Sources */,
+				5767768E20AB52BE00479DE5 /* wsh_sequence_ops.c in Sources */,
 				57F0DD9E1E49338700949D90 /* wsh_transform.c in Sources */,
 				D16AB6271E889FA2008B9072 /* wsh_serial.c in Sources */,
 				57F0DD981E49338700949D90 /* wsh_point_a.c in Sources */,
 				57F0DD921E49338700949D90 /* wsh_object.c in Sources */,
+				5767768F20AB52BE00479DE5 /* wsh_ops_point.c in Sources */,
 				D16AB6321E88A1E9008B9072 /* wsh_sequence.c in Sources */,
 				5781AFD52086B3A3003659FD /* wsh.c in Sources */,
 				5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */,

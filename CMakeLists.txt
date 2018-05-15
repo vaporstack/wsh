@@ -43,8 +43,8 @@ endif ()
 if (${have_r4_environment})
 	message("Enabling the JSON backend?")
 	add_definitions(-DWSH_ENABLE_SERIAL_BACKEND_JSON)
-
 endif()
+
 
 
 if(BuildLibrary)
@@ -151,7 +151,8 @@ if (${BuildDoc})
 endif()
 
 
-target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
+target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..
+	${CMAKE_CURRENT_SOURCE_DIR}/contrib)
 
 
 #target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)
