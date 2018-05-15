@@ -1,17 +1,18 @@
 
-//  w_line_ops.c
-//  w_line_ops
+//  wsh_line_ops.c
+//  wsh_line_ops
 //
 //  Created by Andrew Macfarlane on 21/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_line_ops.h"
+#include "wsh_line_ops.h"
 
 //#include <gl-matrix/gl-matrix.h>
 #include <math.h>
 #include <wsh/wsh.h>
 
-#include "../util/w_math.h"
+#include "../util/wsh_math.h"
+#include "wsh_ops_point.h"
 
 #define DEBUG_LINE_OPS true
 
@@ -23,9 +24,9 @@ static inline double w_dist2d_p( WPoint* a, WPoint* b)
 }
 */
 
-WLine* w_line_ops_dedupe(WLine* line)
+WLine* wsh_line_ops_dedupe(WLine* line)
 {
-	WLine* deduped = w_line_create();
+	WLine* deduped = wsh_line_create();
 
 	double px, py;
 	px = py = -INFINITY;
@@ -51,7 +52,7 @@ WLine* w_line_ops_dedupe(WLine* line)
 			}
 		}
 
-		w_line_add_point(deduped, p);
+		wsh_line_add_point(deduped, p);
 		px = p.x;
 		py = p.y;
 	}
@@ -62,8 +63,34 @@ WLine* w_line_ops_dedupe(WLine* line)
 	return deduped;
 }
 
-WLine* w_line_ops_subdiv(WLine* line, double r)
+WLine* wsh_line_ops_subdiv(WLine* line, double r)
 {
+	return NULL;
+}
+
+double wsh_line_ops_length(WLine* line)
+{
+	if (line->num < 2)
+	{
+		printf("Can't length this line, not enough points!\n");
+		return -1;
+	}
+	WPoint a = line->data[0];
+	WPoint b = line->data[line->num - 1];
+
+	return wsh_ops_point_dist(a, b);
+}
+
+WLine* wsh_line_ops_straighten(WLine* line)
+{
+	if (line->num < 2)
+	{
+		printf("Can't straighten this line, not enough points!\n");
+		return NULL;
+	}
+	WPoint a = line->data[0];
+	WPoint b = line->data[line->num - 1];
+
 	return NULL;
 }
 
@@ -84,7 +111,7 @@ WLine* w_line_ops_subdiv(WLine* line, double r)
  }
  */
 
-WLine* w_line_ops_smooth(WLine* line, double r)
+WLine* wsh_line_ops_smooth(WLine* line, double r)
 {
 	double		 weight		 = 18;
 	double		 scale		 = 1.0 / (weight + 2);
@@ -147,7 +174,7 @@ static double perp_dist(WPoint p, WPoint a, WPoint b)
 	return sqrt(dx * dx + dy * dy);
 }
 
-WLine* w_line_ops_douglaspeucker(WLine* line, double e)
+WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 {
 	double		   dmax  = 0;
 	int		   index = 0;
@@ -169,34 +196,34 @@ WLine* w_line_ops_douglaspeucker(WLine* line, double e)
 
 		// printf("dm: %f\n", dmax);
 
-		WLine* res = w_line_create();
-		WLine* s1  = w_line_create();
-		w_line_concat(s1, line, 0, index);
-		WLine* l1 = w_line_ops_douglaspeucker(s1, e);
+		WLine* res = wsh_line_create();
+		WLine* s1  = wsh_line_create();
+		wsh_line_concat(s1, line, 0, index);
+		WLine* l1 = wsh_line_ops_douglaspeucker(s1, e);
 
-		WLine* s2 = w_line_create();
-		w_line_concat(s2, line, index, num);
-		WLine* l2 = w_line_ops_douglaspeucker(s2, e);
+		WLine* s2 = wsh_line_create();
+		wsh_line_concat(s2, line, index, num);
+		WLine* l2 = wsh_line_ops_douglaspeucker(s2, e);
 
-		w_line_concat(res, l1, 0, l1->num - 1);
-		w_line_concat(res, l2, 0, l2->num);
+		wsh_line_concat(res, l1, 0, l1->num - 1);
+		wsh_line_concat(res, l2, 0, l2->num);
 
 		free(s1);
 		free(s2);
 		free(l1);
 		free(l2);
-		w_line_copy_attribs(res, line);
-		// w_line_concat(res, line, index, num);
-		// WLine* l1 = //w_line_ops_douglaspeucker(<#WLine *line#>, e)
+		wsh_line_copy_attribs(res, line);
+		// wsh_line_concat(res, line, index, num);
+		// WLine* l1 = //wsh_line_ops_douglaspeucker(<#WLine *line#>, e)
 		// if ( DEBUG_LINE_OPS )
 		//	printf("%llu -> %llu\n", line->num, res->num );
 		return res;
 	}
 	else
 	{
-		WLine* res = w_line_create();
-		w_line_concat(res, line, 0, num);
-		w_line_copy_attribs(res, line);
+		WLine* res = wsh_line_create();
+		wsh_line_concat(res, line, 0, num);
+		wsh_line_copy_attribs(res, line);
 		return res;
 	}
 }
@@ -230,13 +257,13 @@ WLine* w_line_ops_douglaspeucker(WLine* line, double e)
 
  */
 
-WLine* w_line_ops_simplify(WLine* line, double r)
+WLine* wsh_line_ops_simplify(WLine* line, double r)
 {
 
 	if (!line->data)
 		return NULL;
-	WLine* cpy = w_line_create();
-	w_line_add_point(cpy, line->data[0]);
+	WLine* cpy = wsh_line_create();
+	wsh_line_add_point(cpy, line->data[0]);
 	for (int i = 0; i < line->num - 1; ++i)
 	{
 		WPoint a = line->data[i];
@@ -244,17 +271,17 @@ WLine* w_line_ops_simplify(WLine* line, double r)
 		double d = w_dist2d_p(&a, &b);
 		if (d > r)
 		{
-			w_line_add_point(cpy, b);
+			wsh_line_add_point(cpy, b);
 		}
 	}
-	w_line_add_point(cpy, line->data[line->num - 1]);
+	wsh_line_add_point(cpy, line->data[line->num - 1]);
 	if (DEBUG_LINE_OPS)
 		printf("%llu -> %llu\n", line->num, cpy->num);
 	// this is probably needlessly expensive, but hey
 	return cpy;
 }
 
-double w_line_ops_sum(WLine* line)
+double wsh_line_ops_sum(WLine* line)
 {
 	double r = 0;
 	for (int i = 0; i < line->num - 1; ++i)
@@ -267,23 +294,23 @@ double w_line_ops_sum(WLine* line)
 	return r;
 }
 
-bool w_line_ops_rect_contains(WLine* line, WRect* rect)
+bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
 {
 	for (int i = 0; i < line->num; i++)
 	{
 		WPoint p = line->data[i];
-		if (! w_rect_within_bounds(rect, p.x, p.y))
+		if (!wsh_rect_within_bounds(rect, p.x, p.y))
 			return false;
 	}
 	return true;
 }
 
-bool w_line_ops_rect_intersects(WLine* line, WRect* rect)
+bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 {
 	for (int i = 0; i < line->num; ++i)
 	{
 		WPoint p = line->data[i];
-		if (w_rect_within_bounds(rect, p.x, p.y))
+		if (wsh_rect_within_bounds(rect, p.x, p.y))
 			return true;
 	}
 	return false;
