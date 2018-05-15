@@ -61,7 +61,7 @@ WLine* w_line_create()
 	WLine* l = calloc(1, sizeof(WLine));
 
 	l->data       = 0;
-	l->num	= 0;
+	l->num		= 0;
 	l->reserved   = 0;
 	l->has_fill   = false;
 	l->has_stroke = false;

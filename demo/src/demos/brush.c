@@ -10,7 +10,7 @@
 #define brush_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 
 #define DEMO_NAME "brush"
 #define DEMO_NICENAME "Procedural Brush"

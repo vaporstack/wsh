@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "578BCE352061782C00672199"
-               BuildableName = "wash-demo.app"
-               BlueprintName = "wash-demo"
-               ReferencedContainer = "container:wash-demo.xcodeproj">
+               BuildableName = "wsh-demo.app"
+               BlueprintName = "wsh-demo"
+               ReferencedContainer = "container:wsh-demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "578BCE352061782C00672199"
-            BuildableName = "wash-demo.app"
-            BlueprintName = "wash-demo"
-            ReferencedContainer = "container:wash-demo.xcodeproj">
+            BuildableName = "wsh-demo.app"
+            BlueprintName = "wsh-demo"
+            ReferencedContainer = "container:wsh-demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "578BCE352061782C00672199"
-            BuildableName = "wash-demo.app"
-            BlueprintName = "wash-demo"
-            ReferencedContainer = "container:wash-demo.xcodeproj">
+            BuildableName = "wsh-demo.app"
+            BlueprintName = "wsh-demo"
+            ReferencedContainer = "container:wsh-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "578BCE352061782C00672199"
-            BuildableName = "wash-demo.app"
-            BlueprintName = "wash-demo"
-            ReferencedContainer = "container:wash-demo.xcodeproj">
+            BuildableName = "wsh-demo.app"
+            BlueprintName = "wsh-demo"
+            ReferencedContainer = "container:wsh-demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

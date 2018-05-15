@@ -10,7 +10,7 @@
 #define animation_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"

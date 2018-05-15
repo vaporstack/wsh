@@ -10,7 +10,7 @@
 #define session_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 #include <wsh/wsh.h>
 
 

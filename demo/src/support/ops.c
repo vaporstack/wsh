@@ -7,7 +7,7 @@
 //
 
 #include "ops.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 #include <stdlib.h>
 
 

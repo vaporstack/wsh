@@ -6,7 +6,7 @@
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#include "wash_demo_common.h"
+#include "wsh_demo_common.h"
 
 #ifdef WSH_DEMO_ENABLE_SDL
 #include "text_sdl.h"
@@ -25,6 +25,7 @@ extern WashDemo playback;
 extern WashDemo operations;
 extern WashDemo session;
 extern WashDemo simulator;
+extern WashDemo mapping;
 //#include "demos/animation.c"
 //#include "demos/resize.h"
 //#include "demos/brush.h"
@@ -39,7 +40,7 @@ extern WashDemo simulator;
 #endif
 
 #include "support/text.h"
-#include "wash_demo_common.h"
+#include "wsh_demo_common.h"
 #define WIDTH 512
 #define HEIGHT 512
 
@@ -54,8 +55,8 @@ GLFWwindow*   window	 = NULL;
 
 WDocumentHnd document;
 
-#define NUM_DEMOS 7
-WashDemo* demos[NUM_DEMOS] = {&animation, &playback, &operations, &brush, &resize, &simulator, &session};
+#define NUM_DEMOS 8
+WashDemo* demos[NUM_DEMOS] = {&mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
 WashDemo* current_demo     = NULL;
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)

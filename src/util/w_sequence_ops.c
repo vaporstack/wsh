@@ -8,7 +8,7 @@
 
 #include "w_sequence_ops.h"
 
-//	collapse a sequence to a single frame
+//	collapse (copy)  sequence to a single frame
 
 WObject* w_sequence_collapse(WSequence* seq )
 {
@@ -25,10 +25,18 @@ WObject* w_sequence_collapse(WSequence* seq )
 	for ( int i =0; i < seq->num_frames; i++ )
 	{
 		WObject* fr = seq->frames[i];
+		printf("Collapsing %d lines.\n", fr->num_lines );
+		
 		for ( int j = 0 ; j < fr->num_lines; j++ )
 		{
 			WLine* nl = fr->lines[j];
-			w_object_add_line(fr, nl);
+			if ( !nl )
+				continue;
+			if ( !nl->data)
+				continue;
+			
+			printf("Line %d : %llu\n", j, nl->num);
+			w_object_add_line(res, w_line_copy(nl));
 			total++;
 		}
 	}

@@ -703,7 +703,11 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	cJSON* jtilty    = cJSON_GetObjectItem(data, "tilt_y");
 
 	int num = cJSON_GetArraySize(jx);
-
+	if ( num > 100000)
+	{
+		printf("Something went WAY wrong (probably)\n");
+		
+	}
 	if (DEBUG_SERIAL)
 		printf("%d points.\n", num);
 
@@ -730,6 +734,10 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		w_line_add_point(line, p);
 	}
 
+	if ( line->num > 100000000)
+	{
+		printf("what the FACK\n");
+	}
 	cJSON* stroke = cJSON_GetObjectItem(data, "stroke");
 	if (stroke != NULL)
 	{

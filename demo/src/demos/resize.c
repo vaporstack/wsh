@@ -10,7 +10,7 @@
 #define resize_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 
 #define DEMO_NAME "resize"
 #define DEMO_NICENAME "Resize"

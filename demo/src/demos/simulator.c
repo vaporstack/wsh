@@ -10,7 +10,7 @@
 #define simulator_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 
 #define DEMO_NAME "simulator"
 #define DEMO_NICENAME "Simulator"

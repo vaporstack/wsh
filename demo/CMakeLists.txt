@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.0)
 
 message("configuring demo.")
 
-project(demo_wash)
+project(wsh_demo)
 
-set(demo_wash_VERSION_MAJOR 0)
-set(demo_wash_VERSION_MINOR 0)
-set(demo_wash_VERSION_PATCH 1)
+set(wsh_demo_VERSION_MAJOR 0)
+set(wsh_demo_VERSION_MINOR 0)
+set(wsh_demo_VERSION_PATCH 1)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules/")
 
@@ -92,9 +92,9 @@ file(GLOB sources
 
 # message(${sources})
 
-add_executable(demo_wash ${sources})
+add_executable(wsh_demo ${sources})
 
-target_include_directories(demo_wash PUBLIC
+target_include_directories(wsh_demo PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../../libs
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/src
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib
@@ -104,7 +104,7 @@ target_include_directories(demo_wash PUBLIC
                            ${CMAKE_CURRENT_SOURCE_DIR}/contrib/ftgl/src)
 
 if(${OperatingSystem} MATCHES "macos")
-  target_link_libraries(demo_wash
+  target_link_libraries(wsh_demo
                         LINK_PUBLIC
                         wsh
                         glfw
@@ -119,6 +119,6 @@ if(${OperatingSystem} MATCHES "macos")
 endif(${OperatingSystem} MATCHES "macos")
 
 if(${OperatingSystem} MATCHES "linux")
-  target_link_libraries(demo_wash LINK_PUBLIC wsh glfw wcm GL m X11 Xi)
+  target_link_libraries(wsh_demo LINK_PUBLIC wsh glfw wcm GL m X11 Xi)
 
 endif()

@@ -10,7 +10,7 @@
 #define playback_c
 
 #include "../demo.h"
-#include "../wash_demo_common.h"
+#include "../wsh_demo_common.h"
 
 #define DEMO_NAME "playback"
 #define DEMO_NICENAME "Playback"

@@ -24,7 +24,8 @@
 		5721DC822076D6B000C141BB /* playback.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7B2076D6B000C141BB /* playback.c */; };
 		5721DC832076D6B000C141BB /* operations.c in Sources */ = {isa = PBXBuildFile; fileRef = 5721DC7C2076D6B000C141BB /* operations.c */; };
 		5760EC83206178D200430B0A /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760EC82206178D200430B0A /* main.c */; };
-		5760ECF02063343300430B0A /* wash_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wash_demo_common.c */; };
+		5760ECF02063343300430B0A /* wsh_demo_common.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760ECEF2063343300430B0A /* wsh_demo_common.c */; };
+		5778576A20AA6B9E00218129 /* mapping.c in Sources */ = {isa = PBXBuildFile; fileRef = 5778576920AA6B9E00218129 /* mapping.c */; };
 		57862B0D20813A76000DF3E0 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57862B0C20813A76000DF3E0 /* libftgl.a */; };
 		57862B0F20813A8A000DF3E0 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57862B0E20813A89000DF3E0 /* libfreetype.a */; };
 		57862B1120813A9A000DF3E0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 57862B1020813A9A000DF3E0 /* libc++.tbd */; };
@@ -89,15 +90,17 @@
 		5721DC7B2076D6B000C141BB /* playback.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = playback.c; sourceTree = "<group>"; };
 		5721DC7C2076D6B000C141BB /* operations.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = operations.c; sourceTree = "<group>"; };
 		5760EC82206178D200430B0A /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = ../demo/src/main.c; sourceTree = "<group>"; };
-		5760ECEE2063343300430B0A /* wash_demo_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wash_demo_common.h; path = ../demo/src/wash_demo_common.h; sourceTree = "<group>"; };
-		5760ECEF2063343300430B0A /* wash_demo_common.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wash_demo_common.c; path = ../demo/src/wash_demo_common.c; sourceTree = "<group>"; };
+		5760ECEE2063343300430B0A /* wsh_demo_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = wsh_demo_common.h; path = ../demo/src/wsh_demo_common.h; sourceTree = "<group>"; };
+		5760ECEF2063343300430B0A /* wsh_demo_common.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wsh_demo_common.c; path = ../demo/src/wsh_demo_common.c; sourceTree = "<group>"; };
+		5778576920AA6B9E00218129 /* mapping.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mapping.c; sourceTree = "<group>"; };
+		5778577720AA702000218129 /* wsh_demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = wsh_demo.entitlements; sourceTree = "<group>"; };
 		57862B0C20813A76000DF3E0 /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../../../../../../../usr/local/lib/libftgl.a; sourceTree = "<group>"; };
 		57862B0E20813A89000DF3E0 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../../../../../../../usr/local/lib/libfreetype.a; sourceTree = "<group>"; };
 		57862B1020813A9A000DF3E0 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		578BCE362061782C00672199 /* wash-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wash-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		578BCE362061782C00672199 /* wsh-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "wsh-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		578BCE4F2061788000672199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		578BCE522061788000672199 /* wash_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wash_demo.entitlements; sourceTree = "<group>"; };
+		578BCE522061788000672199 /* wsh_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wsh_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		57B175FF20797AF800BCF8E8 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 				5721DC782076D6B000C141BB /* resize.c */,
 				5721DC792076D6B000C141BB /* brush.c */,
 				5721DC7A2076D6B000C141BB /* animation.c */,
+				5778576920AA6B9E00218129 /* mapping.c */,
 				5721DC7B2076D6B000C141BB /* playback.c */,
 				5721DC7C2076D6B000C141BB /* operations.c */,
 			);
@@ -207,7 +211,7 @@
 		578BCE372061782C00672199 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				578BCE362061782C00672199 /* wash-demo.app */,
+				578BCE362061782C00672199 /* wsh-demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,8 +221,8 @@
 			children = (
 				57BE55F22076EEFE003E3408 /* demo.h */,
 				5760EC82206178D200430B0A /* main.c */,
-				5760ECEE2063343300430B0A /* wash_demo_common.h */,
-				5760ECEF2063343300430B0A /* wash_demo_common.c */,
+				5760ECEE2063343300430B0A /* wsh_demo_common.h */,
+				5760ECEF2063343300430B0A /* wsh_demo_common.c */,
 				5721DC752076D6B000C141BB /* demos */,
 				5712C747207ABA5C004B2CC3 /* support */,
 			);
@@ -231,7 +235,8 @@
 			children = (
 				578BCE4F2061788000672199 /* Assets.xcassets */,
 				578BCE502061788000672199 /* MainMenu.xib */,
-				578BCE522061788000672199 /* wash_demo.entitlements */,
+				578BCE522061788000672199 /* wsh_demo.entitlements */,
+				5778577720AA702000218129 /* wsh_demo.entitlements */,
 				578BCE542061788000672199 /* Info.plist */,
 			);
 			name = macos;
@@ -251,9 +256,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		578BCE352061782C00672199 /* wash-demo */ = {
+		578BCE352061782C00672199 /* wsh-demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 578BCE472061782C00672199 /* Build configuration list for PBXNativeTarget "wash-demo" */;
+			buildConfigurationList = 578BCE472061782C00672199 /* Build configuration list for PBXNativeTarget "wsh-demo" */;
 			buildPhases = (
 				578BCE322061782C00672199 /* Sources */,
 				578BCE332061782C00672199 /* Frameworks */,
@@ -265,9 +270,9 @@
 				5716704E2078621D0005E15A /* PBXTargetDependency */,
 				5711BFA8206191A100DD36E0 /* PBXTargetDependency */,
 			);
-			name = "wash-demo";
-			productName = "wash-demo";
-			productReference = 578BCE362061782C00672199 /* wash-demo.app */;
+			name = "wsh-demo";
+			productName = "wsh-demo";
+			productReference = 578BCE362061782C00672199 /* wsh-demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -285,7 +290,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 578BCE312061782C00672199 /* Build configuration list for PBXProject "wash-demo" */;
+			buildConfigurationList = 578BCE312061782C00672199 /* Build configuration list for PBXProject "wsh-demo" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -308,7 +313,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				578BCE352061782C00672199 /* wash-demo */,
+				578BCE352061782C00672199 /* wsh-demo */,
 			);
 		};
 /* End PBXProject section */
@@ -353,7 +358,8 @@
 				5712C757207ABA5C004B2CC3 /* primitives.c in Sources */,
 				5721DC7F2076D6B000C141BB /* resize.c in Sources */,
 				5721DC7D2076D6B000C141BB /* simulator.c in Sources */,
-				5760ECF02063343300430B0A /* wash_demo_common.c in Sources */,
+				5760ECF02063343300430B0A /* wsh_demo_common.c in Sources */,
+				5778576A20AA6B9E00218129 /* mapping.c in Sources */,
 				5721DC802076D6B000C141BB /* brush.c in Sources */,
 				5721DC812076D6B000C141BB /* animation.c in Sources */,
 				5721DC822076D6B000C141BB /* playback.c in Sources */,
@@ -509,7 +515,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_ENTITLEMENTS = ../res/macos/wash_demo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ../res/macos/wsh_demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W7MSG2FEA9;
@@ -529,7 +535,7 @@
 					"-DWSH_DEMO_ENABLE_FTGL",
 					"-DWSH_DEMO_ENABLE_WCM",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wash-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wsh-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -539,7 +545,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = NO;
-				CODE_SIGN_ENTITLEMENTS = ../res/macos/wash_demo.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ../res/macos/wsh_demo.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = W7MSG2FEA9;
@@ -559,7 +565,7 @@
 					"-DWSH_DEMO_ENABLE_FTGL",
 					"-DWSH_DEMO_ENABLE_WCM",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wash-demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "space.ruminant.wsh-demo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -567,7 +573,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		578BCE312061782C00672199 /* Build configuration list for PBXProject "wash-demo" */ = {
+		578BCE312061782C00672199 /* Build configuration list for PBXProject "wsh-demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				578BCE452061782C00672199 /* Debug */,
@@ -576,7 +582,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		578BCE472061782C00672199 /* Build configuration list for PBXNativeTarget "wash-demo" */ = {
+		578BCE472061782C00672199 /* Build configuration list for PBXNativeTarget "wsh-demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				578BCE482061782C00672199 /* Debug */,

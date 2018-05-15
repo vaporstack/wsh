@@ -1,21 +1,19 @@
 //
-//  operations.c
+//  mapping.c
 //  wash-demo
 //
-//  Created by vs on 4/5/18.
+//  Created by vs on 5/14/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
-
-#ifndef operations_c
-#define operations_c
 
 #include "../demo.h"
 #include "../wsh_demo_common.h"
 
-#define DEMO_NAME "operations"
-#define DEMO_NICENAME "Line Ops"
 
-WObject* subject = NULL;
+#define DEMO_NAME "mapping"
+#define DEMO_NICENAME "Stroke Mapping"
+
+static WObject* source = NULL;
 
 static void tablet_prox(int v)
 {
@@ -50,41 +48,49 @@ static void mouse_move(double x, double y)
 {
 }
 
-static void wipe_canvas_and_scale(void)
-{
-	WObject* art = recorder_get_art();
-	if ( subject )
-	{
-		w_object_destroy(subject);
-	}
-	subject = w_object_copy(art);
-	recorder_clear();
-	
-	scale_object_to_window(subject);
-}
-
 static void mouse_button(int button, int action, int mods)
 {
-	if( button > 0 )
-		return;
-	if ( action )
-	{
-		printf("mdown\n");
-		
-	}else{
-		printf("mup!\n");
-		wipe_canvas_and_scale();
-	}
 }
 
 static void init(void)
 {
+	WDocumentHnd document;
+	
+	
+	document.src = w_serial_document_unserialize("data/wash/hatching.wash");
+		if (!document.src)
+		{
+			printf("Load failed!\n");
+			return;
+		}
+	
+	source = w_sequence_collapse(document.src->sequence.src);
+	
+	w_document_destroy(document.src);
 	printf("%s init!\n", DEMO_NICENAME);
+	//WObject* tmp = source;
+	
+	//scale_sequence_to_window(source);
+
+	
+	//w_sequence_normalize(document.src->sequence.src);
+	//WSequence* seq = document.src->sequence.src;
+
 }
 
 static void deinit(void)
 {
-	printf("%s deinit!\n", DEMO_NICENAME);
+	if ( source )
+	{
+		w_object_destroy(source);
+		source = NULL;
+	}
+	
+}
+
+static void drop(int num, const char** paths)
+{
+	
 }
 
 static void update(void)
@@ -93,45 +99,32 @@ static void update(void)
 
 static void draw(void)
 {
-	static double d = 1;
+	//WLine* random = NULL;
 	
-	d = d * .99;
-	if ( d == 0 )
-		d = 1;
-	//double v = d * 128;
-	printf("%f\n", d);
-	d_color(0,.25,0,1);
-	if (!subject)
-		return;
+	unsigned long num = source->num_lines;
+	double v = (double)rand() / RAND_MAX;
+
+	unsigned which = v * num;
 	
-	WLine* first = subject->lines[0];
-	if ( !first )
-		return;
+	//printf("drawing line %lu\n", which);
+	WLine* line = source->lines[which];
+	WObject* tmp = source;
+	d_wline(line);
 	
-	d_wline(first);
-	d_verts(first);
-	d_push();
-	//WLine* mod = w_line_copy(first);
+	//unsigned long which = rand
+	//if (!document.src)
+	//	return;
 	
-	WLine* mod = w_line_ops_douglaspeucker(first, d);
+	static double t = 0;
+	t += .05;
 	
-	d_color(.5,0,0,1);
-	d_translate(0,32,0);
-	d_verts(mod);
-	d_wline(mod);
-	w_line_destroy(mod);
-	d_pop();
 	
-	//d_wobject(subject);
+	
+	//	do stuff
 }
 
-static void drop(int num, const char** paths)
+WashDemo mapping =
 {
-	
-}
-
-WashDemo operations =
-    {
 	DEMO_NICENAME,
 	1.0 / 60.0,
 	init,
@@ -145,7 +138,6 @@ WashDemo operations =
 	tablet_down,
 	tablet_motion,
 	tablet_drag,
-	    drop
-    };
+	drop
+};
 
-#endif

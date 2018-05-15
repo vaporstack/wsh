@@ -77,7 +77,11 @@ void w_object_add_line(WObject* obj, WLine* line)
 	{
 		obj->lines = realloc(obj->lines, sizeof(WLine*) * obj->num_lines);
 	}
-
+	if( line->num > 4096 )
+	{
+		printf("abnormally huge line, what happened\n");
+		
+	}
 	obj->lines[obj->num_lines - 1] = line;
 }
 
