@@ -102,7 +102,10 @@ if (GLFW_FOUND)
 	endif()
 
 else()
+
 	message("Did not find GLFW, cannot build demo.")
+	set(BuildDemo NO)
+
 endif()
 
 
