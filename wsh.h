@@ -9,8 +9,6 @@
 #ifndef wsh_h_
 #define wsh_h_
 
-
-
 #include <stdlib.h>
 
 #include <stdio.h>
@@ -48,29 +46,28 @@ static inline char* wsh_get_version_string_header(void)
 
 //#error W_LIBWASH_SVER(WASH_V_MAJOR, WASH_V_MINOR, WASH_V_PATCH)
 
-#include "src/geo/w_document.h"
-#include "src/geo/w_line.h"
-#include "src/geo/w_object.h"
-#include "src/geo/w_point.h"
-#include "src/geo/w_sequence.h"
-#include "src/geo/w_transform.h"
-#include "src/util/w_math.h"
+#include "src/geo/wsh_document.h"
+#include "src/geo/wsh_line.h"
+#include "src/geo/wsh_object.h"
+#include "src/geo/wsh_point.h"
+#include "src/geo/wsh_sequence.h"
+#include "src/geo/wsh_transform.h"
+#include "src/util/wsh_math.h"
 //#include "src/util/w_util_selection.h"
 
 #include "src/core/wsh_tool.h"
 
-#include "src/io/w_io.h"
-#include "src/serial/w_serial.h"
-#include "src/session/w_session.h"
-#include "src/util/w_line_ops.h"
-#include "src/util/w_sequence_ops.h"
+#include "src/io/wsh_io.h"
+#include "src/serial/wsh_serial.h"
+#include "src/session/wsh_session.h"
+#include "src/util/wsh_line_ops.h"
+#include "src/util/wsh_sequence_ops.h"
 
 //	hack / todo
 //#define R4_PRESENT
 
-
 //#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-//	#include "wsrc/serial/w_serial_json.h"
+//	#include "wsrc/serial/wsh_serial_json.h"
 //#endif
 
-#endif /* w_includes_h */
+#endif /* wsh_includes_h */

@@ -58,7 +58,7 @@ static void init(void)
 {
 	if (!document.src)
 	{
-		document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
+		document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
 		if (!document.src)
 		{
 			printf("Load failed!\n");
@@ -68,17 +68,17 @@ static void init(void)
 
 	printf("%s init!\n", DEMO_NICENAME);
 
-	//w_sequence_normalize(document.src->sequence.src);
+	//wsh_sequence_normalize(document.src->sequence.src);
 	WSequence* seq = document.src->sequence.src;
 	scale_sequence_to_window(seq);
 	//	moved this code into the above function
 	/*
-	w_sequence_calc_bounds(seq);
+	wsh_sequence_calc_bounds(seq);
 	WRect bounds = seq->bounds;
 
 	//shift it so lower left corner is 0,0
-	w_sequence_move(seq, bounds.size.x * 1, bounds.size.y * 1);
-	w_sequence_calc_bounds(seq);
+	wsh_sequence_move(seq, bounds.size.x * 1, bounds.size.y * 1);
+	wsh_sequence_calc_bounds(seq);
 
 
 
@@ -90,11 +90,11 @@ static void init(void)
 
 	printf("Should scale sequence to %f %f\n", dx, dy);
 	//	dx here twice on purpose for testing
-	w_sequence_scale(seq, dx, dx);
+	wsh_sequence_scale(seq, dx, dx);
 
-	 w_sequence_calc_bounds(seq);
-	w_sequence_move(seq, window_w* -.5, window_h * -.5);
-	w_sequence_calc_bounds(seq);
+	 wsh_sequence_calc_bounds(seq);
+	wsh_sequence_move(seq, window_w* -.5, window_h * -.5);
+	wsh_sequence_calc_bounds(seq);
 	*/
 }
 
@@ -103,14 +103,13 @@ static void deinit(void)
 	printf("%s deinit!\n", DEMO_NICENAME);
 	if (document.src)
 	{
-		w_document_destroy(document.src);
+		wsh_document_destroy(document.src);
 		document.src = NULL;
 	}
 }
 
 static void drop(int num, const char** paths)
 {
-	
 }
 
 static void update(void)
@@ -160,7 +159,6 @@ WashDemo animation =
 	tablet_down,
 	tablet_motion,
 	tablet_drag,
-	    drop
-    };
+	drop};
 
 #endif

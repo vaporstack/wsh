@@ -1,24 +1,24 @@
 //
-//  w_serial.c
+//  wsh_serial.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/3/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#include "w_serial.h"
+#include "wsh_serial.h"
 
 #include <wsh/wsh_internal.h>
 
-#include "w_serial_bin.h"
+#include "wsh_serial_bin.h"
 #include <wsh/wsh.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
-#include "w_serial_json.h"
+#include "wsh_serial_json.h"
 #endif
 
-#include "../io/w_io.h"
+#include "../io/wsh_io.h"
 
 #include <string.h>
 
@@ -30,22 +30,22 @@ char* w_create_version_string()
 	return buf;
 }
 
-WDocument* w_serial_document_unserialize(const char* path)
+WDocument* wsh_serial_document_unserialize(const char* path)
 {
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-	return w_serial_json_document_unserialize(path);
+	return wsh_serial_json_document_unserialize(path);
 #else
 	printf("Bottleneck interface not yet connected to anything! returning NULL\n");
 	return NULL;
 #endif
 }
 
-const char* w_serial_document_serialize(WDocument* doc)
+const char* wsh_serial_document_serialize(WDocument* doc)
 {
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-	return w_serial_json_document_serialize(doc);
-	
-	//w_write_text_to_file(data, doc-w_document)
+	return wsh_serial_json_document_serialize(doc);
+
+//w_write_text_to_file(data, doc-wsh_document)
 #else
 	printf("Bottleneck interface not yet connected to anything! doing nothing\n");
 	return NULL;

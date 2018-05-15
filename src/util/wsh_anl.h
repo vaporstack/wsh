@@ -1,14 +1,14 @@
 
-//  w_anl.c
-//  w_anl
+//  wsh_anl.c
+//  wsh_anl
 //
 //  Created by Andrew Macfarlane on 07/06/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#ifndef w_anl_h_
-#define w_anl_h_
+#ifndef wsh_anl_h_
+#define wsh_anl_h_
 
-#include "../geo/w_line.h"
+#include "../geo/wsh_line.h"
 
 typedef struct WLineAnalysis
 {
@@ -17,7 +17,7 @@ typedef struct WLineAnalysis
 
 } WLineAnalysis;
 
-WLineAnalysis* w_anl_create(WLine* l);
-void	   w_anl_destroy(WLineAnalysis* anl);
+WLineAnalysis* wsh_anl_create(WLine* l);
+void	   wsh_anl_destroy(WLineAnalysis* anl);
 
 #endif

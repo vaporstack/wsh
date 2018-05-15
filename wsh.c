@@ -1,13 +1,13 @@
 //
-//  w_includes.h
+//  wsh_includes.h
 //  wash
 //
 //  Created by Andrew Macfarlane on 12/9/16.
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#ifndef w_includes_h
-#define w_includes_h
+#ifndef wsh_includes_h
+#define wsh_includes_h
 
 #include "wsh.h"
 
@@ -32,4 +32,4 @@ void init_wash(){
     // printf("asdfasdfasdfasdfasdfasfasdf");
 };
 
-#endif /* w_includes_h */
+#endif /* wsh_includes_h */

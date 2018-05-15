@@ -1,16 +1,14 @@
 //
-//  w_transform.c
+//  wsh_transform.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/2/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#include "w_transform.h"
+#include "wsh_transform.h"
 
-
-
-void w_transform_reset(WTransform* t)
+void wsh_transform_reset(WTransform* t)
 {
 	t->anchor.x = t->anchor.y = t->anchor.z = 0;
 	t->position.x = t->position.x = t->position.z = 0;
@@ -19,9 +17,10 @@ void w_transform_reset(WTransform* t)
 	t->opacity			     = 1.;
 }
 
-void w_transform_apply(WTransform* t) {
-	
-	
+void wsh_transform_apply(WTransform* t){
+
 };
 
-void w_transform_deapply(WTransform* t) {}
+void wsh_transform_deapply(WTransform* t)
+{
+}

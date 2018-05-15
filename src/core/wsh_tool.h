@@ -9,14 +9,14 @@
 #ifndef wsh_tool_h
 #define wsh_tool_h
 
-#include "../core/w_color.h"
+#include "../core/wsh_color.h"
 
 typedef struct WshToolRec
 {
 	const char* name;
 	const char* identifier;
 	const char* desc;
-	
+
 	double attack;
 	double decay;
 	double sustain;

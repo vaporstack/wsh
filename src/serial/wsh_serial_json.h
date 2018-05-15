@@ -1,12 +1,12 @@
 
-//  w_serial_json.c
-//  w_serial_json
+//  wsh_serial_json.c
+//  wsh_serial_json
 //
 //  Created by Andrew Macfarlane on 21/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#ifndef w_serial_json_h_
-#define w_serial_json_h_
+#ifndef wsh_serial_json_h_
+#define wsh_serial_json_h_
 
 #include <wsh/wsh_internal.h>
 
@@ -16,14 +16,14 @@
 
 #include <cjson/cJSON.h>
 
-cJSON*      w_serial_json_serialize_color(WColor col);
-cJSON*      w_serial_json_serialize_color16(WColor16 col);
-WColor      w_serial_json_unserialize_color(cJSON* data);
-WColor16    w_serial_json_unserialize_color16(cJSON* data);
-WObject*    w_serial_json_unserialize_object(cJSON* data);
-WSequence*  w_serial_json_unserialize_sequence(cJSON* data);
-const char* w_serial_json_document_serialize(WDocument*);
-WDocument*  w_serial_json_document_unserialize(const char* path);
+cJSON*      wsh_serial_json_serialize_color(WColor col);
+cJSON*      wsh_serial_json_serialize_color16(WColor16 col);
+WColor      wsh_serial_json_unserialize_color(cJSON* data);
+WColor16    wsh_serial_json_unserialize_color16(cJSON* data);
+WObject*    wsh_serial_json_unserialize_object(cJSON* data);
+WSequence*  wsh_serial_json_unserialize_sequence(cJSON* data);
+const char* wsh_serial_json_document_serialize(WDocument*);
+WDocument*  wsh_serial_json_document_unserialize(const char* path);
 
 #endif
 

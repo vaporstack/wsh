@@ -1,16 +1,16 @@
 //
-//  w_document.h
+//  wsh_document.h
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/18/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#ifndef w_document_h
-#define w_document_h
+#ifndef wsh_document_h
+#define wsh_document_h
 
-#include "w_object.h"
-#include "w_sequence.h"
+#include "wsh_object.h"
+#include "wsh_sequence.h"
 
 enum
 {
@@ -51,9 +51,7 @@ typedef struct WDocumentMeta
 
 	//	hints
 	bool animated;
-	
-	
-	
+
 } WDocumentMeta;
 
 typedef struct WDocument
@@ -75,10 +73,10 @@ typedef struct WDocumentHnd
 	WDocument* src;
 } WDocumentHnd;
 
-WDocument* w_document_create(void);
-void       w_document_destroy(WDocument*);
+WDocument* wsh_document_create(void);
+void       wsh_document_destroy(WDocument*);
 
-WDocument* w_document_copy(WDocument*);
-void       w_document_meta_clear(WDocumentMeta* meta);
+WDocument* wsh_document_copy(WDocument*);
+void       wsh_document_meta_clear(WDocumentMeta* meta);
 
-#endif /* w_document_h */
+#endif /* wsh_document_h */

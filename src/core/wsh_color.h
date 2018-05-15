@@ -1,13 +1,13 @@
 //
-//  w_color.h
+//  wsh_color.h
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/2/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#ifndef w_color_h
-#define w_color_h
+#ifndef wsh_color_h
+#define wsh_color_h
 
 typedef struct
 {
@@ -51,7 +51,7 @@ typedef struct
 hsv rgb2hsv(rgb in);
 rgb hsv2rgb(hsv in);
 
-void w_color_8_clear(WColor* col);
-void w_color_16_clear(WColor16* col);
+void wsh_color_8_clear(WColor* col);
+void wsh_color_16_clear(WColor16* col);
 
-#endif /* w_color_h */
+#endif /* wsh_color_h */

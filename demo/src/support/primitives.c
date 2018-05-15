@@ -24,7 +24,7 @@ void d_color_clear(double r, double g, double b, double a)
 	glClearColor(r, g, b, a);
 }
 
-void d_line(double ax, double ay, double bx, double by)
+void drw_line(double ax, double ay, double bx, double by)
 {
 	glBegin(GL_LINES);
 	glVertex2f(ax, ay);
@@ -104,7 +104,7 @@ void d_setup(int width, int height)
 	d_setup_view_ortho(width, height);
 }
 
-void d_push()
+void drw_push()
 {
 	glPushMatrix();
 }
@@ -163,7 +163,7 @@ void d_verts(WLine* l)
 	for (i = 0; i < l->num; ++i)
 	{
 		WPoint* p = &l->data[i];
-		d_push();
+		drw_push();
 		d_translate2f(p->x, p->y);
 		double pv = p->pressure;
 		pv *= 10;
@@ -187,7 +187,6 @@ void d_wobject_verts(WObject* obj)
 	}
 }
 
-
 void d_circle(float r)
 {
 	d_ellipse(r, r);
@@ -199,12 +198,12 @@ void d_circle(float r)
 	 }
 	 circle = circle_defs[CIRCLE_PRECISION];
 	 glVertexPointer(2, GL_FLOAT, 0, circle);
-	 
+
 	 // cout << "c:" << circleArray[2] << endl;
 	 d_scale_u(r);
 	 fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION)
 	 : glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION);
-	 
+
 	 //r_ellipse(r, r);
 	 */
 }
@@ -216,48 +215,48 @@ void d_ellipse(float _x, float _y)
 	 d_circle(_x);
 	 return;
 	 }*/
-	
+
 	// glEnableClientState( GL_VERTEX_ARRAY );
-	
+
 	// glEnable(GL_BLEND);
 	// glBlendEquation(GL_FUNC_ADD);
 	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
+
 	float deg2rad = (M_PI / CIRCLE_PRECISION);
-	
+
 	const int renderLineSize = (CIRCLE_PRECISION * 2);
-	
+
 	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
 	// GLfloat circleArray[ renderLineSize ];
 	int i;
-	for (i = 0; i < renderLineSize; i += 2) {
+	for (i = 0; i < renderLineSize; i += 2)
+	{
 		float degInRad = deg2rad * (float)i;
 		float x	= cos(degInRad + M_PI * .5) * (_x);
 		float y	= sin(degInRad + M_PI * .5) * (_y);
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
-	
+
 	// cout << '+';
 	glVertexPointer(2, GL_FLOAT, 0, arr);
-	
+
 	// cout << "c:" << circleArray[2] << endl;
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION)
-	: glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION);
-	
+	     : glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION);
+
 	free(arr);
-	
+
 	// fill ?
 	// glDrawArrays(GL_TRIANGLE_FAN, 0, CIRCLE_PRECISION ):
 	// glDrawArrays(GL_LINE_LOOP, 0, CIRCLE_PRECISION );
 }
 
-
 void d_wobject(WObject* obj)
 {
-	
+
 	// d_rect_w(obj->bounds);
-	
+
 	if (!obj)
 	{
 		printf("Error, tried to render a null obj!\n");
@@ -268,17 +267,17 @@ void d_wobject(WObject* obj)
 		// printf("no lines either!?\n");
 		return;
 	}
-	
-	d_push();
+
+	drw_push();
 	//d_transform_apply(obj->transform);
 	int i;
 	for (i = 0; i < obj->num_lines; ++i)
 	{
-		
+
 		WLine* l = obj->lines[i];
 		if (!l)
 			continue;
-		
+
 		if (!l)
 		{
 			printf("ack!\n");
@@ -294,7 +293,6 @@ void d_wobject(WObject* obj)
 	d_pop();
 }
 
-
 void d_wline(WLine* l)
 {
 	if (l == NULL)
@@ -302,33 +300,33 @@ void d_wline(WLine* l)
 		printf("Tried to render a null line!\n");
 		return;
 	}
-	
+
 	//if (!color_bypass)
 	//{
-		if (l->has_stroke)
-		{
-			//WColor16 c = l->stroke;
-			//d_color(c.r, c.g, c.b, c.a * alpha_mult);
-			/// dirty hack to have color and also transparent onion
-			/// skins oops
-			//r_alpha(c.a * alpha_mult);
-		}
-		if (l->closed)
-		{
-			//d_set_fill(l->closed);
-			d_poly(l);
-			//d_pop_fill();
-		}
-		if (l->has_stroke)
-		{
-			//r_alpha_pop();
-		}
-	//}
-	//else
-	//{
-	//}
+	if (l->has_stroke)
+	{
+		//WColor16 c = l->stroke;
+		//d_color(c.r, c.g, c.b, c.a * alpha_mult);
+		/// dirty hack to have color and also transparent onion
+		/// skins oops
+		//r_alpha(c.a * alpha_mult);
+	}
+	if (l->closed)
+	{
+		//d_set_fill(l->closed);
+		d_poly(l);
+		//d_pop_fill();
+	}
+	if (l->has_stroke)
+	{
+		//r_alpha_pop();
+	}
+//}
+//else
+//{
+//}
 #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
-	
+
 	if (l->brush)
 	{
 		if (l->tess)
@@ -336,7 +334,7 @@ void d_wline(WLine* l)
 			d_gpc_tristrip(l->tess);
 			return;
 		}
-		
+
 		if (l->brush->stroke)
 		{
 			if (l->brush->stroke->tess)
@@ -345,18 +343,18 @@ void d_wline(WLine* l)
 			}
 			else
 			{
-				
+
 				d_triangle_strip(l->brush->stroke);
 			}
 		}
 		// else{
-		
+
 		//  d_poly(l->brush->stroke);
 		//}
 	}
 	else
 	{
-		
+
 		if (l->tess)
 		{
 			d_gpc_tristrip(l->tess);
@@ -370,40 +368,36 @@ void d_wline(WLine* l)
 	//d_color(0,0,0,1);
 	d_poly(l);
 #endif
-//}
+	//}
 	//  TODO color pop?
 }
-
-
 
 void d_poly(WLine* line)
 {
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
-	
+
 	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
-	
+
 	for (i = 0, j = 0; i < line->num; i++, j += 2)
 	{
 		WPoint* p = &line->data[i];
 		//  todo: REMOVE THIS HACK
-		
+
 		arr[j]     = p->x;
 		arr[j + 1] = p->y;
 	}
-	
+
 	glVertexPointer(2, GL_FLOAT, 0, arr);
-	
+
 	if (line->closed)
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
 		free(arr);
 		return;
 	}
-	
+
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
-	: glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	free(arr);
 }
-
-

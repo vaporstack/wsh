@@ -1,27 +1,27 @@
 
-//  w_serial_bin.c
-//  w_serial_bin
+//  wsh_serial_bin.c
+//  wsh_serial_bin
 //
 //  Created by Andrew Macfarlane on 21/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_serial_bin.h"
+#include "wsh_serial_bin.h"
 
 /*
-#include "w_serial.h"
+#include "wsh_serial.h"
 #include <binn/binn.h>
 #include <string.h>
 
 
-#include "../io/w_io.h"
+#include "../io/wsh_io.h"
 
-void* w_document_serialize_bin_v_1(void) { return NULL; }
+void* wsh_document_serialize_bin_v_1(void) { return NULL; }
 
-void* w_document_unserialize_bin_v_1(void) { return NULL; }
+void* wsh_document_unserialize_bin_v_1(void) { return NULL; }
 
 WSequence* w_unserialize_sequence_bin(binn* bseq)
 {
-	WSequence* seq = w_sequence_create();
+	WSequence* seq = wsh_sequence_create();
 	binn_object_get_int32(bseq, "num_frames", &seq->num_frames);
 	binn_object_get_int32(bseq, "current_frame_index",
 			      &seq->current_frame_index);
@@ -36,7 +36,7 @@ WSequence* w_unserialize_sequence_bin(binn* bseq)
 	binn_object_get_list(bframes, "frames", (void*)bframes);
 
 	for (int i = 0; i < num; ++i) {
-		w_sequence_frame_add(seq);
+		wsh_sequence_frame_add(seq);
 		WObject* fr = seq->frames[i];
 		// binn* bobj = binn_list_get_(bframes,
 		// seq->frames[i] = w_unserialize_object_bin(
@@ -47,7 +47,7 @@ WSequence* w_unserialize_sequence_bin(binn* bseq)
 }
 
 // WObject* w_unserialize_object_bin(FILE*);
-WDocument* w_document_unserialize_bin(const char* path)
+WDocument* wsh_document_unserialize_bin(const char* path)
 {
 
 	binn* obj;
@@ -74,7 +74,7 @@ WDocument* w_document_unserialize_bin(const char* path)
 
 	binn* bseq = binn_object_object(obj, "sequence");
 
-	WDocument* doc = w_document_create();
+	WDocument* doc = wsh_document_create();
 	doc->meta.uuid      = binn_object_str(info, "uuid");
 	doc->meta.version   = binn_object_str(info, "version");
 
@@ -84,9 +84,9 @@ WDocument* w_document_unserialize_bin(const char* path)
 	return doc;
 }
 
-binn* w_serialize_transform_bin(WTransform* trans) { return NULL; }
+binn* wsh_serialize_transform_bin(WTransform* trans) { return NULL; }
 
-binn* w_serialize_line_bin(WLine* l)
+binn* wsh_serialize_line_bin(WLine* l)
 {
 	binn* bobj = binn_object();
 
@@ -110,7 +110,7 @@ binn* w_serialize_line_bin(WLine* l)
 	return bobj;
 }
 
-binn* w_serialize_object_bin(WObject* obj)
+binn* wsh_serialize_object_bin(WObject* obj)
 {
 
 	binn* bobj   = binn_object();
@@ -119,21 +119,21 @@ binn* w_serialize_object_bin(WObject* obj)
 	binn_object_set_bool(bobj, "normalized", obj->normalized);
 	binn_object_set_int64(bobj, "num_lines", obj->num_lines);
 	binn_object_set_object(bobj, "transform",
-			       w_serialize_transform_bin(&obj->transform));
+			       wsh_serialize_transform_bin(&obj->transform));
 
 	unsigned long long num = obj->num_lines;
 	for (int i = 0; i < num; ++i) {
 		WLine* l  = obj->lines[i];
-		binn*  bl = w_serialize_line_bin(l);
+		binn*  bl = wsh_serialize_line_bin(l);
 		binn_list_add(blines, BINN_FAMILY_BINN, bl, i);
 		// binn_list_add(blines, )
-		// w_serialize_line_bin(l);
+		// wsh_serialize_line_bin(l);
 	}
 
 	return bobj;
 }
 
-int w_serialize_sequence_bin(binn* obj, WSequence* seq)
+int wsh_serialize_sequence_bin(binn* obj, WSequence* seq)
 {
 	binn* bseq    = binn_object();
 	binn* bframes = binn_list();
@@ -152,11 +152,11 @@ int w_serialize_sequence_bin(binn* obj, WSequence* seq)
 	for (int i = 0; i < num; ++i) {
 		WObject* fr = seq->frames[i];
 
-		binn* btrans = w_serialize_transform_bin(&seq->transform);
-		binn* bframe = w_serialize_object_bin(fr);
+		binn* btrans = wsh_serialize_transform_bin(&seq->transform);
+		binn* bframe = wsh_serialize_object_bin(fr);
 		// binn_list_add(bframes, BINN_FAMILY_BINN, bframe, num );
 		// binn_list_add(bframes, BINN_FAMILY_BINN
-		// w_serialize_object_bin(bframes, fr);
+		// wsh_serialize_object_bin(bframes, fr);
 	}
 
 	binn_object_set_object(obj, "sequence", bseq);
@@ -164,7 +164,7 @@ int w_serialize_sequence_bin(binn* obj, WSequence* seq)
 	return 0;
 }
 
-int w_document_serialize_bin(WDocument* doc, const char* path)
+int wsh_document_serialize_bin(WDocument* doc, const char* path)
 {
 
 	binn* obj;
@@ -181,7 +181,7 @@ int w_document_serialize_bin(WDocument* doc, const char* path)
 	binn_object_set_str(info, "uuid", uuid);
 	binn_object_set_object(obj, "info", info);
 
-	// w_serialize_sequence_bin( obj, doc->sequence.src );
+	// wsh_serialize_sequence_bin( obj, doc->sequence.src );
 
 	FILE* f = fopen(path, "wb");
 	if (f) {
@@ -196,7 +196,7 @@ int w_document_serialize_bin(WDocument* doc, const char* path)
 	binn_free(obj);
 	binn_free(info);
 
-	// WDocument* doc2 = w_document_unserialize_bin(path);
+	// WDocument* doc2 = wsh_document_unserialize_bin(path);
 
 	// printf("%s - %s\n", doc->version, doc2->version );
 	// printf("%s - %s\n", doc->uuid, doc2->uuid );

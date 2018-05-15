@@ -1,18 +1,18 @@
 //
-//  w_document.c
+//  wsh_document.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/18/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#include "w_document.h"
+#include "wsh_document.h"
 
 #include <wsh/wsh.h>
 
 #include <stdbool.h>
 
-void w_document_meta_clear(WDocumentMeta* meta)
+void wsh_document_meta_clear(WDocumentMeta* meta)
 {
 	meta->path	   = NULL;
 	meta->name	   = NULL;
@@ -25,11 +25,10 @@ void w_document_meta_clear(WDocumentMeta* meta)
 	meta->events	 = NULL;
 	meta->version_string = NULL;
 	meta->version	= 0;
-	meta->animated = false;
-	
+	meta->animated       = false;
 }
 
-WDocument* w_document_create()
+WDocument* wsh_document_create()
 {
 	WDocument* doc = calloc(1, sizeof(WDocument));
 	// printf("Creating all document attributes\n");
@@ -55,7 +54,7 @@ WDocument* w_document_create()
 
 	//doc->ref  = NULL;
 	//doc->meta = NULL;
-	w_document_meta_clear(&doc->meta);
+	wsh_document_meta_clear(&doc->meta);
 
 	//doc->uuid = NULL;
 	// doc->tags = NULL;
@@ -63,7 +62,7 @@ WDocument* w_document_create()
 	return doc;
 }
 
-void w_document_destroy(WDocument* doc)
+void wsh_document_destroy(WDocument* doc)
 {
 	if (doc == NULL)
 	{
@@ -72,13 +71,13 @@ void w_document_destroy(WDocument* doc)
 
 	//printf("Destroying all document attributes\n");
 	// if ( doc->art.src )
-	//	w_object_destroy(doc->art.src);
+	//	wsh_object_destroy(doc->art.src);
 
 	if (doc->sequence.src)
-		w_sequence_destroy(doc->sequence.src);
+		wsh_sequence_destroy(doc->sequence.src);
 }
 
-WDocument* w_document_copy(WDocument* old)
+WDocument* wsh_document_copy(WDocument* old)
 {
 	WDocument* doc = malloc(sizeof(WDocument));
 	// printf("buf : %s\n", buf );
@@ -88,7 +87,7 @@ WDocument* w_document_copy(WDocument* old)
 	//	TODO: we haven't done layer logic yet.
 	doc->layers       = NULL;
 	doc->layer_num    = old->layer_num;
-	doc->sequence.src = w_sequence_copy(old->sequence.src);
+	doc->sequence.src = wsh_sequence_copy(old->sequence.src);
 	doc->meta	 = old->meta;
 
 	/*doc->version = old->version;

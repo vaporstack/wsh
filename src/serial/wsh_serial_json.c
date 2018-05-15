@@ -1,11 +1,11 @@
 
-//  w_serial_json.c
-//  w_serial_json
+//  wsh_serial_json.c
+//  wsh_serial_json
 //
 //  Created by Andrew Macfarlane on 21/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_serial_json.h"
+#include "wsh_serial_json.h"
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
@@ -30,17 +30,17 @@ const char* working_version = NULL;
 
 #define DEBUG_SERIAL false
 
-cJSON* w_serialize_object_json(WObject* obj);
-cJSON* w_serialize_sequence_json(WSequence* seq);
-cJSON* w_serialize_line_json(WLine* line);
-cJSON* w_serialize_color_json(WColor col);
+cJSON* wsh_serialize_object_json(WObject* obj);
+cJSON* wsh_serialize_sequence_json(WSequence* seq);
+cJSON* wsh_serialize_line_json(WLine* line);
+cJSON* wsh_serialize_color_json(WColor col);
 
-cJSON* w_serialize_object_json_v_0_0_1(WObject* obj);
-cJSON* w_serialize_sequence_json_v_0_0_1(WSequence* seq);
-cJSON* w_serialize_line_json_v_0_0_1(WLine* line);
-cJSON* w_serialize_color_json_v_0_0_1(WColor col);
+cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj);
+cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq);
+cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line);
+cJSON* wsh_serialize_color_json_v_0_0_1(WColor col);
 
-cJSON* w_serial_json_serialize_color(WColor col)
+cJSON* wsh_serial_json_serialize_color(WColor col)
 {
 	cJSON* ret = cJSON_CreateObject();
 	cJSON_AddNumberToObject(ret, "r", col.r);
@@ -50,7 +50,7 @@ cJSON* w_serial_json_serialize_color(WColor col)
 	return ret;
 }
 
-cJSON* w_serial_json_serialize_color16(WColor16 col)
+cJSON* wsh_serial_json_serialize_color16(WColor16 col)
 {
 	cJSON* ret = cJSON_CreateObject();
 	cJSON_AddNumberToObject(ret, "r", col.r);
@@ -60,7 +60,7 @@ cJSON* w_serial_json_serialize_color16(WColor16 col)
 	return ret;
 }
 
-WColor w_serial_json_unserialize_color(cJSON* data)
+WColor wsh_serial_json_unserialize_color(cJSON* data)
 {
 	WColor c;
 	c.a = 1.;
@@ -70,10 +70,10 @@ WColor w_serial_json_unserialize_color(cJSON* data)
 	return c;
 }
 
-WColor16 w_serial_json_unserialize_color16(cJSON* data)
+WColor16 wsh_serial_json_unserialize_color16(cJSON* data)
 {
 	WColor16 c;
-	w_color_16_clear(&c);
+	wsh_color_16_clear(&c);
 
 	cJSON* v = NULL;
 	v	= cJSON_GetObjectItem(data, "r");
@@ -112,7 +112,7 @@ static bool check_any_valid(float* vals, int num)
 	return false;
 }
 
-cJSON* w_serialize_line_json_v_0_0_1(WLine* line)
+cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line)
 {
 
 	unsigned long num_points = line->num;
@@ -141,10 +141,10 @@ cJSON* w_serialize_line_json_v_0_0_1(WLine* line)
 	cJSON_AddBoolToObject(line_rec, "closed", line->closed);
 	if (line->has_fill)
 		cJSON_AddItemToObject(line_rec, "fill",
-				      w_serial_json_serialize_color16(line->fill));
+				      wsh_serial_json_serialize_color16(line->fill));
 	if (line->has_stroke)
 		cJSON_AddItemToObject(line_rec, "stroke",
-				      w_serial_json_serialize_color16(line->stroke));
+				      wsh_serial_json_serialize_color16(line->stroke));
 
 	int num = (int)num_points;
 	cJSON_AddItemToObject(line_rec, "points_x",
@@ -177,7 +177,7 @@ cJSON* w_serialize_line_json_v_0_0_1(WLine* line)
 	return line_rec;
 }
 
-cJSON* w_serialize_color_json_v_0_0_1(WColor col)
+cJSON* wsh_serialize_color_json_v_0_0_1(WColor col)
 {
 	float vals[4];
 	vals[0] = col.r;
@@ -189,17 +189,17 @@ cJSON* w_serialize_color_json_v_0_0_1(WColor col)
 	return jv;
 }
 
-cJSON* w_serialize_color_json(WColor c)
+cJSON* wsh_serialize_color_json(WColor c)
 {
-	return w_serialize_color_json_v_0_0_1(c);
+	return wsh_serialize_color_json_v_0_0_1(c);
 }
 
-cJSON* w_serialize_line_json(WLine* line)
+cJSON* wsh_serialize_line_json(WLine* line)
 {
-	return w_serialize_line_json_v_0_0_1(line);
+	return wsh_serialize_line_json_v_0_0_1(line);
 }
 
-cJSON* w_serialize_vec3_v_0_0_1(WVec3d* v)
+cJSON* wsh_serialize_vec3_v_0_0_1(WVec3d* v)
 {
 	cJSON* r = cJSON_CreateObject();
 	cJSON_AddNumberToObject(r, "x", v->x);
@@ -208,31 +208,31 @@ cJSON* w_serialize_vec3_v_0_0_1(WVec3d* v)
 	return r;
 }
 
-cJSON* w_serialize_vec3(WVec3d* v)
+cJSON* wsh_serialize_vec3(WVec3d* v)
 {
-	return w_serialize_vec3_v_0_0_1(v);
+	return wsh_serialize_vec3_v_0_0_1(v);
 }
 
-cJSON* w_serialize_transform_json_v_0_0_1(WTransform* trs)
+cJSON* wsh_serialize_transform_json_v_0_0_1(WTransform* trs)
 {
 	cJSON* root = cJSON_CreateObject();
 
-	cJSON_AddItemToObject(root, "anchor", w_serialize_vec3(&trs->anchor));
+	cJSON_AddItemToObject(root, "anchor", wsh_serialize_vec3(&trs->anchor));
 	cJSON_AddItemToObject(root, "position",
-			      w_serialize_vec3(&trs->position));
+			      wsh_serialize_vec3(&trs->position));
 	cJSON_AddItemToObject(root, "rotation",
-			      w_serialize_vec3(&trs->rotation));
-	cJSON_AddItemToObject(root, "scale", w_serialize_vec3(&trs->scale));
+			      wsh_serialize_vec3(&trs->rotation));
+	cJSON_AddItemToObject(root, "scale", wsh_serialize_vec3(&trs->scale));
 	cJSON_AddNumberToObject(root, "opacity", trs->opacity);
 	return root;
 }
 
-cJSON* w_serialize_transform_json(WTransform* trs)
+cJSON* wsh_serialize_transform_json(WTransform* trs)
 {
-	return w_serialize_transform_json_v_0_0_1(trs);
+	return wsh_serialize_transform_json_v_0_0_1(trs);
 }
 
-cJSON* w_serialize_object_json_v_0_0_1(WObject* obj)
+cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj)
 {
 	if (!obj)
 		return NULL;
@@ -243,7 +243,7 @@ cJSON* w_serialize_object_json_v_0_0_1(WObject* obj)
 	// cJSON_AddItemToObject(root, "name", cJSON_CreateString("WObject"));
 	cJSON_AddBoolToObject(root, "normalized", obj->normalized);
 	cJSON_AddItemToObject(root, "transform",
-			      w_serialize_transform_json(&obj->transform));
+			      wsh_serialize_transform_json(&obj->transform));
 
 	// cJSON *line_records = malloc(num * sizeof(cJSON));
 	// //cJSON_CreateArray();  cJSON *prev;
@@ -261,7 +261,7 @@ cJSON* w_serialize_object_json_v_0_0_1(WObject* obj)
 		if (line)
 		{
 
-			cJSON* jline = w_serialize_line_json(line);
+			cJSON* jline = wsh_serialize_line_json(line);
 			cJSON_AddItemToArray(jlines, jline);
 		}
 	}
@@ -271,7 +271,7 @@ cJSON* w_serialize_object_json_v_0_0_1(WObject* obj)
 	return root;
 }
 
-cJSON* w_serialize_sequence_json_v_0_0_1(WSequence* seq)
+cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq)
 {
 
 	cJSON* jseq    = cJSON_CreateObject();
@@ -283,7 +283,7 @@ cJSON* w_serialize_sequence_json_v_0_0_1(WSequence* seq)
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
 		WObject* fr    = seq->frames[i];
-		cJSON*   fr_js = w_serialize_object_json(fr);
+		cJSON*   fr_js = wsh_serialize_object_json(fr);
 		cJSON_AddItemToArray(jframes, fr_js);
 	}
 
@@ -314,9 +314,9 @@ cJSON* w_serialize_sequence_json_v_0_0_1(WSequence* seq)
 	return jseq;
 }
 
-WSequence* w_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
+WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 {
-	WSequence* seq = w_sequence_create();
+	WSequence* seq = wsh_sequence_create();
 
 	int    num;
 	cJSON* jframes = cJSON_GetObjectItem(data, "frames");
@@ -354,30 +354,30 @@ WSequence* w_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	for (int i = 0; i < num; ++i)
 	{
 		cJSON* jframe = cJSON_GetArrayItem(jframes, i);
-		frames[i]     = w_serial_json_unserialize_object(jframe);
+		frames[i]     = wsh_serial_json_unserialize_object(jframe);
 	}
 
-	seq->frames = frames;
+	seq->frames	= frames;
 	seq->current_frame = seq->frames[seq->current_frame_index];
-	
+
 	return seq;
 }
 
-WSequence* w_serial_json_unserialize_sequence_v_0_0_2(cJSON* data)
+WSequence* wsh_serial_json_unserialize_sequence_v_0_0_2(cJSON* data)
 {
-	return w_serial_json_unserialize_sequence_v_0_0_1(data);
+	return wsh_serial_json_unserialize_sequence_v_0_0_1(data);
 }
 
-WSequence* w_serial_json_unserialize_sequence(cJSON* data)
+WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 {
 	if (0 == strcmp(working_version, "0_0_1"))
 	{
 
-		return w_serial_json_unserialize_sequence_v_0_0_1(data);
+		return wsh_serial_json_unserialize_sequence_v_0_0_1(data);
 	}
 	else if (0 == strcmp(working_version, "0_0_2"))
 	{
-		return w_serial_json_unserialize_sequence_v_0_0_2(data);
+		return wsh_serial_json_unserialize_sequence_v_0_0_2(data);
 	}
 	else
 	{
@@ -397,17 +397,17 @@ WSequence* w_serial_json_unserialize_sequence(cJSON* data)
 	 */
 }
 
-cJSON* w_serialize_sequence_json(WSequence* seq)
+cJSON* wsh_serialize_sequence_json(WSequence* seq)
 {
-	return w_serialize_sequence_json_v_0_0_1(seq);
+	return wsh_serialize_sequence_json_v_0_0_1(seq);
 }
 
-cJSON* w_serialize_object_json(WObject* obj)
+cJSON* wsh_serialize_object_json(WObject* obj)
 {
-	return w_serialize_object_json_v_0_0_1(obj);
+	return wsh_serialize_object_json_v_0_0_1(obj);
 }
 
-int w_serial_json_unserialize_meta_v0_0_1(cJSON* info, WDocumentMeta* meta)
+int wsh_serial_json_unserialize_meta_v0_0_1(cJSON* info, WDocumentMeta* meta)
 {
 	printf("Unserializing meta!? 01\n");
 	if (!info)
@@ -435,7 +435,7 @@ int w_serial_json_unserialize_meta_v0_0_1(cJSON* info, WDocumentMeta* meta)
 	return true;
 }
 
-cJSON* w_serial_json_serialize_meta_v0_0_1(WDocumentMeta* meta)
+cJSON* wsh_serial_json_serialize_meta_v0_0_1(WDocumentMeta* meta)
 {
 	cJSON* ret = cJSON_CreateObject();
 
@@ -466,7 +466,7 @@ const char* fps_to_string(double v)
 	return buf;
 }
 
-cJSON* w_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
+cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 {
 
 	cJSON* jmeta = cJSON_CreateObject();
@@ -493,7 +493,6 @@ cJSON* w_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	}
 	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
 
-
 	//	todo: add fps
 	cJSON_AddItemToObject(jmeta, "info", info);
 	//cJSON_AddItemToObject(ret, t, )
@@ -502,19 +501,19 @@ cJSON* w_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 }
 
 /*
-cJSON* w_serial_json_serialize_meta(WDocumentMeta* meta)
+cJSON* wsh_serial_json_serialize_meta(WDocumentMeta* meta)
 {
 	printf("Serializing meta!?%s\n", working_version);
 	if (0 == strcmp(working_version, "0_0_1")) {
-		return w_serial_json_serialize_meta_v0_0_1(meta);
+		return wsh_serial_json_serialize_meta_v0_0_1(meta);
 	} else if (0 == strcmp(working_version, "0_0_2")) {
-		return w_serial_json_serialize_meta_v0_0_2(meta);
+		return wsh_serial_json_serialize_meta_v0_0_2(meta);
 	}
 	return NULL;
 }
 */
 
-int w_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
+int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 {
 	printf("Unserializing meta!? 02\n");
 	cJSON* session = cJSON_GetObjectItem(data, "session");
@@ -560,16 +559,16 @@ int w_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 	return true;
 }
 
-const char* w_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
+const char* wsh_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
 {
 
 	cJSON* root = cJSON_CreateObject();
 	cJSON* data = cJSON_CreateObject();
 
-	cJSON* meta = w_serial_json_serialize_meta_v0_0_2(&doc->meta);
+	cJSON* meta = wsh_serial_json_serialize_meta_v0_0_2(&doc->meta);
 	cJSON_AddItemToObject(root, "meta", meta);
 
-	cJSON* sequence = w_serialize_sequence_json(doc->sequence.src);
+	cJSON* sequence = wsh_serialize_sequence_json(doc->sequence.src);
 	cJSON_AddItemToObject(data, "sequence", sequence);
 	cJSON_AddItemToObject(root, "data", data);
 
@@ -589,7 +588,7 @@ const char* w_serial_json_document_serialize_v002(WDocument* doc, const char* ve
 		cJSON_AddStringToObject(info, "uuid", doc->uuid);
 
 	if (doc->sequence.src) {
-		cJSON* jseq = w_serialize_sequence_json(doc->sequence.src);
+		cJSON* jseq = wsh_serialize_sequence_json(doc->sequence.src);
 		cJSON_AddItemToObject(data, "sequence", jseq);
 	}
 	cJSON_AddItemToObject(meta, "info", info);
@@ -598,7 +597,7 @@ const char* w_serial_json_document_serialize_v002(WDocument* doc, const char* ve
 	return cJSON_Print(root);
 }
 
-const char* w_serial_json_document_serialize_v001(WDocument* doc, const char* version_string)
+const char* wsh_serial_json_document_serialize_v001(WDocument* doc, const char* version_string)
 {
 
 	if (DEBUG_SERIAL)
@@ -622,7 +621,7 @@ const char* w_serial_json_document_serialize_v001(WDocument* doc, const char* ve
 		cJSON_AddStringToObject(info, "ref", strdup(doc->ref));
 */
 
-	cJSON* jmeta = w_serial_json_serialize_meta_v0_0_1(&doc->meta);
+	cJSON* jmeta = wsh_serial_json_serialize_meta_v0_0_1(&doc->meta);
 	cJSON_AddItemToObject(root, "meta", jmeta);
 
 	/*
@@ -639,7 +638,7 @@ const char* w_serial_json_document_serialize_v001(WDocument* doc, const char* ve
 */
 	if (doc->sequence.src)
 	{
-		cJSON* jseq = w_serialize_sequence_json(doc->sequence.src);
+		cJSON* jseq = wsh_serialize_sequence_json(doc->sequence.src);
 
 		cJSON_AddItemToObject(root, "sequence", jseq);
 
@@ -649,7 +648,7 @@ const char* w_serial_json_document_serialize_v001(WDocument* doc, const char* ve
 	return result;
 }
 
-const char* w_serial_json_document_serialize(WDocument* doc)
+const char* wsh_serial_json_document_serialize(WDocument* doc)
 {
 	char* buf = calloc(128, sizeof(char));
 	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
@@ -657,16 +656,15 @@ const char* w_serial_json_document_serialize(WDocument* doc)
 
 	working_version = strdup(buf);
 
-	
 	if (0 == strcmp(working_version, "0_0_1"))
 	{
 		printf("Serialize: %s\n", working_version);
-		return w_serial_json_document_serialize_v001(doc, buf);
+		return wsh_serial_json_document_serialize_v001(doc, buf);
 	}
 	else if (0 == strcmp(working_version, "0_0_2"))
 	{
 		printf("Serialize: %s\n", working_version);
-		return w_serial_json_document_serialize_v002(doc, buf);
+		return wsh_serial_json_document_serialize_v002(doc, buf);
 	}
 	else
 	{
@@ -677,11 +675,11 @@ const char* w_serial_json_document_serialize(WDocument* doc)
 	return NULL;
 }
 
-void w_serialize_line(WObject* obj, FILE* f)
+void wsh_serialize_line(WObject* obj, FILE* f)
 {
 }
 
-void w_serialize_point(WPoint* obj, FILE* f)
+void wsh_serialize_point(WPoint* obj, FILE* f)
 {
 }
 
@@ -692,7 +690,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 
 	// printf("%d points.\n", num);
 
-	WLine* line = w_line_create();
+	WLine* line = wsh_line_create();
 
 	cJSON* jx	= cJSON_GetObjectItem(data, "points_x");
 	cJSON* jy	= cJSON_GetObjectItem(data, "points_y");
@@ -703,10 +701,9 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	cJSON* jtilty    = cJSON_GetObjectItem(data, "tilt_y");
 
 	int num = cJSON_GetArraySize(jx);
-	if ( num > 100000)
+	if (num > 100000)
 	{
 		printf("Something went WAY wrong (probably)\n");
-		
 	}
 	if (DEBUG_SERIAL)
 		printf("%d points.\n", num);
@@ -731,10 +728,10 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 			p.rotation =
 			    cJSON_GetArrayItem(jrotation, i)->valuedouble;
 
-		w_line_add_point(line, p);
+		wsh_line_add_point(line, p);
 	}
 
-	if ( line->num > 100000000)
+	if (line->num > 100000000)
 	{
 		printf("what the FACK\n");
 	}
@@ -760,7 +757,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	}
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
 
-	w_line_calc_bounds(line);
+	wsh_line_calc_bounds(line);
 	// printf("done?\n");
 	return line;
 }
@@ -770,12 +767,12 @@ WLine* w_unserialize_line_json(cJSON* data)
 	return w_unserialize_line_json_v_0_0_1(data);
 }
 
-WObject* w_serial_json_unserialize_object_v_0_0_1(cJSON* data)
+WObject* wsh_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 {
 	cJSON* jlines = cJSON_GetObjectItem(data, "lines");
 	int    num    = cJSON_GetArraySize(jlines);
 
-	WObject* obj = w_object_create(NULL);
+	WObject* obj = wsh_object_create(NULL);
 
 	obj->normalized = cJSON_GetObjectItem(data, "normalized")->valueint;
 
@@ -786,7 +783,7 @@ WObject* w_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 		cJSON* jl   = cJSON_GetArrayItem(jlines, i);
 		WLine* line = w_unserialize_line_json(jl);
 
-		w_object_add_line(obj, line);
+		wsh_object_addrw_line(obj, line);
 	}
 
 	if (DEBUG_SERIAL)
@@ -794,24 +791,24 @@ WObject* w_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 	return obj;
 }
 
-WObject* w_serial_json_unserialize_object(cJSON* data)
+WObject* wsh_serial_json_unserialize_object(cJSON* data)
 {
-	return w_serial_json_unserialize_object_v_0_0_1(data);
+	return wsh_serial_json_unserialize_object_v_0_0_1(data);
 }
 /*
-void* w_serial_document_unserialize_generic(const char* path)
+void* wsh_serial_document_unserialize_generic(const char* path)
 {
-	return w_serial_document_unserialize(path);
+	return wsh_serial_document_unserialize(path);
 }
 */
-WDocument* w_serial_document_unserialize_v002(const char* path, cJSON* root)
+WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 {
-	WDocument* doc = w_document_create();
+	WDocument* doc = wsh_document_create();
 
 	cJSON* meta = cJSON_GetObjectItem(root, "meta");
 	if (meta)
 	{
-		int res = w_serial_json_unserialize_meta_v0_0_2(meta, &doc->meta);
+		int res = wsh_serial_json_unserialize_meta_v0_0_2(meta, &doc->meta);
 		if (!res)
 		{
 			printf("Error reading meta!\n");
@@ -840,19 +837,19 @@ WDocument* w_serial_document_unserialize_v002(const char* path, cJSON* root)
 
 	cJSON* data       = cJSON_GetObjectItem(root, "data");
 	cJSON* jseq       = cJSON_GetObjectItem(data, "sequence");
-	doc->sequence.src = w_serial_json_unserialize_sequence(jseq);
+	doc->sequence.src = wsh_serial_json_unserialize_sequence(jseq);
 
 	return doc;
 }
 
-WDocument* w_serial_document_unserialize_v001(const char* path, cJSON* root)
+WDocument* wsh_serial_document_unserialize_v001(const char* path, cJSON* root)
 {
 	printf("Unserializing at v001\n");
 
-	WDocument* doc = w_document_create();
+	WDocument* doc = wsh_document_create();
 
 	cJSON*     jseq = cJSON_GetObjectItem(root, "sequence");
-	WSequence* seq  = w_serial_json_unserialize_sequence(jseq);
+	WSequence* seq  = wsh_serial_json_unserialize_sequence(jseq);
 
 	if (seq)
 	{
@@ -862,7 +859,7 @@ WDocument* w_serial_document_unserialize_v001(const char* path, cJSON* root)
 	{
 		printf("Was unable to decode any sequence!\n");
 		cJSON_Delete(root);
-		w_document_destroy(doc);
+		wsh_document_destroy(doc);
 		return NULL;
 	}
 
@@ -870,14 +867,14 @@ WDocument* w_serial_document_unserialize_v001(const char* path, cJSON* root)
 	if (jval)
 	{
 
-		w_serial_json_unserialize_meta_v0_0_1(jval, &doc->meta);
+		wsh_serial_json_unserialize_meta_v0_0_1(jval, &doc->meta);
 	}
 	else
 	{
 		jval = cJSON_GetObjectItem(root, "meta");
 		if (jval)
 		{
-			w_serial_json_unserialize_meta_v0_0_1(jval, &doc->meta);
+			wsh_serial_json_unserialize_meta_v0_0_1(jval, &doc->meta);
 		}
 	}
 
@@ -908,7 +905,7 @@ static int index_of_char(const char* sdata)
 }
 */
 
-static void w_serial_json_postprocess_document(WDocument* doc)
+static void wsh_serial_json_postprocess_document(WDocument* doc)
 {
 	//	read the fps_repr into the fps
 	////printf("Reading fps repr: [%s]\n", doc->meta.fps_repr);
@@ -939,7 +936,7 @@ static void w_serial_json_postprocess_document(WDocument* doc)
 	//}
 }
 
-WDocument* w_serial_json_document_unserialize(const char* path)
+WDocument* wsh_serial_json_document_unserialize(const char* path)
 {
 	WDocument* doc  = NULL;
 	char*      data = w_read_file_as_text_nc(path);
@@ -966,7 +963,7 @@ WDocument* w_serial_json_document_unserialize(const char* path)
 			working_version = version->valuestring;
 			printf("version detected: %s\n", working_version);
 		}
-		doc = w_serial_document_unserialize_v001(path, root);
+		doc = wsh_serial_document_unserialize_v001(path, root);
 	}
 	else
 	{
@@ -988,7 +985,7 @@ WDocument* w_serial_json_document_unserialize(const char* path)
 
 				if (0 == strcmp(working_version, "0_0_2"))
 				{
-					doc = w_serial_document_unserialize_v002(path, root);
+					doc = wsh_serial_document_unserialize_v002(path, root);
 				}
 				else
 				{
@@ -1001,7 +998,7 @@ WDocument* w_serial_json_document_unserialize(const char* path)
 	//if (meta)
 	//{
 
-	w_serial_json_postprocess_document(doc);
+	wsh_serial_json_postprocess_document(doc);
 	//}
 	/*
 	cJSON* version = cJSON_GetObjectItem(info, "version");

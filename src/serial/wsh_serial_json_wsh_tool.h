@@ -1,13 +1,13 @@
 //
-//  w_serial_json_wsh_tool.h
+//  wsh_serial_json_wsh_tool.h
 //  wsh
 //
 //  Created by vs on 3/15/18.
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
-#ifndef w_serial_json_wsh_tool_h
-#define w_serial_json_wsh_tool_h
+#ifndef wsh_serial_json_wsh_tool_h
+#define wsh_serial_json_wsh_tool_h
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
@@ -15,9 +15,9 @@
 
 #include <cjson/cJSON.h>
 
-cJSON*      w_serial_json_wsh_tool_serialize(WshToolRec* rec);
-WshToolRec* w_serial_json_wsh_tool_unserialize(cJSON* data);
+cJSON*      wsh_serial_json_wsh_tool_serialize(WshToolRec* rec);
+WshToolRec* wsh_serial_json_wsh_tool_unserialize(cJSON* data);
 
 #endif
 
-#endif /* w_serial_json_wsh_tool_h */
+#endif /* wsh_serial_json_wsh_tool_h */

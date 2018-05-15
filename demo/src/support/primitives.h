@@ -18,12 +18,12 @@ void d_setup_view_ortho(int w, int h);
 
 void d_set_dpiscale(double v);
 
-void d_push(void);
+void drw_push(void);
 void d_pop(void);
 void d_translate(double x, double y, double z);
 void d_color(double r, double g, double b, double a);
 
-void d_line(double ax, double ay, double bx, double by);
+void drw_line(double ax, double ay, double bx, double by);
 void d_circle(float);
 void d_ellipse(float, float);
 void d_poly(WLine*);
@@ -41,7 +41,5 @@ void d_wobject_notransform(WObject*);
 void d_wobject_e(WObject*);
 
 void d_rect(float, float, float, float);
-
-
 
 #endif /* primitives_h */

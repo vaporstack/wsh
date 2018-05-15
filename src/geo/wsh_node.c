@@ -5,7 +5,7 @@
 //  Created by Andrew Macfarlane on 09/09/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_node.h"
+#include "wsh_node.h"
 
 WNode* w_node_create(WNode* parent)
 {
@@ -17,7 +17,8 @@ WNode* w_node_create(WNode* parent)
 
 void w_node_destroy(WNode* node)
 {
-	for (int i = 0; i < node->num_children; i++) {
+	for (int i = 0; i < node->num_children; i++)
+	{
 		WNode* child = &node->children[i];
 		w_node_destroy(child);
 		child = NULL;

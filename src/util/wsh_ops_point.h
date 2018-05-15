@@ -9,6 +9,13 @@
 #ifndef wsh_ops_point_h
 #define wsh_ops_point_h
 
-#include <stdio.h>
+#include "../geo/wsh_point.h"
+
+/**
+ *
+ *	simple distance between two points
+ *
+ */
+double wsh_ops_point_dist(WPoint a, WPoint b);
 
 #endif /* wsh_ops_point_h */

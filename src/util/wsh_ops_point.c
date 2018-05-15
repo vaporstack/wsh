@@ -7,3 +7,10 @@
 //
 
 #include "wsh_ops_point.h"
+
+#include "wsh_math.h"
+
+double wsh_ops_point_dist(WPoint a, WPoint b)
+{
+	return w_dist2d_wp(&a, &b);
+}

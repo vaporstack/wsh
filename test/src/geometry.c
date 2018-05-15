@@ -11,13 +11,13 @@ int test_geometry(void)
 {
 	printf("Testing geometry.\n");
 
-	WLine* line = w_line_create();
+	WLine* line = wsh_line_create();
 
-	WObject* obj = w_object_create(NULL);
-	w_object_add_line(obj, line);
+	WObject* obj = wsh_object_create(NULL);
+	wsh_object_addrw_line(obj, line);
 
-	w_line_destroy(line);
-	w_object_destroy(obj);
+	wsh_line_destroy(line);
+	wsh_object_destroy(obj);
 	return 0;
 }
 

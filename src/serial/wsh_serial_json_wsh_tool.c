@@ -1,20 +1,20 @@
 //
-//  w_serial_json_wsh_tool.c
+//  wsh_serial_json_wsh_tool.c
 //  wsh
 //
 //  Created by vs on 3/15/18.
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
-#include "w_serial_json_wsh_tool.h"
+#include "wsh_serial_json_wsh_tool.h"
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 
-#include "w_serial_json.h"
+#include "wsh_serial_json.h"
 #include <cjson/cJSON.h>
 #include <stdlib.h>
 
-cJSON* w_serial_json_wsh_tool_serialize(WshToolRec* rec)
+cJSON* wsh_serial_json_wsh_tool_serialize(WshToolRec* rec)
 {
 
 	cJSON* root = cJSON_CreateObject();
@@ -33,14 +33,14 @@ cJSON* w_serial_json_wsh_tool_serialize(WshToolRec* rec)
 	cJSON_AddNumberToObject(root, "size_base", rec->size_base);
 	cJSON_AddNumberToObject(root, "size_mod", rec->size_mod);
 
-	cJSON* color = w_serial_json_serialize_color16(rec->color);
+	cJSON* color = wsh_serial_json_serialize_color16(rec->color);
 
 	int    num    = rec->color_num;
 	cJSON* colors = cJSON_CreateArray();
 
 	for (int i = 0; i < num; i++)
 	{
-		cJSON* v = w_serial_json_serialize_color16(rec->colors[i]);
+		cJSON* v = wsh_serial_json_serialize_color16(rec->colors[i]);
 		cJSON_AddItemToArray(colors, v);
 	}
 
@@ -50,7 +50,7 @@ cJSON* w_serial_json_wsh_tool_serialize(WshToolRec* rec)
 	return root;
 }
 
-WshToolRec* w_serial_json_wsh_tool_unserialize(cJSON* data)
+WshToolRec* wsh_serial_json_wsh_tool_unserialize(cJSON* data)
 {
 	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
 	cJSON*      v   = NULL;
@@ -95,7 +95,7 @@ WshToolRec* w_serial_json_wsh_tool_unserialize(cJSON* data)
 	v = cJSON_GetObjectItem(data, "color");
 
 	if (v)
-		rec->color = w_serial_json_unserialize_color16(v);
+		rec->color = wsh_serial_json_unserialize_color16(v);
 
 	v = cJSON_GetObjectItem(data, "colors");
 	if (v)
@@ -105,7 +105,7 @@ WshToolRec* w_serial_json_wsh_tool_unserialize(cJSON* data)
 		for (int i = 0; i < num; i++)
 		{
 			cJSON* jv      = cJSON_GetArrayItem(v, i);
-			rec->colors[i] = w_serial_json_unserialize_color16(jv);
+			rec->colors[i] = wsh_serial_json_unserialize_color16(jv);
 		}
 	}
 	return rec;

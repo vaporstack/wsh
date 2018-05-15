@@ -7,8 +7,8 @@
 
 #ifndef w_sgraph_h_
 #define w_sgraph_h_
-#include "../geo/w_object.h"
-#include "../geo/w_transform.h"
+#include "../geo/wsh_object.h"
+#include "../geo/wsh_transform.h"
 
 typedef struct WGraphNode
 {
@@ -18,7 +18,7 @@ typedef struct WGraphNode
 
 } WGraphNode;
 
-WGraphNode *w_sgraph_create(void);
-void	w_sgraph_destroy(WGraphNode *node);
+WGraphNode* w_sgraph_create(void);
+void	w_sgraph_destroy(WGraphNode* node);
 
 #endif

@@ -108,7 +108,7 @@ static void start_faking_it(void)
 
 static void stop_faking_it(double x, double y)
 {
-	recorder_end_line(x, y);
+	recorder_endrw_line(x, y);
 
 	faking_it = false;
 	printf("No longer faking it.\n");
@@ -137,7 +137,6 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 #ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
 		wcm_init(window_w, window_h);
 #endif
-		
 	}
 
 	if (action == 1)
@@ -228,7 +227,7 @@ void my_tablet_up(double x, double y, int button, double p, double r, double tx,
 	normalize_coordinates(&mouse_x, &mouse_y);
 
 	printf("got rich up? %f %f %f %f %f %f\n", mouse_x, mouse_y, p, r, tx, ty);
-	recorder_end_line(mouse_x, mouse_y);
+	recorder_endrw_line(mouse_x, mouse_y);
 }
 
 static void have_pressure(void)
@@ -315,12 +314,12 @@ static void draw(void)
 		current_demo->draw();
 	}
 
-	d_line(0, 0, mouse_x, mouse_y);
-	d_push();
+	drw_line(0, 0, mouse_x, mouse_y);
+	drw_push();
 
 	d_translate(mouse_x, mouse_y, 0);
 
-	d_line(0, 0, 32, 32);
+	drw_line(0, 0, 32, 32);
 	if (mouse_down)
 	{
 		d_color(0, 0, 0, 1);
@@ -391,7 +390,7 @@ int main(int argc, const char* argv[])
 
 	wcm_init(window_w, window_h);
 #endif
-	
+
 	/* Make the window's context current */
 	glfwMakeContextCurrent(window);
 
@@ -407,7 +406,7 @@ int main(int argc, const char* argv[])
 	d_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
-	document.src = w_serial_document_unserialize("data/wash/squares-anim.wash");
+	document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
 
 	d_setup(window_w, window_h);
 
@@ -438,7 +437,7 @@ int main(int argc, const char* argv[])
 
 	recorder_deinit();
 	wash_demo_text_deinit();
-	
+
 #ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
 	wcm_deinit();
 #endif

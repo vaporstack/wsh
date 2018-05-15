@@ -1,13 +1,13 @@
 //
-//  w_point.c
+//  wsh_point.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 12/9/16.
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#include "w_point.h"
-#include "../w_includes.h"
+#include "wsh_point.h"
+#include "../wsh_includes.h"
 
 /** @brief Create a point, on the heap.
  *
@@ -16,7 +16,7 @@
  *  @return The point structure, allocated on heap.
  */
 
-WPoint* w_point_create()
+WPoint* wsh_point_create()
 {
 	WPoint* p = calloc(1, sizeof(WPoint));
 	// WPoint p;
@@ -34,20 +34,20 @@ WPoint* w_point_create()
  *  @return The point structure, allocated on heap.
  */
 
-WPoint* w_point_create_2f(double x, double y)
+WPoint* wsh_point_create_2f(double x, double y)
 {
-	WPoint* p = w_point_create();
+	WPoint* p = wsh_point_create();
 	p->x      = x;
 	p->y      = y;
 	return p;
 }
 
-void w_point_zero(WPoint* p)
+void wsh_point_zero(WPoint* p)
 {
 	p->pressure = p->rotation = p->tilt_x = p->tilt_y = p->time = p->x = p->y = 0;
 }
 
-void w_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees)
+void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees)
 {
 	double angle_in_radians = angle_in_degrees * (M_PI / 180);
 	double cos_theta	= cos(angle_in_radians);

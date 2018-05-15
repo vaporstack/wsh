@@ -1,8 +1,8 @@
 
-//  w_lib.c
-//  w_lib
+//  wsh_lib.c
+//  wsh_lib
 //
 //  Created by Andrew Macfarlane on 17/04/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_lib.h"
+#include "wsh_lib.h"

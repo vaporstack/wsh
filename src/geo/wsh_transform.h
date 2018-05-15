@@ -1,13 +1,13 @@
 //
-//  w_transform.h
+//  wsh_transform.h
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/2/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#ifndef w_transform_h
-#define w_transform_h
+#ifndef wsh_transform_h
+#define wsh_transform_h
 
 typedef struct WVec2d
 {
@@ -42,8 +42,8 @@ typedef struct WTransform
 	double opacity;
 } WTransform;
 
-void w_transform_reset(WTransform* t);
-void w_transform_apply(WTransform* t);
-void w_transform_deapply(WTransform* t);
+void wsh_transform_reset(WTransform* t);
+void wsh_transform_apply(WTransform* t);
+void wsh_transform_deapply(WTransform* t);
 
-#endif /* w_transform_h */
+#endif /* wsh_transform_h */

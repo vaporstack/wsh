@@ -1,14 +1,14 @@
 //
-//  w_layer.h
+//  wsh_layer.h
 //  wsh-ios
 //
 //  Created by Andrew Macfarlane on 6/15/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#ifndef w_layer_h
-#define w_layer_h
+#ifndef wsh_layer_h
+#define wsh_layer_h
 
 #include <stdio.h>
 
-#endif /* w_layer_h */
+#endif /* wsh_layer_h */

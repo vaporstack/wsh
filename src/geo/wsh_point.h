@@ -1,12 +1,12 @@
 //
-//  w_point.h
+//  wsh_point.h
 //  wash
 //
 //  Created by Andrew Macfarlane on 12/9/16.
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-/** @file w_point.h
+/** @file wsh_point.h
  *  @brief Fundamental data unit for wsh (rich content support)
  *
  *  This contains the prototypes for the console
@@ -17,8 +17,8 @@
  *  @bug All the bugs.
  */
 
-#ifndef w_point_h
-#define w_point_h
+#ifndef wsh_point_h
+#define wsh_point_h
 
 typedef struct
 {
@@ -34,27 +34,27 @@ typedef struct
 /*
  *
  */
-void w_point_zero(WPoint*);
+void wsh_point_zero(WPoint*);
 
 /**
  *
  *@return WPoint
  *
  */
-WPoint* w_point_create(void);
+WPoint* wsh_point_create(void);
 
 /**
  *
  *@return WPoint
  *
  */
-WPoint* w_point_create_2f(double, double);
+WPoint* wsh_point_create_2f(double, double);
 
 /**
  *
  *
  *
  */
-void w_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees);
+void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees);
 
-#endif /* w_point_h */
+#endif /* wsh_point_h */

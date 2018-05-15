@@ -53,25 +53,26 @@ static void mouse_move(double x, double y)
 static void wipe_canvas_and_scale(void)
 {
 	WObject* art = recorder_get_art();
-	if ( subject )
+	if (subject)
 	{
-		w_object_destroy(subject);
+		wsh_object_destroy(subject);
 	}
-	subject = w_object_copy(art);
+	subject = wsh_object_copy(art);
 	recorder_clear();
-	
+
 	scale_object_to_window(subject);
 }
 
 static void mouse_button(int button, int action, int mods)
 {
-	if( button > 0 )
+	if (button > 0)
 		return;
-	if ( action )
+	if (action)
 	{
 		printf("mdown\n");
-		
-	}else{
+	}
+	else
+	{
 		printf("mup!\n");
 		wipe_canvas_and_scale();
 	}
@@ -94,40 +95,39 @@ static void update(void)
 static void draw(void)
 {
 	static double d = 1;
-	
+
 	d = d * .99;
-	if ( d == 0 )
+	if (d == 0)
 		d = 1;
 	//double v = d * 128;
 	printf("%f\n", d);
-	d_color(0,.25,0,1);
+	d_color(0, .25, 0, 1);
 	if (!subject)
 		return;
-	
+
 	WLine* first = subject->lines[0];
-	if ( !first )
+	if (!first)
 		return;
-	
+
 	d_wline(first);
 	d_verts(first);
-	d_push();
-	//WLine* mod = w_line_copy(first);
-	
-	WLine* mod = w_line_ops_douglaspeucker(first, d);
-	
-	d_color(.5,0,0,1);
-	d_translate(0,32,0);
+	drw_push();
+	//WLine* mod = wsh_line_copy(first);
+
+	WLine* mod = wsh_line_ops_douglaspeucker(first, d);
+
+	d_color(.5, 0, 0, 1);
+	d_translate(0, 32, 0);
 	d_verts(mod);
 	d_wline(mod);
-	w_line_destroy(mod);
+	wsh_line_destroy(mod);
 	d_pop();
-	
+
 	//d_wobject(subject);
 }
 
 static void drop(int num, const char** paths)
 {
-	
 }
 
 WashDemo operations =
@@ -145,7 +145,6 @@ WashDemo operations =
 	tablet_down,
 	tablet_motion,
 	tablet_drag,
-	    drop
-    };
+	drop};
 
 #endif

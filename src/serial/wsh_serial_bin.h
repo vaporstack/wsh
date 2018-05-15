@@ -1,23 +1,22 @@
 
-//  w_serial_bin.c
-//  w_serial_bin
+//  wsh_serial_bin.c
+//  wsh_serial_bin
 //
 //  Created by Andrew Macfarlane on 21/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#ifndef w_serial_bin_h_
-#define w_serial_bin_h_
+#ifndef wsh_serial_bin_h_
+#define wsh_serial_bin_h_
 
 /*
 #include "stdio.h"
 #include "stdlib.h"
 
-#include "../geo/w_document.h"
+#include "../geo/wsh_document.h"
 
 // WObject* w_unserialize_object_bin(FILE*);
-WDocument* w_document_unserialize_bin(const char* path);
-int	w_document_serialize_bin(WDocument* doc, const char* path);
+WDocument* wsh_document_unserialize_bin(const char* path);
+int	wsh_document_serialize_bin(WDocument* doc, const char* path);
 */
-
 
 #endif

@@ -1,5 +1,5 @@
 //
-//  w_line.c
+//  wsh_line.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 12/15/16.
@@ -10,45 +10,45 @@
 
 /* internal includes. */
 
-#include "w_line.h"
-#include "w_point.h"
+#include "wsh_line.h"
+#include "wsh_point.h"
 
 #define LINE_START_SIZE 256
 #define LINE_MAX_SIZE 1024
 
 //#include "../util/w_gpc.h"
-//#include "../util/w_line_ops.h"
+//#include "../util/wsh_line_ops.h"
 #include <math.h>
 #include <string.h>
 
-WLineHnd* w_line_hnd_create(void)
+WLineHnd* wsh_line_hnd_create(void)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
 	return hnd;
 }
 
-WLineHnd* w_line_hnd_create_with_data(void)
+WLineHnd* wsh_line_hnd_create_with_data(void)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
-	hnd->src      = w_line_create();
+	hnd->src      = wsh_line_create();
 	return hnd;
 }
 
-WLineHnd* w_line_hnd_create_with_addr(WLine* addr)
+WLineHnd* wsh_line_hnd_create_with_addr(WLine* addr)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
 	hnd->src      = addr;
 	return hnd;
 }
 
-WLineHnd* w_line_hnd_copy(WLineHnd* hnd)
+WLineHnd* wsh_line_hnd_copy(WLineHnd* hnd)
 {
 	// todo implement this
 
 	return NULL;
 }
 
-void w_line_hnd_destroy(WLineHnd* hnd)
+void wsh_line_hnd_destroy(WLineHnd* hnd)
 {
 	free(hnd->src);
 
@@ -56,12 +56,12 @@ void w_line_hnd_destroy(WLineHnd* hnd)
 	//	totally dead
 }
 
-WLine* w_line_create()
+WLine* wsh_line_create()
 {
 	WLine* l = calloc(1, sizeof(WLine));
 
 	l->data       = 0;
-	l->num		= 0;
+	l->num	= 0;
 	l->reserved   = 0;
 	l->has_fill   = false;
 	l->has_stroke = false;
@@ -87,7 +87,7 @@ WLine* w_line_create()
 	return l;
 }
 
-void w_line_calc_bounds(WLine* src)
+void wsh_line_calc_bounds(WLine* src)
 {
 	double minx, miny, maxx, maxy;
 
@@ -116,15 +116,15 @@ void w_line_calc_bounds(WLine* src)
 	src->bounds.size.x = maxx - minx;
 	src->bounds.size.y = maxy - miny;
 }
-void w_line_add_point2f(WLine* line, double x, double y)
+void wsh_line_add_point2f(WLine* line, double x, double y)
 {
 	WPoint p;
 	p.x = x;
 	p.y = y;
-	w_line_add_point(line, p);
+	wsh_line_add_point(line, p);
 }
 
-void w_line_add_point(WLine* line, WPoint p)
+void wsh_line_add_point(WLine* line, WPoint p)
 {
 	if (!line)
 	{
@@ -133,28 +133,26 @@ void w_line_add_point(WLine* line, WPoint p)
 #endif
 		return;
 	}
-	
+
 	if (!line->data)
 	{
 		line->reserved = LINE_START_SIZE;
 		//	leaky
 		//line->data     = calloc(line->reserved, sizeof *line->data);
-		line->data     = calloc(line->reserved, sizeof(WPoint));
+		line->data = calloc(line->reserved, sizeof(WPoint));
 	}
 
 	if (line->num == line->reserved)
 	{
 		(line->reserved) *= 2;
-	//	line->data = realloc(line->data, sizeof *line->data * line->reserved);
-		line->data = realloc(line->data, sizeof (WPoint) * line->reserved);
+		//	line->data = realloc(line->data, sizeof *line->data * line->reserved);
+		line->data = realloc(line->data, sizeof(WPoint) * line->reserved);
 	}
 
 	line->data[line->num] = p;
 
 	line->num++;
-
 }
-
 
 // TODO move this somewhere higher level, line is a core data type and
 // shouldn't know about
@@ -163,21 +161,21 @@ void w_line_add_point(WLine* line, WPoint p)
 //	update, this HAS been moved higher level
 /*
  #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
- 
+
  if (line->closed)
  {
  if (line->tess)
  {
  w_gpc_tess_destroy(line);
  }
- 
+
  w_gpc_tess_create(line);
- // w_line_ops_smooth(line->brush->stroke->tess, 8);
+ // wsh_line_ops_smooth(line->brush->stroke->tess, 8);
  if (line->brush)
  {
  if (line->brush->stroke)
  {
- // w_line_ops_smooth(line->brush->stroke->tess,
+ // wsh_line_ops_smooth(line->brush->stroke->tess,
  // 8);
  }
  else
@@ -196,18 +194,17 @@ void w_line_add_point(WLine* line, WPoint p)
  #endif
  */
 
-void w_line_concat(WLine* dst, WLine* src, ull start, ull end)
+void wsh_line_concat(WLine* dst, WLine* src, ull start, ull end)
 {
-	
+
 	//while( start < end )
 	for (ull i = start; i < end; ++i)
 	{
-		w_line_add_point(dst, src->data[i]);
+		wsh_line_add_point(dst, src->data[i]);
 	}
-	
 }
 
-WLine* w_line_copy(WLine* old)
+WLine* wsh_line_copy(WLine* old)
 {
 
 	if (old == NULL)
@@ -221,12 +218,12 @@ WLine* w_line_copy(WLine* old)
 	else if (old->data == NULL)
 	{
 #ifdef DEBUG
-	printf("Tried to copy a line with no data!\n");
+		printf("Tried to copy a line with no data!\n");
 #endif
 		return NULL;
 	}
 
-	WLine* new      = w_line_create();
+	WLine* new      = wsh_line_create();
 	new->num	= old->num;
 	new->reserved   = old->reserved;
 	new->data       = malloc((sizeof *new->data) * new->reserved);
@@ -250,7 +247,7 @@ WLine* w_line_copy(WLine* old)
 		new->data[i].time     = old->data[i].time;
 	}
 
-	//WLineHnd* new_hnd = w_line_hnd_create();
+	//WLineHnd* new_hnd = wsh_line_hnd_create();
 	//new_hnd->src      = new;
 
 	//if (old->brush != NULL) {
@@ -261,24 +258,24 @@ WLine* w_line_copy(WLine* old)
 	return new;
 }
 
-WLine* w_line_copy_percentage(WLine* old, double v)
+WLine* wsh_line_copy_percentage(WLine* old, double v)
 {
 	if (old == NULL)
 	{
 #ifdef DEBUG
-	printf("tried to copy a null line.\n");
+		printf("tried to copy a null line.\n");
 #endif
 		return NULL;
 	}
 	else if (old->data == NULL)
 	{
 #ifdef DEBUG
-	printf("Tried to copy a line with no data!\n");
+		printf("Tried to copy a line with no data!\n");
 #endif
 		return NULL;
 	}
 
-	WLine* new = w_line_create();
+	WLine* new = wsh_line_create();
 	//new->num	= old->num;
 	//new->reserved   = old->reserved;
 	//new->data       = malloc((sizeof *new->data) * new->reserved);
@@ -296,7 +293,7 @@ WLine* w_line_copy_percentage(WLine* old, double v)
 		WPoint p = old->data[i];
 		if (p.time > v)
 			break;
-		w_line_add_point(new, p);
+		wsh_line_add_point(new, p);
 		/*
 		new->data[i].x	= old->data[i].x;
 		new->data[i].y	= old->data[i].y;
@@ -308,7 +305,7 @@ WLine* w_line_copy_percentage(WLine* old, double v)
 		 */
 	}
 
-	//WLineHnd* new_hnd = w_line_hnd_create();
+	//WLineHnd* new_hnd = wsh_line_hnd_create();
 	//new_hnd->src      = new;
 
 	//if (old->brush != NULL) {
@@ -320,7 +317,7 @@ WLine* w_line_copy_percentage(WLine* old, double v)
 	return new;
 }
 
-void w_line_copy_attribs(WLine* to, WLine* from)
+void wsh_line_copy_attribs(WLine* to, WLine* from)
 {
 	to->has_stroke = from->has_stroke;
 	to->has_fill   = from->has_fill;
@@ -330,12 +327,12 @@ void w_line_copy_attribs(WLine* to, WLine* from)
 	//	todo : copy brush here too?  other stuff?
 }
 
-void w_line_destroy(WLine* line)
+void wsh_line_destroy(WLine* line)
 {
 	if (!line)
 	{
 #ifdef DEBUG
-	printf("I refuse to destroy something that is already "
+		printf("I refuse to destroy something that is already "
 		       "destroyed lol\n");
 #endif
 		return;
@@ -353,10 +350,9 @@ void w_line_destroy(WLine* line)
 	//	w_gpc_tess_destroy(line);
 	//}
 	free(line);
-	
 }
 
-void w_line_find_mins(WLine* line, double* o_x, double* o_y)
+void wsh_line_find_mins(WLine* line, double* o_x, double* o_y)
 {
 	unsigned long long np = line->num;
 	double		   mx, my;
@@ -381,19 +377,17 @@ void w_line_find_mins(WLine* line, double* o_x, double* o_y)
 	*o_y = my;
 }
 
-void w_line_rotate(WLine* line, double cx, double cy, double r)
+void wsh_line_rotate(WLine* line, double cx, double cy, double r)
 {
-	for (int i = 0; i < line->num; i++ )
+	for (int i = 0; i < line->num; i++)
 	{
 		WPoint* p = &line->data[i];
-		
-		w_point_rotate(p, cx, cy, r);
+
+		wsh_point_rotate(p, cx, cy, r);
 	}
-	
 }
 
-
-void w_line_move(WLine* line, double x, double y)
+void wsh_line_move(WLine* line, double x, double y)
 {
 	//printf("offset line by %f %f\n", x, y);
 	unsigned long long np = line->num;
@@ -404,16 +398,16 @@ void w_line_move(WLine* line, double x, double y)
 		p->x += x;
 		p->y += y;
 	}
-	w_line_calc_bounds(line);
+	wsh_line_calc_bounds(line);
 
 	//w_brush_update(line->brush);
 	//if ( line->brush )
 	//{
-	//	w_line_move(line->brush->stroke, x, y);
+	//	wsh_line_move(line->brush->stroke, x, y);
 	//	}
 }
 
-void w_line_scale(WLine* line, double x, double y)
+void wsh_line_scale(WLine* line, double x, double y)
 {
 	unsigned long long np = line->num;
 
@@ -423,15 +417,15 @@ void w_line_scale(WLine* line, double x, double y)
 		p->x *= x;
 		p->y *= y;
 	}
-	w_line_calc_bounds(line);
+	wsh_line_calc_bounds(line);
 }
 
-void w_line_normalize_time(WLine* l)
+void wsh_line_normalize_time(WLine* l)
 {
 	if (!l)
 	{
 #ifdef DEBUG
-	printf("Tried to normalize time for a NULL line.\n");
+		printf("Tried to normalize time for a NULL line.\n");
 #endif
 		return;
 	}
@@ -444,10 +438,10 @@ void w_line_normalize_time(WLine* l)
 }
 
 //	todo:	this method copies, maybe have one that does it inplace?
-WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
+WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
 {
 
-	WLine* normal = w_line_create();
+	WLine* normal = wsh_line_create();
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
 	//minx = maxx = miny = maxy = -77777;
@@ -508,7 +502,7 @@ WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
 	for (int j = 0; j < np; ++j)
 	{
 		WPoint* p  = &l->data[j];
-		WPoint* np = w_point_create();
+		WPoint* np = wsh_point_create();
 		np->x      = p->x;
 		np->y      = p->y;
 
@@ -521,7 +515,7 @@ WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
 		np->x /= dx;
 		np->y /= dy;
 
-		w_line_add_point(normal, *np);
+		wsh_line_add_point(normal, *np);
 	}
 	*o_dx = dx;
 	*o_dy = dy;
@@ -529,10 +523,10 @@ WLine* w_line_normalize(WLine* l, double* o_dx, double* o_dy)
 	return normal;
 }
 
-void w_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
+void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 {
 
-	// WLine* normal = w_line_create();
+	// WLine* normal = wsh_line_create();
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
 
@@ -592,7 +586,7 @@ void w_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 	for (int j = 0; j < np; ++j)
 	{
 		WPoint* p = &l->data[j];
-		// WPoint* np = w_point_create();
+		// WPoint* np = wsh_point_create();
 		// np->x = p->x;
 		// np->y = p->y;
 
@@ -605,7 +599,7 @@ void w_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 		p->x /= dx;
 		p->y /= dy;
 
-		// w_line_add_point(normal, *np);
+		// wsh_line_add_point(normal, *np);
 		//	redundant?
 		l->data[j].x = p->x;
 		l->data[j].y = p->y;

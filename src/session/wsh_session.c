@@ -1,13 +1,13 @@
 
-//  w_session.c
-//  w_session
+//  wsh_session.c
+//  wsh_session
 //
 //  Created by Andrew Macfarlane on 09/03/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 
-#include "w_session.h"
+#include "wsh_session.h"
 
-#include "../geo/w_document.h"
+#include "../geo/wsh_document.h"
 #include <errno.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -21,11 +21,11 @@ static const char*  path      = NULL;
 static int	  recording = 0;
 static void*	data      = NULL; //T B VERY MUCH D
 static WDocumentHnd document;
-static const char** tool_names = NULL;
-static int	  num_tools  = 0;
-const WshToolRec* current_tool_rec = NULL;
+static const char** tool_names       = NULL;
+static int	  num_tools	= 0;
+const WshToolRec*   current_tool_rec = NULL;
 
-int w_session_rec_tool_register(WshToolRec* rec)
+int wsh_session_rec_tool_register(WshToolRec* rec)
 {
 	if (strlen(rec->identifier) > IDENTIFIER_MAX)
 	{
@@ -55,14 +55,14 @@ int w_session_rec_tool_register(WshToolRec* rec)
 	}
 	tool_names[num_tools - 1] = rec->identifier;
 #ifdef DEBUG
-printf("Registered tool: %s\n", tool_names[num_tools - 1]);
+	printf("Registered tool: %s\n", tool_names[num_tools - 1]);
 #endif
 	return true;
 }
 
-int w_session_rec_tool_change(WshToolRec* rec, double ts)
+int wsh_session_rec_tool_change(WshToolRec* rec, double ts)
 {
-	if (current_tool_rec == rec )
+	if (current_tool_rec == rec)
 	{
 		printf("Already using this tool, not changing.\n");
 		return false;
@@ -71,17 +71,17 @@ int w_session_rec_tool_change(WshToolRec* rec, double ts)
 	return true;
 }
 
-int w_session_rec_tool_activity(WshToolRec* rec, double ts)
+int wsh_session_rec_tool_activity(WshToolRec* rec, double ts)
 {
 	return 0;
 }
 
-int w_session_rec_tool_cease(WshToolRec* rec, double ts)
+int wsh_session_rec_tool_cease(WshToolRec* rec, double ts)
 {
 	return 0;
 }
 
-int w_session_rec_tool_begin(WshToolRec* rec, double ts)
+int wsh_session_rec_tool_begin(WshToolRec* rec, double ts)
 {
 	return 0;
 }
@@ -117,7 +117,7 @@ static int check_if_directory_exists(const char* path)
 	return 0;
 }
 
-int w_session_set_path(const char* _path)
+int wsh_session_set_path(const char* _path)
 {
 	if (_path == NULL)
 		return 0;
@@ -129,7 +129,7 @@ int w_session_set_path(const char* _path)
 	return 0;
 }
 
-int w_session_init()
+int wsh_session_init()
 {
 	if (path == NULL)
 	{
@@ -137,11 +137,11 @@ int w_session_init()
 		return false;
 	}
 	printf("Pretending our session was successfully initialized!\n");
-	document.src = w_document_create();
+	document.src = wsh_document_create();
 	return true;
 }
 
-int w_session_deinit()
+int wsh_session_deinit()
 {
 	//	do stuff
 
@@ -151,7 +151,7 @@ int w_session_deinit()
 	return 1;
 }
 
-int w_session_start(double ts)
+int wsh_session_start(double ts)
 {
 	printf("Starting wsh recording session.\n");
 	if (recording)
@@ -164,7 +164,7 @@ int w_session_start(double ts)
 	return true;
 }
 
-int w_session_stop(double ts)
+int wsh_session_stop(double ts)
 {
 	if (!recording)
 	{
@@ -177,7 +177,7 @@ int w_session_stop(double ts)
 	return true;
 }
 
-void w_session_print_debug_info(void)
+void wsh_session_print_debug_info(void)
 {
 	printf("Tools:\n");
 	for (int i = 0; i < num_tools; i++)

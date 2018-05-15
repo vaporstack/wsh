@@ -10,26 +10,26 @@
 		4900CABD1F5F357C00DFC52C /* w_brush.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA841F5F355800DFC52C /* w_brush.c */; };
 		4900CABE1F5F357C00DFC52C /* w_brush_eng.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA861F5F355800DFC52C /* w_brush_eng.c */; };
 		4900CABF1F5F357C00DFC52C /* w_stroke.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA881F5F355800DFC52C /* w_stroke.c */; };
-		4900CAC01F5F357C00DFC52C /* w_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8B1F5F355800DFC52C /* w_color.c */; };
-		4900CAC11F5F357C00DFC52C /* w_document.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8D1F5F355800DFC52C /* w_document.c */; };
-		4900CAC21F5F357C00DFC52C /* w_layer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8F1F5F355800DFC52C /* w_layer.c */; };
-		4900CAC31F5F357C00DFC52C /* w_line.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA911F5F355800DFC52C /* w_line.c */; };
-		4900CAC41F5F357C00DFC52C /* w_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA931F5F355800DFC52C /* w_object.c */; };
-		4900CAC51F5F357C00DFC52C /* w_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA951F5F355800DFC52C /* w_point.c */; };
-		4900CAC61F5F357C00DFC52C /* w_point_a.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA971F5F355800DFC52C /* w_point_a.c */; };
-		4900CAC71F5F357C00DFC52C /* w_rect.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA991F5F355800DFC52C /* w_rect.c */; };
-		4900CAC81F5F357C00DFC52C /* w_sequence.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA9B1F5F355800DFC52C /* w_sequence.c */; };
-		4900CAC91F5F357C00DFC52C /* w_transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA9D1F5F355800DFC52C /* w_transform.c */; };
-		4900CACA1F5F357C00DFC52C /* w_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA01F5F355800DFC52C /* w_io.c */; };
-		4900CACB1F5F357C00DFC52C /* w_serial.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA31F5F355800DFC52C /* w_serial.c */; };
-		4900CACC1F5F357C00DFC52C /* w_serial_bin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA51F5F355800DFC52C /* w_serial_bin.c */; };
-		4900CACD1F5F357C00DFC52C /* w_serial_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA71F5F355800DFC52C /* w_serial_json.c */; };
-		4900CACE1F5F357C00DFC52C /* w_serial_svg.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA91F5F355800DFC52C /* w_serial_svg.c */; };
-		4900CACF1F5F357C00DFC52C /* w_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAAC1F5F355800DFC52C /* w_lib.c */; };
-		4900CAD01F5F357C00DFC52C /* w_session.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAAE1F5F355800DFC52C /* w_session.c */; };
-		4900CAD11F5F357C00DFC52C /* w_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB11F5F355800DFC52C /* w_anl.c */; };
+		4900CAC01F5F357C00DFC52C /* wsh_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8B1F5F355800DFC52C /* wsh_color.c */; };
+		4900CAC11F5F357C00DFC52C /* wsh_document.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8D1F5F355800DFC52C /* wsh_document.c */; };
+		4900CAC21F5F357C00DFC52C /* wsh_layer.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA8F1F5F355800DFC52C /* wsh_layer.c */; };
+		4900CAC31F5F357C00DFC52C /* wsh_line.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA911F5F355800DFC52C /* wsh_line.c */; };
+		4900CAC41F5F357C00DFC52C /* wsh_object.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA931F5F355800DFC52C /* wsh_object.c */; };
+		4900CAC51F5F357C00DFC52C /* wsh_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA951F5F355800DFC52C /* wsh_point.c */; };
+		4900CAC61F5F357C00DFC52C /* wsh_point_a.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA971F5F355800DFC52C /* wsh_point_a.c */; };
+		4900CAC71F5F357C00DFC52C /* wsh_rect.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA991F5F355800DFC52C /* wsh_rect.c */; };
+		4900CAC81F5F357C00DFC52C /* wsh_sequence.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA9B1F5F355800DFC52C /* wsh_sequence.c */; };
+		4900CAC91F5F357C00DFC52C /* wsh_transform.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CA9D1F5F355800DFC52C /* wsh_transform.c */; };
+		4900CACA1F5F357C00DFC52C /* wsh_io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA01F5F355800DFC52C /* wsh_io.c */; };
+		4900CACB1F5F357C00DFC52C /* wsh_serial.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA31F5F355800DFC52C /* wsh_serial.c */; };
+		4900CACC1F5F357C00DFC52C /* wsh_serial_bin.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA51F5F355800DFC52C /* wsh_serial_bin.c */; };
+		4900CACD1F5F357C00DFC52C /* wsh_serial_json.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA71F5F355800DFC52C /* wsh_serial_json.c */; };
+		4900CACE1F5F357C00DFC52C /* wsh_serial_svg.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAA91F5F355800DFC52C /* wsh_serial_svg.c */; };
+		4900CACF1F5F357C00DFC52C /* wsh_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAAC1F5F355800DFC52C /* wsh_lib.c */; };
+		4900CAD01F5F357C00DFC52C /* wsh_session.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAAE1F5F355800DFC52C /* wsh_session.c */; };
+		4900CAD11F5F357C00DFC52C /* wsh_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB11F5F355800DFC52C /* wsh_anl.c */; };
 		4900CAD21F5F357C00DFC52C /* w_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB31F5F355800DFC52C /* w_gpc.c */; };
-		4900CAD31F5F357C00DFC52C /* w_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB51F5F355800DFC52C /* w_line_ops.c */; };
+		4900CAD31F5F357C00DFC52C /* wsh_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB51F5F355800DFC52C /* wsh_line_ops.c */; };
 		4900CAD41F5F357C00DFC52C /* w_tess.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB71F5F355800DFC52C /* w_tess.c */; };
 		4900CAD51F5F357C00DFC52C /* w_triangle.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CAB91F5F355800DFC52C /* w_triangle.c */; };
 		4900CAD61F5F357C00DFC52C /* wsh.c in Sources */ = {isa = PBXBuildFile; fileRef = 4900CABC1F5F355800DFC52C /* wsh.c */; };
@@ -47,51 +47,51 @@
 		4900CA871F5F355800DFC52C /* w_brush_eng.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_brush_eng.h; sourceTree = "<group>"; };
 		4900CA881F5F355800DFC52C /* w_stroke.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_stroke.c; sourceTree = "<group>"; };
 		4900CA891F5F355800DFC52C /* w_stroke.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_stroke.h; sourceTree = "<group>"; };
-		4900CA8B1F5F355800DFC52C /* w_color.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_color.c; sourceTree = "<group>"; };
-		4900CA8C1F5F355800DFC52C /* w_color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_color.h; sourceTree = "<group>"; };
-		4900CA8D1F5F355800DFC52C /* w_document.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_document.c; sourceTree = "<group>"; };
-		4900CA8E1F5F355800DFC52C /* w_document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_document.h; sourceTree = "<group>"; };
-		4900CA8F1F5F355800DFC52C /* w_layer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_layer.c; sourceTree = "<group>"; };
-		4900CA901F5F355800DFC52C /* w_layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_layer.h; sourceTree = "<group>"; };
-		4900CA911F5F355800DFC52C /* w_line.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_line.c; sourceTree = "<group>"; };
-		4900CA921F5F355800DFC52C /* w_line.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_line.h; sourceTree = "<group>"; };
-		4900CA931F5F355800DFC52C /* w_object.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_object.c; sourceTree = "<group>"; };
-		4900CA941F5F355800DFC52C /* w_object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_object.h; sourceTree = "<group>"; };
-		4900CA951F5F355800DFC52C /* w_point.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_point.c; sourceTree = "<group>"; };
-		4900CA961F5F355800DFC52C /* w_point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_point.h; sourceTree = "<group>"; };
-		4900CA971F5F355800DFC52C /* w_point_a.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_point_a.c; sourceTree = "<group>"; };
-		4900CA981F5F355800DFC52C /* w_point_a.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_point_a.h; sourceTree = "<group>"; };
-		4900CA991F5F355800DFC52C /* w_rect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_rect.c; sourceTree = "<group>"; };
-		4900CA9A1F5F355800DFC52C /* w_rect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_rect.h; sourceTree = "<group>"; };
-		4900CA9B1F5F355800DFC52C /* w_sequence.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_sequence.c; sourceTree = "<group>"; };
-		4900CA9C1F5F355800DFC52C /* w_sequence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_sequence.h; sourceTree = "<group>"; };
-		4900CA9D1F5F355800DFC52C /* w_transform.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_transform.c; sourceTree = "<group>"; };
-		4900CA9E1F5F355800DFC52C /* w_transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_transform.h; sourceTree = "<group>"; };
-		4900CAA01F5F355800DFC52C /* w_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_io.c; sourceTree = "<group>"; };
-		4900CAA11F5F355800DFC52C /* w_io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_io.h; sourceTree = "<group>"; };
-		4900CAA31F5F355800DFC52C /* w_serial.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_serial.c; sourceTree = "<group>"; };
-		4900CAA41F5F355800DFC52C /* w_serial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_serial.h; sourceTree = "<group>"; };
-		4900CAA51F5F355800DFC52C /* w_serial_bin.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_serial_bin.c; sourceTree = "<group>"; };
-		4900CAA61F5F355800DFC52C /* w_serial_bin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_serial_bin.h; sourceTree = "<group>"; };
-		4900CAA71F5F355800DFC52C /* w_serial_json.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_serial_json.c; sourceTree = "<group>"; };
-		4900CAA81F5F355800DFC52C /* w_serial_json.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_serial_json.h; sourceTree = "<group>"; };
-		4900CAA91F5F355800DFC52C /* w_serial_svg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_serial_svg.c; sourceTree = "<group>"; };
-		4900CAAA1F5F355800DFC52C /* w_serial_svg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_serial_svg.h; sourceTree = "<group>"; };
-		4900CAAC1F5F355800DFC52C /* w_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_lib.c; sourceTree = "<group>"; };
-		4900CAAD1F5F355800DFC52C /* w_lib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_lib.h; sourceTree = "<group>"; };
-		4900CAAE1F5F355800DFC52C /* w_session.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_session.c; sourceTree = "<group>"; };
-		4900CAAF1F5F355800DFC52C /* w_session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_session.h; sourceTree = "<group>"; };
-		4900CAB11F5F355800DFC52C /* w_anl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_anl.c; sourceTree = "<group>"; };
-		4900CAB21F5F355800DFC52C /* w_anl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_anl.h; sourceTree = "<group>"; };
+		4900CA8B1F5F355800DFC52C /* wsh_color.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_color.c; sourceTree = "<group>"; };
+		4900CA8C1F5F355800DFC52C /* wsh_color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_color.h; sourceTree = "<group>"; };
+		4900CA8D1F5F355800DFC52C /* wsh_document.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_document.c; sourceTree = "<group>"; };
+		4900CA8E1F5F355800DFC52C /* wsh_document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_document.h; sourceTree = "<group>"; };
+		4900CA8F1F5F355800DFC52C /* wsh_layer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_layer.c; sourceTree = "<group>"; };
+		4900CA901F5F355800DFC52C /* wsh_layer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_layer.h; sourceTree = "<group>"; };
+		4900CA911F5F355800DFC52C /* wsh_line.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_line.c; sourceTree = "<group>"; };
+		4900CA921F5F355800DFC52C /* wsh_line.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_line.h; sourceTree = "<group>"; };
+		4900CA931F5F355800DFC52C /* wsh_object.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_object.c; sourceTree = "<group>"; };
+		4900CA941F5F355800DFC52C /* wsh_object.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_object.h; sourceTree = "<group>"; };
+		4900CA951F5F355800DFC52C /* wsh_point.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_point.c; sourceTree = "<group>"; };
+		4900CA961F5F355800DFC52C /* wsh_point.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_point.h; sourceTree = "<group>"; };
+		4900CA971F5F355800DFC52C /* wsh_point_a.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_point_a.c; sourceTree = "<group>"; };
+		4900CA981F5F355800DFC52C /* wsh_point_a.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_point_a.h; sourceTree = "<group>"; };
+		4900CA991F5F355800DFC52C /* wsh_rect.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_rect.c; sourceTree = "<group>"; };
+		4900CA9A1F5F355800DFC52C /* wsh_rect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_rect.h; sourceTree = "<group>"; };
+		4900CA9B1F5F355800DFC52C /* wsh_sequence.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_sequence.c; sourceTree = "<group>"; };
+		4900CA9C1F5F355800DFC52C /* wsh_sequence.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_sequence.h; sourceTree = "<group>"; };
+		4900CA9D1F5F355800DFC52C /* wsh_transform.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_transform.c; sourceTree = "<group>"; };
+		4900CA9E1F5F355800DFC52C /* wsh_transform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_transform.h; sourceTree = "<group>"; };
+		4900CAA01F5F355800DFC52C /* wsh_io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_io.c; sourceTree = "<group>"; };
+		4900CAA11F5F355800DFC52C /* wsh_io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_io.h; sourceTree = "<group>"; };
+		4900CAA31F5F355800DFC52C /* wsh_serial.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_serial.c; sourceTree = "<group>"; };
+		4900CAA41F5F355800DFC52C /* wsh_serial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_serial.h; sourceTree = "<group>"; };
+		4900CAA51F5F355800DFC52C /* wsh_serial_bin.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_serial_bin.c; sourceTree = "<group>"; };
+		4900CAA61F5F355800DFC52C /* wsh_serial_bin.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_serial_bin.h; sourceTree = "<group>"; };
+		4900CAA71F5F355800DFC52C /* wsh_serial_json.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_serial_json.c; sourceTree = "<group>"; };
+		4900CAA81F5F355800DFC52C /* wsh_serial_json.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_serial_json.h; sourceTree = "<group>"; };
+		4900CAA91F5F355800DFC52C /* wsh_serial_svg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_serial_svg.c; sourceTree = "<group>"; };
+		4900CAAA1F5F355800DFC52C /* wsh_serial_svg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_serial_svg.h; sourceTree = "<group>"; };
+		4900CAAC1F5F355800DFC52C /* wsh_lib.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_lib.c; sourceTree = "<group>"; };
+		4900CAAD1F5F355800DFC52C /* wsh_lib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_lib.h; sourceTree = "<group>"; };
+		4900CAAE1F5F355800DFC52C /* wsh_session.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_session.c; sourceTree = "<group>"; };
+		4900CAAF1F5F355800DFC52C /* wsh_session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_session.h; sourceTree = "<group>"; };
+		4900CAB11F5F355800DFC52C /* wsh_anl.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_anl.c; sourceTree = "<group>"; };
+		4900CAB21F5F355800DFC52C /* wsh_anl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_anl.h; sourceTree = "<group>"; };
 		4900CAB31F5F355800DFC52C /* w_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_gpc.c; sourceTree = "<group>"; };
 		4900CAB41F5F355800DFC52C /* w_gpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_gpc.h; sourceTree = "<group>"; };
-		4900CAB51F5F355800DFC52C /* w_line_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_line_ops.c; sourceTree = "<group>"; };
-		4900CAB61F5F355800DFC52C /* w_line_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_line_ops.h; sourceTree = "<group>"; };
+		4900CAB51F5F355800DFC52C /* wsh_line_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_line_ops.c; sourceTree = "<group>"; };
+		4900CAB61F5F355800DFC52C /* wsh_line_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_line_ops.h; sourceTree = "<group>"; };
 		4900CAB71F5F355800DFC52C /* w_tess.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_tess.c; sourceTree = "<group>"; };
 		4900CAB81F5F355800DFC52C /* w_tess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_tess.h; sourceTree = "<group>"; };
 		4900CAB91F5F355800DFC52C /* w_triangle.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = w_triangle.c; sourceTree = "<group>"; };
 		4900CABA1F5F355800DFC52C /* w_triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_triangle.h; sourceTree = "<group>"; };
-		4900CABB1F5F355800DFC52C /* w_includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = w_includes.h; sourceTree = "<group>"; };
+		4900CABB1F5F355800DFC52C /* wsh_includes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_includes.h; sourceTree = "<group>"; };
 		4900CABC1F5F355800DFC52C /* wsh.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh.c; sourceTree = "<group>"; };
 		4900CAD81F5F36E500DFC52C /* libcjson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcjson.a; path = ../../../../contrib/platform/darwin/libcjson.a; sourceTree = "<group>"; };
 		4900CADB1F5F37E700DFC52C /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
@@ -142,7 +142,7 @@
 				4900CAA21F5F355800DFC52C /* serial */,
 				4900CAAB1F5F355800DFC52C /* session */,
 				4900CAB01F5F355800DFC52C /* util */,
-				4900CABB1F5F355800DFC52C /* w_includes.h */,
+				4900CABB1F5F355800DFC52C /* wsh_includes.h */,
 				4900CABC1F5F355800DFC52C /* wsh.c */,
 			);
 			name = src;
@@ -165,26 +165,26 @@
 		4900CA8A1F5F355800DFC52C /* geo */ = {
 			isa = PBXGroup;
 			children = (
-				4900CA8B1F5F355800DFC52C /* w_color.c */,
-				4900CA8C1F5F355800DFC52C /* w_color.h */,
-				4900CA8D1F5F355800DFC52C /* w_document.c */,
-				4900CA8E1F5F355800DFC52C /* w_document.h */,
-				4900CA8F1F5F355800DFC52C /* w_layer.c */,
-				4900CA901F5F355800DFC52C /* w_layer.h */,
-				4900CA911F5F355800DFC52C /* w_line.c */,
-				4900CA921F5F355800DFC52C /* w_line.h */,
-				4900CA931F5F355800DFC52C /* w_object.c */,
-				4900CA941F5F355800DFC52C /* w_object.h */,
-				4900CA951F5F355800DFC52C /* w_point.c */,
-				4900CA961F5F355800DFC52C /* w_point.h */,
-				4900CA971F5F355800DFC52C /* w_point_a.c */,
-				4900CA981F5F355800DFC52C /* w_point_a.h */,
-				4900CA991F5F355800DFC52C /* w_rect.c */,
-				4900CA9A1F5F355800DFC52C /* w_rect.h */,
-				4900CA9B1F5F355800DFC52C /* w_sequence.c */,
-				4900CA9C1F5F355800DFC52C /* w_sequence.h */,
-				4900CA9D1F5F355800DFC52C /* w_transform.c */,
-				4900CA9E1F5F355800DFC52C /* w_transform.h */,
+				4900CA8B1F5F355800DFC52C /* wsh_color.c */,
+				4900CA8C1F5F355800DFC52C /* wsh_color.h */,
+				4900CA8D1F5F355800DFC52C /* wsh_document.c */,
+				4900CA8E1F5F355800DFC52C /* wsh_document.h */,
+				4900CA8F1F5F355800DFC52C /* wsh_layer.c */,
+				4900CA901F5F355800DFC52C /* wsh_layer.h */,
+				4900CA911F5F355800DFC52C /* wsh_line.c */,
+				4900CA921F5F355800DFC52C /* wsh_line.h */,
+				4900CA931F5F355800DFC52C /* wsh_object.c */,
+				4900CA941F5F355800DFC52C /* wsh_object.h */,
+				4900CA951F5F355800DFC52C /* wsh_point.c */,
+				4900CA961F5F355800DFC52C /* wsh_point.h */,
+				4900CA971F5F355800DFC52C /* wsh_point_a.c */,
+				4900CA981F5F355800DFC52C /* wsh_point_a.h */,
+				4900CA991F5F355800DFC52C /* wsh_rect.c */,
+				4900CA9A1F5F355800DFC52C /* wsh_rect.h */,
+				4900CA9B1F5F355800DFC52C /* wsh_sequence.c */,
+				4900CA9C1F5F355800DFC52C /* wsh_sequence.h */,
+				4900CA9D1F5F355800DFC52C /* wsh_transform.c */,
+				4900CA9E1F5F355800DFC52C /* wsh_transform.h */,
 			);
 			path = geo;
 			sourceTree = "<group>";
@@ -192,8 +192,8 @@
 		4900CA9F1F5F355800DFC52C /* io */ = {
 			isa = PBXGroup;
 			children = (
-				4900CAA01F5F355800DFC52C /* w_io.c */,
-				4900CAA11F5F355800DFC52C /* w_io.h */,
+				4900CAA01F5F355800DFC52C /* wsh_io.c */,
+				4900CAA11F5F355800DFC52C /* wsh_io.h */,
 			);
 			path = io;
 			sourceTree = "<group>";
@@ -201,14 +201,14 @@
 		4900CAA21F5F355800DFC52C /* serial */ = {
 			isa = PBXGroup;
 			children = (
-				4900CAA31F5F355800DFC52C /* w_serial.c */,
-				4900CAA41F5F355800DFC52C /* w_serial.h */,
-				4900CAA51F5F355800DFC52C /* w_serial_bin.c */,
-				4900CAA61F5F355800DFC52C /* w_serial_bin.h */,
-				4900CAA71F5F355800DFC52C /* w_serial_json.c */,
-				4900CAA81F5F355800DFC52C /* w_serial_json.h */,
-				4900CAA91F5F355800DFC52C /* w_serial_svg.c */,
-				4900CAAA1F5F355800DFC52C /* w_serial_svg.h */,
+				4900CAA31F5F355800DFC52C /* wsh_serial.c */,
+				4900CAA41F5F355800DFC52C /* wsh_serial.h */,
+				4900CAA51F5F355800DFC52C /* wsh_serial_bin.c */,
+				4900CAA61F5F355800DFC52C /* wsh_serial_bin.h */,
+				4900CAA71F5F355800DFC52C /* wsh_serial_json.c */,
+				4900CAA81F5F355800DFC52C /* wsh_serial_json.h */,
+				4900CAA91F5F355800DFC52C /* wsh_serial_svg.c */,
+				4900CAAA1F5F355800DFC52C /* wsh_serial_svg.h */,
 			);
 			path = serial;
 			sourceTree = "<group>";
@@ -216,10 +216,10 @@
 		4900CAAB1F5F355800DFC52C /* session */ = {
 			isa = PBXGroup;
 			children = (
-				4900CAAC1F5F355800DFC52C /* w_lib.c */,
-				4900CAAD1F5F355800DFC52C /* w_lib.h */,
-				4900CAAE1F5F355800DFC52C /* w_session.c */,
-				4900CAAF1F5F355800DFC52C /* w_session.h */,
+				4900CAAC1F5F355800DFC52C /* wsh_lib.c */,
+				4900CAAD1F5F355800DFC52C /* wsh_lib.h */,
+				4900CAAE1F5F355800DFC52C /* wsh_session.c */,
+				4900CAAF1F5F355800DFC52C /* wsh_session.h */,
 			);
 			path = session;
 			sourceTree = "<group>";
@@ -227,12 +227,12 @@
 		4900CAB01F5F355800DFC52C /* util */ = {
 			isa = PBXGroup;
 			children = (
-				4900CAB11F5F355800DFC52C /* w_anl.c */,
-				4900CAB21F5F355800DFC52C /* w_anl.h */,
+				4900CAB11F5F355800DFC52C /* wsh_anl.c */,
+				4900CAB21F5F355800DFC52C /* wsh_anl.h */,
 				4900CAB31F5F355800DFC52C /* w_gpc.c */,
 				4900CAB41F5F355800DFC52C /* w_gpc.h */,
-				4900CAB51F5F355800DFC52C /* w_line_ops.c */,
-				4900CAB61F5F355800DFC52C /* w_line_ops.h */,
+				4900CAB51F5F355800DFC52C /* wsh_line_ops.c */,
+				4900CAB61F5F355800DFC52C /* wsh_line_ops.h */,
 				4900CAB71F5F355800DFC52C /* w_tess.c */,
 				4900CAB81F5F355800DFC52C /* w_tess.h */,
 				4900CAB91F5F355800DFC52C /* w_triangle.c */,
@@ -354,27 +354,27 @@
 				4900CABD1F5F357C00DFC52C /* w_brush.c in Sources */,
 				4900CABE1F5F357C00DFC52C /* w_brush_eng.c in Sources */,
 				4900CABF1F5F357C00DFC52C /* w_stroke.c in Sources */,
-				4900CAC01F5F357C00DFC52C /* w_color.c in Sources */,
-				4900CAC11F5F357C00DFC52C /* w_document.c in Sources */,
-				4900CAC21F5F357C00DFC52C /* w_layer.c in Sources */,
-				4900CAC31F5F357C00DFC52C /* w_line.c in Sources */,
-				4900CAC41F5F357C00DFC52C /* w_object.c in Sources */,
-				4900CAC51F5F357C00DFC52C /* w_point.c in Sources */,
-				4900CAC61F5F357C00DFC52C /* w_point_a.c in Sources */,
-				4900CAC71F5F357C00DFC52C /* w_rect.c in Sources */,
-				4900CAC81F5F357C00DFC52C /* w_sequence.c in Sources */,
-				4900CAC91F5F357C00DFC52C /* w_transform.c in Sources */,
-				4900CACA1F5F357C00DFC52C /* w_io.c in Sources */,
-				4900CACB1F5F357C00DFC52C /* w_serial.c in Sources */,
-				4900CACC1F5F357C00DFC52C /* w_serial_bin.c in Sources */,
-				4900CACD1F5F357C00DFC52C /* w_serial_json.c in Sources */,
+				4900CAC01F5F357C00DFC52C /* wsh_color.c in Sources */,
+				4900CAC11F5F357C00DFC52C /* wsh_document.c in Sources */,
+				4900CAC21F5F357C00DFC52C /* wsh_layer.c in Sources */,
+				4900CAC31F5F357C00DFC52C /* wsh_line.c in Sources */,
+				4900CAC41F5F357C00DFC52C /* wsh_object.c in Sources */,
+				4900CAC51F5F357C00DFC52C /* wsh_point.c in Sources */,
+				4900CAC61F5F357C00DFC52C /* wsh_point_a.c in Sources */,
+				4900CAC71F5F357C00DFC52C /* wsh_rect.c in Sources */,
+				4900CAC81F5F357C00DFC52C /* wsh_sequence.c in Sources */,
+				4900CAC91F5F357C00DFC52C /* wsh_transform.c in Sources */,
+				4900CACA1F5F357C00DFC52C /* wsh_io.c in Sources */,
+				4900CACB1F5F357C00DFC52C /* wsh_serial.c in Sources */,
+				4900CACC1F5F357C00DFC52C /* wsh_serial_bin.c in Sources */,
+				4900CACD1F5F357C00DFC52C /* wsh_serial_json.c in Sources */,
 				4900CAE41F5F385F00DFC52C /* binn.c in Sources */,
-				4900CACE1F5F357C00DFC52C /* w_serial_svg.c in Sources */,
-				4900CACF1F5F357C00DFC52C /* w_lib.c in Sources */,
-				4900CAD01F5F357C00DFC52C /* w_session.c in Sources */,
-				4900CAD11F5F357C00DFC52C /* w_anl.c in Sources */,
+				4900CACE1F5F357C00DFC52C /* wsh_serial_svg.c in Sources */,
+				4900CACF1F5F357C00DFC52C /* wsh_lib.c in Sources */,
+				4900CAD01F5F357C00DFC52C /* wsh_session.c in Sources */,
+				4900CAD11F5F357C00DFC52C /* wsh_anl.c in Sources */,
 				4900CAD21F5F357C00DFC52C /* w_gpc.c in Sources */,
-				4900CAD31F5F357C00DFC52C /* w_line_ops.c in Sources */,
+				4900CAD31F5F357C00DFC52C /* wsh_line_ops.c in Sources */,
 				4900CAE91F5F38EB00DFC52C /* gpc.c in Sources */,
 				4900CAD41F5F357C00DFC52C /* w_tess.c in Sources */,
 				4900CAD51F5F357C00DFC52C /* w_triangle.c in Sources */,

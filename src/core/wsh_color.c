@@ -1,12 +1,12 @@
 //
-//  w_color.c
+//  wsh_color.c
 //  wash
 //
 //  Created by Andrew Macfarlane on 1/2/17.
 //  Copyright © 2017 vaporstack. All rights reserved.
 //
 
-#include "w_color.h"
+#include "wsh_color.h"
 
 #include <math.h>
 
@@ -23,15 +23,19 @@ hsv rgb2hsv(rgb in)
 
 	out.v = max; // v
 	delta = max - min;
-	if (delta < 0.00001) {
+	if (delta < 0.00001)
+	{
 		out.s = 0;
 		out.h = 0; // undefined, maybe nan?
 		return out;
 	}
 	if (max >
-	    0.0) { // NOTE: if Max is == 0, this divide would cause a crash
+	    0.0)
+	{ // NOTE: if Max is == 0, this divide would cause a crash
 		out.s = (delta / max); // s
-	} else {
+	}
+	else
+	{
 		// if max is 0, then r = g = b = 0
 		// s = 0, v is undefined
 		out.s = 0.0;
@@ -59,7 +63,8 @@ rgb hsv2rgb(hsv in)
 	long   i;
 	rgb    out;
 
-	if (in.s <= 0.0) { // < is bogus, just shuts up warnings
+	if (in.s <= 0.0)
+	{ // < is bogus, just shuts up warnings
 		out.r = in.v;
 		out.g = in.v;
 		out.b = in.v;
@@ -75,7 +80,8 @@ rgb hsv2rgb(hsv in)
 	q  = in.v * (1.0 - (in.s * ff));
 	t  = in.v * (1.0 - (in.s * (1.0 - ff)));
 
-	switch (i) {
+	switch (i)
+	{
 	case 0:
 		out.r = in.v;
 		out.g = t;
@@ -112,7 +118,7 @@ rgb hsv2rgb(hsv in)
 	return out;
 }
 
-void w_color_8_clear(WColor* c)
+void wsh_color_8_clear(WColor* c)
 {
 	c->r = 0;
 	c->g = 0;
@@ -120,11 +126,10 @@ void w_color_8_clear(WColor* c)
 	c->a = 1;
 }
 
-void w_color_16_clear(WColor16* c)
+void wsh_color_16_clear(WColor16* c)
 {
 	c->r = 0;
 	c->g = 0;
 	c->b = 0;
 	c->a = 1;
 }
-
