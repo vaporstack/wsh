@@ -64,15 +64,36 @@ if(${OperatingSystem} MATCHES "macos")
   FIND_LIBRARY(IO_LIB IOKit)
   FIND_LIBRARY(GL_LIB OpenGL)
   LINK_DIRECTORIES(${CMAKE_BINARY_DIR}
-                   ${CMAKE_BINARY_DIR}/contrib/glfw/src
                    ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
+                   ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm
+                   ${CMAKE_SOURCE_DIR}/demo/contrib/wcm/build
                    /usr/local/lib)
-
+message(                  "------" ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
+)
 endif()
 
 # add_subdirectory(contrib/wcm)
+# presumptuous to build dependencies without asking the user, removing
+# add_subdirectory(contrib/ftgl)
 
-add_subdirectory(contrib/ftgl)
+find_library(WCM_LIBRARY
+    NAMES wcm libwcm.dll libwcm.a
+      PATHS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
+                         ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
+                   ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm
+                   ${CMAKE_SOURCE_DIR}/demo/contrib/wcm/build)
+
+
+message(${WCM_LIBRARY})
+if ( WCM_LIBRARY )
+  message("Did find WCM, compiling with questionable tablet support.")
+  add_definitions(-DWSH_DEMO_ENABLE_WCM)
+  set(ADDITIONAL_LIBS ${WCM_LIBRARY})
+
+else()
+  message("Did not find WCM")
+
+endif()
 
 find_package(OpenGL)
 if(OPENGL_FOUND)
@@ -106,9 +127,9 @@ target_include_directories(wsh_demo PUBLIC
 if(${OperatingSystem} MATCHES "macos")
   target_link_libraries(wsh_demo
                         LINK_PUBLIC
-                        wsh
+                        ${ADDITIONAL_LIBS}
                         glfw
-                        wcm
+                        wsh
                         ftgl
                         ${GL_LIB}
                         ${COCOA_LIB}

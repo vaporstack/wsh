@@ -34,7 +34,7 @@ extern WashDemo mapping;
 
 #include <wsh/wsh.h>
 
-#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
+#ifdef WSH_DEMO_ENABLE_WCM
 //#error hi
 #include <wcm/wcm.h>
 #endif
@@ -134,7 +134,7 @@ static void mouse_button_callback(GLFWwindow* window, int button, int action, in
 	if (once == 0)
 	{
 		once = 1;
-#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
+#ifdef WSH_DEMO_ENABLE_WCM
 		wcm_init(window_w, window_h);
 #endif
 	}
@@ -381,7 +381,7 @@ int main(int argc, const char* argv[])
 	}
 
 	setup_callbacks();
-#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
+#ifdef WSH_DEMO_ENABLE_WCM
 	wcm_set_tablet_proximity_func(my_tablet_prox);
 	wcm_set_tablet_up_func(my_tablet_up);
 	wcm_set_tablet_down_func(my_tablet_down);
@@ -438,7 +438,7 @@ int main(int argc, const char* argv[])
 	recorder_deinit();
 	wash_demo_text_deinit();
 
-#ifdef WSH_DEMO_ENABLE_WCM_NOOOOOO
+#ifdef WSH_DEMO_ENABLE_WCM
 	wcm_deinit();
 #endif
 
