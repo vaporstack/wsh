@@ -124,7 +124,7 @@ static void start_faking_it(void)
 
 static void stop_faking_it(double x, double y)
 {
-	recorder_endrw_line(x, y);
+	recorder_end_line(x, y);
 
 	faking_it = false;
 	printf("No longer faking it.\n");
@@ -243,7 +243,7 @@ void my_tablet_up(double x, double y, int button, double p, double r, double tx,
 	normalize_coordinates(&mouse_x, &mouse_y);
 
 	printf("got rich up? %f %f %f %f %f %f\n", mouse_x, mouse_y, p, r, tx, ty);
-	recorder_endrw_line(mouse_x, mouse_y);
+	recorder_end_line(mouse_x, mouse_y);
 }
 
 static void have_pressure(void)
@@ -265,7 +265,7 @@ void my_tablet_down(double x, double y, int button, double p, double r, double t
 	normalize_coordinates(&mouse_x, &mouse_y);
 
 	printf("got rich down? %f %f %f %f %f %f\n", x, y, p, r, tx, ty);
-	recorder_recordrw_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
+	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 void my_tablet_motion(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
@@ -285,7 +285,7 @@ void my_tablet_drag(double x, double y, int button, double p, double r, double t
 	mouse_y = y;
 	normalize_coordinates(&mouse_x, &mouse_y);
 
-	recorder_recordrw_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
+	recorder_record_point(mouse_x, mouse_y, button, p, r, tx, ty, altitude, azimuth, idk);
 }
 
 static void setup_callbacks()

@@ -440,7 +440,12 @@ void wsh_line_normalize_time(WLine* l)
 //	todo:	this method copies, maybe have one that does it inplace?
 WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
 {
-
+	if ( !l )
+	{
+		printf("Can't normalize a NULL line!\n");
+		return NULL;
+	}
+	
 	WLine* normal = wsh_line_create();
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
@@ -517,8 +522,10 @@ WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
 
 		wsh_line_addrw_point(normal, *np);
 	}
-	*o_dx = dx;
-	*o_dy = dy;
+	if ( o_dx )
+		*o_dx = dx;
+	if (o_dy)
+		*o_dy = dy;
 
 	return normal;
 }

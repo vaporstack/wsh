@@ -13,6 +13,9 @@
 #define DEMO_NICENAME "Stroke Mapping"
 
 static WObject* source = NULL;
+static WLine* line = NULL;
+
+static void choose_random_line(void);
 
 static void tablet_prox(int v)
 {
@@ -49,6 +52,34 @@ static void mouse_move(double x, double y)
 
 static void mouse_button(int button, int action, int mods)
 {
+	if ( button > 0 || action == 1 )
+		return;
+	
+	//WLine* random = NULL;
+	if ( !source )
+	{
+		printf("No source, can't pick random line!\n");
+		return;
+	}
+	choose_random_line();
+	
+}
+
+static void choose_random_line(void)
+{
+	unsigned long num = source->num_lines;
+	double	v   = (double)rand() / RAND_MAX;
+	
+	unsigned which = v * num;
+	
+	//printf("drawing line %lu\n", which);
+	line = source->lines[which];
+	
+	
+	
+	
+	//WObject* tmp  = source;
+	
 }
 
 static void init(void)
@@ -93,19 +124,7 @@ static void update(void)
 
 static void draw(void)
 {
-	//WLine* random = NULL;
 
-	unsigned long num = source->num_lines;
-	double	v   = (double)rand() / RAND_MAX;
-
-	unsigned which = v * num;
-
-	//printf("drawing line %lu\n", which);
-	WLine*   line = source->lines[which];
-	WObject* tmp  = source;
-	drw_wline(line);
-
-	
 	
 	drw_line(mouse_x, mouse_y, window_w * .5 * dpi, window_h * .5 * dpi);
 	
@@ -117,7 +136,16 @@ static void draw(void)
 	//unsigned long which = rand
 	//if (!document.src)
 	//	return;
-
+	
+	if(line)
+	{
+		drw_wline(line);
+		WLine* cpy = wsh_line_normalize(line, NULL, NULL);
+		drw_wline(cpy);
+		drw_verts(cpy);
+		wsh_line_destroy(cpy);
+	}
+	
 	static double t = 0;
 	t += .05;
 

@@ -53,7 +53,7 @@ void recorder_record_manual_point(WPoint p)
 	wsh_line_addrw_point(src, p);
 }
 
-void recorder_recordrw_point(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
+void recorder_record_point(double x, double y, int button, double p, double r, double tx, double ty, double altitude, double azimuth, double idk)
 {
 
 	WLine* src = sanity_check();
@@ -71,7 +71,7 @@ void recorder_recordrw_point(double x, double y, int button, double p, double r,
 	wsh_line_addrw_point(src, *point);
 }
 
-void recorder_endrw_line(double x, double y)
+void recorder_end_line(double x, double y)
 {
 	WLine* src = sanity_check();
 	if (!src)
@@ -96,6 +96,7 @@ void recorder_endrw_line(double x, double y)
 
 	work_line.src = wsh_line_create();
 }
+
 WObject* recorder_get_art(void)
 {
 	return test_geometry.src;
