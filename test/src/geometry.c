@@ -14,7 +14,7 @@ int test_geometry(void)
 	WLine* line = wsh_line_create();
 
 	WObject* obj = wsh_object_create(NULL);
-	wsh_object_addrw_line(obj, line);
+	wsh_object_add_line(obj, line);
 
 	wsh_line_destroy(line);
 	wsh_object_destroy(obj);

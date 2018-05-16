@@ -62,7 +62,7 @@ void wsh_object_destroy(WObject* obj)
 	free(obj);
 }
 
-void wsh_object_addrw_line(WObject* obj, WLine* line)
+void wsh_object_add_line(WObject* obj, WLine* line)
 {
 	if (obj == NULL)
 	{
@@ -83,13 +83,14 @@ void wsh_object_addrw_line(WObject* obj, WLine* line)
 	}
 
 #ifdef DEBUG
-	if(line)
+	if (line)
 	{
-	if (line->num > 4096)
-	{
-		printf("abnormally huge line, what happened\n");
-	}}
-	
+		if (line->num > 4096)
+		{
+			printf("abnormally huge line, what happened\n");
+		}
+	}
+
 #endif
 
 	obj->lines[obj->num_lines - 1] = line;
@@ -240,7 +241,7 @@ WObject* wsh_object_copy(WObject* old)
 		WLine* oldrw_line = old->lines[i];
 		WLine* line       = wsh_line_copy(oldrw_line);
 		obj->lines[i]     = line;
-		// wsh_object_addrw_line(obj, line);
+		// wsh_object_add_line(obj, line);
 	}
 
 	return obj;

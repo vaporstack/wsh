@@ -324,7 +324,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	num = cJSON_GetArraySize(jframes);
 
 	seq->num_frames		 = num;
-	seq->current_frame_index = 0; // TODO read this back in properly?
+	seq->current_frame_index = 0;  // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
 	struct WObject** frames;
@@ -728,7 +728,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 			p.rotation =
 			    cJSON_GetArrayItem(jrotation, i)->valuedouble;
 
-		wsh_line_addrw_point(line, p);
+		wsh_line_add_point(line, p);
 	}
 
 	if (line->num > 100000000)
@@ -783,7 +783,7 @@ WObject* wsh_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 		cJSON* jl   = cJSON_GetArrayItem(jlines, i);
 		WLine* line = w_unserialize_line_json(jl);
 
-		wsh_object_addrw_line(obj, line);
+		wsh_object_add_line(obj, line);
 	}
 
 	if (DEBUG_SERIAL)

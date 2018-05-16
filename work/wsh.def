@@ -36,7 +36,7 @@ EXPORTS
 	w_node_destroy
 	*wsh_object_copy
 	*wsh_object_create
-	wsh_object_addrw_line
+	wsh_object_add_line
 	wsh_object_calc_bounds
 	wsh_object_destroy
 	wsh_object_destroy_void

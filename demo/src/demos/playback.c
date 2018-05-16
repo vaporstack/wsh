@@ -197,7 +197,7 @@ static void drawsh_points_until_given_time(WObject* obj, double t)
 			WPoint p = src->data[j];
 			if (p.time < t)
 			{
-				wsh_line_addrw_point(dst, p);
+				wsh_line_add_point(dst, p);
 			}
 		}
 

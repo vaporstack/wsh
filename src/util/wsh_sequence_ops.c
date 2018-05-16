@@ -36,7 +36,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 				continue;
 
 			printf("Line %d : %llu\n", j, nl->num);
-			wsh_object_addrw_line(res, wsh_line_copy(nl));
+			wsh_object_add_line(res, wsh_line_copy(nl));
 			total++;
 		}
 	}

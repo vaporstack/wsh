@@ -44,7 +44,7 @@ WObject* wsh_object_create(WObject* parent);
 void     wsh_object_destroy(WObject* obj);
 void     wsh_object_destroy_void(void* obj);
 
-void wsh_object_addrw_line(WObject*, WLine*);
+void wsh_object_add_line(WObject*, WLine*);
 void wsh_object_remove_line(WObject*, WLine*);
 
 void     wsh_object_center(WObject* obj);

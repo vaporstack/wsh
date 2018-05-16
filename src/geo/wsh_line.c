@@ -116,15 +116,15 @@ void wsh_line_calc_bounds(WLine* src)
 	src->bounds.size.x = maxx - minx;
 	src->bounds.size.y = maxy - miny;
 }
-void wsh_line_addrw_point2f(WLine* line, double x, double y)
+void wsh_line_add_point2f(WLine* line, double x, double y)
 {
 	WPoint p;
 	p.x = x;
 	p.y = y;
-	wsh_line_addrw_point(line, p);
+	wsh_line_add_point(line, p);
 }
 
-void wsh_line_addrw_point(WLine* line, WPoint p)
+void wsh_line_add_point(WLine* line, WPoint p)
 {
 	if (!line)
 	{
@@ -200,7 +200,7 @@ void wsh_line_concat(WLine* dst, WLine* src, ull start, ull end)
 	//while( start < end )
 	for (ull i = start; i < end; ++i)
 	{
-		wsh_line_addrw_point(dst, src->data[i]);
+		wsh_line_add_point(dst, src->data[i]);
 	}
 }
 
@@ -293,7 +293,7 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 		WPoint p = old->data[i];
 		if (p.time > v)
 			break;
-		wsh_line_addrw_point(new, p);
+		wsh_line_add_point(new, p);
 		/*
 		new->data[i].x	= old->data[i].x;
 		new->data[i].y	= old->data[i].y;
@@ -522,7 +522,7 @@ WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
 		np->x /= dx;
 		np->y /= dy;
 
-		wsh_line_addrw_point(normal, *np);
+		wsh_line_add_point(normal, *np);
 	}
 	if (o_dx)
 		*o_dx = dx;
@@ -608,7 +608,7 @@ void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 		p->x /= dx;
 		p->y /= dy;
 
-		// wsh_line_addrw_point(normal, *np);
+		// wsh_line_add_point(normal, *np);
 		//	redundant?
 		l->data[j].x = p->x;
 		l->data[j].y = p->y;
