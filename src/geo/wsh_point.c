@@ -52,6 +52,6 @@ void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees)
 	double angle_in_radians = angle_in_degrees * (M_PI / 180);
 	double cos_theta	= cos(angle_in_radians);
 	double sin_theta	= sin(angle_in_radians);
-	p->x			= (cos_theta * (p->x - cx) - sin_theta * (p->x - cy)) + cx;
-	p->y			= (sin_theta * (p->y - cx) + cos_theta * (p->y - cy)) + cy;
+	p->x			= (cos_theta * (p->x - cx) - cos_theta * (p->x - cx)) + cx;
+	p->y			= (sin_theta * (p->y - cx) + sin_theta * (p->y - cy)) + cy;
 }

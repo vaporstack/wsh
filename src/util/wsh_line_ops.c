@@ -67,7 +67,43 @@ WLine* wsh_line_ops_subdiv(WLine* line, double r)
 {
 	return NULL;
 }
+/*
+static double angle_from_points(double ax, double ay, double bx, double by)
+{
+	float dx    = bx- ax;
+	float dy    = by- ay;
+	float angle = atan2(dy, dx);
+	return  angle;
+}
+*/
 
+static inline float angle_from_points(int x1, int y1, int x2, int y2)
+{
+	float dx    = x2 - x1;
+	float dy    = y2 - y1;
+	float angle = atan2(dy, dx);
+	// return atan2(dy, dx);
+	
+	if (dy < 0) {
+		angle += 2 * (float)M_PI;
+	}
+	// map to [0, 1] range
+	angle /= (2 * (float)M_PI);
+	angle *= 360;
+	angle -= 270;
+	return angle;
+}
+double wsh_line_ops_angle(WLine* line)
+{
+	if (line->num < 2)
+	{
+		printf("Can't angle this line, not enough points!\n");
+		return -1;
+	}
+	WPoint a = line->data[0];
+	WPoint b = line->data[line->num - 1];
+	return angle_from_points(a.x, a.y, b.x, b.y);
+}
 double wsh_line_ops_length(WLine* line)
 {
 	if (line->num < 2)
@@ -80,6 +116,7 @@ double wsh_line_ops_length(WLine* line)
 
 	return wsh_ops_point_dist(a, b);
 }
+
 
 WLine* wsh_line_ops_straighten(WLine* line)
 {
