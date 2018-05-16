@@ -83,10 +83,13 @@ void wsh_object_addrw_line(WObject* obj, WLine* line)
 	}
 
 #ifdef DEBUG
+	if(line)
+	{
 	if (line->num > 4096)
 	{
 		printf("abnormally huge line, what happened\n");
-	}
+	}}
+	
 #endif
 
 	obj->lines[obj->num_lines - 1] = line;

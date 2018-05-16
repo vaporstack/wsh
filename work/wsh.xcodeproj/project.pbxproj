@@ -539,7 +539,7 @@
 					../../../contrib/deps,
 					../../../contrib,
 				);
-				OTHER_CFLAGS = "-DR4_PRESENT";
+				OTHER_CFLAGS = "-DRUMINANT4_PRESENT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;
 				r4_root = "$(HOME)/art/r4";
@@ -561,7 +561,7 @@
 					../../../contrib/deps,
 					../../../contrib,
 				);
-				OTHER_CFLAGS = "-DR4_PRESENT";
+				OTHER_CFLAGS = "-DRUMINANT4_PRESENT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SYMROOT = ../../../build;
 				r4_root = "$(HOME)/art/r4";

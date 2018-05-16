@@ -160,7 +160,7 @@ void drw_translate2f(float x, float y)
 void drw_verts(WLine* l)
 {
 	int i;
-	for (i = 0; i < l->num; ++i)
+	for (i = 0; i < l->num; i++)
 	{
 		WPoint* p = &l->data[i];
 		drw_push();

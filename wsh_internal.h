@@ -9,11 +9,10 @@
 #ifndef wsh_internal_h
 #define wsh_internal_h
 
-
 //hack / todo
-#define R4_PRESENT
+#define RUMINANT4_PRESENT
 
-#ifdef R4_PRESENT
+#ifdef RUMINANT4_PRESENT
 #ifndef WSH_ENABLE_SERIAL_BACKEND_JSON
 #define WSH_ENABLE_SERIAL_BACKEND_JSON
 #endif

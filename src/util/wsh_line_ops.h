@@ -23,6 +23,13 @@ WLine* wsh_line_ops_douglaspeucker(WLine*, double);
 
 /**
  *
+ *	return the angle of the start and end points of the line
+ *
+ */
+double wsh_line_ops_angle(WLine* l);
+
+/**
+ *
  *	return the total length of a line
  *
  */

@@ -64,7 +64,7 @@ static inline char* wsh_get_version_string_header(void)
 #include "src/util/wsh_sequence_ops.h"
 
 //	hack / todo
-//#define R4_PRESENT
+//#define RUMINANT4_PRESENT
 
 //#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 //	#include "wsrc/serial/wsh_serial_json.h"
