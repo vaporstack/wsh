@@ -182,7 +182,7 @@ static void draw(void)
 		double ang = wsh_line_ops_angle(cpy);
 		
 		
-		printf("%f\n", ang);
+		//printf("%f\n", ang);
 		//double ang_r = radians
 		wsh_line_rotate(cpy, 0,0 , -ang);
 

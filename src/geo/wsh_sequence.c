@@ -89,6 +89,7 @@ WSequence* wsh_sequence_create()
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 
 	seq->frames = calloc(seq->reserved, sizeof(WObject*));
+	seq->current_frame = seq->frames[seq->current_frame_index];
 
 	/*
 	seq->num_golden_frames = 3;
