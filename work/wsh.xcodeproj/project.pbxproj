@@ -167,10 +167,10 @@
 		577857B920AA828600218129 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				577857BA20AA828600218129 /* wsh_color.c */,
 				577857BB20AA828600218129 /* wsh_tool.h */,
-				577857BC20AA828600218129 /* wsh_color.h */,
 				577857BD20AA828600218129 /* wsh_tool.c */,
+				577857BC20AA828600218129 /* wsh_color.h */,
+				577857BA20AA828600218129 /* wsh_color.c */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -178,8 +178,8 @@
 		577857BE20AA828600218129 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				577857BF20AA828600218129 /* wsh_line_ops.h */,
 				577857C020AA828600218129 /* wsh_math.h */,
+				577857BF20AA828600218129 /* wsh_line_ops.h */,
 				577857C120AA828600218129 /* wsh_ops_point.h */,
 				577857C220AA828600218129 /* wsh_anl.c */,
 				577857C320AA828600218129 /* wsh_sequence_ops.c */,

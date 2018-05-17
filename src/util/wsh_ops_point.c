@@ -12,5 +12,5 @@
 
 double wsh_ops_point_dist(WPoint a, WPoint b)
 {
-	return w_dist2d_wp(&a, &b);
+	return wsh_dist2d_wp(&a, &b);
 }

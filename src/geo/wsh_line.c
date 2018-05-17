@@ -317,6 +317,29 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 	return new;
 }
 
+WLine* wsh_line_reverse(WLine* old )
+{
+	WLine* new = wsh_line_create();
+	//new->num	= old->num;
+	//new->reserved   = old->reserved;
+	//new->data       = malloc((sizeof *new->data) * new->reserved);
+	new->has_fill   = old->has_fill;
+	new->has_stroke = old->has_stroke;
+	new->stroke     = old->stroke;
+	new->fill       = old->fill;
+	new->closed     = old->closed;
+	new->fill       = old->fill;
+	new->stroke     = old->stroke;
+	
+	for (int i = 0; i < old->num; ++i)
+	{
+		WPoint p = old->data[old->num - i];
+		wsh_line_add_point(new, p);
+	}
+	return new;
+	
+}
+
 void wsh_line_copy_attribs(WLine* to, WLine* from)
 {
 	to->has_stroke = from->has_stroke;
@@ -389,7 +412,7 @@ void wsh_line_rotate(WLine* line, double cx, double cy, double r)
 
 void wsh_line_move(WLine* line, double x, double y)
 {
-	//printf("offset line by %f %f\n", x, y);
+
 	unsigned long long np = line->num;
 
 	for (int j = 0; j < np; ++j)
@@ -398,13 +421,9 @@ void wsh_line_move(WLine* line, double x, double y)
 		p->x += x;
 		p->y += y;
 	}
+	//	todo: take a stance on whether these methods should implicitly
+	//	recalculate bounds or if that's wasteful and up to the user
 	wsh_line_calc_bounds(line);
-
-	//w_brush_update(line->brush);
-	//if ( line->brush )
-	//{
-	//	wsh_line_move(line->brush->stroke, x, y);
-	//	}
 }
 
 void wsh_line_scale(WLine* line, double x, double y)

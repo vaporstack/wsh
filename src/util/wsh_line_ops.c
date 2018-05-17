@@ -17,7 +17,7 @@
 #define DEBUG_LINE_OPS true
 
 /*
-static inline double w_dist2d_p( WPoint* a, WPoint* b)
+static inline double wsh_dist2d_p( WPoint* a, WPoint* b)
 {
 	return sqrt( (fabs( a->x - b->x)) * (fabs( a->x - b->x)) +
 				(fabs( a->y - b->y)) * (fabs( a->y- b->y)) );
@@ -77,11 +77,28 @@ static double angle_from_points(double ax, double ay, double bx, double by)
 }
 */
 
-static inline float angle_from_points(int x1, int y1, int x2, int y2)
+
+static inline double angle_from_points(double x1, double y1, double x2, double y2)
 {
-	float dx    = x2 - x1;
-	float dy    = y2 - y1;
-	float angle = atan2(dy, dx);
+	double dx    = x2 - x1;
+	double dy    = y2 - y1;
+	double angle = atan2(dy, dx);
+	// return atan2(dy, dx);
+	
+	/*
+	if (dy < 0)
+	{
+		angle += 1.0 * (double)M_PI;
+	}
+	*/
+	return angle;
+}
+
+static inline double angle_from_points_degrees(double x1, double y1, double x2, double y2)
+{
+	double dx    = x2 - x1;
+	double dy    = y2 - y1;
+	double angle = atan2(dy, dx);
 	// return atan2(dy, dx);
 
 	if (dy < 0)
@@ -94,6 +111,7 @@ static inline float angle_from_points(int x1, int y1, int x2, int y2)
 	angle -= 270;
 	return angle;
 }
+
 double wsh_line_ops_angle(WLine* line)
 {
 	if (line->num < 2)
@@ -105,6 +123,7 @@ double wsh_line_ops_angle(WLine* line)
 	WPoint b = line->data[line->num - 1];
 	return angle_from_points(a.x, a.y, b.x, b.y);
 }
+
 double wsh_line_ops_length(WLine* line)
 {
 	if (line->num < 2)
@@ -305,7 +324,7 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
-		double d = w_dist2d_p(&a, &b);
+		double d = wsh_dist2d_p(&a, &b);
 		if (d > r)
 		{
 			wsh_line_add_point(cpy, b);
@@ -325,7 +344,7 @@ double wsh_line_ops_sum(WLine* line)
 	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
-		double d = w_dist2d_p(&a, &b);
+		double d = wsh_dist2d_p(&a, &b);
 		r += d;
 	}
 	return r;

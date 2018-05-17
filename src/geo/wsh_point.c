@@ -47,11 +47,36 @@ void wsh_point_zero(WPoint* p)
 	p->pressure = p->rotation = p->tilt_x = p->tilt_y = p->time = p->x = p->y = 0;
 }
 
-void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees)
+
+void wsh_point_rotate_degrees(WPoint* p, double cx, double cy, double angle_in_degrees)
 {
 	double angle_in_radians = angle_in_degrees * (M_PI / 180);
 	double cos_theta	= cos(angle_in_radians);
 	double sin_theta	= sin(angle_in_radians);
-	p->x			= (cos_theta * (p->x - cx) - cos_theta * (p->x - cx)) + cx;
-	p->y			= (sin_theta * (p->y - cx) + sin_theta * (p->y - cy)) + cy;
+	//p->x			= (cos_theta * (p->x - cx) - cos_theta * (p->x - cx)) + cx;
+	//p->y			= (sin_theta * (p->y - cx) + sin_theta * (p->y - cy)) + cy;
+	p->x   = (cos_theta * (p->x - cx)) + cx; // I think?
+	p->y   = (sin_theta * (p->y - cy)) + cy; // I think?
+	
+}
+
+void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_radians)
+{
+	//double angle_in_radians = angle_in_degrees * (M_PI / 180);
+	double cos_theta	= cos(angle_in_radians);
+	double sin_theta	= sin(angle_in_radians);
+	//p->x			= (cos_theta * (p->x - cx) - cos_theta * (p->x - cx)) + cx;
+	//p->y			= (sin_theta * (p->y - cx) + sin_theta * (p->y - cy)) + cy;
+	p->x   = (cos_theta * (p->x - cx)) + cx; // I think?
+	p->y   = (sin_theta * (p->y - cy)) + cy; // I think?
+	
+	
+	
+	 //this is the old one.
+	 //double angle_in_radians = angle_in_degrees * (M_PI / 180);
+	// double cos_theta	= cos(angle_in_radians);
+	// double sin_theta	= sin(angle_in_radians);
+	// p->x			= cos_theta * (p->x - cx) - sin_theta * (p->y - cy) + cx;
+	// p->y			= sin_theta * (p->x - cx) + cos_theta * (p->y - cy) + cy;
+	
 }

@@ -427,7 +427,7 @@ int main(int argc, const char* argv[])
 
 	drw_setup(window_w, window_h);
 
-	switch_demo(2);
+	switch_demo(0);
 
 	drw_color_clear(1, 1, 1, 1);
 	drw_color(0, 0, 0, 1);

@@ -140,10 +140,34 @@ static void draw(void)
 	//if (!document.src)
 	//	return;
 	
+	
+	
 	if(line)
 	{
-		WLine* cpy = wsh_line_copy(line);
+		
+		WPoint first = line->data[0];
+		WPoint last = line->data[line->num-1];
+		
+		WLine* cpy = NULL;
+		//if ( last.x <first.x || last.y < first.y )
+		//{
+		//	cpy = wsh_line_reverse(line);
+		//}else{
+			cpy = wsh_line_copy(line);
+			
+		//}
 		WLine* refcpy = wsh_line_copy(line);
+		if (!cpy)
+		{
+			free(cpy);
+		}
+		
+		if(!refcpy)
+		{
+			free(refcpy);
+			return;
+		}
+		
 		//wsh_line_move(cpy)
 		//printf("ang: %f\n", ang);
 		
@@ -152,25 +176,52 @@ static void draw(void)
 		//wsh_line_move(cpy, last.x, last.y);
 		
 		//	move the line to 0, 0, for ease of operations
-		WPoint first = cpy->data[0];
 		wsh_line_move(cpy, -first.x, -first.y);
 		wsh_line_move(refcpy, -first.x, -first.y);
+		
 		double ang = wsh_line_ops_angle(cpy);
+		
+		
+		printf("%f\n", ang);
+		//double ang_r = radians
 		wsh_line_rotate(cpy, 0,0 , -ang);
 
 		//	printf("cpy first: %f %f\n", cpy->data[0].x, cpy->data[0].y);
 		//wsh_line_move(cpy, first.x, first.y);
 		drw_push();
-		drw_translate(cx, cy, 0);
-		drw_wline(refcpy);
-		//drw_wline(line);
 
+		drw_translate(cx, cy, 0);
+		drw_line(0,0, cos(ang)* 512, sin(ang)* 512);
+
+		//drw_wline(line);
+		drw_color(1,0,0,1);
+		drw_wline(refcpy);
+		drw_verts(refcpy);
+		
+		double dx = mouse_x - cx;
+		double dy = mouse_y - cy;
+		double r = wsh_angle_from_points(mouse_x, mouse_y,cx, cy);
+		
+		drw_color(0,1,0,1);
 		drw_wline(cpy);
 		drw_verts(cpy);
-		drw_verts(refcpy);
 		drw_pop();
+		
+		WLine* out = wsh_line_normalize(cpy, 0, 0);
+		wsh_line_scale(out, dx, dy);
+		wsh_line_rotate(out, cx, cy, -r);
+		
+		drw_color(0,0,0,1);
+
+		drw_wline(out);
+		drw_verts(out);
+		
+
+		
+
 		wsh_line_destroy(cpy);
 		wsh_line_destroy(refcpy);
+		wsh_line_destroy(out);
 	}
 	
 	static double t = 0;

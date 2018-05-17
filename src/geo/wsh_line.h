@@ -69,6 +69,9 @@ void wsh_line_hnd_add_point(WLineHnd*, WPoint);
 void wsh_line_hnd_add_point2f(WLineHnd* hnd, double x, double y);
 void wsh_line_calc_bounds(WLine* src);
 void wsh_line_move(WLine* src, double x, double y);
+
+//	going forward, all rotation operations should be in radians unless otherwise specified
+//	by the _degree suffix
 void wsh_line_rotate(WLine* line, double cx, double cy, double r);
 
 void wsh_line_scale(WLine* src, double x, double y);
@@ -76,6 +79,7 @@ void wsh_line_scale(WLine* src, double x, double y);
 void   wsh_line_find_mins(WLine* src, double* x, double* y);
 void   wsh_line_find_maxs(WLine* src, double* x, double* y);
 WLine* wsh_line_create(void);
+WLine* wsh_line_reverse(WLine*);
 WLine* wsh_line_copy(WLine*);
 WLine* wsh_line_copy_percentage(WLine*, double v);
 void   wsh_line_concat(WLine* dst, WLine* src, ull, ull);
