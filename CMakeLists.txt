@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 
 set(project_name wsh)
 
-project("wsh")
+project(${project_name})
 
 set (${project_name}_VERSION_MAJOR 0)
 set (${project_name}_VERSION_MINOR 0)
@@ -49,7 +49,7 @@ endif()
 
 if(BuildLibrary)
 	message("Adding library target.")
-	file(GLOB sources *.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
+	file(GLOB sources wsh.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 	add_library(${project_name} STATIC ${sources})
 	# add_library(wsh SHARED ${sources})
 endif()

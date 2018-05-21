@@ -31,7 +31,7 @@ enum PlaybackTypes
 	NONE
 };
 
-static void drawsh_points_until_given_time(WObject* obj, double t);
+static void draw_points_until_given_time(WObject* obj, double t);
 static void reset_playback(void);
 static void toggle_playback_mode(void);
 
@@ -178,7 +178,7 @@ static void reset_playback(void)
 	start = glfwGetTime();
 }
 
-static void drawsh_points_until_given_time(WObject* obj, double t)
+static void draw_points_until_given_time(WObject* obj, double t)
 {
 	//being a bit dirty here, doing logic in a drawing function,
 	// maybe better than doing all this iteration twice/
@@ -273,7 +273,7 @@ static void draw(void)
 		break;
 	}
 
-	drawsh_points_until_given_time(timeslice, (playhead - start) * .25);
+	draw_points_until_given_time(timeslice, (playhead - start) * .25);
 
 	wash_demo_text("space - toggle modes", frame_w * .125, frame_h * (1 - .125));
 	wash_demo_text("left/right - switch art", frame_w * .125, frame_h * (1 - .125 * 2));

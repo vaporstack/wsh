@@ -8,6 +8,18 @@ set(wsh_demo_VERSION_MAJOR 0)
 set(wsh_demo_VERSION_MINOR 0)
 set(wsh_demo_VERSION_PATCH 1)
 
+macro(use_c99)
+  if (CMAKE_VERSION VERSION_LESS "3.1")
+    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set (CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+    endif ()
+  else ()
+    set (CMAKE_C_STANDARD 99)
+  endif ()
+endmacro(use_c99)
+
+use_c99()
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake/Modules/")
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
