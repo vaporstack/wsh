@@ -14,6 +14,19 @@ option(BuildDocumentation "BuildDocumentation" OFF)
 option(BuildDemo "BuildDemo" ON)
 option(BuildTest "BuildTest" ON)
 
+macro(use_c99)
+  if(CMAKE_VERSION VERSION_LESS "3.1")
+    if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+    endif()
+  else()
+    set(CMAKE_C_STANDARD 99)
+  endif()
+endmacro(use_c99)
+
+use_c99()
+
+
 if(${BuildTest})
 	add_subdirectory(test)
 endif()
@@ -46,14 +59,12 @@ if (${have_r4_environment})
 endif()
 
 
-
 if(BuildLibrary)
 	message("Adding library target.")
 	file(GLOB sources wsh.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 	add_library(${project_name} STATIC ${sources})
 	# add_library(wsh SHARED ${sources})
 endif()
-
 
 
 if ( ${have_r4_environment} )

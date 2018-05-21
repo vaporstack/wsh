@@ -9,13 +9,13 @@ set(wsh_demo_VERSION_MINOR 0)
 set(wsh_demo_VERSION_PATCH 1)
 
 macro(use_c99)
-  if (CMAKE_VERSION VERSION_LESS "3.1")
-    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
-      set (CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
-    endif ()
-  else ()
-    set (CMAKE_C_STANDARD 99)
-  endif ()
+  if(CMAKE_VERSION VERSION_LESS "3.1")
+    if(CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_C_FLAGS "-std=gnu99 ${CMAKE_C_FLAGS}")
+    endif()
+  else()
+    set(CMAKE_C_STANDARD 99)
+  endif()
 endmacro(use_c99)
 
 use_c99()
@@ -93,7 +93,9 @@ find_library(WCM_LIBRARY
       PATHS ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
                          ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm/build
                    ${CMAKE_CURRENT_SOURCE_DIR}/contrib/wcm
-                   ${CMAKE_SOURCE_DIR}/demo/contrib/wcm/build)
+                   ${CMAKE_SOURCE_DIR}/demo/contrib/wcm/build
+                   ${CMAKE_CURRENT_SOURCE_DIR}/demo/contrib/wcm/build)
+
 
 
 message(${WCM_LIBRARY})
@@ -152,6 +154,6 @@ if(${OperatingSystem} MATCHES "macos")
 endif(${OperatingSystem} MATCHES "macos")
 
 if(${OperatingSystem} MATCHES "linux")
-  target_link_libraries(wsh_demo LINK_PUBLIC wsh glfw wcm GL m X11 Xi)
+  target_link_libraries(wsh_demo LINK_PUBLIC wsh glfw3 ${WCM_LIBRARY} GL m X11 Xi)
 
 endif()
