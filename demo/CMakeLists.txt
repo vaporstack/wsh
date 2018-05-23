@@ -49,15 +49,17 @@ IF(OperatingSystem STREQUAL "linux") # SET(OperatingSystem "linux")
   elseif(${CMAKE_DEB_HOST_ARCH} MATCHES "i386")
     set(link_directory /usr/lib/
         ${CMAKE_SOURCE_DIR}/contrib/platform/linux2/x86) # message("eighty sixed
-                                                         # WOOOOO")
-  else() # message("SIXTY FOUR?!")
+        message("FFFFFFFFFFFFFFFFFFFFFFf ${CMAKE_DEB_HOST_ARCH}")# message("SIXTY FOUR?!")
+                                                     # WOOOOO")
+  else()
+    message("ASDDDDDDDDDDDDDDDDDDDDDDDDDDD ${CMAKE_DEB_HOST_ARCH}")# message("SIXTY FOUR?!")
     set(link_directory /usr/lib/x86_64-linux-gnu/
         ${CMAKE_SOURCE_DIR}/contrib/platform/linux2/x86_64)
 
   endif()
 
-  link_directories(${link_directory} ${CMAKE_BINARY_DIR}
-                   ${CMAKE_SOURCE_DIR}/contrib/platform/linux2/x86_64)
+  #link_directories(${link_directory} ${CMAKE_BINARY_DIR}
+  #                 ${CMAKE_SOURCE_DIR}/contrib/platform/linux2/x86_64)
   set(platform_libs X11 Xrandr Xi Xinerama z GLEW Xcursor)
 ENDIF(OperatingSystem STREQUAL "linux")
 

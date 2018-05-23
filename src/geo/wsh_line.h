@@ -82,7 +82,8 @@ WLine* wsh_line_create(void);
 WLine* wsh_line_reverse(WLine*);
 WLine* wsh_line_copy(WLine*);
 WLine* wsh_line_copy_percentage(WLine*, double v);
-void   wsh_line_concat(WLine* dst, WLine* src, ull, ull);
+void   wsh_line_concat(WLine* dst, WLine* src);
+void   wsh_line_concat_slice(WLine* dst, WLine* src, long start, long end);
 
 void   wsh_line_destroy(WLine*);
 void   wsh_line_add_point(WLine* line, WPoint p);

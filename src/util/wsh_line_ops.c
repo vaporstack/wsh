@@ -261,8 +261,8 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 		wsh_line_concat(s2, line, index, num);
 		WLine* l2 = wsh_line_ops_douglaspeucker(s2, e);
 
-		wsh_line_concat(res, l1, 0, l1->num - 1);
-		wsh_line_concat(res, l2, 0, l2->num);
+		wsh_line_concat(res, l1, -1, -1);
+		wsh_line_concat(res, l2, -1, -1);
 
 		free(s1);
 		free(s2);

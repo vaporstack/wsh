@@ -193,12 +193,21 @@ void wsh_line_add_point(WLine* line, WPoint p)
  }
  #endif
  */
+#include <assert.h>
 
-void wsh_line_concat(WLine* dst, WLine* src, ull start, ull end)
+void wsh_line_concat(WLine* dst, WLine* src, long start, long end)
 {
+	
+	
+	if (start < 0 )
+		start = 0;
 
+	if (end < 0 )
+		end = src->num;
+	
+	assert(end > start);
 	//while( start < end )
-	for (ull i = start; i < end; ++i)
+	for (long i = start; i < end; ++i)
 	{
 		wsh_line_add_point(dst, src->data[i]);
 	}
