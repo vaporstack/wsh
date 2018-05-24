@@ -254,15 +254,15 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 
 		WLine* res = wsh_line_create();
 		WLine* s1  = wsh_line_create();
-		wsh_line_concat(s1, line, 0, index);
+		wsh_line_concat_range(s1, line, 0, index);
 		WLine* l1 = wsh_line_ops_douglaspeucker(s1, e);
 
 		WLine* s2 = wsh_line_create();
-		wsh_line_concat(s2, line, index, num);
+		wsh_line_concat_range(s2, line, index, num);
 		WLine* l2 = wsh_line_ops_douglaspeucker(s2, e);
 
-		wsh_line_concat(res, l1, -1, -1);
-		wsh_line_concat(res, l2, -1, -1);
+		wsh_line_concat(res, l1);
+		wsh_line_concat(res, l2);
 
 		free(s1);
 		free(s2);
@@ -278,7 +278,7 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 	else
 	{
 		WLine* res = wsh_line_create();
-		wsh_line_concat(res, line, 0, num);
+		wsh_line_concat(res, line);
 		wsh_line_copy_attribs(res, line);
 		return res;
 	}
