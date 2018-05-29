@@ -16,6 +16,8 @@
 #include <stdio.h>
 #endif
 
+#include <assert.h>
+
 WObject* wsh_object_create(WObject* parent)
 {
 	WObject* obj;
@@ -633,6 +635,9 @@ void wsh_object_normalize(WObject* obj)
 
 void wsh_object_calc_bounds(WObject* obj)
 {
+    assert(obj != NULL);
+    
+    
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
 	minx = miny = INFINITY;
