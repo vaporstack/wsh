@@ -11,7 +11,7 @@ set (${project_name}_VERSION_PATCH 1)
 
 option(BuildLibrary "Build ${project_name} static library" ON)
 option(BuildDocumentation "BuildDocumentation" OFF)
-option(BuildDemo "BuildDemo" ON)
+option(BuildDemo "BuildDemo" OFF)
 option(BuildTest "BuildTest" ON)
 
 macro(use_c99)
