@@ -31,6 +31,7 @@
 		57862B1120813A9A000DF3E0 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 57862B1020813A9A000DF3E0 /* libc++.tbd */; };
 		578BCE552061788000672199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE4F2061788000672199 /* Assets.xcassets */; };
 		578BCE562061788000672199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 578BCE502061788000672199 /* MainMenu.xib */; };
+		57A7611C20D0713C0065CE3E /* tiling.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A7611B20D0713C0065CE3E /* tiling.c */; };
 		57B1760020797AF800BCF8E8 /* libglfw.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B175FF20797AF800BCF8E8 /* libglfw.dylib */; };
 		57CE090A20A6175300243A4A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57CE090920A6175200243A4A /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		578BCE512061788000672199 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		578BCE522061788000672199 /* wsh_demo.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = wsh_demo.entitlements; sourceTree = "<group>"; };
 		578BCE542061788000672199 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57A7611B20D0713C0065CE3E /* tiling.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tiling.c; sourceTree = "<group>"; };
 		57B175FF20797AF800BCF8E8 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw.dylib; path = ../../../../../../../../../usr/local/lib/libglfw.dylib; sourceTree = "<group>"; };
 		57BE55F22076EEFE003E3408 /* demo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = demo.h; path = ../demo/src/demo.h; sourceTree = "<group>"; };
 		57CE090920A6175200243A4A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -185,6 +187,7 @@
 				5721DC782076D6B000C141BB /* resize.c */,
 				5721DC792076D6B000C141BB /* brush.c */,
 				5721DC7A2076D6B000C141BB /* animation.c */,
+				57A7611B20D0713C0065CE3E /* tiling.c */,
 				5778576920AA6B9E00218129 /* mapping.c */,
 				5721DC7B2076D6B000C141BB /* playback.c */,
 				5721DC7C2076D6B000C141BB /* operations.c */,
@@ -360,6 +363,7 @@
 				5721DC7D2076D6B000C141BB /* simulator.c in Sources */,
 				5760ECF02063343300430B0A /* wsh_demo_common.c in Sources */,
 				5778576A20AA6B9E00218129 /* mapping.c in Sources */,
+				57A7611C20D0713C0065CE3E /* tiling.c in Sources */,
 				5721DC802076D6B000C141BB /* brush.c in Sources */,
 				5721DC812076D6B000C141BB /* animation.c in Sources */,
 				5721DC822076D6B000C141BB /* playback.c in Sources */,

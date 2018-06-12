@@ -26,6 +26,8 @@ extern WashDemo operations;
 extern WashDemo session;
 extern WashDemo simulator;
 extern WashDemo mapping;
+extern WashDemo tiling;
+
 //#include "demos/animation.c"
 //#include "demos/resize.h"
 //#include "demos/brush.h"
@@ -55,8 +57,8 @@ GLFWwindow*   window	 = NULL;
 
 WDocumentHnd document;
 
-#define NUM_DEMOS 8
-WashDemo* demos[NUM_DEMOS] = {&mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
+#define NUM_DEMOS 9
+WashDemo* demos[NUM_DEMOS] = {&tiling, &mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
 WashDemo* current_demo     = NULL;
 
 
@@ -348,7 +350,10 @@ static void draw(void)
 	drw_pop();
 	drw_color(0, 0, 0, 1);
 
-	wash_demo_text("switch demo: 1-6", 32, 32);
+	char buf[256];
+	sprintf(buf, "switch demo: 1-6 [%d] %s", current_demo_index, current_demo->name);
+	
+	wash_demo_text(buf, 32, 32);
 }
 
 static void switch_demo(int i)

@@ -20,7 +20,11 @@ void drw_set_dpiscale(double v);
 
 void drw_push(void);
 void drw_pop(void);
+void drw_scale(double x, double y, double z);
+void drw_scale_u(double v);
+
 void drw_translate(double x, double y, double z);
+void drw_translate2f(double x, double y);
 void drw_color(double r, double g, double b, double a);
 
 void drw_line(double ax, double ay, double bx, double by);

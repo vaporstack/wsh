@@ -123,6 +123,19 @@ void drw_translate(double x, double y, double z)
 {
 	glTranslatef(x, y, z);
 }
+void drw_scale(double x, double y, double z)
+{
+	glScaled(x,y,z);
+}
+void drw_scale_u(double v)
+{
+	glScaled(v,v,v);
+}
+
+void drw_translate2f(double x, double y)
+{
+	glTranslatef(x, y, 0);
+}
 
 void drw_color(double r, double g, double b, double a)
 {
@@ -151,12 +164,12 @@ void drw_square(float r)
 {
 	drw_rect(r * -.5, r * -.5, r * .5, r * .5);
 }
-
-void drw_translate2f(float x, float y)
+/*
+void drw_translate2f(double x, double y)
 {
 	glTranslatef(x, y, 0);
 }
-
+*/
 void drw_verts(WLine* l)
 {
 	int i;
@@ -262,6 +275,7 @@ void drw_wobject(WObject* obj)
 		printf("Error, tried to render a null obj!\n");
 		return;
 	}
+	
 	if (!obj->lines)
 	{
 		// printf("no lines either!?\n");
