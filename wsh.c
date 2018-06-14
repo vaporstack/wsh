@@ -32,4 +32,14 @@ void init_wash(){
     // printf("asdfasdfasdfasdfasdfasfasdf");
 };
 
+
+struct {
+	const char* string;
+	const unsigned major;
+	const unsigned minor;
+	const unsigned revision;
+} wsh_version = {
+	WSH_VERSION, WSH_VERSION_MAJOR, WSH_VERSION_MINOR, WSH_VERSION_PATCH
+};
+
 #endif /* wsh_includes_h */

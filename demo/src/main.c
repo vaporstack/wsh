@@ -399,6 +399,10 @@ static void switch_demo(int i)
 int main(int argc, const char* argv[])
 {
 
+	//	check build library compatibility
+	wsh_version_check(WSH_VERSION_MAJOR, WSH_VERSION_MINOR);
+	
+	
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;

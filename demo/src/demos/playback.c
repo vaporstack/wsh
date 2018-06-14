@@ -144,11 +144,11 @@ static void demo_specific_post_load_quirks(void)
 
 static void init(void)
 {
-	if ( !document.src )
-	{
+	//if ( !document.src )
+	//{
 		wsh_demo_load_document("data/wash/crab.wash");
 
-	}
+	//}
 	/*
 	printf("Realtime playback init!\n");
 	if (!document.src)
