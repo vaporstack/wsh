@@ -75,7 +75,7 @@ static void drop(int num, const char** paths)
 	
 }
 
-WashDemo brush =
+WshDemo brush =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,

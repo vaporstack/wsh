@@ -15,7 +15,7 @@
 #define DEMO_NAME "animation"
 #define DEMO_NICENAME "Cel Animation"
 
-static WDocumentHnd document;
+//static WDocumentHnd document;
 
 static void tablet_prox(int v)
 {
@@ -56,16 +56,20 @@ static void mouse_button(int button, int action, int mods)
 
 static void init(void)
 {
-	if (!document.src)
+	
+	wsh_demo_load_document("data/wash/squares-anim.wash");
+	
+	/*if (!document.src)
 	{
-		document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
+		document.src = wsh_serial_document_unserialize();
 		if (!document.src)
 		{
 			printf("Load failed!\n");
 			return;
 		}
 	}
-
+*/
+	
 	printf("%s init!\n", DEMO_NICENAME);
 
 	//wsh_sequence_normalize(document.src->sequence.src);
@@ -101,11 +105,11 @@ static void init(void)
 static void deinit(void)
 {
 	printf("%s deinit!\n", DEMO_NICENAME);
-	if (document.src)
-	{
-		wsh_document_destroy(document.src);
-		document.src = NULL;
-	}
+	//if (document.src)
+	//{
+	//	wsh_document_destroy(document.src);
+	//	document.src = NULL;
+	//}
 }
 
 static void drop(int num, const char** paths)
@@ -144,7 +148,7 @@ static void draw(void)
 	drw_wobject(frame);
 }
 
-WashDemo animation =
+WshDemo animation =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,

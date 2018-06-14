@@ -84,18 +84,19 @@ static void choose_random_line(void)
 
 static void init(void)
 {
-	WDocumentHnd document;
-
-	document.src = wsh_serial_document_unserialize("data/wash/hatching.wash");
-	if (!document.src)
-	{
-		printf("Load failed!\n");
-		return;
-	}
+	//WDocumentHnd document;
+	wsh_demo_load_document("data/wash/hatching.wash");
+	
+	//document.src = wsh_serial_document_unserialize("data/wash/hatching.wash");
+	//if (!document.src)
+	//{
+	//	printf("Load failed!\n");
+	//	return;
+	//}
 
 	source = wsh_sequence_ops_collapse(document.src->sequence.src);
 
-	wsh_document_destroy(document.src);
+	//wsh_document_destroy(document.src);
 	printf("%s init!\n", DEMO_NICENAME);
 	//WObject* tmp = source;
 
@@ -230,7 +231,7 @@ static void draw(void)
 	//	do stuff
 }
 
-WashDemo mapping =
+WshDemo mapping =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,

@@ -44,7 +44,7 @@ static inline char* wsh_get_version_string_header(void)
 #define THE ANSWER_STR STR2(THE_ANSWER)
 */
 
-//#error W_LIBWASH_SVER(WASH_V_MAJOR, WASH_V_MINOR, WASH_V_PATCH)
+//#error W_LIBWSH_SVER(WSH_V_MAJOR, WSH_V_MINOR, WSH_V_PATCH)
 
 #include "src/geo/wsh_document.h"
 #include "src/geo/wsh_line.h"

@@ -40,7 +40,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 				continue;
 
 #ifdef DEBUG
-			printf("Line %d : %llu\n", j, nl->num);
+			//printf("Line %d : %llu\n", j, nl->num);
 #endif
 			wsh_object_add_line(res, wsh_line_copy(nl));
 			total++;

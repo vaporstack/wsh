@@ -152,7 +152,7 @@ static void drop(int num, const char** paths)
 {
 }
 
-WashDemo session =
+WshDemo session =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,

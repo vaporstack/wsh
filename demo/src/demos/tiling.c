@@ -14,7 +14,8 @@
 
 #define DEMO_NAME "tiling"
 #define DEMO_NICENAME "Tiling"
-static WDocumentHnd document;
+
+//static WDocumentHnd document;
 
 
 static void tablet_prox(int v)
@@ -82,6 +83,8 @@ static void draw(void)
 	WSequence* seq = document.src->sequence.src;
 	int num = seq->num_frames;
 	int idx = 0;
+	
+	
 	for ( int y = 0; y < TMP_ROWS; y++)
 	{
 		for(int x = 0; x < TMP_COLS; x++)
@@ -90,11 +93,20 @@ static void draw(void)
 				continue;
 			int px = x * sx;
 			int py = y * sy;
-			drw_push();
-			drw_translate2f(px,py);
-			WObject* frame = seq->frames[idx];
-			drw_scale_u(sx);
 			
+			WObject* frame = seq->frames[idx];
+			//safety first!
+			if ( !frame )
+			{
+				printf("ack! something went wrong!\n");
+				continue;
+			}
+			drw_push();
+			
+			drw_translate2f(px,py);
+			drw_scale_u(sx);
+			drw_translate2f(frame->bounds.size.x * .5, frame->bounds.size.y * .5);
+
 			drw_wobject(frame);
 			drw_color(1,0,0,1);
 			drw_rect(frame->bounds.pos.x, frame->bounds.pos.y, frame->bounds.pos.x + frame->bounds.size.x, frame->bounds.pos.y + frame->bounds.size.y);
@@ -106,9 +118,15 @@ static void draw(void)
 		}
 	}
 }
+/*
+static void do_post_drop_quirks(void)
+{
 
+}
+*/
 static void drop(int num, const char** paths)
 {
+	/*
 	const char* first = paths[0];
 	if (first)
 	{
@@ -130,14 +148,16 @@ static void drop(int num, const char** paths)
 		printf("Load failed!\n");
 		return;
 	}
+	 */
+	
+	
+		//do_post_drop_quirks();
 	wsh_sequence_normalize(document.src->sequence.src);
-	
-	
-	
+
 }
 
 
-WashDemo tiling =
+WshDemo tiling =
 {
 	DEMO_NICENAME,
 	1.0 / 60.0,

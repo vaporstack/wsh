@@ -18,7 +18,7 @@ typedef void (*mouse_move_fn)(double x, double y);
 typedef void (*mouse_click_fn)(int btn, int action, int mods);
 typedef void (*drop_fn)(int num, const char** paths);
 
-typedef struct WashDemo
+typedef struct WshDemo
 {
 	const char*    name;
 	double	 fps;
@@ -34,6 +34,6 @@ typedef struct WashDemo
 	tablet_fn      motion;
 	tablet_fn      drag;
 	drop_fn		drop;
-} WashDemo;
+} WshDemo;
 
 #endif /* demo_h */

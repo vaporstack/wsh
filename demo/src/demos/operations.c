@@ -126,11 +126,13 @@ static void draw(void)
 	//drw_wobject(subject);
 }
 
+/*
 static void drop(int num, const char** paths)
 {
 }
+*/
 
-WashDemo operations =
+WshDemo operations =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,
@@ -145,6 +147,8 @@ WashDemo operations =
 	tablet_down,
 	tablet_motion,
 	tablet_drag,
-	drop};
+	NULL
+	    
+    };
 
 #endif

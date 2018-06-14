@@ -18,15 +18,15 @@
 
 #include "demo.h"
 
-extern WashDemo animation;
-extern WashDemo resize;
-extern WashDemo brush;
-extern WashDemo playback;
-extern WashDemo operations;
-extern WashDemo session;
-extern WashDemo simulator;
-extern WashDemo mapping;
-extern WashDemo tiling;
+extern WshDemo animation;
+extern WshDemo resize;
+extern WshDemo brush;
+extern WshDemo playback;
+extern WshDemo operations;
+extern WshDemo session;
+extern WshDemo simulator;
+extern WshDemo mapping;
+extern WshDemo tiling;
 
 //#include "demos/animation.c"
 //#include "demos/resize.h"
@@ -55,11 +55,11 @@ static double display_radius = 1;
 static bool   faking_it      = false;
 GLFWwindow*   window	 = NULL;
 
-WDocumentHnd document;
+//WDocumentHnd document;
 
 #define NUM_DEMOS 9
-WashDemo* demos[NUM_DEMOS] = {&tiling, &mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
-WashDemo* current_demo     = NULL;
+WshDemo* demos[NUM_DEMOS] = {&tiling, &mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
+WshDemo* current_demo     = NULL;
 
 
 static void calculate_retina_scale(void)
@@ -225,10 +225,22 @@ static void key_callback(GLFWwindow* window, int key, int scan, int action, int 
 
 static void drop_callback(GLFWwindow* window, int num, const char** paths)
 {
-	if (current_demo)
+	const char* first = paths[0];
+	if ( !strstr(first, ".wash"))
 	{
-		current_demo->drop(num, paths);
+		printf("Error, file dragged was not a .wash file!\n");
+		return;
 	}
+	
+	wsh_demo_load_document(first);
+	if (!current_demo)
+		return;
+	
+	if ( !current_demo->drop)
+		return;
+	
+	current_demo->drop(num, paths);
+	
 }
 
 void my_tablet_prox(int v)
@@ -380,6 +392,8 @@ static void switch_demo(int i)
 	}
 
 	current_demo->init();
+	
+	printf("Loaded demo: %s\n", current_demo->name);
 }
 
 int main(int argc, const char* argv[])
@@ -394,7 +408,7 @@ int main(int argc, const char* argv[])
 	frame_w  = WIDTH;
 	frame_h  = HEIGHT;
 	/* Create a windowed mode window and its OpenGL context */
-	window = glfwCreateWindow(window_w, window_h, "Hello World", NULL, NULL);
+	window = glfwCreateWindow(window_w, window_h, "Wsh Demos4", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -428,7 +442,8 @@ int main(int argc, const char* argv[])
 	drw_set_dpiscale(dpi);
 	printf("dpi: %f\n", dpi);
 
-	document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
+	document.src = NULL;
+	//document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
 
 	drw_setup(window_w, window_h);
 

@@ -18,7 +18,7 @@
 static int current_frame;
 WObject*   timeslice = NULL;
 
-static WDocumentHnd document;
+//static WDocumentHnd document;
 static double       playhead      = 0.;
 static double       start	 = 0.;
 static int	  playback_mode = 0;
@@ -114,6 +114,7 @@ static void mouse_button(int button, int action, int mods)
 {
 }
 
+/*
 static int load_file(const char* path)
 {
 	if (document.src)
@@ -132,21 +133,37 @@ static int load_file(const char* path)
 	reset_playback();
 	return 0;
 }
+*/
+
+static void demo_specific_post_load_quirks(void)
+{
+	scale_sequence_to_window(document.src->sequence.src);
+	current_frame = 0;
+	reset_playback();
+}
 
 static void init(void)
 {
+	if ( !document.src )
+	{
+		wsh_demo_load_document("data/wash/crab.wash");
+
+	}
+	/*
 	printf("Realtime playback init!\n");
 	if (!document.src)
 	{
 		if (path)
 		{
-			load_file(path);
+			wsh_demo_load_document("data/wash/crab.wash");
 		}
 		else
 		{
-			load_file("data/wash/crab.wash");
+			wsh_demo_load_document("data/wash/crab.wash");
 		}
 	}
+	 */
+	demo_specific_post_load_quirks();
 	printf("%s init!\n", DEMO_NICENAME);
 	//wsh_object_normalize_time_exploded(document.src);
 
@@ -155,10 +172,10 @@ static void init(void)
 
 static void deinit(void)
 {
-	printf("Realtime playback deinit!\n");
-	wsh_document_destroy(document.src);
+	//printf("Realtime playback deinit!\n");
+	//wsh_document_destroy(document.src);
 
-	document.src = NULL;
+	//document.src = NULL;
 }
 
 static void update(void)
@@ -214,6 +231,7 @@ static void draw_points_until_given_time(WObject* obj, double t)
 
 static void drop(int num, const char** paths)
 {
+	/*
 	bool  can_proceed = false;
 	char* path	= NULL;
 	for (int i = 0; i < num; i++)
@@ -238,6 +256,9 @@ static void drop(int num, const char** paths)
 		printf("Failed at loading file\n");
 	}
 	free(path);
+	*/
+	
+	demo_specific_post_load_quirks();
 }
 
 static void draw(void)
@@ -280,7 +301,7 @@ static void draw(void)
 	wsh_object_destroy(timeslice);
 }
 
-WashDemo playback =
+WshDemo playback =
     {
 	DEMO_NICENAME,
 	1.0 / 60.0,

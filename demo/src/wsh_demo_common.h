@@ -37,5 +37,8 @@ extern WLineHnd work_line;
 extern WObjectHnd test_geometry;
 
 extern bool wash_demo_has_pressure_sensitivity_of_any_kind;
+extern WDocumentHnd document;
+
+bool wsh_demo_load_document(const char* path);
 
 #endif /* wsh_demo_common_h */
