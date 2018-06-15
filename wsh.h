@@ -21,7 +21,6 @@
 #define WSH_VERSION_MINOR 0
 #define WSH_VERSION_PATCH 2
 
-
 #define WSH_VERSION_CHECK(maj, min) ((maj==WSH_VERSION_MAJOR) && (min<=WSH_VERSION_MINOR))
 
 #define WSH_COMPAT
