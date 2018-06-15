@@ -10,11 +10,11 @@
 #define wsh_h_
 
 
+//	https://stackoverflow.com/questions/1638207/how-to-store-a-version-number-in-a-static-library
 
 #include <stdlib.h>
 #include <stdio.h>
 
-//	https://stackoverflow.com/questions/1638207/how-to-store-a-version-number-in-a-static-library
 
 #define WSH_VERSION "0.0.2"
 #define WSH_VERSION_MAJOR 0
