@@ -35,6 +35,10 @@ typedef struct WDocumentMeta
 	//	plugins
 	// ????
 
+	//	tools
+	char** tools;
+	int tool_num;
+	
 	//	canvas
 	int canvas_width;
 	int canvas_height;

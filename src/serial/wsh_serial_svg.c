@@ -21,21 +21,42 @@
 
 //#define xmlNodePtr void*
 
-void	w_serialize_line_svg_v_1(cairo_surface_t* cr, WLine* line)
+static unsigned int canvas_w = -1;
+static unsigned int canvas_h = -1;
+
+
+void	w_serialize_line_svg_v_1(cairo_t* cr, WLine* line)
 {
 	
 	for ( int j = 1; j < line->num; j++)
 	{
-		WPoint prev = line->data[j-1];
-		cairo_move_to(cr, prev.x, prev.y);
 		WPoint p = line->data[j];
+		WPoint prev = line->data[j-1];
+		
+		prev.x += canvas_w * .5;
+		prev.y += canvas_h * .5;
+		p.x += canvas_w * .5;
+		p.y += canvas_h * .5;
+		
+		prev.y = canvas_h - prev.y;
+		p.y = canvas_h - p.y;
+		
+
+		cairo_move_to(cr, prev.x, prev.y);
 		cairo_line_to(cr, p.x, p.y);
+		
+		
 	}
 	cairo_stroke(cr);
+	
+	//	todo figure out where the fuck this should go
+	//WLineHnd hnd;
+	//hnd.src = line;
+	
 }
 
 
-void	w_serialize_line_svg(cairo_surface_t* cr, WLine* line)
+void	w_serialize_line_svg(cairo_t* cr, WLine* line)
 {
 	w_serialize_line_svg_v_1(cr, line);
 }
@@ -48,7 +69,7 @@ void	w_serialize_sequence_svg_v_1(WSequence* seq )
 
 }
 
-void	w_serialize_sequence_svg(cairo_surface_t* cr, WSequence* seq )
+void	w_serialize_sequence_svg(cairo_t* cr, WSequence* seq )
 {
 	return w_serialize_sequence_svg_v_1(seq);
 
@@ -70,7 +91,7 @@ void	w_serialize_object_svg_v_1(WObject* obj)
 	
 }
 
-void	w_serialize_object_svg(cairo_surface_t* cr, WObject* obj)
+void	w_serialize_object_svg(cairo_t* cr, WObject* obj)
 {
 	return w_serialize_object_svg_v_1(obj);
 }
@@ -80,10 +101,10 @@ void wsh_serial_svg_object_serialize(const char* path, WDocument* doc, WObject* 
 	cairo_surface_t *surface;
 	cairo_t *cr;
 	WDocumentMeta meta = doc->meta;
-	int w = doc->meta.canvas_width;
-	int h = doc->meta.canvas_height;
+	canvas_w = meta.canvas_width;
+	canvas_h = meta.canvas_height;
 
-	surface = cairo_svg_surface_create(path, w, h);
+	surface = cairo_svg_surface_create(path, canvas_w, canvas_h);
 	cr = cairo_create(surface);
 
 	
@@ -106,6 +127,7 @@ void wsh_serial_svg_object_serialize(const char* path, WDocument* doc, WObject* 
 
 	
 }
+
 
 const char*	wsh_serial_svg_document_serialize(WDocument* doc)
 {
