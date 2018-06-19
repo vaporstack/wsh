@@ -75,8 +75,23 @@ void	w_serialize_object_svg(cairo_surface_t* cr, WObject* obj)
 	return w_serialize_object_svg_v_1(obj);
 }
 
-void wsh_serial_svg_object_serialize(cairo_surface_t* cr, WObject* obj)
+void wsh_serial_svg_object_serialize(const char* path, WDocument* doc, WObject* obj)
 {
+	cairo_surface_t *surface;
+	cairo_t *cr;
+	WDocumentMeta meta = doc->meta;
+	int w = doc->meta.canvas_width;
+	int h = doc->meta.canvas_height;
+
+	surface = cairo_svg_surface_create(path, w, h);
+	cr = cairo_create(surface);
+
+	
+	cairo_set_line_width(cr, 1);
+	cairo_set_source_rgb(cr, 0, 0, 0);
+	cairo_set_source_rgba(cr, 0,0,0,.5);
+	
+	
 	for ( int i = 0;i < obj->num_lines; i++ )
 	{
 		WLine* l = obj->lines[i];
@@ -84,7 +99,11 @@ void wsh_serial_svg_object_serialize(cairo_surface_t* cr, WObject* obj)
 		
 		
 	}
+	cairo_surface_destroy(surface);
+	cairo_destroy(cr);
 	
+	
+
 	
 }
 
@@ -92,14 +111,22 @@ const char*	wsh_serial_svg_document_serialize(WDocument* doc)
 {
 
 
-	cairo_surface_t *surface;
-	cairo_t *cr;
-	
+	WDocumentMeta meta = doc->meta;
 	int w = doc->meta.canvas_width;
 	int h = doc->meta.canvas_height;
-	surface = cairo_svg_surface_create("svgfile.svg", w, h);
-	cr = cairo_create(surface);
+	const char* path = meta.path;
+	printf("Exporting svg for document: %s\n", path);
 	
+	char buf[PATH_MAX];
+	
+	
+	
+	const char* name = meta.name;
+	
+	if (!name )
+	{
+		name = "unnamed_wash_document";
+	}
 	
 	//cairo_select_font_face(cr, "Sans", CAIRO_FONT_SLANT_NORMAL, CAIRO_FONT_WEIGHT_NORMAL);
 	//cairo_set_font_size(cr, 40.0);
@@ -108,23 +135,22 @@ const char*	wsh_serial_svg_document_serialize(WDocument* doc)
 	
 	
 	
-	
-	cairo_set_line_width(cr, 1);
-	cairo_set_source_rgb(cr, 0, 0, 0);
-	cairo_set_source_rgba(cr, 0,0,0,.5);
-	
 	WSequence* seq = doc->sequence.src;
-	WObject* first = seq->frames[0];
+	
+	for ( int i = 0; i < seq->num_frames; i++ )
+	{
+		sprintf(buf, "/tmp/%s-%02d.svg", name, i );
 
-	wsh_serial_svg_object_serialize(cr, first);
+		WObject* frame = seq->frames[i];
+		wsh_serial_svg_object_serialize(buf, doc, frame);
+
+	}
+
 	//WPoint prev;
 	
+	
+	
 
-	
-	
-	cairo_surface_destroy(surface);
-	cairo_destroy(cr);
-	
 	return NULL;
 	
 	
