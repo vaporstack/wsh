@@ -127,7 +127,6 @@
 		578E35B52086CF9F006281B7 /* wsh_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh_internal.h; path = ../wsh_internal.h; sourceTree = "<group>"; };
 		57D5AEA720D85D5E001736EF /* wsh_serial_svg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_serial_svg.c; sourceTree = "<group>"; };
 		57D5AEA820D85D5E001736EF /* wsh_serial_svg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_serial_svg.h; sourceTree = "<group>"; };
-		57D5AEB220D8667B001736EF /* libcairo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcairo.a; path = ../../../../../../../usr/local/Cellar/cairo/1.14.12/lib/libcairo.a; sourceTree = "<group>"; };
 		57F12DDA1F806D3000564D7C /* wsh.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = wsh.c; path = ../wsh.c; sourceTree = "<group>"; };
 		D13617E71DFB772900FD1F83 /* libwsh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libwsh.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DB879F1F1431BA00BA023B /* wsh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh.h; path = ../wsh.h; sourceTree = "<group>"; };
@@ -276,7 +275,6 @@
 		57D5AEAB20D85F95001736EF /* lib */ = {
 			isa = PBXGroup;
 			children = (
-				57D5AEB220D8667B001736EF /* libcairo.a */,
 			);
 			name = lib;
 			sourceTree = "<group>";
