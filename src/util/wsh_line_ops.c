@@ -167,9 +167,13 @@ WLine* wsh_line_ops_straighten(WLine* line)
  }
  */
 
+
+//	todo: this r parameter is completely ignored, lol
+//	also it returns nothing so why does it have a WLine return type lol
+//	wtfffffff andrew
 WLine* wsh_line_ops_smooth(WLine* line, double r)
 {
-	double		 weight		 = 18;
+	double		 weight		 = r;
 	double		 scale		 = 1.0 / (weight + 2);
 	signed long long nPointsMinusTwo = line->num - 2;
 	if (!line->data)
