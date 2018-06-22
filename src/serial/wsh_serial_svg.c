@@ -13,8 +13,6 @@
 #include <limits.h>
 #include <stdio.h>
 #include <string.h>
-//#include "libxml/parser.h"
-#include <stdio.h>
 
 #include <cairo/cairo-svg.h>
 #include <cairo/cairo.h>
