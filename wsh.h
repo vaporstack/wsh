@@ -9,31 +9,30 @@
 #ifndef wsh_h_
 #define wsh_h_
 
-
 //	https://stackoverflow.com/questions/1638207/how-to-store-a-version-number-in-a-static-library
 
-#include <stdlib.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 
 #define WSH_VERSION "0.0.2"
 #define WSH_VERSION_MAJOR 0
 #define WSH_VERSION_MINOR 0
 #define WSH_VERSION_PATCH 2
 
-#define WSH_VERSION_CHECK(maj, min) ((maj==WSH_VERSION_MAJOR) && (min<=WSH_VERSION_MINOR))
+#define WSH_VERSION_CHECK(maj, min) ((maj == WSH_VERSION_MAJOR) && (min <= WSH_VERSION_MINOR))
 
 #define WSH_PRESENT
 
-int		    wsh_check_version_match(const char* str);
-int		    wsh_check_compat_match(const char* str);
-char*		    wsh_get_version_string(void);
-char*		    wsh_get_compat_string(void);
-
+int   wsh_check_version_match(const char* str);
+int   wsh_check_version_match222(const char* str);
+int   wsh_check_compat_match(const char* str);
+char* wsh_get_version_string(void);
+char* wsh_get_compat_string(void);
 
 static inline void wsh_version_check(int major, int minor)
 {
-	if (! WSH_VERSION_CHECK(major, minor)) {
+	if (!WSH_VERSION_CHECK(major, minor))
+	{
 		fprintf(stderr, "ERROR: incompatible library version\n");
 		exit(-1);
 	}

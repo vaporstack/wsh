@@ -19,10 +19,10 @@ static int current_frame;
 WObject*   timeslice = NULL;
 
 //static WDocumentHnd document;
-static double       playhead      = 0.;
-static double       start	 = 0.;
-static int	  playback_mode = 0;
-static char*	path	  = NULL;
+static double playhead      = 0.;
+static double start	 = 0.;
+static int    playback_mode = 0;
+static char*  path	  = NULL;
 
 enum PlaybackTypes
 {
@@ -146,7 +146,7 @@ static void init(void)
 {
 	//if ( !document.src )
 	//{
-		wsh_demo_load_document("data/wash/crab.wash");
+	wsh_demo_load_document("data/wash/crab.wash");
 
 	//}
 	/*
@@ -202,7 +202,7 @@ static void draw_points_until_given_time(WObject* obj, double t)
 	bool all_complete = true;
 
 	//printf("Drawing lines that happen until %f\n", t);
-	int num = obj->num_lines;
+	int num = obj->num;
 
 	for (unsigned long i = 0; i < num; i++)
 	{
@@ -257,7 +257,7 @@ static void drop(int num, const char** paths)
 	}
 	free(path);
 	*/
-	
+
 	demo_specific_post_load_quirks();
 }
 

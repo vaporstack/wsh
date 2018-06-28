@@ -205,14 +205,13 @@ void wsh_line_concat(WLine* dst, WLine* src)
 
 void wsh_line_concat_range(WLine* dst, WLine* src, long start, long end)
 {
-	
-	
-	if (start < 0 )
+
+	if (start < 0)
 		start = 0;
 
-	if (end < 0 )
+	if (end < 0)
 		end = src->num;
-	
+
 	assert(end > start);
 	//while( start < end )
 	for (long i = start; i < end; ++i)
@@ -334,7 +333,7 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 	return new;
 }
 
-WLine* wsh_line_reverse(WLine* old )
+WLine* wsh_line_reverse(WLine* old)
 {
 	WLine* new = wsh_line_create();
 	//new->num	= old->num;
@@ -347,14 +346,13 @@ WLine* wsh_line_reverse(WLine* old )
 	new->closed     = old->closed;
 	new->fill       = old->fill;
 	new->stroke     = old->stroke;
-	
+
 	for (int i = 0; i < old->num; ++i)
 	{
 		WPoint p = old->data[old->num - i];
 		wsh_line_add_point(new, p);
 	}
 	return new;
-	
 }
 
 void wsh_line_copy_attribs(WLine* to, WLine* from)
@@ -661,7 +659,7 @@ void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
  //	error prone as fuck!
  minx = maxx = miny = maxy = -77777;
  avgx = avgy = 0;
- int num = obj->num_lines;
+ int num = obj->num;
  int total = 0;
 
  for (int i = 0 ; i < num; ++i )

@@ -66,7 +66,7 @@ void w_serialize_object_svg_v_1(WObject* obj)
 {
 	/*
 	//xmlNodePtr xobj;
-	for ( int i = 0 ; i < obj->num_lines; ++i )
+	for ( int i = 0 ; i < obj->num; ++i )
 	{
 		WLine* line = obj->lines[i];
 		xmlNodePtr xline = w_serialize_line_svg( line);
@@ -97,7 +97,7 @@ void wsh_serial_svg_object_serialize(const char* path, WDocument* doc, WObject* 
 	cairo_set_source_rgb(cr, 0, 0, 0);
 	cairo_set_source_rgba(cr, 0, 0, 0, .5);
 
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		w_serialize_line_svg(cr, l);

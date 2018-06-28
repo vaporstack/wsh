@@ -24,7 +24,7 @@ WObject* wsh_object_create(WObject* parent)
 	obj		= calloc(1, sizeof(WObject));
 	obj->lines      = NULL;
 	obj->normalized = false;
-	obj->num_lines  = 0;
+	obj->num	= 0;
 	obj->parent     = parent;
 	WRect b;
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
@@ -54,7 +54,7 @@ void wsh_object_destroy(WObject* obj)
 		return;
 	}
 
-	for (int i = 0; i < obj->num_lines; ++i)
+	for (int i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
 
@@ -74,14 +74,14 @@ void wsh_object_add_line(WObject* obj, WLine* line)
 		return;
 	}
 
-	obj->num_lines++;
+	obj->num++;
 	if (obj->lines == NULL)
 	{
 		obj->lines = calloc(1, sizeof(WLine*));
 	}
 	else
 	{
-		obj->lines = realloc(obj->lines, sizeof(WLine*) * obj->num_lines);
+		obj->lines = realloc(obj->lines, sizeof(WLine*) * obj->num);
 	}
 
 #ifdef DEBUG
@@ -95,13 +95,13 @@ void wsh_object_add_line(WObject* obj, WLine* line)
 
 #endif
 
-	obj->lines[obj->num_lines - 1] = line;
+	obj->lines[obj->num - 1] = line;
 }
 
 void wsh_object_remove_line(WObject* obj, WLine* line)
 {
 	int idx = -1;
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		WLine* test = obj->lines[i];
 		if (test == line)
@@ -120,13 +120,13 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 #ifdef DEBUG
 	printf("found line %d\n", idx);
 #endif
-	for (int i = idx; i < obj->num_lines - 1; i++)
+	for (int i = idx; i < obj->num - 1; i++)
 	{
 #ifdef DEBUG
 		printf("Shuffling %d tp %d.\n", i + 1, i);
 #endif
 	}
-	obj->num_lines--;
+	obj->num--;
 }
 
 /*
@@ -210,7 +210,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 WObject* wsh_object_copy(WObject* old)
 {
 
-	// printf("Copying object with %d lines\n", old->num_lines);
+	// printf("Copying object with %d lines\n", old->num);
 	// WObject* cpy = malloc(sizeof(WObject));
 	// cpy = (WObject*)memcpy(cpy, old, sizeof(WObject));
 
@@ -229,14 +229,14 @@ WObject* wsh_object_copy(WObject* old)
 	obj->normalized = old->normalized;
 	// obj->frames = NULL;
 	// obj->num_frames = old->num_frames;
-	// obj->num_lines = old->num_lines;
+	// obj->num = old->num;
 
 	int i;
-	int num = old->num_lines;
+	int num = old->num;
 
-	obj->num_lines = num;
-	obj->lines     = NULL;
-	obj->lines     = malloc(sizeof(WLine*) * num);
+	obj->num   = num;
+	obj->lines = NULL;
+	obj->lines = malloc(sizeof(WLine*) * num);
 
 	for (i = 0; i < num; ++i)
 	{
@@ -267,11 +267,11 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 	obj->normalized = old->normalized;
 
 	int i;
-	int num = old->num_lines;
+	int num = old->num;
 
-	obj->num_lines = num;
-	obj->lines     = NULL;
-	obj->lines     = malloc(sizeof(WLine*) * num);
+	obj->num   = num;
+	obj->lines = NULL;
+	obj->lines = malloc(sizeof(WLine*) * num);
 
 	for (i = 0; i < num; ++i)
 	{
@@ -289,7 +289,7 @@ void wsh_object_douglaspeucker(WObject* obj, double r)
 	unsigned long long old = wsh_object_sum_points(obj);
 #endif
 
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		WLine* l   = obj->lines[i];
 		WLine* new = wsh_line_ops_douglaspeucker(l, r);
@@ -305,7 +305,7 @@ void wsh_object_douglaspeucker(WObject* obj, double r)
 
 void wsh_object_scale(WObject* obj, double modx, double mody)
 {
-	for (unsigned long i = 0; i < obj->num_lines; i++)
+	for (unsigned long i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		wsh_line_scale(l, modx, mody);
@@ -314,7 +314,7 @@ void wsh_object_scale(WObject* obj, double modx, double mody)
 
 void wsh_object_move(WObject* obj, double dx, double dy)
 {
-	for (unsigned long i = 0; i < obj->num_lines; i++)
+	for (unsigned long i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		wsh_line_move(l, dx, dy);
@@ -330,7 +330,7 @@ void wsh_object_center(WObject* obj)
 	double cx = obj->bounds.pos.x + (dx * .5);
 	double cy = obj->bounds.pos.y + (dy * .5);
 
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		for (int j = 0; j < l->num; j++)
@@ -343,7 +343,7 @@ void wsh_object_center(WObject* obj)
 
 void wsh_object_simplify(WObject* obj, double r)
 {
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		wsh_line_ops_simplify(l, r);
@@ -352,7 +352,7 @@ void wsh_object_simplify(WObject* obj, double r)
 
 void wsh_object_rotate(WObject* obj, double cx, double cy, double r)
 {
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		wsh_line_rotate(obj->lines[i], cx, cy, r);
 	}
@@ -362,7 +362,7 @@ void wsh_object_normalize_time_continuous(WObject* obj)
 {
 	double first = INFINITY;
 	double last  = -INFINITY;
-	for (int j = 0; j < obj->num_lines; j++)
+	for (int j = 0; j < obj->num; j++)
 	{
 		WLine* l = obj->lines[j];
 		for (int k = 0; k < l->num; k++)
@@ -387,7 +387,7 @@ void wsh_object_normalize_time_continuous(WObject* obj)
 	//printf("Normalizing frame to %f->%f\n", first, last);
 	double delta = last - first;
 	//printf("delta %f\n", delta);
-	for (int j = 0; j < obj->num_lines; j++)
+	for (int j = 0; j < obj->num; j++)
 	{
 		WLine* l = obj->lines[j];
 		for (int k = 0; k < l->num; k++)
@@ -412,7 +412,7 @@ void wsh_object_normalize_time_exploded(WObject* obj)
 	double longest_start    = -INFINITY;
 	//double longest_end = -INFINITY;
 	//double leader = -INFINITY;
-	for (int j = 0; j < obj->num_lines; j++)
+	for (int j = 0; j < obj->num; j++)
 	{
 		WLine* l = obj->lines[j];
 
@@ -441,7 +441,7 @@ void wsh_object_normalize_time_exploded(WObject* obj)
 	//double scale = 1 / longest_duration;
 	//printf("timescale is %f\n", scale);
 
-	for (int j = 0; j < obj->num_lines; j++)
+	for (int j = 0; j < obj->num; j++)
 	{
 		WLine* l     = obj->lines[j];
 		double first = INFINITY;
@@ -474,7 +474,7 @@ void wsh_object_normalize_time_exploded(WObject* obj)
 	}
 
 	/*
-	 //for ( int j = 0; j < obj->num_lines; j++ )
+	 //for ( int j = 0; j < obj->num; j++ )
 	 //{
 	 WLine* l = obj->lines[longest];
 	 for ( int k = 0; k < l->num; k++)
@@ -504,7 +504,7 @@ void wsh_object_normalize_time_exploded(WObject* obj)
 	 printf("Normalizing frame %d to %f->%f\n", i, first, last);
 	 double delta = last - first;
 	 printf("delta %f\n", delta);
-	 for ( int j = 0; j < obj->num_lines; j++ )
+	 for ( int j = 0; j < obj->num; j++ )
 	 {
 	 WLine* l = obj->lines[j];
 	 for ( int k = 0; k < l->num; k++)
@@ -528,7 +528,7 @@ void wsh_object_normalize(WObject* obj)
 	maxx = maxy = INFINITY;
 
 	avgx = avgy = 0;
-	int num     = obj->num_lines;
+	int num     = obj->num;
 	int total   = 0;
 
 	for (int i = 0; i < num; ++i)
@@ -635,16 +635,15 @@ void wsh_object_normalize(WObject* obj)
 
 void wsh_object_calc_bounds(WObject* obj)
 {
-    assert(obj != NULL);
-    
-    
+	assert(obj != NULL);
+
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
 	minx = miny = INFINITY;
 	maxx = maxy = -INFINITY;
 
 	avgx = avgy = 0;
-	int num     = obj->num_lines;
+	int num     = obj->num;
 	int total   = 0;
 
 	for (int i = 0; i < num; ++i)
@@ -713,7 +712,7 @@ void wsh_object_calc_bounds(WObject* obj)
 unsigned long long wsh_object_sum_points(WObject* obj)
 {
 	unsigned long long sum = 0;
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		sum += obj->lines[i]->num;
 	}
@@ -722,7 +721,7 @@ unsigned long long wsh_object_sum_points(WObject* obj)
 
 void wsh_object_set_closed(WObject* obj, bool val)
 {
-	for (int i = 0; i < obj->num_lines; i++)
+	for (int i = 0; i < obj->num; i++)
 	{
 		obj->lines[i]->closed = val;
 	}

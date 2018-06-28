@@ -60,3 +60,4 @@ docs/
 *xcdebugger*
 *xcshareddata*
 
+*.xcuserdatad

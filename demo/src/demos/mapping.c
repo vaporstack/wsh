@@ -13,7 +13,7 @@
 #define DEMO_NICENAME "Stroke Mapping"
 
 static WObject* source = NULL;
-static WLine* line = NULL;
+static WLine*   line   = NULL;
 
 static void choose_random_line(void);
 
@@ -52,41 +52,36 @@ static void mouse_move(double x, double y)
 
 static void mouse_button(int button, int action, int mods)
 {
-	if ( button > 0 || action == 1 )
+	if (button > 0 || action == 1)
 		return;
-	
+
 	//WLine* random = NULL;
-	if ( !source )
+	if (!source)
 	{
 		printf("No source, can't pick random line!\n");
 		return;
 	}
 	choose_random_line();
-	
 }
 
 static void choose_random_line(void)
 {
-	unsigned long num = source->num_lines;
+	unsigned long num = source->num;
 	double	v   = (double)rand() / RAND_MAX;
-	
+
 	unsigned which = v * num;
-	
+
 	//printf("drawing line %lu\n", which);
 	line = source->lines[which];
-	
-	
-	
-	
+
 	//WObject* tmp  = source;
-	
 }
 
 static void init(void)
 {
 	//WDocumentHnd document;
 	wsh_demo_load_document("data/wash/hatching.wash");
-	
+
 	//document.src = wsh_serial_document_unserialize("data/wash/hatching.wash");
 	//if (!document.src)
 	//{
@@ -128,103 +123,96 @@ static void draw(void)
 
 	double cx = window_w * .5 * dpi;
 	double cy = window_h * .5 * dpi;
-	
+
 	drw_line(mouse_x, mouse_y, cx, cy);
-	
+
 	drw_push();
 	drw_translate(0, 32, 0);
-	
-	
+
 	drw_pop();
-	
+
 	//unsigned long which = rand
 	//if (!document.src)
 	//	return;
-	
-	
-	
-	if(line)
+
+	if (line)
 	{
-		
+
 		WPoint first = line->data[0];
-		WPoint last = line->data[line->num-1];
-		
+		WPoint last  = line->data[line->num - 1];
+
 		WLine* cpy = NULL;
 		//if ( last.x <first.x || last.y < first.y )
 		//{
 		//	cpy = wsh_line_reverse(line);
 		//}else{
-			cpy = wsh_line_copy(line);
-			
+		cpy = wsh_line_copy(line);
+
 		//}
 		WLine* refcpy = wsh_line_copy(line);
 		if (!cpy)
 		{
 			free(cpy);
 		}
-		
-		if(!refcpy)
+
+		if (!refcpy)
 		{
 			free(refcpy);
 			return;
 		}
-		
+
 		//wsh_line_move(cpy)
 		//printf("ang: %f\n", ang);
-		
+
 		//WPoint last = cpy->data[cpy->num-1];
-		
+
 		//wsh_line_move(cpy, last.x, last.y);
-		
+
 		//	move the line to 0, 0, for ease of operations
 		wsh_line_move(cpy, -first.x, -first.y);
 		wsh_line_move(refcpy, -first.x, -first.y);
-		
+
 		double ang = wsh_line_ops_angle(cpy);
-		
-		
+
 		//printf("%f\n", ang);
 		//double ang_r = radians
-		wsh_line_rotate(cpy, 0,0 , -ang);
+		wsh_line_rotate(cpy, 0, 0, -ang);
 
 		//	printf("cpy first: %f %f\n", cpy->data[0].x, cpy->data[0].y);
 		//wsh_line_move(cpy, first.x, first.y);
 		drw_push();
 
 		drw_translate(cx, cy, 0);
-		drw_line(0,0, cos(ang)* 512, sin(ang)* 512);
+		drw_line(0, 0, cos(ang) * 512, sin(ang) * 512);
 
 		//drw_wline(line);
-		drw_color(1,0,0,1);
+		drw_color(1, 0, 0, 1);
 		drw_wline(refcpy);
 		drw_verts(refcpy);
-		
+
 		double dx = mouse_x - cx;
 		double dy = mouse_y - cy;
-		double r = wsh_angle_from_points(mouse_x, mouse_y,cx, cy);
-		
-		drw_color(0,1,0,1);
+		double r  = wsh_angle_from_points(mouse_x, mouse_y, cx, cy);
+
+		drw_color(0, 1, 0, 1);
 		drw_wline(cpy);
 		drw_verts(cpy);
 		drw_pop();
-		
+
 		WLine* out = wsh_line_normalize(cpy, 0, 0);
 		wsh_line_scale(out, dx, dy);
 		wsh_line_rotate(out, cx, cy, -r);
-		
-		drw_color(0,0,0,1);
+
+		drw_color(0, 0, 0, 1);
 
 		drw_wline(out);
 		drw_verts(out);
-		
-
-		
 
 		wsh_line_destroy(cpy);
 		wsh_line_destroy(refcpy);
 		wsh_line_destroy(out);
 	}
-	
+
 	static double t = 0;
 	t += .05;
 

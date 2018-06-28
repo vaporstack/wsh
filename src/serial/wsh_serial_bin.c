@@ -117,11 +117,11 @@ binn* wsh_serialize_object_bin(WObject* obj)
 	binn* blines = binn_list();
 
 	binn_object_set_bool(bobj, "normalized", obj->normalized);
-	binn_object_set_int64(bobj, "num_lines", obj->num_lines);
+	binn_object_set_int64(bobj, "num", obj->num);
 	binn_object_set_object(bobj, "transform",
 			       wsh_serialize_transform_bin(&obj->transform));
 
-	unsigned long long num = obj->num_lines;
+	unsigned long long num = obj->num;
 	for (int i = 0; i < num; ++i) {
 		WLine* l  = obj->lines[i];
 		binn*  bl = wsh_serialize_line_bin(l);

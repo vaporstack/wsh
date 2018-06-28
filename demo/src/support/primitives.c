@@ -125,11 +125,11 @@ void drw_translate(double x, double y, double z)
 }
 void drw_scale(double x, double y, double z)
 {
-	glScaled(x,y,z);
+	glScaled(x, y, z);
 }
 void drw_scale_u(double v)
 {
-	glScaled(v,v,v);
+	glScaled(v, v, v);
 }
 
 void drw_translate2f(double x, double y)
@@ -188,7 +188,7 @@ void drw_verts(WLine* l)
 void drw_wobject_verts(WObject* obj)
 {
 	int i;
-	for (i = 0; i < obj->num_lines; i++)
+	for (i = 0; i < obj->num; i++)
 	{
 		WLine* line = obj->lines[i];
 		if (!line)
@@ -275,7 +275,7 @@ void drw_wobject(WObject* obj)
 		printf("Error, tried to render a null obj!\n");
 		return;
 	}
-	
+
 	if (!obj->lines)
 	{
 		// printf("no lines either!?\n");
@@ -285,7 +285,7 @@ void drw_wobject(WObject* obj)
 	drw_push();
 	//drw_transform_apply(obj->transform);
 	int i;
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 
 		WLine* l = obj->lines[i];

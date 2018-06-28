@@ -88,7 +88,7 @@ WSequence* wsh_sequence_create()
 	seq->bounds.pos.x = seq->bounds.size.x = 0;
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 
-	seq->frames = calloc(seq->reserved, sizeof(WObject*));
+	seq->frames	= calloc(seq->reserved, sizeof(WObject*));
 	seq->current_frame = seq->frames[seq->current_frame_index];
 
 	/*
@@ -458,7 +458,7 @@ void wsh_sequence_normalize(WSequence* seq)
 		WObject* fr = seq->frames[i];
 
 		//	you have no geo, you don't get to vote!
-		if (fr->num_lines == 0)
+		if (fr->num == 0)
 			continue;
 
 		double x1 = fr->bounds.pos.x;
@@ -490,7 +490,7 @@ void wsh_sequence_normalize(WSequence* seq)
 	{
 		WObject* fr = seq->frames[i];
 
-		for (int j = 0; j < fr->num_lines; ++j)
+		for (int j = 0; j < fr->num; ++j)
 		{
 			WLine* l = fr->lines[j];
 			for (unsigned long long k = 0; k < l->num; ++k)

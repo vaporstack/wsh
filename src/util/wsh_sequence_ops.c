@@ -28,10 +28,10 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 	{
 		WObject* fr = seq->frames[i];
 #ifdef DEBUG
-		printf("Collapsing %d lines.\n", fr->num_lines);
+		printf("Collapsing %d lines.\n", fr->num);
 #endif
-		
-		for (int j = 0; j < fr->num_lines; j++)
+
+		for (int j = 0; j < fr->num; j++)
 		{
 			WLine* nl = fr->lines[j];
 			if (!nl)
@@ -40,7 +40,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 				continue;
 
 #ifdef DEBUG
-			//printf("Line %d : %llu\n", j, nl->num);
+				//printf("Line %d : %llu\n", j, nl->num);
 #endif
 			wsh_object_add_line(res, wsh_line_copy(nl));
 			total++;
@@ -49,6 +49,6 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 #ifdef DEBUG
 	printf("Collapsed %d lines.\n", total);
 #endif
-	
+
 	return res;
 }
