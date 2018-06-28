@@ -34,7 +34,7 @@ WDocument* wsh_document_create()
 	// printf("Creating all document attributes\n");
 
 	char buf[128];
-	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
+	sprintf(buf, "%d.%d.%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
 		WSH_VERSION_PATCH);
 
 	//meta->name = "Untitled";

@@ -49,7 +49,7 @@ static inline char* wsh_get_compat_string_header(void)
 static inline char* wsh_get_version_string_header(void)
 {
 	char* buf = (char*)calloc(256, sizeof(char));
-	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
+	sprintf(buf, "%d.%d.%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
 		WSH_VERSION_PATCH);
 	return buf;
 }

@@ -25,7 +25,7 @@
 char* w_create_version_string()
 {
 	char* buf = malloc(sizeof(char) * 16);
-	sprintf(buf, "%d_%d_%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
+	sprintf(buf, "%d.%d.%d", WSH_VERSION_MAJOR, WSH_VERSION_MINOR,
 		WSH_VERSION_PATCH);
 	return buf;
 }
