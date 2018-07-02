@@ -89,7 +89,10 @@ void   wsh_line_destroy(WLine*);
 void   wsh_line_add_point(WLine* line, WPoint p);
 void   wsh_line_add_point2f(WLine* line, double x, double y);
 void   wsh_line_normalize_time(WLine* l);
+
 WLine* wsh_line_normalize(WLine*, double* dx, double* dy);
+WLine* wsh_line_normalize_square(WLine*, double* dx, double* dy);
 void   wsh_line_normalize_inplace(WLine*, double* dx, double* dy);
+void   wsh_line_normalize_square_inplace(WLine*, double* dx, double* dy);
 
 #endif /* wsh_line_h */

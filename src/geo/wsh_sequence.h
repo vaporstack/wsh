@@ -64,7 +64,7 @@ void wsh_sequence_frame_duplicate(WSequence* seq);
 
 void wsh_sequence_calc_bounds(WSequence* seq);
 void wsh_sequence_normalize(WSequence* seq);
-;
+void wsh_sequence_normalize_all_lines_individually(WSequence* seq);
 
 void wsh_sequence_move(WSequence* seq, double dx, double dy);
 void wsh_sequence_scale(WSequence* seq, double modx, double mody);

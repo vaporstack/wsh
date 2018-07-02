@@ -435,6 +435,25 @@ void wsh_sequence_calc_bounds(WSequence* seq)
 	seq->bounds.size.y = maxy - miny;
 }
 
+void wsh_sequence_normalize_all_lines_individually(WSequence* seq)
+{
+	for (int i = 0; i < seq->num_frames; ++i)
+	{
+		
+		WObject* fr = seq->frames[i];
+		for (int j = 0; j < fr->num; ++j)
+		{
+			WLine* line = fr->lines[j];
+			WLine* normal = wsh_line_normalize( line, 0, 0);
+			
+			wsh_line_destroy(fr->lines[j]);
+			fr->lines[j] = normal;
+			
+		}
+	}
+	
+}
+
 void wsh_sequence_normalize(WSequence* seq)
 {
 	if (!seq)
