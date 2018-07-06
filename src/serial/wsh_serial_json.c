@@ -969,7 +969,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 		cJSON* version = cJSON_GetObjectItem(info, "version");
 		if (version)
 		{
-			working_version = version->valuestring;
+			working_version = strdup(version->valuestring);
 			fixup_old_style_version_string(working_version);
 			printf("version detected: %s\n", working_version);
 		}
@@ -992,7 +992,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 			{
 				cJSON* jv = cJSON_GetObjectItem(info, "version");
 				//char*  doc_version = jv->valuestring;
-				working_version = jv->valuestring;
+				if ( jv ) working_version = strdup(jv->valuestring);
 				fixup_old_style_version_string(working_version);
 				if (0 == strcmp(working_version, "0.0.2"))
 				{
