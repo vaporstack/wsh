@@ -265,7 +265,7 @@ cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj)
 	
 	// cJSON *line_records = malloc(num * sizeof(cJSON));
 	// //cJSON_CreateArray();  cJSON *prev;
-	
+
 	int num = obj->num;
 	if (DEBUG_SERIAL)
 		printf("Serializing %d lines.\n", num);
@@ -783,9 +783,7 @@ WObject* wsh_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 	WObject* obj = wsh_object_create(NULL);
 	
 	obj->normalized = cJSON_GetObjectItem(data, "normalized")->valueint;
-	
-	// obj->lines = malloc(sizeof(WLine) * obj->num);
-	
+
 	for (int i = 0; i < num; ++i)
 	{
 		cJSON* jl   = cJSON_GetArrayItem(jlines, i);

@@ -209,9 +209,10 @@ void wsh_line_concat_range(WLine* dst, WLine* src, long start, long end)
 	if (start < 0)
 		start = 0;
 	
+
 	if (end < 0)
 		end = src->num;
-	
+
 	assert(end > start);
 	//while( start < end )
 	for (long i = start; i < end; ++i)
@@ -346,7 +347,7 @@ WLine* wsh_line_reverse(WLine* old)
 	new->closed     = old->closed;
 	new->fill       = old->fill;
 	new->stroke     = old->stroke;
-	
+
 	for (int i = 0; i < old->num; ++i)
 	{
 		WPoint p = old->data[old->num - i];
