@@ -483,20 +483,27 @@ static void bounds_and_avgs(WLine* l, double* _minx, double* _miny, double* maxx
 //	todo:	this method copies, maybe have one that does it inplace?
 WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
 {
-	wsh_line_calc_bounds(l);
 	
-	WRect bnds = l->bounds;
-	
+	WRect obnds = l->bounds;
+
 	WLine* nl = wsh_line_normalize_square(l, o_dx, o_dy);
-	
-	double ar = bnds.size.y / bnds.size.x;
-	
-	if ( bnds.size.x > bnds.size.y )
+
+	double ar = obnds.size.y / obnds.size.x;
+	wsh_line_calc_bounds(l);
+
+	if ( obnds.size.x > obnds.size.y )
 	{
 		wsh_line_scale(nl, 1, ar);
 	}else{
 		wsh_line_scale(nl, ar, 1);
 	}
+	wsh_line_calc_bounds(nl);
+
+	//if ( bnds->size.y > 1 || bnds->size.y < -1 || bnds->size.x > 1 || bnds->size.x < -1)
+	//{
+	//	printf("ERROR normalizing, data exceeded 1!\n");
+		
+	//}
 	return nl;
 }
 
@@ -592,6 +599,8 @@ WLine* wsh_line_normalize_square(WLine* l, double* o_dx, double* o_dy)
 	if (o_dy)
 		*o_dy = dy;
 	
+	wsh_line_calc_bounds(normal);
+
 	return normal;
 }
 void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
