@@ -57,8 +57,7 @@ static void _check_realloc(WSequence* seq)
 	if (seq->num_frames == seq->reserved)
 	{
 		seq->reserved *= 2;
-		seq->frames =
-		    realloc(seq->frames, sizeof(WObject*) * seq->reserved);
+		seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->reserved);
 
 		for (int i = seq->current_frame_index; i < seq->reserved; ++i)
 		{
@@ -197,12 +196,66 @@ void wsh_sequence_frame_set(WSequence* seq, int ind)
 
 void wsh_sequence_frame_add(WSequence* seq)
 {
+	
+	WObject* fr = wsh_object_create(NULL);
 
+	if ( seq->current_frame_index == seq->num_frames - 1 )
+	{
+		//this is the last frame, our job is easer
+#ifdef DEBUG
+	printf("last frame!\n");
+#endif
+		seq->num_frames++;
+		_check_realloc(seq);
+		
+		
+		//if (seq->current_frame_index < seq->num_frames - 1)
+		seq->current_frame_index++;
+		
+		seq->frames[seq->current_frame_index] = fr;
+		
+	}else{
+#ifdef DEBUG
+	printf("NOT last rame!\n");
+#endif
+		seq->num_frames++;
+		_check_realloc(seq);
+		
+		int pos = seq->current_frame_index;
+		int delta = seq->num_frames - pos;
+#ifdef DEBUG
+	printf("shiftinng with delta %d\n", delta);
+#endif
+		//memcpy(seq->frames[pos+1], seq->frames[pos], sizeof(WObject) * (delta ));
+		for ( int i = seq->num_frames -1; i > pos; i--)
+		{
+			seq->frames[i] = seq->frames[i-1];
+		}
+		
+		seq->current_frame_index++;
+		seq->frames[seq->current_frame_index] = fr;
+		//seq->current_frame = fr;
+		//this is not the last frame, we have to shuffle everything down.
+	
+	}
+	
+	
+	seq->current_frame = seq->frames[seq->current_frame_index];
+
+	/*
 	// seq->current_frame_index;
 	seq->num_frames++;
 
 	_check_realloc(seq);
 
+	//if we aren't on the last frame, everything needs to get shifted up one.
+	if(seq->current_frame_index < seq->num_frames-1)
+	{
+		int index = seq->num_frames;
+		int delta = seq->num_frames - index;
+		memcpy(seq->frames+index, seq->frames+index+1, sizeof(WObject) * delta);
+	}
+	
 	WObject* fr = wsh_object_create(NULL);
 
 	if (seq->current_frame_index < seq->num_frames - 1)
@@ -218,6 +271,9 @@ void wsh_sequence_frame_add(WSequence* seq)
 	seq->current_frame = seq->frames[seq->current_frame_index];
 
 	// seq->num_frames = num;
+*/
+	
+	
 }
 
 void wsh_sequence_frame_duplicate(WSequence* seq)

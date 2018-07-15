@@ -329,7 +329,7 @@ void drw_wline(WLine* l)
 	{
 		//drw_set_fill(l->closed);
 		drw_poly(l);
-		//drw_pop_fill();
+		//drw_fill_pop();
 	}
 	if (l->has_stroke)
 	{
