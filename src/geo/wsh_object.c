@@ -231,8 +231,8 @@ WObject* wsh_object_copy(WObject* old)
 	// obj->num_frames = old->num_frames;
 	// obj->num = old->num;
 
-	int i;
-	int num = old->num;
+	unsigned long i;
+	unsigned long num = old->num;
 
 	obj->num   = num;
 	obj->lines = NULL;
