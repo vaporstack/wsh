@@ -327,7 +327,7 @@ void drw_wline(WLine* l)
 	}
 	if (l->closed)
 	{
-		//drw_set_fill(l->closed);
+		//drw_fill_set(l->closed);
 		drw_poly(l);
 		//drw_fill_pop();
 	}
