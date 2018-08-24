@@ -11,6 +11,12 @@
 
 #include <wsh/wsh.h>
 
+/**
+ *
+ *	convenience utility to handle playback of wsh files
+ *
+ */
+
 //	already partially implemented this in GRenderWsh oops
 //
 

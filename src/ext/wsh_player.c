@@ -42,21 +42,24 @@ void wsh_player_destroy(WshPlayer* player)
 {
 	if (player)
 		return;
+	if (player->info)
+		free(player->info);
+
+	if (player->hnd.src)
+		free(player->hnd.src);
 }
 
 static void update_replay(WshPlayer* player, double t)
 {
-	double last	  = player->info->last;
-	
-	
+	double last = player->info->last;
+
 	double fakenow = t - player->info->start_time;
-	
-	
+
 	bool playback_done = true;
 	if (player->current_frame)
 	{
 	}
-	WObject*  dst = wsh_object_create(NULL);
+	WObject*   dst = wsh_object_create(NULL);
 	WSequence* seq = player->hnd.src->sequence.src;
 
 	WObject* src = seq->current_frame;
@@ -80,9 +83,9 @@ static void update_replay(WshPlayer* player, double t)
 				//playback_done = false;
 			}
 		}
-		if (dl->num != sl->num )
+		if (dl->num != sl->num)
 			playback_done = false;
-		
+
 		wsh_object_add_line(dst, dl);
 		//while ( !done )
 		//	{
@@ -106,12 +109,11 @@ static void update_replay(WshPlayer* player, double t)
 
 void wsh_player_update(WshPlayer* player, double t)
 {
-	if ( !player->playing )
+	if (!player->playing)
 	{
 		printf("Not updating, not playin\n");
 		return;
 	}
-	
 
 	if (player->playbacktype == WSH_PLAYER_PLAYBACK_REPLAY)
 	{
@@ -122,12 +124,11 @@ void wsh_player_update(WshPlayer* player, double t)
 
 void wsh_player_start(WshPlayer* player, double time)
 {
-	if ( player->playbacktype == WSH_PLAYER_PLAYBACK_REPLAY )
+	if (player->playbacktype == WSH_PLAYER_PLAYBACK_REPLAY)
 	{
 		player->info->start_time = time;
-		player->playing = true;
+		player->playing		 = true;
 	}
-	
 }
 
 void wsh_player_stop(WshPlayer* player, double time)
