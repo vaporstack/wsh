@@ -196,50 +196,48 @@ void wsh_sequence_frame_set(WSequence* seq, int ind)
 
 void wsh_sequence_frame_add(WSequence* seq)
 {
-	
+
 	WObject* fr = wsh_object_create(NULL);
 
-	if ( seq->current_frame_index == seq->num_frames - 1 )
+	if (seq->current_frame_index == seq->num_frames - 1)
 	{
 		//this is the last frame, our job is easer
 #ifdef DEBUG
-	printf("last frame!\n");
+		printf("last frame!\n");
 #endif
 		seq->num_frames++;
 		_check_realloc(seq);
-		
-		
+
 		//if (seq->current_frame_index < seq->num_frames - 1)
 		seq->current_frame_index++;
-		
+
 		seq->frames[seq->current_frame_index] = fr;
-		
-	}else{
+	}
+	else
+	{
 #ifdef DEBUG
-	printf("NOT last rame!\n");
+		printf("NOT last rame!\n");
 #endif
 		seq->num_frames++;
 		_check_realloc(seq);
-		
-		int pos = seq->current_frame_index;
+
+		int pos   = seq->current_frame_index;
 		int delta = seq->num_frames - pos;
 #ifdef DEBUG
-	printf("shiftinng with delta %d\n", delta);
+		printf("shiftinng with delta %d\n", delta);
 #endif
 		//memcpy(seq->frames[pos+1], seq->frames[pos], sizeof(WObject) * (delta ));
-		for ( int i = seq->num_frames -1; i > pos; i--)
+		for (int i = seq->num_frames - 1; i > pos; i--)
 		{
-			seq->frames[i] = seq->frames[i-1];
+			seq->frames[i] = seq->frames[i - 1];
 		}
-		
+
 		seq->current_frame_index++;
 		seq->frames[seq->current_frame_index] = fr;
 		//seq->current_frame = fr;
 		//this is not the last frame, we have to shuffle everything down.
-	
 	}
-	
-	
+
 	seq->current_frame = seq->frames[seq->current_frame_index];
 
 	/*
@@ -255,7 +253,7 @@ void wsh_sequence_frame_add(WSequence* seq)
 		int delta = seq->num_frames - index;
 		memcpy(seq->frames+index, seq->frames+index+1, sizeof(WObject) * delta);
 	}
-	
+
 	WObject* fr = wsh_object_create(NULL);
 
 	if (seq->current_frame_index < seq->num_frames - 1)
@@ -272,8 +270,6 @@ void wsh_sequence_frame_add(WSequence* seq)
 
 	// seq->num_frames = num;
 */
-	
-	
 }
 
 void wsh_sequence_frame_duplicate(WSequence* seq)
@@ -412,7 +408,7 @@ void wsh_sequence_normalize_time_continuous(WSequence* seq)
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
 		WObject* fr = seq->frames[i];
-		wsh_object_normalize_time_continuous(fr);
+		wsh_object_time_normalize_continuous(fr);
 	}
 }
 
@@ -422,7 +418,7 @@ void wsh_sequence_normalize_time_exploded(WSequence* seq)
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
 		WObject* fr = seq->frames[i];
-		wsh_object_normalize_time_exploded(fr);
+		wsh_object_time_normalize_exploded(fr);
 
 		// SHOW HACKS HAX
 		//return;
@@ -495,22 +491,20 @@ void wsh_sequence_normalize_all_lines_individually(WSequence* seq)
 {
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
-		
+
 		WObject* fr = seq->frames[i];
 		for (int j = 0; j < fr->num; ++j)
 		{
-			WLine* line = fr->lines[j];
-			WLine* normal = wsh_line_normalize( line, 0, 0);
-			
+			WLine* line   = fr->lines[j];
+			WLine* normal = wsh_line_normalize(line, 0, 0);
+
 			wsh_line_destroy(fr->lines[j]);
 			fr->lines[j] = normal;
-			
 		}
 	}
-	
 }
 
-void wsh_sequence_normalize(WSequence* seq)
+void wsh_sequence_normalize_square(WSequence* seq)
 {
 	if (!seq)
 	{
@@ -573,6 +567,93 @@ void wsh_sequence_normalize(WSequence* seq)
 				WPoint* p = &l->data[k];
 				p->x /= dx;
 				p->y /= dy;
+			}
+		}
+		fr->normalized	= true;
+		fr->transform.scale.x = seq->transform.scale.x;
+		fr->transform.scale.y = seq->transform.scale.y;
+	}
+
+	_calc_subobjects(seq);
+}
+void wsh_sequence_normalize(WSequence* seq)
+{
+	if (!seq)
+	{
+#ifdef DEBUG
+		printf("tried to normalize a null sequence.\n");
+#endif
+		return;
+	}
+
+	_calc_subobjects(seq);
+
+	double minx, miny, maxx, maxy;
+
+	minx = miny = INFINITY;
+	maxx = maxy = -INFINITY;
+
+	for (int i = 0; i < seq->num_frames; ++i)
+	{
+
+		WObject* fr = seq->frames[i];
+
+		//	you have no geo, you don't get to vote!
+		if (fr->num == 0)
+			continue;
+
+		double x1 = fr->bounds.pos.x;
+		double y1 = fr->bounds.pos.y;
+		double x2 = fr->bounds.pos.x + fr->bounds.size.x;
+		double y2 = fr->bounds.pos.y + fr->bounds.size.y;
+
+		if (x1 < minx)
+			minx = x1;
+		if (x2 > maxx)
+			maxx = x2;
+		if (y1 < miny)
+			miny = y1;
+		if (y2 > maxy)
+			maxy = y2;
+	}
+
+	seq->bounds.pos.x  = minx;
+	seq->bounds.pos.y  = miny;
+	seq->bounds.size.x = maxx - minx;
+	seq->bounds.size.y = maxy - miny;
+
+	double dx = maxx - minx;
+	double dy = maxy - miny;
+
+	double bigger = (dx > dy) ? dx : dy;
+	double ar     = dy / dx;
+	double rx, ry;
+	if (dx > dy)
+	{
+		rx = dx;
+		ry = dy * ar;
+	}
+	else
+	{
+		rx = dx * ar;
+		ry = dy;
+	}
+
+	seq->transform.scale.x = rx;
+	seq->transform.scale.y = ry;
+
+	for (int i = 0; i < seq->num_frames; ++i)
+	{
+		WObject* fr = seq->frames[i];
+
+		for (int j = 0; j < fr->num; ++j)
+		{
+			WLine* l = fr->lines[j];
+			for (unsigned long long k = 0; k < l->num; ++k)
+			{
+				WPoint* p = &l->data[k];
+				p->x /= rx;
+				p->y /= ry;
 			}
 		}
 		fr->normalized	= true;

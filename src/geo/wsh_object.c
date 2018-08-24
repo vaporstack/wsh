@@ -358,7 +358,33 @@ void wsh_object_rotate(WObject* obj, double cx, double cy, double r)
 	}
 }
 
-void wsh_object_normalize_time_continuous(WObject* obj)
+void wsh_object_time_trim_head(WObject* obj)
+{
+	double earliest = INFINITY;
+	for (unsigned long i = 0; i < obj->num; i++)
+	{
+		WLine* l = obj->lines[i];
+		for (unsigned long j = 0; j < l->num; j++)
+		{
+			double t = l->data[j].time;
+			if (t < earliest)
+			{
+				earliest = t;
+			}
+		}
+	}
+	//printf("earliest point is at %f\n", earliest);
+	for (unsigned long i = 0; i < obj->num; i++)
+	{
+		WLine* l = obj->lines[i];
+		for (unsigned long j = 0; j < l->num; j++)
+		{
+			l->data[j].time -= earliest;
+		}
+	}
+}
+
+void wsh_object_time_normalize_continuous(WObject* obj)
 {
 	double first = INFINITY;
 	double last  = -INFINITY;
@@ -400,7 +426,7 @@ void wsh_object_normalize_time_continuous(WObject* obj)
 	}
 }
 
-void wsh_object_normalize_time_exploded(WObject* obj)
+void wsh_object_time_normalize_exploded(WObject* obj)
 {
 
 	//double first = INFINITY;

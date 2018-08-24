@@ -51,14 +51,17 @@ void     wsh_object_center(WObject* obj);
 WObject* wsh_object_copy(WObject* obj);
 WObject* wsh_object_copy_from_percentage(WObject* obj, double t);
 
+//	find the earliest recorded point and shift everything up
+void wsh_object_time_trim_head(WObject* obj);
+
 //	all lines in the frame are drawn consecutively
-void wsh_object_normalize_time_continuous(WObject* obj);
+void wsh_object_time_normalize_continuous(WObject* obj);
 
 //	all lines in the frame draw at once at the same rate
-void wsh_object_normalize_time_exploded(WObject* obj);
+void wsh_object_time_normalize_exploded(WObject* obj);
 
 //	all lines in the frame draw at timed to the line that took the longest to draw
-void wsh_object_normalize_time_exploded_accurate(WObject* obj);
+void wsh_object_time_normalize_exploded_accurate(WObject* obj);
 
 void     wsh_object_center(WObject* obj);
 WObject* wsh_object_copy(WObject* obj);

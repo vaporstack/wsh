@@ -61,7 +61,7 @@ endif()
 
 if(BuildLibrary)
 	message("Adding library target.")
-	file(GLOB sources wsh.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
+	file(GLOB sources wsh.c src/ext/*.c src/core/*.c src/geo/*.c src/io/*.c src/serial/*.c src/session/*.c src/util/*.c contrib/cjson/cJSON.c)
 	add_library(${project_name} STATIC ${sources})
 	# add_library(wsh SHARED ${sources})
 endif()

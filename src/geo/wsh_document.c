@@ -40,11 +40,11 @@ WDocument* wsh_document_create()
 	//meta->name = "Untitled";
 
 	// printf("buf : %s\n", buf );
-	doc->state = W_DOC_STATE_CLEAN;
 	//doc->meta.version = buf;
 	// doc->art.src = NULL;
 	// no guarantees
-
+	
+	doc->state = W_DOC_STATE_CLEAN;
 	doc->layers       = NULL;
 	doc->layer_num    = 1;
 	doc->sequence.src = NULL;

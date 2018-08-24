@@ -165,7 +165,7 @@ static void init(void)
 	 */
 	demo_specific_post_load_quirks();
 	printf("%s init!\n", DEMO_NICENAME);
-	//wsh_object_normalize_time_exploded(document.src);
+	//wsh_object_time_normalize_exploded(document.src);
 
 	//wsh_sequence_scale(document.src->sequence.src,dpi, dpi);
 }
@@ -283,10 +283,10 @@ static void draw(void)
 	switch (playback_mode)
 	{
 	case NORMAL:
-		wsh_object_normalize_time_continuous(timeslice);
+		wsh_object_time_normalize_continuous(timeslice);
 		break;
 	case EXPLODED_LINEAR:
-		wsh_object_normalize_time_exploded(timeslice);
+		wsh_object_time_normalize_exploded(timeslice);
 
 		break;
 
