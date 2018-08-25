@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		57167043207860AB0005E15A /* cJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 57167041207860AB0005E15A /* cJSON.h */; };
 		57167044207860AB0005E15A /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 57167042207860AB0005E15A /* cJSON.c */; };
+		576FC96E2130E0DA00820BAA /* wsh_palette.h in Headers */ = {isa = PBXBuildFile; fileRef = 576FC96C2130E0DA00820BAA /* wsh_palette.h */; };
+		576FC96F2130E0DA00820BAA /* wsh_palette.c in Sources */ = {isa = PBXBuildFile; fileRef = 576FC96D2130E0DA00820BAA /* wsh_palette.c */; };
 		577857F420AA828600218129 /* wsh_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 577857BA20AA828600218129 /* wsh_color.c */; };
 		577857F520AA828600218129 /* wsh_tool.h in Headers */ = {isa = PBXBuildFile; fileRef = 577857BB20AA828600218129 /* wsh_tool.h */; };
 		577857F620AA828600218129 /* wsh_color.h in Headers */ = {isa = PBXBuildFile; fileRef = 577857BC20AA828600218129 /* wsh_color.h */; };
@@ -74,6 +76,8 @@
 /* Begin PBXFileReference section */
 		57167041207860AB0005E15A /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cJSON.h; sourceTree = "<group>"; };
 		57167042207860AB0005E15A /* cJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cJSON.c; sourceTree = "<group>"; };
+		576FC96C2130E0DA00820BAA /* wsh_palette.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_palette.h; sourceTree = "<group>"; };
+		576FC96D2130E0DA00820BAA /* wsh_palette.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_palette.c; sourceTree = "<group>"; };
 		577857BA20AA828600218129 /* wsh_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_color.c; sourceTree = "<group>"; };
 		577857BB20AA828600218129 /* wsh_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_tool.h; sourceTree = "<group>"; };
 		577857BC20AA828600218129 /* wsh_color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_color.h; sourceTree = "<group>"; };
@@ -182,6 +186,8 @@
 				577857BD20AA828600218129 /* wsh_tool.c */,
 				577857BC20AA828600218129 /* wsh_color.h */,
 				577857BA20AA828600218129 /* wsh_color.c */,
+				576FC96C2130E0DA00820BAA /* wsh_palette.h */,
+				576FC96D2130E0DA00820BAA /* wsh_palette.c */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 				5778581A20AA828600218129 /* wsh_sgraph.h in Headers */,
 				57D5AEAA20D85D5E001736EF /* wsh_serial_svg.h in Headers */,
 				5778581620AA828600218129 /* wsh_point.h in Headers */,
+				576FC96E2130E0DA00820BAA /* wsh_palette.h in Headers */,
 				577857F920AA828600218129 /* wsh_math.h in Headers */,
 				5778580F20AA828600218129 /* wsh_color.h in Headers */,
 				5778581420AA828600218129 /* wsh_point_a.h in Headers */,
@@ -434,6 +441,7 @@
 				5778580620AA828600218129 /* wsh_layer.c in Sources */,
 				5778580220AA828600218129 /* wsh_io.c in Sources */,
 				57BED60F2130918F00E7FC63 /* wsh_player.c in Sources */,
+				576FC96F2130E0DA00820BAA /* wsh_palette.c in Sources */,
 				5778580A20AA828600218129 /* wsh_sequence.c in Sources */,
 				57167044207860AB0005E15A /* cJSON.c in Sources */,
 				5778581B20AA828600218129 /* wsh_sgraph.c in Sources */,
