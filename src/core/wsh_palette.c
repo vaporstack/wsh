@@ -8,6 +8,8 @@
 
 #include "wsh_palette.h"
 
+#include <stdlib.h>
+
 WshPalette* wsh_palette_create(void)
 {
 	return NULL;
