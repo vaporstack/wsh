@@ -51,7 +51,7 @@ void wsh_player_destroy(WshPlayer* player)
 
 static void update_replay(WshPlayer* player, double t)
 {
-	double last = player->info->last;
+	//double last = player->info->last;
 
 	double fakenow = t - player->info->start_time;
 
@@ -99,6 +99,9 @@ static void update_replay(WshPlayer* player, double t)
 
 		if (playback_done)
 		{
+			free(dst);
+			player->current_frame = NULL;
+			
 			wsh_sequence_frame_next(player->hnd.src->sequence.src);
 			wsh_player_stop(player, t);
 			wsh_player_start(player, t);
@@ -117,7 +120,8 @@ void wsh_player_update(WshPlayer* player, double t)
 
 	if (player->playbacktype == WSH_PLAYER_PLAYBACK_REPLAY)
 	{
-		update_replay(player, t);
+		// is this the cause of all our leaks/
+		//update_replay(player, t);
 		return;
 	}
 }

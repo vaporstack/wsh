@@ -66,6 +66,7 @@ void wsh_document_destroy(WDocument* doc)
 {
 	if (doc == NULL)
 	{
+		printf("Tried to destroy a null doc!\n");
 		return;
 	}
 
