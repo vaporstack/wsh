@@ -13,7 +13,7 @@
 #include "../wsh_demo_common.h"
 
 #define DEMO_NAME "operations"
-#define DEMO_NICENAME "Line Ops"
+#define DEMO_NICENAME "Line Operations"
 
 WObject* subject = NULL;
 
@@ -50,7 +50,7 @@ static void mouse_move(double x, double y)
 {
 }
 
-static void wipe_canvas_andrw_scale(void)
+static void wipe_canvas_and_scale(void)
 {
 	WObject* art = recorder_get_art();
 	if (subject)
@@ -74,7 +74,7 @@ static void mouse_button(int button, int action, int mods)
 	else
 	{
 		printf("mup!\n");
-		wipe_canvas_andrw_scale();
+		wipe_canvas_and_scale();
 	}
 }
 
@@ -91,7 +91,7 @@ static void deinit(void)
 static void update(void)
 {
 }
-
+#define TMP_OFFSET_DIST 32
 static void draw(void)
 {
 	static double d = 1;
@@ -100,7 +100,7 @@ static void draw(void)
 	if (d == 0)
 		d = 1;
 	//double v = d * 128;
-	printf("%f\n", d);
+	//printf("%f\n", d);
 	drw_color(0, .25, 0, 1);
 	if (!subject)
 		return;
@@ -115,13 +115,21 @@ static void draw(void)
 	//WLine* mod = wsh_line_copy(first);
 
 	WLine* mod = wsh_line_ops_douglaspeucker(first, d);
+	WLine* seg = wsh_line_ops_subdivide(first, 16);
 
 	drw_color(.5, 0, 0, 1);
-	drw_translate(0, 32, 0);
+	drw_translate(0, TMP_OFFSET_DIST, 0);
 	drw_verts(mod);
 	drw_wline(mod);
-	wsh_line_destroy(mod);
+
+	drw_translate(0, -TMP_OFFSET_DIST * 2, 0);
+	drw_verts(seg);
+	drw_wline(seg);
+
 	drw_pop();
+
+	wsh_line_destroy(mod);
+	wsh_line_destroy(seg);
 
 	//drw_wobject(subject);
 }
@@ -148,7 +156,7 @@ WshDemo operations =
 	tablet_motion,
 	tablet_drag,
 	NULL
-	    
-    };
+
+};
 
 #endif

@@ -63,6 +63,15 @@ static inline double wsh_degrees_to_radians(double angle)
 	return angle * (M_PI / 180);
 }
 
+static inline double wsh_angle_from_points_p(WPoint* a, WPoint* b)
+{
+	
+	double dx    = b->x - a->x;
+	double dy    = b->y - a->y;
+	double angle = atan2(dy, dx);
+	return angle;
+}
+
 static inline double wsh_angle_from_points(double ax, double ay, double bx, double by)
 {
 

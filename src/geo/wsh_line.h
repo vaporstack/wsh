@@ -94,5 +94,6 @@ WLine* wsh_line_normalize(WLine*, double* dx, double* dy);
 WLine* wsh_line_normalize_square(WLine*, double* dx, double* dy);
 void   wsh_line_normalize_inplace(WLine*, double* dx, double* dy);
 void   wsh_line_normalize_square_inplace(WLine*, double* dx, double* dy);
+WLine* wsh_line_segment(WLine* line, double d);
 
 #endif /* wsh_line_h */

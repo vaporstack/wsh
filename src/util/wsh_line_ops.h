@@ -15,11 +15,30 @@
 //	right now it's like 50/50.  probably should return copies
 //	across the board
 
-WLine* wsh_line_ops_dedupe(WLine*);
-WLine* wsh_line_ops_subdiv(WLine*, double);
-WLine* wsh_line_ops_smooth(WLine*, double);
-WLine* wsh_line_ops_simplify(WLine*, double);
-WLine* wsh_line_ops_douglaspeucker(WLine*, double);
+/*! 	\fn wsh_line_ops_dedupe
+ *
+ *	\brief return a copy of the line, duplicates removed.
+ *	\param the WLine to be deduplicated
+ *	\todo make it return the same line and self cleanup?
+ */
+WLine* wsh_line_ops_dedupe(WLine* line);
+
+/**
+ *
+ *	method to check if the line has any line segments > delta
+ *
+ */
+bool wsh_line_ops_subdivide_needed(WLine* line, double delta);
+
+/**
+ *
+ *	return a segmented copy of the line, with divisions size delta
+ *
+ */
+WLine* wsh_line_ops_subdivide(WLine* line, double delta);
+WLine* wsh_line_ops_smooth(WLine* line, double delta);
+WLine* wsh_line_ops_simplify(WLine* line, double delta);
+WLine* wsh_line_ops_douglaspeucker(WLine* line, double delta);
 
 /**
  *
@@ -37,10 +56,10 @@ double wsh_line_ops_sum(WLine*);
 
 /**
  *
- *	simple return the delta of start and end points of a line, for straightish lines mostly
+ *	simply return the delta of start and end points of a line, for straightish lines mostly
  *
  */
-double wsh_line_ops_length(WLine* line);
+double wsh_line_ops_length_simple(WLine* line);
 
 /**
  *

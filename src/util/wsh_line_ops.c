@@ -24,6 +24,8 @@ static inline double wsh_dist2d_p( WPoint* a, WPoint* b)
 }
 */
 
+//	todo: rewrite this and maybe refactor to self-manage
+//	and return the original line if the count is the same?
 WLine* wsh_line_ops_dedupe(WLine* line)
 {
 	WLine* deduped = wsh_line_create();
@@ -63,9 +65,76 @@ WLine* wsh_line_ops_dedupe(WLine* line)
 	return deduped;
 }
 
-WLine* wsh_line_ops_subdiv(WLine* line, double r)
+bool wsh_line_ops_subdivide_needed(WLine* line, double delta)
 {
-	return NULL;
+	for (unsigned long i = 0; i < line->num - 1; i++)
+	{
+		WPoint* a = &line->data[i];
+		WPoint* b = &line->data[i + 1];
+		if (wsh_dist2d_wp(a, b) > delta)
+			return true;
+	}
+	return false;
+}
+
+WLine* wsh_line_ops_subdivide(WLine* line, double delta)
+{
+	WLine* res = wsh_line_create();
+	wsh_line_add_point(res, line->data[0]);
+
+	for (int i = 0; i < line->num - 1; i++)
+	{
+		WPoint* a	= &line->data[i];
+		WPoint* b	= &line->data[i + 1];
+		double  distance = wsh_dist2d_p(a, b);
+
+		//	distance is less than our desired segmentation,
+		//	append and proceed
+		if (distance <= delta)
+		{
+			wsh_line_add_point(res, *b);
+			continue;
+		}
+
+		//	distance is greater than desired segment
+		//	cutting it up.
+		int num_required = (distance / delta);
+		//double frac = 1./num_required;
+		//double angle = wsh_angle_from_points_p(a, b);
+
+		if (num_required == 0)
+		{
+			wsh_line_add_point(res, *b);
+			continue;
+		}
+		//printf("need to provde %d points.\n", num_required);
+
+		//	TODO: danger? we are synthesizing data here.
+
+		for (int j = 1; j < num_required; j++)
+		{
+			double t = ((double)j) / num_required;
+			double x = a->x * (1 - t) + b->x * t;
+			double y = a->y * (1 - t) + b->y * t;
+
+			WPoint p;
+			wsh_point_zero(&p);
+			p.x = x;
+			p.y = y;
+
+			p.pressure = a->pressure * (1 - t) + b->pressure * t;
+			p.time     = a->time * (1 - t) + b->time * t;
+			p.tilt_x   = a->tilt_x * (1 - t) + b->tilt_x * t;
+			p.tilt_x   = a->tilt_x * (1 - t) + b->tilt_x * t;
+			p.rotation = a->rotation * (1 - t) + b->rotation * t;
+
+			wsh_line_add_point(res, p);
+		}
+
+		wsh_line_add_point(res, *b);
+	}
+
+	return res;
 }
 /*
 static double angle_from_points(double ax, double ay, double bx, double by)
@@ -77,14 +146,13 @@ static double angle_from_points(double ax, double ay, double bx, double by)
 }
 */
 
-
 static inline double angle_from_points(double x1, double y1, double x2, double y2)
 {
 	double dx    = x2 - x1;
 	double dy    = y2 - y1;
 	double angle = atan2(dy, dx);
 	// return atan2(dy, dx);
-	
+
 	/*
 	if (dy < 0)
 	{
@@ -124,7 +192,7 @@ double wsh_line_ops_angle(WLine* line)
 	return angle_from_points(a.x, a.y, b.x, b.y);
 }
 
-double wsh_line_ops_length(WLine* line)
+double wsh_line_ops_length_simple(WLine* line)
 {
 	if (line->num < 2)
 	{
@@ -166,7 +234,6 @@ WLine* wsh_line_ops_straighten(WLine* line)
  }
  }
  */
-
 
 //	todo: this r parameter is completely ignored, lol
 //	also it returns nothing so why does it have a WLine return type lol

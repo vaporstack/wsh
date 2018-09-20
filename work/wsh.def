@@ -95,6 +95,6 @@ EXPORTS
 	wsh_line_ops_douglaspeucker
 	wsh_line_ops_simplify
 	wsh_line_ops_smooth
-	wsh_line_ops_subdiv
+	wsh_line_ops_subdivide
 	wsh_line_ops_sum
 	w_triangle_test
