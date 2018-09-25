@@ -424,6 +424,17 @@ void wsh_line_rotate(WLine* line, double cx, double cy, double r)
 		wsh_point_rotate(p, cx, cy, r);
 	}
 }
+#include "../util/wsh_math.h"
+
+void wsh_line_rotate_d(WLine* line, double cx, double cy, double d)
+{
+	double r = wsh_degrees_to_radians(d);
+	for (int i = 0; i < line->num; i++)
+	{
+		WPoint* p = &line->data[i];
+		wsh_point_rotate(p, cx, cy, r);
+	}
+}
 
 void wsh_line_move(WLine* line, double x, double y)
 {

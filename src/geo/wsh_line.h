@@ -73,6 +73,7 @@ void wsh_line_move(WLine* src, double x, double y);
 //	going forward, all rotation operations should be in radians unless otherwise specified
 //	by the _degree suffix
 void wsh_line_rotate(WLine* line, double cx, double cy, double r);
+void wsh_line_rotate_d(WLine* line, double cx, double cy, double d);
 
 void wsh_line_scale(WLine* src, double x, double y);
 
