@@ -969,13 +969,13 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 		{
 			working_version = strdup(version->valuestring);
 			fixup_old_style_version_string(working_version);
-			printf("version detected: %s\n", working_version);
+			wsh_log("version detected: %s", working_version);
 		}
 		doc = wsh_serial_document_unserialize_v001(path, root);
 	}
 	else
 	{
-		printf("No 'info' suggesting schema 2 or higher, checking for meta.: %s\n", working_version);
+		wsh_log("No 'info' suggesting schema 2 or higher, checking for meta.: %s", working_version);
 		
 		meta = cJSON_GetObjectItem(root, "meta");
 		if (!meta)
@@ -1014,7 +1014,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 	 if (version) {
 	 working_version = version->valuestring;
 	 if (DEBUG_SERIAL)
-	 printf("version detected: %s\n", working_version);
+	 wsh_log("version detected: %s", working_version);
 	 }
 	 */
 	

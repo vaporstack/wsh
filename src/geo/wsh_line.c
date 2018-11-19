@@ -129,7 +129,7 @@ void wsh_line_add_point(WLine* line, WPoint p)
 	if (!line)
 	{
 #ifdef DEBUG
-		printf("Cannot add to a NULL line!\n");
+		wsh_log("Cannot add to a NULL line!");
 #endif
 		return;
 	}
@@ -228,14 +228,14 @@ WLine* wsh_line_copy(WLine* old)
 	{
 #ifdef DEBUG
 		
-		printf("tried to copy a null line.\n");
+		wsh_log("tried to copy a null line.");
 #endif
 		return NULL;
 	}
 	else if (old->data == NULL)
 	{
 #ifdef DEBUG
-		printf("Tried to copy a line with no data!\n");
+		wsh_log("Tried to copy a line with no data!");
 #endif
 		return NULL;
 	}
@@ -280,14 +280,14 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 	if (old == NULL)
 	{
 #ifdef DEBUG
-		printf("tried to copy a null line.\n");
+		wsh_log("tried to copy a null line.");
 #endif
 		return NULL;
 	}
 	else if (old->data == NULL)
 	{
 #ifdef DEBUG
-		printf("Tried to copy a line with no data!\n");
+		wsh_log("Tried to copy a line with no data!");
 #endif
 		return NULL;
 	}
@@ -371,7 +371,7 @@ void wsh_line_destroy(WLine* line)
 	if (!line)
 	{
 #ifdef DEBUG
-		printf("I refuse to destroy something that is already "
+		wsh_log("I refuse to destroy something that is already "
 		       "destroyed lol\n");
 #endif
 		return;
@@ -470,7 +470,7 @@ void wsh_line_normalize_time(WLine* l)
 	if (!l)
 	{
 #ifdef DEBUG
-		printf("Tried to normalize time for a NULL line.\n");
+		wsh_log("Tried to normalize time for a NULL line.");
 #endif
 		return;
 	}
@@ -524,7 +524,7 @@ WLine* wsh_line_normalize_square(WLine* l, double* o_dx, double* o_dy)
 	if (!l)
 	{
 #ifdef DEBUG
-		printf("Can't normalize a NULL line!\n");
+		wsh_log("Can't normalize a NULL line!");
 #endif
 		return NULL;
 	}

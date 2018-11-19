@@ -7,7 +7,7 @@
 
 #include "wsh_line_ops.h"
 
-//#include <gl-matrix/gl-matrix.h>
+//#include <deps/gl-matrix/gl-matrix.h>
 #include <math.h>
 #include <wsh/wsh.h>
 
@@ -60,7 +60,7 @@ WLine* wsh_line_ops_dedupe(WLine* line)
 	}
 
 	if (DEBUG_LINE_OPS)
-		printf("Dedupe %llu -> %llu\n", line->num, deduped->num);
+		wsh_log("Dedupe %llu -> %llu", line->num, deduped->num);
 
 	return deduped;
 }
@@ -184,7 +184,7 @@ double wsh_line_ops_angle(WLine* line)
 {
 	if (line->num < 2)
 	{
-		printf("Can't angle this line, not enough points!\n");
+		wsh_log("Can't angle this line, not enough points!");
 		return -1;
 	}
 	WPoint a = line->data[0];
@@ -196,7 +196,7 @@ double wsh_line_ops_length_simple(WLine* line)
 {
 	if (line->num < 2)
 	{
-		printf("Can't length this line, not enough points!\n");
+		wsh_log("Can't length this line, not enough points!");
 		return -1;
 	}
 	WPoint a = line->data[0];
@@ -209,7 +209,7 @@ WLine* wsh_line_ops_straighten(WLine* line)
 {
 	if (line->num < 2)
 	{
-		printf("Can't straighten this line, not enough points!\n");
+		wsh_log("Can't straighten this line, not enough points!");
 		return NULL;
 	}
 	WPoint a = line->data[0];
@@ -403,7 +403,7 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 	}
 	wsh_line_add_point(cpy, line->data[line->num - 1]);
 	if (DEBUG_LINE_OPS)
-		printf("%llu -> %llu\n", line->num, cpy->num);
+		wsh_log("%llu -> %llu", line->num, cpy->num);
 	// this is probably needlessly expensive, but hey
 	return cpy;
 }

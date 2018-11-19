@@ -18,7 +18,7 @@
 /*! 	\fn wsh_line_ops_dedupe
  *
  *	\brief return a copy of the line, duplicates removed.
- *	\param the WLine to be deduplicated
+ *	\param WLine to be deduplicated
  *	\todo make it return the same line and self cleanup?
  */
 WLine* wsh_line_ops_dedupe(WLine* line);

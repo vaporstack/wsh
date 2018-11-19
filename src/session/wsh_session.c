@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <wsh/wsh.h>
 
 #define IDENTIFIER_MAX 256
 
@@ -153,7 +154,7 @@ int wsh_session_deinit()
 
 int wsh_session_start(double ts)
 {
-	printf("Starting wsh recording session.\n");
+	wsh_log("Starting wsh recording session.");
 	if (recording)
 	{
 		printf("Was already recording!\n");
@@ -173,13 +174,13 @@ int wsh_session_stop(double ts)
 	}
 	recording = false;
 
-	printf("Stopping wsh recording session.\n");
+	wsh_log("Stopping wsh recording session.");
 	return true;
 }
 
 void wsh_session_print_debug_info(void)
 {
-	printf("Tools:\n");
+	wsh_log("Tools:");
 	for (int i = 0; i < num_tools; i++)
 	{
 		printf("Tool: %s\n", tool_names[i]);

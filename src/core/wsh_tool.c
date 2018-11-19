@@ -53,7 +53,7 @@ WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 	{
 #ifdef DEBUG
 
-		printf("D: %f\n", *r->decay);
+		wsh_log("D: %f", *r->decay);
 #endif
 		
 	}

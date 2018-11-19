@@ -69,10 +69,14 @@ endif()
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
-	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib /opt/X11/include)
+	target_include_directories(${project_name} PUBLIC 
+		${CMAKE_CURRENT_SOURCE_DIR}/contrib 
+		/opt/X11/include)
 else()
 	message("Building standalone.")
-	target_include_directories(${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/contrib /opt/X11/include)
+	target_include_directories(${project_name} PUBLIC 
+		${CMAKE_CURRENT_SOURCE_DIR}/contrib 
+		/opt/X11/include)
 
 	macro(use_c99)
 		if (CMAKE_VERSION VERSION_LESS "3.1")

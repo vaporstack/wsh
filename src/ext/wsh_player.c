@@ -114,7 +114,7 @@ void wsh_player_update(WshPlayer* player, double t)
 {
 	if (!player->playing)
 	{
-		printf("Not updating, not playin\n");
+		wsh_log("Not updating, not playin");
 		return;
 	}
 

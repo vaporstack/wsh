@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 #define WSH_VERSION "0.0.2"
 #define WSH_VERSION_MAJOR 0
 #define WSH_VERSION_MINOR 0
@@ -22,6 +23,7 @@
 #define WSH_VERSION_CHECK(maj, min) ((maj == WSH_VERSION_MAJOR) && (min <= WSH_VERSION_MINOR))
 
 #define WSH_PRESENT
+void wsh_log(char* fmt, ...);
 
 int   wsh_check_version_match(const char* str);
 int   wsh_check_version_match222(const char* str);
@@ -36,7 +38,7 @@ static inline void wsh_version_check(int major, int minor)
 		fprintf(stderr, "ERROR: incompatible library version\n");
 		exit(-1);
 	}
-	printf("libwsh is compatible (%s)\n", WSH_VERSION);
+	wsh_log("libwsh is compatible (%s)", WSH_VERSION);
 }
 
 static inline char* wsh_get_compat_string_header(void)

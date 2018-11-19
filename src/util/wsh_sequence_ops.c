@@ -6,6 +6,7 @@
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
+#include <wsh/wsh.h>
 #include "wsh_sequence_ops.h"
 
 //	collapse (copy)  sequence to a single frame
@@ -21,14 +22,14 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 	WObject* res = wsh_object_create(NULL);
 	//	wsh_sequence_frame_add(res);
 #ifdef DEBUG
-	printf("Collapsing a sequence of %d frames\n", seq->num_frames);
+	wsh_log("Collapsing a sequence of %d frames", seq->num_frames);
 #endif
 	int total = 0;
 	for (int i = 0; i < seq->num_frames; i++)
 	{
 		WObject* fr = seq->frames[i];
 #ifdef DEBUG
-		printf("Collapsing %d lines.\n", fr->num);
+		wsh_log("Collapsing %d lines.", fr->num);
 #endif
 
 		for (int j = 0; j < fr->num; j++)
