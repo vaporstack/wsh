@@ -255,7 +255,7 @@ cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj)
 	if (!obj)
 		return NULL;
 	if (DEBUG_SERIAL)
-		printf("Serialization test: %p\n", obj);
+		wsh_log("Serialization test: %p", obj);
 	cJSON* root = cJSON_CreateObject();
 	
 	// cJSON_AddItemToObject(root, "name", cJSON_CreateString("WObject"));
@@ -268,13 +268,13 @@ cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj)
 
 	int num = obj->num;
 	if (DEBUG_SERIAL)
-		printf("Serializing %d lines.\n", num);
+		wsh_log("Serializing %d lines.", num);
 	cJSON* jlines = cJSON_CreateArray();
 	
 	for (int i = 0; i < num; ++i)
 	{
 		if (DEBUG_SERIAL)
-			printf("Serializing line %d\n", i);
+			wsh_log("Serializing line %d", i);
 		WLine* line = obj->lines[i];
 		if (line)
 		{
@@ -297,7 +297,7 @@ cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq)
 	
 	//int num = seq->num_frames;
 	if (DEBUG_SERIAL)
-		printf("Have %d frames to serialize.\n", seq->num_frames);
+		wsh_log("Have %d frames to serialize.", seq->num_frames);
 	for (int i = 0; i < seq->num_frames; ++i)
 	{
 		WObject* fr    = seq->frames[i];
@@ -368,7 +368,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	
 	// seq->frames = malloc(sizeof(WObject) * num
 	if (DEBUG_SERIAL)
-		printf("%d frames to read.\n", num);
+		wsh_log("%d frames to read.", num);
 	for (int i = 0; i < num; ++i)
 	{
 		cJSON* jframe = cJSON_GetArrayItem(jframes, i);
@@ -399,7 +399,7 @@ WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 	}
 	else
 	{
-		printf("No code to handle this version or unable to read "
+		wsh_log("No code to handle this version or unable to read "
 		       "version.\n");
 		return NULL;
 	}
@@ -427,10 +427,10 @@ cJSON* wsh_serialize_object_json(WObject* obj)
 
 int wsh_serial_json_unserialize_meta_v0_0_1(cJSON* info, WDocumentMeta* meta)
 {
-	printf("Unserializing meta!? 01\n");
+	wsh_log("Unserializing meta!? 01");
 	if (!info)
 	{
-		printf("INFO weas null\n");
+		wsh_log("INFO weas null");
 		return false;
 	}
 	//cJSON* info = cJSON_GetObjectItem(data, "info");
@@ -471,15 +471,15 @@ const char* fps_to_string(double v)
 		double frac = v - vi;
 		sprintf(buf, "%d.%f\n", vi, frac);
 		//we got a floater
-		printf("floating point.\n");
+		wsh_log("floating point.");
 	}
 	else
 	{
 		printf("Integer.\n");
-		sprintf(buf, "%d", vi);
+		wsh_log(buf, "%d", vi);
 	}
 	
-	printf("buf:[%s]\n", buf);
+	wsh_log("buf:[%s]", buf);
 	
 	return buf;
 }
@@ -522,7 +522,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 
 int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 {
-	printf("Unserializing meta!? 02\n");
+	wsh_log("Unserializing meta!? 02");
 	cJSON* session = cJSON_GetObjectItem(data, "session");
 	cJSON* plugins = cJSON_GetObjectItem(data, "plugins");
 	cJSON* canvas  = cJSON_GetObjectItem(data, "canvas");
@@ -608,7 +608,7 @@ const char* wsh_serial_json_document_serialize_v001(WDocument* doc, const char* 
 {
 	
 	if (DEBUG_SERIAL)
-		printf("Serialization doc: %p\n", doc);
+		wsh_log("Serialization doc: %p", doc);
 	
 	// printf("//------------------------\n\n\n\n %s",
 	// W_LIBWSH_SVER(ASDF));
@@ -666,17 +666,17 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 	
 	if (0 == strcmp(working_version, "0.0.1"))
 	{
-		printf("Serialize: %s\n", working_version);
+		wsh_log("Serialize: %s", working_version);
 		return wsh_serial_json_document_serialize_v001(doc, buf);
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
 	{
-		printf("Serialize: %s\n", working_version);
+		wsh_log("Serialize: %s", working_version);
 		return wsh_serial_json_document_serialize_v002(doc, buf);
 	}
 	else
 	{
-		printf("NO known code paths to serialize this format: %s\n", buf);
+		wsh_log("NO known code paths to serialize this format: %s", buf);
 	}
 	free(buf);
 	
@@ -711,10 +711,10 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	int num = cJSON_GetArraySize(jx);
 	if (num > 100000)
 	{
-		printf("Something went WAY wrong (probably)\n");
+		wsh_log("Something went WAY wrong (probably)");
 	}
 	if (DEBUG_SERIAL)
-		printf("%d points.\n", num);
+		wsh_log("%d points.", num);
 	
 	for (int i = 0; i < num; ++i)
 	{
@@ -741,7 +741,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	
 	if (line->num > 100000000)
 	{
-		printf("what the FACK\n");
+		wsh_log("what the FACK");
 	}
 	cJSON* stroke = cJSON_GetObjectItem(data, "stroke");
 	if (stroke != NULL)
@@ -756,7 +756,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	}
 	else
 	{
-		printf("Error loading stroke!\n");
+		wsh_log("Error loading stroke!");
 		line->has_stroke = true;
 		line->stroke.r   = 0;
 		line->stroke.g   = 0;
@@ -793,7 +793,7 @@ WObject* wsh_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 	}
 	
 	if (DEBUG_SERIAL)
-		printf("%d lines.\n", num);
+		wsh_log("%d lines.", num);
 	return obj;
 }
 
@@ -817,7 +817,7 @@ WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 		int res = wsh_serial_json_unserialize_meta_v0_0_2(meta, &doc->meta);
 		if (!res)
 		{
-			printf("Error reading meta!\n");
+			wsh_log("Error reading meta!");
 		}
 		/*doc->meta   = meta;
 		 cJSON* info = cJSON_GetObjectItem(meta, "info");
@@ -837,7 +837,7 @@ WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 	}
 	else
 	{
-		printf("ALERT NO META\n");
+		wsh_log("ALERT NO META");
 		//doc->meta = cJSON_CreateObject();
 	}
 	
@@ -850,7 +850,7 @@ WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 
 WDocument* wsh_serial_document_unserialize_v001(const char* path, cJSON* root)
 {
-	printf("Unserializing at v001\n");
+	wsh_log("Unserializing at v001");
 	
 	WDocument* doc = wsh_document_create();
 	
@@ -863,7 +863,7 @@ WDocument* wsh_serial_document_unserialize_v001(const char* path, cJSON* root)
 	}
 	else
 	{
-		printf("Was unable to decode any sequence!\n");
+		wsh_log("Was unable to decode any sequence!");
 		cJSON_Delete(root);
 		wsh_document_destroy(doc);
 		return NULL;
@@ -950,10 +950,10 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 	cJSON*     meta = NULL;
 	if (!data)
 	{
-		char buf[256];
-		sprintf(buf, "An error occurred reading text file: %s\n", path);
+		//char buf[256];
+		wsh_log("An error occurred reading text file: %s", path);
 		// l_warning(buf);
-		free(data);
+		//free(data);
 		return NULL;
 	}
 	
@@ -980,7 +980,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 		meta = cJSON_GetObjectItem(root, "meta");
 		if (!meta)
 		{
-			printf("NO meta decoded!\n what do?\n");
+			wsh_log("NO meta decoded! what do?");
 		}
 		else
 		{
@@ -998,7 +998,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 				}
 				else
 				{
-					printf("Unknown version number! %s\n", working_version);
+					wsh_log("Unknown version number! %s", working_version);
 				}
 			}
 		}

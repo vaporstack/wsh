@@ -11,23 +11,24 @@
 
 #include "wsh.h"
 
+#include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
 #define WSH_LOG_MAX 256
-#include <stdarg.h>
 
 void wsh_log(char* format, ...)
 {
-	
+
 	char buf[WSH_LOG_MAX];
 	sprintf(buf, "%s", format);
 	va_list args;
 	va_start(args, format);
 	vsprintf(buf, format, args);
 	va_end(args);
-	
+
 #ifdef DEBUG
-	printf("[wsh]: %s\n", buf);
+	printf("[wsh ]: %s\n", buf);
 #else
 	printf("DO NOTHING LATER: %s\n", buf);
 #endif
@@ -51,14 +52,13 @@ void init_wash(){
     // printf("asdfasdfasdfasdfasdfasfasdf");
 };
 
-
-struct {
-	const char* string;
+struct
+{
+	const char*    string;
 	const unsigned major;
 	const unsigned minor;
 	const unsigned revision;
 } wsh_version = {
-	WSH_VERSION, WSH_VERSION_MAJOR, WSH_VERSION_MINOR, WSH_VERSION_PATCH
-};
+    WSH_VERSION, WSH_VERSION_MAJOR, WSH_VERSION_MINOR, WSH_VERSION_PATCH};
 
 #endif /* wsh_includes_h */
