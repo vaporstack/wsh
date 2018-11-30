@@ -8,6 +8,8 @@
 
 #include "wsh_tool.h"
 
+#include <wsh/wsh.h>
+
 #include <stdlib.h>
 #define NUM_FIELDS 4
 

@@ -12,7 +12,7 @@
 
 #include "wsh_line.h"
 #include "wsh_point.h"
-
+#include <wsh/wsh.h>
 #define LINE_START_SIZE 256
 #define LINE_MAX_SIZE 1024
 
