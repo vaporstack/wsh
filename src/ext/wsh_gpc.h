@@ -11,7 +11,7 @@
 
 //	do not uncomment this unless you have purchased a gpc license or are just testing
 //	legally unsuitable for release.
-	#define WSH_ENABLE_EXT_GPC
+#define WSH_ENABLE_EXT_GPC
 
 
 #ifdef WSH_ENABLE_EXT_GPC

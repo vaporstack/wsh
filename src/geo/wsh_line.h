@@ -80,6 +80,7 @@ void wsh_line_scale(WLine* src, double x, double y);
 void   wsh_line_find_mins(WLine* src, double* x, double* y);
 void   wsh_line_find_maxs(WLine* src, double* x, double* y);
 WLine* wsh_line_create(void);
+WLine* wsh_line_create_with_reserved(unsigned int num);
 WLine* wsh_line_reverse(WLine*);
 WLine* wsh_line_copy(WLine*);
 WLine* wsh_line_copy_percentage(WLine*, double v);

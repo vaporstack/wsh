@@ -13,7 +13,7 @@
 #include "wsh_line.h"
 #include "wsh_point.h"
 #include <wsh/wsh.h>
-#define LINE_START_SIZE 256
+#define LINE_START_SIZE 32
 #define LINE_MAX_SIZE 1024
 
 //#include "../util/w_gpc.h"
@@ -30,7 +30,7 @@ WLineHnd* wsh_line_hnd_create(void)
 WLineHnd* wsh_line_hnd_create_with_data(void)
 {
 	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
-	hnd->src      = wsh_line_create();
+	hnd->src      = wsh_line_create_with_reserved(LINE_START_SIZE);
 	return hnd;
 }
 
@@ -56,7 +56,7 @@ void wsh_line_hnd_destroy(WLineHnd* hnd)
 	//	totally dead
 }
 
-WLine* wsh_line_create()
+WLine* wsh_line_create(void)
 {
 	WLine* l = calloc(1, sizeof(WLine));
 	
@@ -84,6 +84,14 @@ WLine* wsh_line_create()
 	 
 	 l->transform = t;
 	 */
+	return l;
+}
+
+WLine* wsh_line_create_with_reserved(unsigned int num)
+{
+	WLine* l = wsh_line_create();
+	l->reserved = num;
+	l->data = calloc(l->reserved, sizeof(WPoint));
 	return l;
 }
 
