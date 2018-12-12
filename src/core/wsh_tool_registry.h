@@ -11,4 +11,9 @@
 
 #include "wsh_tool.h"
 
+
+
+void wsh_tool_registry_register(WshToolRec);
+
+
 #endif /* wsh_tool_registry_h */

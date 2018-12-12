@@ -21,9 +21,9 @@ WshToolRec* wsh_tool_rec_create(const char* name, const char* ident, const char*
 {
 
 	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
-	rec->name       = strdup(name);
-	rec->identifier = strdup(ident);
-	rec->desc       = strdup(desc);
+	rec->name       = (name);
+	rec->identifier = (ident);
+	rec->desc       = (desc);
 	return rec;
 }
 
@@ -69,7 +69,7 @@ void wsh_tool_params_destroy(WshToolParams* rec)
 WshToolParamDelta* wsh_tool_paramdelta_create(void)
 {
 	WshToolParamDelta* delta = calloc(1, sizeof(WshToolParamDelta));
-	
+
 	return delta;
 }
 
@@ -91,24 +91,24 @@ WshToolParamDelta* wsh_tool_params_diff(WshToolParams* a, WshToolParams* b)
 		//double diff = *b - *a;
 		//printf("%f\n", diff);
 	}
-	
+
 	if (r->attack)
 	{
 #ifdef DEBUG
-		
+
 		printf("A: %f\n", *r->attack);
 #endif
 	}
-	
+
 	if (r->decay)
 	{
 #ifdef DEBUG
-		
+
 		wsh_log("D: %f", *r->decay);
 #endif
 	}
-	
+
 	//	todo: fill out the rest of these fields in the diff
-	
+
 	return r;
 }
