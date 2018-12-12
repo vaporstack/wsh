@@ -17,19 +17,68 @@
 #include <stdio.h>
 #endif
 
-WshToolRecDelta* wsh_tool_rec_delta_create(void)
+WshToolRec* wsh_tool_rec_create(const char* name, const char* ident, const char* desc)
 {
-	WshToolRecDelta* delta = calloc(1, sizeof(WshToolRecDelta));
 
+	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
+	rec->name       = strdup(name);
+	rec->identifier = strdup(ident);
+	rec->desc       = strdup(desc);
+	return rec;
+}
+
+void wsh_tool_rec_destroy(WshToolRec* rec)
+{
+	free(rec);
+}
+
+WshToolParams* wsh_tool_params_create(void)
+{
+	WshToolParams* rec = calloc(1, sizeof(WshToolRec));
+	//rec->textures = NULL;
+	//rec->colors = NULL;
+
+	rec->size_base  = 0;
+	rec->size_inner = .5;
+	rec->size_outer = .75;
+	rec->size_perim = 1.;
+
+	rec->attack  = .25;
+	rec->decay   = .125;
+	rec->sustain = 3;
+	rec->release = .125;
+
+	rec->size_mod = 1.;
+
+	return rec;
+}
+
+void wsh_tool_params_destroy(WshToolParams* rec)
+{
+	if (rec->textures)
+	{
+		free(rec->textures);
+	}
+	if (rec->colors)
+	{
+		free(rec->colors);
+	}
+	free(rec);
+}
+
+WshToolParamDelta* wsh_tool_paramdelta_create(void)
+{
+	WshToolParamDelta* delta = calloc(1, sizeof(WshToolParamDelta));
+	
 	return delta;
 }
 
-WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
+WshToolParamDelta* wsh_tool_params_diff(WshToolParams* a, WshToolParams* b)
 {
-	WshToolRecDelta* r		      = wsh_tool_rec_delta_create();
-	double*		 fields_a[NUM_FIELDS] = {&(a->attack), &(a->decay), &(a->sustain), &(a->release)};
-	double*		 fields_b[NUM_FIELDS] = {&(b->attack), &(b->decay), &(b->sustain), &(b->release)};
-	double*		 fields_r[NUM_FIELDS] = {(r->attack), (r->decay), (r->sustain), (r->release)};
+	WshToolParamDelta* r			= wsh_tool_paramdelta_create();
+	double*		   fields_a[NUM_FIELDS] = {&(a->attack), &(a->decay), &(a->sustain), &(a->release)};
+	double*		   fields_b[NUM_FIELDS] = {&(b->attack), &(b->decay), &(b->sustain), &(b->release)};
+	double*		   fields_r[NUM_FIELDS] = {(r->attack), (r->decay), (r->sustain), (r->release)};
 	for (int i = 0; i < NUM_FIELDS; i++)
 	{
 		double* a = fields_a[i];
@@ -42,59 +91,24 @@ WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b)
 		//double diff = *b - *a;
 		//printf("%f\n", diff);
 	}
-
+	
 	if (r->attack)
 	{
 #ifdef DEBUG
-
+		
 		printf("A: %f\n", *r->attack);
 #endif
 	}
-
+	
 	if (r->decay)
 	{
 #ifdef DEBUG
-
+		
 		wsh_log("D: %f", *r->decay);
 #endif
-		
 	}
-
+	
 	//	todo: fill out the rest of these fields in the diff
-
+	
 	return r;
-}
-
-WshToolRec* wsh_tool_rec_create(void)
-{
-	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
-	//rec->textures = NULL;
-	//rec->colors = NULL;
-
-	rec->size_base  = 0;
-	rec->size_inner = .5;
-	rec->size_outer = .75;
-	rec->size_perim = 1.;
-	
-	rec->attack = .25;
-	rec->decay = .125;
-	rec->sustain = 3;
-	rec->release = .125;
-	
-	rec->size_mod	 = 1.;
-
-	return rec;
-}
-
-void wsh_tool_rec_destroy(WshToolRec* rec)
-{
-	if (rec->textures)
-	{
-		free(rec->textures);
-	}
-	if (rec->colors)
-	{
-		free(rec->colors);
-	}
-	free(rec);
 }

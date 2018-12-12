@@ -12,6 +12,7 @@
 
 #include <deps/gpc/gpc.h>
 
+
 void* wsh_ext_gpc_tess_create_wline(WLine* line)
 {
 	

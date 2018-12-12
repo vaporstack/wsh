@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572918D421C1B727009399DD /* wsh_tool_registry.c in Sources */ = {isa = PBXBuildFile; fileRef = 572918D321C1B727009399DD /* wsh_tool_registry.c */; };
 		5760D415205B2B13005A9373 /* wsh_color.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D414205B2B13005A9373 /* wsh_color.c */; };
 		5760D420205B2B57005A9373 /* wsh_anl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41A205B2B57005A9373 /* wsh_anl.c */; };
 		5760D422205B2B57005A9373 /* wsh_line_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 5760D41D205B2B57005A9373 /* wsh_line_ops.c */; };
@@ -45,6 +46,8 @@
 
 /* Begin PBXFileReference section */
 		5711BFC92061B5BB00DD36E0 /* wsh_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_math.h; sourceTree = "<group>"; };
+		572918D221C1B727009399DD /* wsh_tool_registry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_tool_registry.h; sourceTree = "<group>"; };
+		572918D321C1B727009399DD /* wsh_tool_registry.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_tool_registry.c; sourceTree = "<group>"; };
 		5760D413205B2B13005A9373 /* wsh_color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_color.h; sourceTree = "<group>"; };
 		5760D414205B2B13005A9373 /* wsh_color.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_color.c; sourceTree = "<group>"; };
 		5760D418205B2B57005A9373 /* wsh_line_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_line_ops.h; sourceTree = "<group>"; };
@@ -112,10 +115,12 @@
 		5760D412205B2B13005A9373 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				5760D414205B2B13005A9373 /* wsh_color.c */,
+				5760D413205B2B13005A9373 /* wsh_color.h */,
+				572918D321C1B727009399DD /* wsh_tool_registry.c */,
+				572918D221C1B727009399DD /* wsh_tool_registry.h */,
 				5760D432205B3F5C005A9373 /* wsh_tool.c */,
 				5760D433205B3F5C005A9373 /* wsh_tool.h */,
-				5760D413205B2B13005A9373 /* wsh_color.h */,
-				5760D414205B2B13005A9373 /* wsh_color.c */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				57F0DD921E49338700949D90 /* wsh_object.c in Sources */,
 				5767768F20AB52BE00479DE5 /* wsh_ops_point.c in Sources */,
 				57D8E27B21C0427900892E0C /* wsh_gpc.c in Sources */,
+				572918D421C1B727009399DD /* wsh_tool_registry.c in Sources */,
 				D16AB6321E88A1E9008B9072 /* wsh_sequence.c in Sources */,
 				5781AFD52086B3A3003659FD /* wsh.c in Sources */,
 				5760D434205B3F5C005A9373 /* wsh_tool.c in Sources */,

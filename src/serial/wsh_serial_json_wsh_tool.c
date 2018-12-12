@@ -16,7 +16,7 @@
 
 cJSON* wsh_serial_json_wsh_tool_serialize(WshToolRec* rec)
 {
-
+/*
 	cJSON* root = cJSON_CreateObject();
 
 	cJSON_AddStringToObject(root, "name", rec->name);
@@ -48,11 +48,14 @@ cJSON* wsh_serial_json_wsh_tool_serialize(WshToolRec* rec)
 
 	//	todo : figure out if we're doing texture files or what
 	return root;
+ */
+	return NULL;
 }
 
 WshToolRec* wsh_serial_json_wsh_tool_unserialize(cJSON* data)
 {
-	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
+	/*
+	 WshToolRec* rec = calloc(1, sizeof(WshToolRec));
 	cJSON*      v   = NULL;
 	v		= cJSON_GetObjectItem(data, "name");
 	if (v)
@@ -109,6 +112,8 @@ WshToolRec* wsh_serial_json_wsh_tool_unserialize(cJSON* data)
 		}
 	}
 	return rec;
+	 */
+	return NULL;
 }
 
 #endif

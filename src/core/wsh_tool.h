@@ -16,7 +16,10 @@ typedef struct WshToolRec
 	const char* name;
 	const char* identifier;
 	const char* desc;
+} WshToolRec;
 
+typedef struct WshToolParams
+{
 	double attack;
 	double decay;
 	double sustain;
@@ -36,9 +39,9 @@ typedef struct WshToolRec
 	void* textures;
 	int   texture_num;
 
-} WshToolRec;
+} WshToolParams;
 
-typedef struct WshToolRecDelta
+typedef struct WshToolParamDelta
 {
 	double*    attack;
 	double*    decay;
@@ -51,12 +54,13 @@ typedef struct WshToolRecDelta
 	int*       color_num;
 	void*      textures;
 	int*       texture_num;
-} WshToolRecDelta;
+} WshToolParamDelta;
 
-WshToolRecDelta* wsh_tool_rec_delta_create(void);
-WshToolRecDelta* wsh_tool_rec_diff(WshToolRec* a, WshToolRec* b);
-
-WshToolRec* wsh_tool_rec_create(void);
-void	wsh_tool_rec_destroy(WshToolRec* rec);
+WshToolRec*	wsh_tool_rec_create(const char* name, const char* ident, const char* desc);
+void		   wsh_tool_rec_destroy(WshToolRec* rec);
+WshToolParams*     wsh_tool_params_create(void);
+void		   wsh_tool_params_destroy(WshToolParams* rec);
+WshToolParamDelta* wsh_tool_paramdelta_create(void);
+WshToolParamDelta* wsh_tool_params_diff(WshToolParams* a, WshToolParams* b);
 
 #endif /* wsh_tool_h */
