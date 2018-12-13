@@ -19,12 +19,15 @@
 
 WshToolRec* wsh_tool_rec_create(const char* name, const char* ident, const char* desc)
 {
-
+	/*
 	WshToolRec* rec = calloc(1, sizeof(WshToolRec));
 	rec->name       = (name);
 	rec->identifier = (ident);
 	rec->desc       = (desc);
 	return rec;
+	*/
+	return NULL;
+	
 }
 
 void wsh_tool_rec_destroy(WshToolRec* rec)
