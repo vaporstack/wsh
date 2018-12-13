@@ -20,7 +20,7 @@
 
 static const char*  path      = NULL;
 static int	  recording = 0;
-static void*	data      = NULL; //T B VERY MUCH D
+//static void*	data      = NULL; //T B VERY MUCH D
 static WDocumentHnd document;
 static const char** tool_names       = NULL;
 static int	  num_tools	= 0;

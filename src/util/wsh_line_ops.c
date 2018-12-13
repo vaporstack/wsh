@@ -212,9 +212,14 @@ WLine* wsh_line_ops_straighten(WLine* line)
 		wsh_log("Can't straighten this line, not enough points!");
 		return NULL;
 	}
-	WPoint a = line->data[0];
-	WPoint b = line->data[line->num - 1];
-
+	//WPoint a = line->data[0];
+	//WPoint b = line->data[line->num - 1];
+	
+	
+	
+	//	todo:
+	//	implement this
+	
 	return NULL;
 }
 

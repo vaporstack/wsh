@@ -267,7 +267,7 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 	obj->normalized = old->normalized;
 
 	int i;
-	int num = old->num;
+	unsigned long num = old->num;
 
 	obj->num   = num;
 	obj->lines = NULL;
@@ -554,10 +554,10 @@ void wsh_object_normalize(WObject* obj)
 	maxx = maxy = INFINITY;
 
 	avgx = avgy = 0;
-	int num     = obj->num;
+	unsigned long num     = obj->num;
 	int total   = 0;
 
-	for (int i = 0; i < num; ++i)
+	for (unsigned long i = 0; i < num; ++i)
 	{
 		WLine* l = obj->lines[i];
 
@@ -669,7 +669,7 @@ void wsh_object_calc_bounds(WObject* obj)
 	maxx = maxy = -INFINITY;
 
 	avgx = avgy = 0;
-	int num     = obj->num;
+	unsigned long num     = obj->num;
 	int total   = 0;
 
 	for (int i = 0; i < num; ++i)

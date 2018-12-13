@@ -30,7 +30,7 @@ typedef struct WObject
 
 typedef struct WObjectHnd
 {
-	bool     valid;
+	//bool     valid;
 	WObject* src;
 } WObjectHnd;
 

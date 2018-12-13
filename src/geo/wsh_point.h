@@ -22,13 +22,20 @@
 
 typedef struct
 {
+	//	common params
 	double x;
 	double y;
 	double pressure;
+	double time;
+
+	//	wacom params
 	double tilt_x;
 	double tilt_y;
 	double rotation;
-	double time;
+	
+	//	pencil params
+	double altitude;
+	double azimuth;
 } WPoint;
 
 /*

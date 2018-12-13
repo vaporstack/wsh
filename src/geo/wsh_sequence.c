@@ -625,7 +625,7 @@ void wsh_sequence_normalize(WSequence* seq)
 	double dx = maxx - minx;
 	double dy = maxy - miny;
 
-	double bigger = (dx > dy) ? dx : dy;
+	//double bigger = (dx > dy) ? dx : dy;
 	double ar     = dy / dx;
 	double rx, ry;
 	if (dx > dy)

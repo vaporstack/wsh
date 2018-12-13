@@ -15,13 +15,14 @@
  *
  *  @return The point structure, allocated on heap.
  */
-
-WPoint* wsh_point_create()
+WPoint* wsh_point_create(void)
 {
 	WPoint* p = calloc(1, sizeof(WPoint));
+	wsh_point_zero(p);
+	
 	// WPoint p;
 	//(*p).x = .7;
-	p->x = 0;
+	//p->x = 0;
 	return p;
 }
 
@@ -42,9 +43,16 @@ WPoint* wsh_point_create_2f(double x, double y)
 	return p;
 }
 
+/** @brief Zero a point
+ *
+ *  Zero all fields of a WPoint
+ *
+ *  @return Nothing.
+ */
 void wsh_point_zero(WPoint* p)
 {
-	p->pressure = p->rotation = p->tilt_x = p->tilt_y = p->time = p->x = p->y = 0;
+	p->pressure = p->time = p->x = p->y = 0;
+	p->rotation = p->tilt_x = p->tilt_y = p->altitude = p->azimuth = -1;
 }
 
 
