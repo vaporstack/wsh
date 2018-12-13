@@ -37,7 +37,7 @@ void wsh_tool_rec_destroy(WshToolRec* rec)
 
 WshToolParams* wsh_tool_params_create(void)
 {
-	WshToolParams* rec = calloc(1, sizeof(WshToolRec));
+	WshToolParams* rec = calloc(1, sizeof(WshToolParams));
 	//rec->textures = NULL;
 	//rec->colors = NULL;
 

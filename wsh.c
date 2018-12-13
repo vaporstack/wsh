@@ -36,8 +36,10 @@ void wsh_log(char* format, ...)
 
 int wsh_check_version_match(const char* header_generated_version)
 {
-
-	return (0 == strcmp(wsh_get_version_string(), header_generated_version));
+	char* vstring = wsh_get_version_string();
+	int res = (0 == strcmp(vstring, header_generated_version));
+	free(vstring);
+	return res;
 }
 
 char* wsh_get_version_string(void)

@@ -40,8 +40,12 @@ WshPlayer* wsh_player_create_replay(WDocumentHnd hnd)
 
 void wsh_player_destroy(WshPlayer* player)
 {
-	if (player)
+	if (!player)
+	{
+		wsh_log("Not destroying a NULL player\n");
+		
 		return;
+	}
 	if (player->info)
 		free(player->info);
 
