@@ -57,6 +57,9 @@ endif ()
 if (${have_r4_environment})
 	message("Enabling the JSON backend?")
 	add_definitions(-DWSH_ENABLE_SERIAL_BACKEND_JSON)
+
+	set(EnableGPC ON)
+
 endif()
 
 
@@ -76,13 +79,13 @@ endif()
 
 if ( ${have_r4_environment} )
 	message("Building within r4 lib structure.")
-	target_include_directories(${project_name} PUBLIC 
-		${CMAKE_CURRENT_SOURCE_DIR}/contrib 
+	target_include_directories(${project_name} PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}/contrib
 		/opt/X11/include)
 else()
 	message("Building standalone.")
-	target_include_directories(${project_name} PUBLIC 
-		${CMAKE_CURRENT_SOURCE_DIR}/contrib 
+	target_include_directories(${project_name} PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}/contrib
 		/opt/X11/include)
 
 	macro(use_c99)
