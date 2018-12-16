@@ -22,8 +22,8 @@
 
 #include <FTGL/ftgl.h>
 
-FTGLfont*   font    = NULL;
-static bool initted = false;
+FTGLfont*   font	= NULL;
+static bool initialized = false;
 
 void text_ftgl_deinit(void)
 {
@@ -42,12 +42,12 @@ static int init(void)
 	ftglSetFontFaceSize(font, 36, 36);
 
 	/* Destroy the font object. */
-	initted = true;
+	initialized = true;
 	return 0;
 }
 void text_ftgl_draw_text(const char* text, double x, double y)
 {
-	if (!initted)
+	if (!initialized)
 	{
 		int res = init();
 		if (res == -1)
