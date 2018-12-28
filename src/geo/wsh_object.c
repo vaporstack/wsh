@@ -271,7 +271,7 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 
 	obj->num   = num;
 	obj->lines = NULL;
-	obj->lines = malloc(sizeof(WLine*) * num);
+	obj->lines = calloc(num, sizeof(WLine*));
 
 	for (i = 0; i < num; ++i)
 	{

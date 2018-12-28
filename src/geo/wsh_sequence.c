@@ -316,7 +316,7 @@ void wsh_sequence_frame_insert(WSequence* seq)
 	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->num_frames);
 
 	// move everything after n up
-	for (int i = seq->num_frames; i > pos; --i)
+	for (int i = seq->num_frames - 1; i > pos; --i)
 	{
 		seq->frames[i] = seq->frames[i - 1];
 	}

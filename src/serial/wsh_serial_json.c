@@ -667,17 +667,23 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 	if (0 == strcmp(working_version, "0.0.1"))
 	{
 		wsh_log("Serialize: %s", working_version);
-		return wsh_serial_json_document_serialize_v001(doc, buf);
+		const char* res = wsh_serial_json_document_serialize_v001(doc, buf);
+		free(buf);
+		return res;
+		
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
 	{
 		wsh_log("Serialize: %s", working_version);
-		return wsh_serial_json_document_serialize_v002(doc, buf);
+		const char* res =  wsh_serial_json_document_serialize_v002(doc, buf);
+		free(buf);
+		return res;
 	}
 	else
 	{
 		wsh_log("NO known code paths to serialize this format: %s", buf);
 	}
+	
 	free(buf);
 	
 	return NULL;
