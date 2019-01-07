@@ -374,6 +374,21 @@ void wsh_line_copy_attribs(WLine* to, WLine* from)
 	//	todo : copy brush here too?  other stuff?
 }
 
+//	returns a copy of the last point. shortens the line
+
+WPoint* wsh_line_pop_back(WLine* line)
+{
+	if (line->num <= 0 )
+	{
+		wsh_log("Error, tried to pop an empty line\n");
+		return NULL;
+	}
+	WPoint p =line->data[line->num-1];
+	WPoint* ret = wsh_point_copy(&p);;
+	return ret;
+	
+}
+
 void wsh_line_destroy(WLine* line)
 {
 	if (!line)

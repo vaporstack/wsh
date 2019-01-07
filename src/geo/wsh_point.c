@@ -55,7 +55,20 @@ void wsh_point_zero(WPoint* p)
 	p->rotation = p->tilt_x = p->tilt_y = p->altitude = p->azimuth = -1;
 }
 
-
+WPoint* wsh_point_copy(WPoint* p)
+{
+	WPoint* n = wsh_point_create();
+	n->x = p->x;
+	n->y = p->y;
+	n->time = p->time;
+	n->pressure = p->pressure;
+	n->rotation = p->rotation;
+	n->tilt_x = p->tilt_x;
+	n->tilt_y = p->tilt_y;
+	n->altitude = p->altitude;
+	n->azimuth = p->azimuth;
+	return n;
+}
 void wsh_point_rotate_degrees(WPoint* p, double cx, double cy, double angle_in_degrees)
 {
 	double angle_in_radians = angle_in_degrees * (M_PI / 180);

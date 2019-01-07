@@ -62,6 +62,13 @@ WPoint* wsh_point_create_2f(double, double);
  *
  *
  */
+WPoint* wsh_point_copy(WPoint* p);
+
+/**
+ *
+ *
+ *
+ */
 void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees);
 
 #endif /* wsh_point_h */
