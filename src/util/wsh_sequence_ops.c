@@ -6,10 +6,32 @@
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
-#include <wsh/wsh.h>
 #include "wsh_sequence_ops.h"
+#include <wsh/wsh.h>
 
 //	collapse (copy)  sequence to a single frame
+/**
+*
+*	take a sequence and center all frames (useful for disparate drawings)
+*
+*/
+
+void wsh_sequence_center_frames_independent(WSequence* seq)
+{
+	for (unsigned int i = 0; i < seq->num_frames; i++)
+	{
+		WObject* frame = seq->frames[i];
+		wsh_object_calc_bounds(frame);
+		double wx = frame->bounds.size.x * .5;
+		double wy = frame->bounds.size.y * .5;
+		double px = frame->bounds.pos.x;
+		double py = frame->bounds.pos.y;
+		double dx = px + wx;
+		double dy = py + wy;
+
+		wsh_object_move(frame, -dx, -dy);
+	}
+}
 
 WObject* wsh_sequence_ops_collapse(WSequence* seq)
 {
@@ -20,7 +42,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 		return wsh_object_copy(seq->frames[0]);
 	}
 	WObject* res = wsh_object_create(NULL);
-	//	wsh_sequence_frame_add(res);
+//	wsh_sequence_frame_add(res);
 #ifdef DEBUG
 	wsh_log("Collapsing a sequence of %d frames", seq->num_frames);
 #endif
@@ -41,7 +63,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 				continue;
 
 #ifdef DEBUG
-				//printf("Line %d : %llu\n", j, nl->num);
+//printf("Line %d : %llu\n", j, nl->num);
 #endif
 			wsh_object_add_line(res, wsh_line_copy(nl));
 			total++;

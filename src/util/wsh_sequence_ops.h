@@ -16,6 +16,8 @@
  *
  *
  */
+
 WObject* wsh_sequence_ops_collapse(WSequence* seq);
+void     wsh_sequence_center_frames_independent(WSequence* seq);
 
 #endif /* wsh_sequence_ops_h */
