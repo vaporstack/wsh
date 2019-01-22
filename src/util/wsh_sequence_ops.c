@@ -6,6 +6,7 @@
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
+#include <wsh/wsh.h>
 #include "wsh_sequence_ops.h"
 #include <wsh/wsh.h>
 

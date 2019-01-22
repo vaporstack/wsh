@@ -85,15 +85,15 @@ static void switch_tool(WshToolRec* rec)
 
 static void setup_tools(void)
 {
-	pencil		   = wsh_tool_rec_create();
+	pencil		   = wsh_tool_rec_create("pencil", "space.ruminant.wshDemoPencil", "simple demo pencil");
 	pencil->identifier = "space.ruminant.wsh.demo_pencil";
 	pencil->name       = "My awesome pencil";
 
-	brush		  = wsh_tool_rec_create();
+	brush		  = wsh_tool_rec_create("brush", "space.ruminant.wshDemoBrush", "simple demo brush");
 	brush->identifier = "space.ruminant.wsh.demo_brush";
 	brush->name       = "My awesome brush";
 
-	eraser		   = wsh_tool_rec_create();
+	eraser		   = wsh_tool_rec_create("eraser", "space.ruminant.wshDemoEraser", "simple demo eraser");
 	eraser->identifier = "space.ruminant.wsh.demo_eraser";
 	eraser->name       = "My awesome brush";
 
