@@ -43,14 +43,14 @@ typedef struct WshPlayer
 	int		 paused;
 	int		 playbacktype;
 	WshPlaybackInfo* info;
-	WDocumentHnd     hnd;
+	WDocumentHnd*     hnd;
 	WObject*	 current_frame;
 
 } WshPlayer;
 
-WshPlayer* wsh_player_create_static(WDocumentHnd hnd);
-WshPlayer* wsh_player_create_frames(WDocumentHnd hnd);
-WshPlayer* wsh_player_create_replay(WDocumentHnd hnd);
+WshPlayer* wsh_player_create_static(WDocumentHnd* hnd);
+WshPlayer* wsh_player_create_frames(WDocumentHnd* hnd);
+WshPlayer* wsh_player_create_replay(WDocumentHnd* hnd);
 
 
 //	wsh is a core library and this is an extension / nicety

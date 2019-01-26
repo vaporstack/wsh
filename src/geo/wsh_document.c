@@ -44,7 +44,7 @@ WDocument* wsh_document_create()
 	// doc->art.src = NULL;
 	// no guarantees
 	
-	doc->state = W_DOC_STATE_CLEAN;
+	doc->state = WASH_DOCUMENT_STATE_CLEAN;
 	doc->layers       = NULL;
 	doc->layer_num    = 1;
 	doc->sequence.src = NULL;

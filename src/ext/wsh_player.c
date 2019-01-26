@@ -8,18 +8,18 @@
 
 #include "wsh_player.h"
 
-WshPlayer* wsh_player_create_static(WDocumentHnd hnd)
+WshPlayer* wsh_player_create_static(WDocumentHnd* hnd)
 {
 	WshPlayer* player     = calloc(1, sizeof(WshPlayer));
 	player->playbacktype  = WSH_PLAYER_PLAYBACK_NONE;
 	player->hnd	   = hnd;
 	player->info	  = NULL;
-	player->current_frame = hnd.src->sequence.src->current_frame;
+	player->current_frame = hnd->src->sequence.src->current_frame;
 
 	return player;
 }
 
-WshPlayer* wsh_player_create_frames(WDocumentHnd hnd)
+WshPlayer* wsh_player_create_frames(WDocumentHnd* hnd)
 {
 	WshPlayer* player = wsh_player_create_static(hnd);
 
@@ -28,7 +28,7 @@ WshPlayer* wsh_player_create_frames(WDocumentHnd hnd)
 	return player;
 }
 
-WshPlayer* wsh_player_create_replay(WDocumentHnd hnd)
+WshPlayer* wsh_player_create_replay(WDocumentHnd* hnd)
 {
 	WshPlayer* player = wsh_player_create_static(hnd);
 
@@ -49,8 +49,8 @@ void wsh_player_destroy(WshPlayer* player)
 	if (player->info)
 		free(player->info);
 
-	if (player->hnd.src)
-		free(player->hnd.src);
+	if (player->hnd->src)
+		free(player->hnd->src);
 }
 
 static void update_replay(WshPlayer* player, double t)
@@ -64,7 +64,7 @@ static void update_replay(WshPlayer* player, double t)
 	{
 	}
 	WObject*   dst = wsh_object_create(NULL);
-	WSequence* seq = player->hnd.src->sequence.src;
+	WSequence* seq = player->hnd->src->sequence.src;
 
 	WObject* src = seq->current_frame;
 
@@ -106,7 +106,7 @@ static void update_replay(WshPlayer* player, double t)
 			free(dst);
 			player->current_frame = NULL;
 			
-			wsh_sequence_frame_next(player->hnd.src->sequence.src);
+			wsh_sequence_frame_next(player->hnd->src->sequence.src);
 			wsh_player_stop(player, t);
 			wsh_player_start(player, t);
 			//player->hnd.src->current_frame
