@@ -380,8 +380,12 @@ void wsh_sequence_frame_next(WSequence* seq)
 		return;
 	}
 	seq->current_frame_index++;
-
-	wsh_sequence_ensure_frame(seq);
+	if ( seq->current_frame_index  == seq->num_frames )
+		seq->current_frame_index = 0;
+	
+	seq->current_frame = seq->frames[seq->current_frame_index];
+	
+	//wsh_sequence_ensure_frame(seq);
 }
 
 void wsh_sequence_frame_prev(WSequence* seq)

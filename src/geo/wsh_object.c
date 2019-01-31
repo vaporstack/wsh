@@ -57,7 +57,6 @@ void wsh_object_destroy(WObject* obj)
 	for (int i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
-
 		wsh_line_destroy(l);
 	}
 	free(obj->lines);
