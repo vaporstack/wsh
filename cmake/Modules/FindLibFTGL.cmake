@@ -56,7 +56,7 @@ ELSE(NOT UNIX)
             /opt/local/include)
 
     FIND_LIBRARY(FTGL_LIBRARIES DOC "Absolute path to FTGL library."
-            NAMES ftgl.dll ftgl.dylib libftgl.dylib
+            NAMES ftgl.dll ftgl.dylib libftgl.dylib libftgl.a
             PATHS
             /usr/local/lib
             /usr/lib
