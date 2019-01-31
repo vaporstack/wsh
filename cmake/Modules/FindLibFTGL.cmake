@@ -61,7 +61,8 @@ ELSE(NOT UNIX)
             /usr/local/lib
             /usr/lib
             /lib
-            contrib/ftgl/build)
+            contrib/ftgl/build
+            /usr/lib/arm-linux-gnueabihf)
 
 ENDIF(NOT UNIX)
 
