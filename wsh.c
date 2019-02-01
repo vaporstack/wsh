@@ -36,23 +36,6 @@ void wsh_log(char* format, ...)
 
 int wsh_check_version_match(const char* header_generated_version)
 {
-
-	char buf[WSH_LOG_MAX];
-	sprintf(buf, "%s", format);
-	va_list args;
-	va_start(args, format);
-	vsprintf(buf, format, args);
-	va_end(args);
-
-#ifdef DEBUG
-	printf("[wsh ]: %s\n", buf);
-#else
-	printf("DO NOTHING LATER: %s\n", buf);
-#endif
-}
-
-int wsh_check_version_match(const char* header_generated_version)
-{
 	char* vstring = wsh_get_version_string();
 	int   res     = (0 == strcmp(vstring, header_generated_version));
 	free(vstring);
