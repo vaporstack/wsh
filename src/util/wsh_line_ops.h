@@ -15,14 +15,10 @@
 //	right now it's like 50/50.  probably should return copies
 //	across the board
 
-/*! 	\fn wsh_line_ops_dedupe
+/** 	\fn wsh_line_ops_dedupe
  *
  *	\brief return a copy of the line, duplicates removed.
-<<<<<<< Updated upstream
  *	\param line  WLine to be deduplicated
-=======
- *	\param WLine to be deduplicated
->>>>>>> Stashed changes
  *	\todo make it return the same line and self cleanup?
  */
 WLine* wsh_line_ops_dedupe(WLine* line);

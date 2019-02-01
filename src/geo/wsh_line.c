@@ -235,7 +235,6 @@ WLine* wsh_line_copy(WLine* old)
 	if (old == NULL)
 	{
 #ifdef DEBUG
-
 		wsh_log("tried to copy a null line.");
 #endif
 		return NULL;

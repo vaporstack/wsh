@@ -87,6 +87,7 @@ else()
 	target_include_directories(${project_name} PUBLIC
 		${CMAKE_CURRENT_SOURCE_DIR}/contrib
 
+
 		/opt/X11/include)
 
 	macro(use_c99)

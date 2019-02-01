@@ -398,7 +398,8 @@ WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 	else
 	{
 		wsh_log("No code to handle this version or unable to read "
-			"version.\n");
+		       "version.\n");
+		
 		return NULL;
 	}
 
@@ -478,6 +479,7 @@ const char* fps_to_string(double v)
 	}
 
 	wsh_log("buf:[%s]", buf);
+
 
 	return buf;
 }
@@ -666,6 +668,7 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 		const char* res = wsh_serial_json_document_serialize_v001(doc, buf);
 		free(buf);
 		return res;
+
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
 	{
@@ -673,6 +676,7 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 		const char* res = wsh_serial_json_document_serialize_v002(doc, buf);
 		free(buf);
 		return res;
+
 	}
 	else
 	{
