@@ -24,6 +24,7 @@ WObject*    wsh_serial_json_unserialize_object(cJSON* data);
 WSequence*  wsh_serial_json_unserialize_sequence(cJSON* data);
 const char* wsh_serial_json_document_serialize(WDocument*);
 WDocument*  wsh_serial_json_document_unserialize(const char* path);
+void*	wsh_serial_json_document_unserialize_cjson(const char* path);
 
 #endif
 

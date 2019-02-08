@@ -13,5 +13,10 @@
 
 WDocument*  wsh_serial_document_unserialize(const char* path);
 const char* wsh_serial_document_serialize(WDocument* doc);
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
+//	this marks a bit of a paradigm shift, we are passing cjson as a void*
+//	so that I can add the plugin info on the application level.
+void*		wsh_serial_document_serialize_cjson(WDocument* doc);
+#endif
 
 #endif /* wsh_serial_h */

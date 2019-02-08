@@ -40,6 +40,13 @@ WDocument* wsh_serial_document_unserialize(const char* path)
 #endif
 }
 
+void*		wsh_serial_document_serialize_cjson(WDocument* doc)
+{
+	
+	return NULL;
+	
+}
+
 const char* wsh_serial_document_serialize(WDocument* doc)
 {
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
