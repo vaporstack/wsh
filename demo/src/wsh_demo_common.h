@@ -11,7 +11,8 @@
 
 #include <stdbool.h>
 #include <stdio.h>
-#include <wsh/wsh.h>
+#include <wsh/src/util/wsh_log.h>
+#include <wsh/wsh.h#>
 
 #include "support/ops.h"
 #include "support/primitives.h"

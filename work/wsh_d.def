@@ -65,10 +65,10 @@ EXPORTS
 	wsh_sequence_hnd_create
 	wsh_sequence_hnd_destroy
 	wsh_sequence_normalize
-	w_read_file_as_bin
-	w_read_file_as_text
-	w_read_file_as_text_nc
-	w_write_text_to_file
+	wsh_read_file_as_bin
+	wsh_read_file_as_text
+	wsh_read_file_as_text_nc
+	wsh_write_text_to_file
 	w_create_version_string
 	wsh_document_serialize_bin
 	wsh_document_unserialize_bin
