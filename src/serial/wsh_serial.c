@@ -52,7 +52,7 @@ const char* wsh_serial_document_serialize(WDocument* doc)
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 	return wsh_serial_json_document_serialize(doc);
 
-//w_write_text_to_file(data, doc-wsh_document)
+//wsh_write_text_to_file(data, doc-wsh_document)
 #else
 	printf("Bottleneck interface not yet connected to anything! doing nothing\n");
 	return NULL;

@@ -340,7 +340,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	num = cJSON_GetArraySize(jframes);
 
 	seq->num_frames		 = num;
-	seq->current_frame_index = 0;  // TODO read this back in properly?
+	seq->current_frame_index = 0; // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
 	struct WObject** frames;
@@ -398,8 +398,8 @@ WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 	else
 	{
 		wsh_log("No code to handle this version or unable to read "
-		       "version.\n");
-		
+			"version.\n");
+
 		return NULL;
 	}
 
@@ -479,7 +479,6 @@ const char* fps_to_string(double v)
 	}
 
 	wsh_log("buf:[%s]", buf);
-
 
 	return buf;
 }
@@ -562,6 +561,11 @@ int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 
 	//	todo: add plugin and event decoding coder
 	return true;
+}
+
+const char* wsh_serial_json_document_serialize_v003(WDocument* doc, const char* version_string)
+{
+	return NULL;
 }
 
 const char* wsh_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
@@ -668,7 +672,6 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 		const char* res = wsh_serial_json_document_serialize_v001(doc, buf);
 		free(buf);
 		return res;
-
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
 	{
@@ -676,7 +679,6 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 		const char* res = wsh_serial_json_document_serialize_v002(doc, buf);
 		free(buf);
 		return res;
-
 	}
 	else
 	{
@@ -951,7 +953,7 @@ static void wsh_serial_json_postprocess_document(WDocument* doc)
 WDocument* wsh_serial_json_document_unserialize(const char* path)
 {
 	WDocument* doc  = NULL;
-	char*      data = w_read_file_as_text_nc(path);
+	char*      data = wsh_read_file_as_text_nc(path);
 	cJSON*     meta = NULL;
 	if (!data)
 	{

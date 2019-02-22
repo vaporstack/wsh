@@ -54,7 +54,7 @@ WDocument* wsh_document_unserialize_bin(const char* path)
 
 	long  buf_len = 0;
 	void* mydata  = NULL;
-	mydata	= w_read_file_as_bin(path, &buf_len);
+	mydata	= wsh_read_file_as_bin(path, &buf_len);
 	// if ( res != 0 )
 	//{
 	//	printf("Couldn't read file, file had len 0 or couldn't be

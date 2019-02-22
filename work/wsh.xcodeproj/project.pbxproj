@@ -63,6 +63,10 @@
 		5778582520AA828600218129 /* wsh_lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 577857F120AA828600218129 /* wsh_lib.c */; };
 		5778582620AA828600218129 /* wsh_session.h in Headers */ = {isa = PBXBuildFile; fileRef = 577857F220AA828600218129 /* wsh_session.h */; };
 		5778582720AA828600218129 /* wsh_lib.h in Headers */ = {isa = PBXBuildFile; fileRef = 577857F320AA828600218129 /* wsh_lib.h */; };
+		577D3051222084970019435B /* wsh_tagdb.h in Headers */ = {isa = PBXBuildFile; fileRef = 577D304F222084970019435B /* wsh_tagdb.h */; };
+		577D3052222084970019435B /* wsh_tagdb.c in Sources */ = {isa = PBXBuildFile; fileRef = 577D3050222084970019435B /* wsh_tagdb.c */; };
+		577D30552220861F0019435B /* wsh_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 577D30532220861F0019435B /* wsh_log.h */; };
+		577D30562220861F0019435B /* wsh_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 577D30542220861F0019435B /* wsh_log.c */; };
 		578E35B62086CF9F006281B7 /* wsh_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 578E35B52086CF9F006281B7 /* wsh_internal.h */; };
 		57939B3F21BF5A9000F74BF4 /* wsh_gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B3D21BF5A9000F74BF4 /* wsh_gpc.h */; };
 		57939B4021BF5A9000F74BF4 /* wsh_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B3E21BF5A9000F74BF4 /* wsh_gpc.c */; };
@@ -132,6 +136,10 @@
 		577857F120AA828600218129 /* wsh_lib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_lib.c; sourceTree = "<group>"; };
 		577857F220AA828600218129 /* wsh_session.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_session.h; sourceTree = "<group>"; };
 		577857F320AA828600218129 /* wsh_lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_lib.h; sourceTree = "<group>"; };
+		577D304F222084970019435B /* wsh_tagdb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_tagdb.h; sourceTree = "<group>"; };
+		577D3050222084970019435B /* wsh_tagdb.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_tagdb.c; sourceTree = "<group>"; };
+		577D30532220861F0019435B /* wsh_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_log.h; sourceTree = "<group>"; };
+		577D30542220861F0019435B /* wsh_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_log.c; sourceTree = "<group>"; };
 		578E35B52086CF9F006281B7 /* wsh_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh_internal.h; path = ../wsh_internal.h; sourceTree = "<group>"; };
 		57939B3D21BF5A9000F74BF4 /* wsh_gpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wsh_gpc.h; sourceTree = "<group>"; };
 		57939B3E21BF5A9000F74BF4 /* wsh_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = wsh_gpc.c; sourceTree = "<group>"; };
@@ -215,8 +223,10 @@
 		577857C820AA828600218129 /* io */ = {
 			isa = PBXGroup;
 			children = (
-				577857C920AA828600218129 /* wsh_io.h */,
 				577857CA20AA828600218129 /* wsh_io.c */,
+				577857C920AA828600218129 /* wsh_io.h */,
+				577D30542220861F0019435B /* wsh_log.c */,
+				577D30532220861F0019435B /* wsh_log.h */,
 			);
 			path = io;
 			sourceTree = "<group>";
@@ -294,6 +304,8 @@
 				57939B3D21BF5A9000F74BF4 /* wsh_gpc.h */,
 				57BED60D2130918F00E7FC63 /* wsh_player.c */,
 				57BED60C2130918F00E7FC63 /* wsh_player.h */,
+				577D3050222084970019435B /* wsh_tagdb.c */,
+				577D304F222084970019435B /* wsh_tagdb.h */,
 			);
 			path = ext;
 			sourceTree = "<group>";
@@ -334,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57BED60E2130918F00E7FC63 /* wsh_player.h in Headers */,
+				577D3051222084970019435B /* wsh_tagdb.h in Headers */,
 				5778581A20AA828600218129 /* wsh_sgraph.h in Headers */,
 				57D5AEAA20D85D5E001736EF /* wsh_serial_svg.h in Headers */,
 				5778581620AA828600218129 /* wsh_point.h in Headers */,
@@ -354,6 +367,7 @@
 				577857FF20AA828600218129 /* wsh_sequence_ops.h in Headers */,
 				577857F820AA828600218129 /* wsh_line_ops.h in Headers */,
 				5778580520AA828600218129 /* wsh_transform.h in Headers */,
+				577D30552220861F0019435B /* wsh_log.h in Headers */,
 				5778582620AA828600218129 /* wsh_session.h in Headers */,
 				5778580320AA828600218129 /* wsh_rect.h in Headers */,
 				57939B3F21BF5A9000F74BF4 /* wsh_gpc.h in Headers */,
@@ -430,6 +444,7 @@
 				577857FC20AA828600218129 /* wsh_sequence_ops.c in Sources */,
 				5778582220AA828600218129 /* wsh_serial_bin.c in Sources */,
 				577857F420AA828600218129 /* wsh_color.c in Sources */,
+				577D30562220861F0019435B /* wsh_log.c in Sources */,
 				5778582520AA828600218129 /* wsh_lib.c in Sources */,
 				5778580D20AA828600218129 /* wsh_node.c in Sources */,
 				5778581320AA828600218129 /* wsh_line.c in Sources */,
@@ -441,6 +456,7 @@
 				577857F720AA828600218129 /* wsh_tool.c in Sources */,
 				5778582120AA828600218129 /* wsh_serial_json_wsh_tool.c in Sources */,
 				5778582020AA828600218129 /* wsh_serial.c in Sources */,
+				577D3052222084970019435B /* wsh_tagdb.c in Sources */,
 				5778580420AA828600218129 /* wsh_color.c in Sources */,
 				5778580E20AA828600218129 /* wsh_transform.c in Sources */,
 				5778582320AA828600218129 /* wsh_serial_json.c in Sources */,

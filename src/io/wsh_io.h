@@ -9,9 +9,9 @@
 #ifndef wsh_io_h
 #define wsh_io_h
 
-void*       w_read_file_as_bin(const char* path, long* len);
-const char* w_read_file_as_text(const char*);
-char*       w_read_file_as_text_nc(const char*);
-int	 w_write_text_to_file(const char*, const char*);
+void*       wsh_read_file_as_bin(const char* path, long* len);
+const char* wsh_read_file_as_text(const char* path);
+char*       wsh_read_file_as_text_nc(const char* path);
+int	 wsh_write_text_to_file(const char* path, const char* data);
 
 #endif /* wsh_io_h */

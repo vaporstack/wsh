@@ -504,12 +504,12 @@ void wsh_line_normalize_time(WLine* l)
 	}
 }
 
-static void bounds_and_avgs(WLine* l, double* _minx, double* _miny, double* maxx, double* maxy, double* _avgx, double* _avgy)
-{
-	//double minx, miny, maxx, maxy;
-	//double avgx, avgy;
-	//avgx = avgy = 0;
-}
+//static void bounds_and_avgs(WLine* l, double* _minx, double* _miny, double* maxx, double* maxy, double* _avgx, double* _avgy)
+//{
+//	double minx, miny, maxx, maxy;
+//	double avgx, avgy;
+//	avgx = avgy = 0;
+//}
 
 //	todo:	this method copies, maybe have one that does it inplace?
 WLine* wsh_line_normalize(WLine* l, double* o_dx, double* o_dy)
@@ -636,6 +636,7 @@ WLine* wsh_line_normalize_square(WLine* l, double* o_dx, double* o_dy)
 
 	return normal;
 }
+
 void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 {
 
@@ -722,6 +723,24 @@ void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 
 	// return normal;
 }
+
+double wsh_line_sum(WLine* line)
+{
+	double r = 0;
+	if ( line->num < 2 )
+	{
+#ifdef DEBUG
+		wsh_log("Can't call sum, line is degenerate.");
+#endif
+		return 0;
+	}
+	for (unsigned long long i = 0 , n = -1 + line->num; i < n; i++ )
+	{
+		r += wsh_dist2d_wp(&line->data[i], &line->data[i+1]);
+	}
+	return r;
+}
+
 /*
  double minx, miny, maxx, maxy;
  double avgx, avgy;

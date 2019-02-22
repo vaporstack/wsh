@@ -8,14 +8,14 @@
 
 #include "wsh_io.h"
 
+#include "../io/wsh_log.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <string.h>
 
 //	TODO unify the various stupid file reading functions
 
-void* w_read_file_as_bin(const char* path, long* len)
+void* wsh_read_file_as_bin(const char* path, long* len)
 {
 	FILE* fileptr;
 	// char *buffer;
@@ -28,29 +28,29 @@ void* w_read_file_as_bin(const char* path, long* len)
 		return NULL;
 	}
 	fseek(fileptr, 0, SEEK_END); // Jump to the end of the file
-	l = ftell(fileptr); // Get the current byte offset in the file
-	rewind(fileptr); // Jump back to the beginning of the file
+	l = ftell(fileptr);	  // Get the current byte offset in the file
+	rewind(fileptr);	     // Jump back to the beginning of the file
 
-	printf("%lu\n", *len);
+	wsh_log("%lu\n", *len);
 	long  sz  = (l + 1) * sizeof(char);
 	void* buf = malloc(sz); // Enough memory for file + \0
 	memset(buf, 0, sz);
 	fread(buf, l, 1, fileptr); // Read in the entire file
-	fclose(fileptr); // Close the file
+	fclose(fileptr);	   // Close the file
 	*len = l;
 	return 0;
 }
 
-const char* w_read_file_as_text(const char* path)
+const char* wsh_read_file_as_text(const char* path)
 {
 	FILE* f;
 
 	f = fopen(path, "r");
 	if (!f)
 	{
-		char buf[256];
-		sprintf(buf, "Failed to open file: %s\n", path);
-		printf("%s\n", buf);
+//		char buf[256];
+		wsh_log("Failed to open file: %s\n", path);
+//		printf("%s\n", buf);
 		return NULL;
 	}
 	fseek(f, 0, SEEK_END);
@@ -66,16 +66,16 @@ const char* w_read_file_as_text(const char* path)
 	return data;
 }
 
-char* w_read_file_as_text_nc(const char* path)
+char* wsh_read_file_as_text_nc(const char* path)
 {
 	FILE* f;
 
 	f = fopen(path, "r");
 	if (!f)
 	{
-		char buf[256];
-		sprintf(buf, "Failed to open file: %s\n", path);
-		printf("%s\n", buf);
+//		char buf[256];
+		wsh_log("Failed to open file: %s\n", path);
+//		printf("%s\n", buf);
 		return NULL;
 	}
 	fseek(f, 0, SEEK_END);
@@ -91,7 +91,7 @@ char* w_read_file_as_text_nc(const char* path)
 	return data;
 }
 
-int w_write_text_to_file(const char* path, const char* data)
+int wsh_write_text_to_file(const char* path, const char* data)
 {
 	FILE* f;
 	f = fopen(path, "w");
