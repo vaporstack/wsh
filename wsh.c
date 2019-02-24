@@ -11,6 +11,7 @@
 
 #include "wsh.h"
 
+#include <string.h>
 
 int wsh_check_version_match(const char* header_generated_version)
 {

@@ -37,11 +37,12 @@ typedef struct WDocumentMeta
 
 	//	tools
 	char** tools;
-	int tool_num;
-	
+	int    tool_num;
+
 	//	canvas
 	int canvas_width;
 	int canvas_height;
+	int orientation;
 
 	//	info
 	int	 version;
@@ -60,16 +61,11 @@ typedef struct WDocumentMeta
 
 typedef struct WDocument
 {
-
-	int state;
-
-	WDocumentMeta meta;
-
+	int	    state;
+	WDocumentMeta  meta;
 	WSequenceHnd   sequence;
 	WSequenceHnd** layers;
-
-	int layer_num;
-
+	int	    layer_num;
 } WDocument;
 
 typedef struct WDocumentHnd

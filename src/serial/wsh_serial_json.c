@@ -492,6 +492,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	cJSON* canvas = cJSON_CreateObject();
 	cJSON_AddNumberToObject(canvas, "width", meta->canvas_width);
 	cJSON_AddNumberToObject(canvas, "height", meta->canvas_height);
+	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
 
 	//	info
@@ -535,6 +536,10 @@ int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 		v = cJSON_GetObjectItem(canvas, "height");
 		if (v)
 			meta->canvas_height = v->valueint;
+
+		v = cJSON_GetObjectItem(canvas, "orientation");
+		if (v)
+			meta->orientation = v->valueint;
 	}
 	if (info)
 	{

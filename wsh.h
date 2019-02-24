@@ -24,6 +24,7 @@
 
 #define WSH_PRESENT
 
+#include "src/io/wsh_log.h"
 
 int   wsh_check_version_match(const char* str);
 int   wsh_check_version_match222(const char* str);

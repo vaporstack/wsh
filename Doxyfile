@@ -1584,7 +1584,7 @@ SEARCHENGINE           = YES
 # setting. When disabled, doxygen will generate a PHP script for searching and
 # an index file used by the script. When EXTERNAL_SEARCH is enabled the indexing
 # and searching needs to be provided by external tools. See the section
-# "External Indexing and Searching" for details.
+# "External Indexing and app_extensions.enable_audio" for details.
 # The default value is: NO.
 # This tag requires that the tag SEARCHENGINE is set to YES.
 
@@ -1600,7 +1600,7 @@ SERVER_BASED_SEARCH    = NO
 # (doxysearch.cgi) which are based on the open source search engine library
 # Xapian (see: http://xapian.org/).
 #
-# See the section "External Indexing and Searching" for details.
+# See the section "External Indexing and app_extensions.enable_audio" for details.
 # The default value is: NO.
 # This tag requires that the tag SEARCHENGINE is set to YES.
 
@@ -1612,7 +1612,7 @@ EXTERNAL_SEARCH        = NO
 # Doxygen ships with an example indexer (doxyindexer) and search engine
 # (doxysearch.cgi) which are based on the open source search engine library
 # Xapian (see: http://xapian.org/). See the section "External Indexing and
-# Searching" for details.
+# app_extensions.enable_audio" for details.
 # This tag requires that the tag SEARCHENGINE is set to YES.
 
 SEARCHENGINE_URL       =
