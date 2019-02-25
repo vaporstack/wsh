@@ -657,11 +657,17 @@ void wsh_object_normalize(WObject* obj)
 
 	obj->normalized = true;
 }
+#include "../io/wsh_log.h"
 
 void wsh_object_calc_bounds(WObject* obj)
 {
+#ifdef DEBUG
+	wsh_log("wsh was passed a null object: %s", __func__);
 	assert(obj != NULL);
-
+#else
+	if ( !obj )
+		return;
+#endif
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
 	minx = miny = INFINITY;
