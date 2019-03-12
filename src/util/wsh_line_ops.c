@@ -426,17 +426,6 @@ double wsh_line_ops_sum(WLine* line)
 	return r;
 }
 
-bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
-{
-	for (int i = 0; i < line->num; i++)
-	{
-		WPoint p = line->data[i];
-		if (!wsh_rect_within_bounds(rect, p.x, p.y))
-			return false;
-	}
-	return true;
-}
-
 bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 {
 	for (int i = 0; i < line->num; ++i)
@@ -446,4 +435,15 @@ bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 			return true;
 	}
 	return false;
+}
+
+bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
+{
+	for (int i = 0; i < line->num; i++)
+	{
+		WPoint p = line->data[i];
+		if (!wsh_rect_within_bounds(rect, p.x, p.y))
+			return false;
+	}
+	return true;
 }
