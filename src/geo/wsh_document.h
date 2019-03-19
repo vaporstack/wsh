@@ -56,6 +56,7 @@ typedef struct WDocumentMeta
 
 	//	hints
 	bool animated;
+	const char* theme;
 
 } WDocumentMeta;
 

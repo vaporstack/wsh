@@ -26,6 +26,7 @@ void wsh_document_meta_clear(WDocumentMeta* meta)
 	meta->version_string = NULL;
 	meta->version	= 0;
 	meta->animated       = false;
+	meta->theme = NULL;
 }
 
 WDocument* wsh_document_create()

@@ -250,6 +250,7 @@ WLine* wsh_line_copy(WLine* old)
 	WLine* new      = wsh_line_create();
 	new->num	= old->num;
 	new->reserved   = old->reserved;
+	new->width = old->width;
 	new->data       = calloc(new->reserved, sizeof(WPoint)); //(sizeof *new->data) * new->reserved);
 	new->has_fill   = old->has_fill;
 	new->has_stroke = old->has_stroke;

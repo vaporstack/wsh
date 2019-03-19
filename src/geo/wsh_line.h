@@ -35,6 +35,11 @@ typedef struct WLine
 	unsigned long long num;
 	unsigned long long reserved;
 	WPoint*		   data;
+	//	swimming upstream here and adding a temporary brush width parameter
+	//	to give us local strokes quickly
+	//	since the big tool refactor is still some weeks away
+	double width;
+	
 	//void*		   tess;
 	//	todo:
 	//	refactor to have the brush owned elsewhere, it is not a core

@@ -155,6 +155,8 @@ cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line)
 	cJSON* line_rec = cJSON_CreateObject();
 
 	cJSON_AddBoolToObject(line_rec, "closed", line->closed);
+	cJSON_AddNumberToObject(line_rec, "width", line->width);
+
 	if (line->has_fill)
 		cJSON_AddItemToObject(line_rec, "fill",
 				      wsh_serial_json_serialize_color16(line->fill));
@@ -163,25 +165,18 @@ cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line)
 				      wsh_serial_json_serialize_color16(line->stroke));
 
 	int num = (int)num_points;
-	cJSON_AddItemToObject(line_rec, "points_x",
-			      cJSON_CreateFloatArray(vx, num));
-	cJSON_AddItemToObject(line_rec, "points_y",
-			      cJSON_CreateFloatArray(vy, num));
+	cJSON_AddItemToObject(line_rec, "points_x", cJSON_CreateFloatArray(vx, num));
+	cJSON_AddItemToObject(line_rec, "points_y", cJSON_CreateFloatArray(vy, num));
 	if (check_any_valid(pressure, num))
-		cJSON_AddItemToObject(line_rec, "pressure",
-				      cJSON_CreateFloatArray(pressure, num));
+		cJSON_AddItemToObject(line_rec, "pressure", cJSON_CreateFloatArray(pressure, num));
 	if (check_any_valid(rots, num))
-		cJSON_AddItemToObject(line_rec, "rotation",
-				      cJSON_CreateFloatArray(rots, num));
+		cJSON_AddItemToObject(line_rec, "rotation", cJSON_CreateFloatArray(rots, num));
 	if (check_any_valid(tiltx, num))
-		cJSON_AddItemToObject(line_rec, "tilt_x",
-				      cJSON_CreateFloatArray(tiltx, num));
+		cJSON_AddItemToObject(line_rec, "tilt_x", cJSON_CreateFloatArray(tiltx, num));
 	if (check_any_valid(tilty, num))
-		cJSON_AddItemToObject(line_rec, "tilt_y",
-				      cJSON_CreateFloatArray(tilty, num));
+		cJSON_AddItemToObject(line_rec, "tilt_y", cJSON_CreateFloatArray(tilty, num));
 	if (check_any_valid(times, num))
-		cJSON_AddItemToObject(line_rec, "time",
-				      cJSON_CreateFloatArray(times, num));
+		cJSON_AddItemToObject(line_rec, "time", cJSON_CreateFloatArray(times, num));
 
 	free(vx);
 	free(vy);
@@ -340,7 +335,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	num = cJSON_GetArraySize(jframes);
 
 	seq->num_frames		 = num;
-	seq->current_frame_index = 0; // TODO read this back in properly?
+	seq->current_frame_index = 0;  // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
 	struct WObject** frames;
@@ -494,7 +489,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	cJSON_AddNumberToObject(canvas, "height", meta->canvas_height);
 	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
-
+	
 	//	info
 	cJSON* info = cJSON_CreateObject();
 	if (working_version == NULL)
@@ -504,7 +499,8 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	cJSON_AddStringToObject(info, "path", meta->path);
 	cJSON_AddStringToObject(info, "uuid", meta->uuid);
 	cJSON_AddStringToObject(info, "ref", meta->ref);
-
+	if ( meta->theme )
+			cJSON_AddStringToObject(info, "theme", meta->theme);
 	if (!meta->fps_repr)
 	{
 		meta->fps_repr = fps_to_string(meta->fps);
@@ -562,6 +558,10 @@ int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 		v = cJSON_GetObjectItem(info, "uuid");
 		if (v)
 			meta->uuid = v->valuestring;
+		
+		v = cJSON_GetObjectItem(info, "theme");
+		if ( v )
+			meta->theme = v->valuestring;
 	}
 
 	//	todo: add plugin and event decoding coder
@@ -719,6 +719,8 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	cJSON* jrotation = cJSON_GetObjectItem(data, "rotation");
 	cJSON* jtiltx    = cJSON_GetObjectItem(data, "tilt_x");
 	cJSON* jtilty    = cJSON_GetObjectItem(data, "tilt_y");
+	cJSON* jclosed    = cJSON_GetObjectItem(data, "closed");
+	cJSON* jwidth    = cJSON_GetObjectItem(data, "width");
 
 	int num = cJSON_GetArraySize(jx);
 	if (num > 100000)
@@ -748,10 +750,15 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		if (jrotation)
 			p.rotation =
 			    cJSON_GetArrayItem(jrotation, i)->valuedouble;
-
+		
 		wsh_line_add_point(line, p);
 	}
+	if (jclosed )
+		line->closed = jclosed->valueint;
 
+	if ( jwidth )
+		line->width = jwidth->valuedouble;
+	
 	if (line->num > 100000000)
 	{
 		wsh_log("what the FACK");
