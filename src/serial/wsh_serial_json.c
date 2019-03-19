@@ -13,6 +13,14 @@
 #include <string.h>
 
 #include <stdio.h>
+
+
+
+//	version 0.0.1 - initial draft
+//	version 0.0.2 - improvements to meta
+//	version 0.0.3 - removed has_stroke and has_fill
+//			fill and stroke are now pointers so they can be NULL
+
 /*
  #define REGISTER(ns, id, type)                                          \
  inline Inst* type##Activate() { return new type(); }                 \
@@ -54,7 +62,7 @@ cJSON* wsh_serialize_color_json(WColor col);
 
 cJSON* wsh_serialize_object_json_v_0_0_1(WObject* obj);
 cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq);
-cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line);
+cJSON* wsh_serialize_line_json_v_0_0_3(WLine* line);
 cJSON* wsh_serialize_color_json_v_0_0_1(WColor col);
 
 cJSON* wsh_serial_json_serialize_color(WColor col)
@@ -128,7 +136,7 @@ static bool check_any_valid(float* vals, int num)
 	return false;
 }
 
-cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line)
+cJSON* wsh_serialize_line_json_v_0_0_3(WLine* line)
 {
 
 	unsigned long num_points = line->num;
@@ -157,12 +165,12 @@ cJSON* wsh_serialize_line_json_v_0_0_1(WLine* line)
 	cJSON_AddBoolToObject(line_rec, "closed", line->closed);
 	cJSON_AddNumberToObject(line_rec, "width", line->width);
 
-	if (line->has_fill)
+	if (line->fill)
 		cJSON_AddItemToObject(line_rec, "fill",
-				      wsh_serial_json_serialize_color16(line->fill));
-	if (line->has_stroke)
+				      wsh_serial_json_serialize_color16(*line->fill));
+	if (line->stroke)
 		cJSON_AddItemToObject(line_rec, "stroke",
-				      wsh_serial_json_serialize_color16(line->stroke));
+				      wsh_serial_json_serialize_color16(*line->stroke));
 
 	int num = (int)num_points;
 	cJSON_AddItemToObject(line_rec, "points_x", cJSON_CreateFloatArray(vx, num));
@@ -207,7 +215,7 @@ cJSON* wsh_serialize_color_json(WColor c)
 
 cJSON* wsh_serialize_line_json(WLine* line)
 {
-	return wsh_serialize_line_json_v_0_0_1(line);
+	return wsh_serialize_line_json_v_0_0_3(line);
 }
 
 cJSON* wsh_serialize_vec3_v_0_0_1(WVec3d* v)
@@ -766,22 +774,23 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	cJSON* stroke = cJSON_GetObjectItem(data, "stroke");
 	if (stroke != NULL)
 	{
-		line->has_stroke = true;
+		line->stroke = malloc(sizeof(WColor16));
+		//line->has_stroke = true;
 		// line->stroke.r = cJSON_GetArrayItem(stroke,0);
 		// cJSON* test = cJSON_GetArrayItem(stroke, 0);
-		line->stroke.r = cJSON_GetArrayItem(stroke, 0)->valuedouble;
-		line->stroke.g = cJSON_GetArrayItem(stroke, 1)->valuedouble;
-		line->stroke.b = cJSON_GetArrayItem(stroke, 2)->valuedouble;
-		line->stroke.a = cJSON_GetArrayItem(stroke, 3)->valuedouble;
+		line->stroke->r = cJSON_GetArrayItem(stroke, 0)->valuedouble;
+		line->stroke->g = cJSON_GetArrayItem(stroke, 1)->valuedouble;
+		line->stroke->b = cJSON_GetArrayItem(stroke, 2)->valuedouble;
+		line->stroke->a = cJSON_GetArrayItem(stroke, 3)->valuedouble;
 	}
 	else
 	{
 		wsh_log("Error loading stroke!");
-		line->has_stroke = true;
-		line->stroke.r   = 0;
-		line->stroke.g   = 0;
-		line->stroke.b   = 0;
-		line->stroke.a   = 0;
+//		line->has_stroke = true;
+		line->stroke->r   = 0;
+		line->stroke->g   = 0;
+		line->stroke->b   = 0;
+		line->stroke->a   = 0;
 	}
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
 

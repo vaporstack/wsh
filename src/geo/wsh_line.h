@@ -29,8 +29,8 @@
 typedef struct WLine
 {
 	bool		   closed;
-	bool		   has_stroke;
-	bool		   has_fill;
+	//bool		   has_stroke;
+	//bool		   has_fill;
 	int		   z;
 	unsigned long long num;
 	unsigned long long reserved;
@@ -47,8 +47,10 @@ typedef struct WLine
 	//struct WBrush* brush;
 	//	todo: change stroke and fill to pointers to be able to remove the has_stroke  and has_fill params?
 	//	no,  remove stroke and fill, this is now a pure storage class.
-	WColor16 fill;
-	WColor16 stroke;
+	//	i changed my mind again, refactoring these to be 2 vars instead of 4 will make removing them
+	//	slightly easier in the future
+	WColor16* fill;
+	WColor16* stroke;
 	WRect    bounds;
 	//WTransform transform;
 } WLine;

@@ -64,8 +64,9 @@ WLine* wsh_line_create(void)
 	l->data       = 0;
 	l->num	= 0;
 	l->reserved   = 0;
-	l->has_fill   = false;
-	l->has_stroke = false;
+	
+	//l->has_fill   = false;
+	//l->has_stroke = false;
 	//l->tess       = NULL;
 	//l->brush      = NULL;
 	l->closed = false;
@@ -252,13 +253,23 @@ WLine* wsh_line_copy(WLine* old)
 	new->reserved   = old->reserved;
 	new->width = old->width;
 	new->data       = calloc(new->reserved, sizeof(WPoint)); //(sizeof *new->data) * new->reserved);
-	new->has_fill   = old->has_fill;
-	new->has_stroke = old->has_stroke;
-	new->stroke     = old->stroke;
-	new->fill       = old->fill;
+	//new->has_fill   = old->has_fill;
+	//new->has_stroke = old->has_stroke;
+	//new->stroke     = old->stroke;
+	//new->fill       = old->fill;
+	if ( old->stroke )
+	{
+		new->stroke = calloc(1, sizeof(WColor16));
+		memcpy(new->stroke, old->stroke, sizeof(WColor16));
+	}
+	if (old->fill)
+	{
+		new->fill = calloc(1, sizeof(WColor16));
+		memcpy(new->fill, old->fill, sizeof(WColor16));
+	}
 	new->closed     = old->closed;
-	new->fill       = old->fill;
-	new->stroke     = old->stroke;
+	//new->fill       = old->fill;
+	//new->stroke     = old->stroke;
 	new->bounds     = old->bounds;
 	for (int i = 0; i < new->num; ++i)
 	{
@@ -304,14 +315,16 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 	//new->num	= old->num;
 	//new->reserved   = old->reserved;
 	//new->data       = malloc((sizeof *new->data) * new->reserved);
-	new->has_fill   = old->has_fill;
-	new->has_stroke = old->has_stroke;
-	new->stroke     = old->stroke;
-	new->fill       = old->fill;
+//	new->has_fill   = old->has_fill;
+//	new->has_stroke = old->has_stroke;
+//	new->stroke     = old->stroke;
+//	new->fill       = old->fill;
 	new->closed     = old->closed;
-	new->fill       = old->fill;
-	new->stroke     = old->stroke;
-
+//	new->fill       = old->fill;
+//	new->stroke     = old->stroke;
+	memcpy(new->stroke, old->stroke, sizeof(WColor));
+	memcpy(new->fill, old->fill, sizeof(WColor));
+	
 	for (int i = 0; i < old->num; ++i)
 	{
 
@@ -348,13 +361,15 @@ WLine* wsh_line_reverse(WLine* old)
 	//new->num	= old->num;
 	//new->reserved   = old->reserved;
 	//new->data       = malloc((sizeof *new->data) * new->reserved);
-	new->has_fill   = old->has_fill;
-	new->has_stroke = old->has_stroke;
-	new->stroke     = old->stroke;
-	new->fill       = old->fill;
+	//new->has_fill   = old->has_fill;
+	//new->has_stroke = old->has_stroke;
+	//new->stroke     = old->stroke;
+	//new->fill       = old->fill;
+	memcpy(new->stroke, old->stroke, sizeof(WColor));
+	memcpy(new->fill, old->fill, sizeof(WColor));
 	new->closed     = old->closed;
-	new->fill       = old->fill;
-	new->stroke     = old->stroke;
+	//new->fill       = old->fill;
+	//new->stroke     = old->stroke;
 
 	for (int i = 0; i < old->num; ++i)
 	{
@@ -366,10 +381,14 @@ WLine* wsh_line_reverse(WLine* old)
 
 void wsh_line_copy_attribs(WLine* to, WLine* from)
 {
-	to->has_stroke = from->has_stroke;
-	to->has_fill   = from->has_fill;
+	memcpy(to->stroke, from->stroke, sizeof(WColor));
+	memcpy(to->fill, from->fill, sizeof(WColor));
+	
+	//to->has_stroke = from->has_stroke;
+	//to->has_fill   = from->has_fill;
 	to->stroke     = from->stroke;
 	to->fill       = from->fill;
+	
 	to->closed     = from->closed;
 	//	todo : copy brush here too?  other stuff?
 }
