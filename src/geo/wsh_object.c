@@ -12,10 +12,10 @@
 
 #include "../util/wsh_line_ops.h"
 
-#ifdef DEBUG
-#include <stdio.h>
+//#ifdef DEBUG
 #include "../io/wsh_log.h"
-#endif
+#include <stdio.h>
+//#endif
 
 #include <assert.h>
 
@@ -54,7 +54,7 @@ void wsh_object_destroy(WObject* obj)
 #endif
 		return;
 	}
-	if ( !obj->lines)
+	if (!obj->lines)
 	{
 		wsh_log("lines field was null!");
 		return;
@@ -62,7 +62,7 @@ void wsh_object_destroy(WObject* obj)
 	for (unsigned i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
-		if ( !l )
+		if (!l)
 			continue;
 		wsh_line_destroy(l);
 	}
@@ -272,7 +272,7 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 	obj->transform  = old->transform;
 	obj->normalized = old->normalized;
 
-	int i;
+	int	   i;
 	unsigned long num = old->num;
 
 	obj->num   = num;
@@ -559,9 +559,9 @@ void wsh_object_normalize(WObject* obj)
 	minx = miny = -INFINITY;
 	maxx = maxy = INFINITY;
 
-	avgx = avgy = 0;
-	unsigned long num     = obj->num;
-	int total   = 0;
+	avgx = avgy	 = 0;
+	unsigned long num   = obj->num;
+	int	   total = 0;
 
 	for (unsigned long i = 0; i < num; ++i)
 	{
@@ -672,7 +672,7 @@ void wsh_object_calc_bounds(WObject* obj)
 	wsh_log("wsh was passed a null object: %s", __func__);
 	assert(obj != NULL);
 #else
-	if ( !obj )
+	if (!obj)
 		return;
 #endif
 	double minx, miny, maxx, maxy;
@@ -680,9 +680,9 @@ void wsh_object_calc_bounds(WObject* obj)
 	minx = miny = INFINITY;
 	maxx = maxy = -INFINITY;
 
-	avgx = avgy = 0;
-	unsigned long num     = obj->num;
-	int total   = 0;
+	avgx = avgy	 = 0;
+	unsigned long num   = obj->num;
+	int	   total = 0;
 
 	for (int i = 0; i < num; ++i)
 	{
