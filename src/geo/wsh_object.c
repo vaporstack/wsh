@@ -14,6 +14,7 @@
 
 #ifdef DEBUG
 #include <stdio.h>
+#include "../io/wsh_log.h"
 #endif
 
 #include <assert.h>
@@ -38,7 +39,7 @@ WObject* wsh_object_create(WObject* parent)
 void wsh_object_destroy_void(void* obj)
 {
 #ifdef DEBUG
-	printf("Destroying void pointer (from map?\n");
+	wsh_log("Destroying void pointer (from map?\n");
 #endif
 	wsh_object_destroy((WObject*)obj);
 }
@@ -49,12 +50,16 @@ void wsh_object_destroy(WObject* obj)
 	{
 
 #ifdef DEBUG
-		printf("Trying to free a null\n");
+		wsh_log("Trying to free a null\n");
 #endif
 		return;
 	}
-
-	for (int i = 0; i < obj->num; ++i)
+	if ( !obj->lines)
+	{
+		wsh_log("lines field was null!");
+		return;
+	}
+	for (unsigned i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
 		if ( !l )
@@ -70,7 +75,7 @@ void wsh_object_add_line(WObject* obj, WLine* line)
 	if (obj == NULL)
 	{
 #ifdef DEBUG
-		printf("Can't add a line to a NULL object.\n");
+		wsh_log("Can't add a line to a NULL object.\n");
 #endif
 		return;
 	}
@@ -90,7 +95,7 @@ void wsh_object_add_line(WObject* obj, WLine* line)
 	{
 		if (line->num > 4096)
 		{
-			printf("abnormally huge line, what happened\n");
+			wsh_log("abnormally huge line, what happened\n");
 		}
 	}
 
@@ -114,17 +119,17 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 	if (idx == -1)
 	{
 #ifdef DEBUG
-		printf("Error, did not find requested line.\n");
+		wsh_log("Error, did not find requested line.\n");
 #endif
 		return;
 	}
 #ifdef DEBUG
-	printf("found line %d\n", idx);
+	wsh_log("found line %d\n", idx);
 #endif
 	for (int i = idx; i < obj->num - 1; i++)
 	{
 #ifdef DEBUG
-		printf("Shuffling %d tp %d.\n", i + 1, i);
+		wsh_log("Shuffling %d tp %d.\n", i + 1, i);
 #endif
 	}
 	obj->num--;
@@ -140,7 +145,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 
 	if ( obj->num_frames == 0 )
 	{
- printf("can't do next frame, no frames!\n");
+ wsh_log("can't do next frame, no frames!\n");
  return;
 	}
 	obj->current_frame_index++;
@@ -150,7 +155,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 	}
 
 	obj->current_frame = obj->frames[obj->current_frame_index];
-	printf("Set object frame %d %p\n", obj->current_frame_index,
+	wsh_log("Set object frame %d %p\n", obj->current_frame_index,
  obj->current_frame);
 
  }
@@ -162,7 +167,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 
 	if ( obj->num_frames == 0 )
 	{
- printf("can't do next frame, no frames!\n");
+ wsh_log("can't do next frame, no frames!\n");
  return;
 	}
 
@@ -172,7 +177,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
  obj->current_frame_index = obj->num_frames-1;
 	}
 	obj->current_frame = obj->frames[obj->current_frame_index];
-	printf("Set object frame %d %p\n", obj->current_frame_index,
+	wsh_log("Set object frame %d %p\n", obj->current_frame_index,
  obj->current_frame);
  }
 
@@ -183,7 +188,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 	if ( pos == -1 )
 	{
  parent->num_frames++;
- printf("creating frame at %d\n", parent->num_frames);
+ wsh_log("creating frame at %d\n", parent->num_frames);
  parent->frames = realloc(parent->frames, sizeof(WObject*) *
  parent->num_frames);
 
@@ -192,7 +197,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
  parent->current_frame = obj;
  return obj;
 	}else{
- printf("creating frame at %d\n", pos);
+ wsh_log("creating frame at %d\n", pos);
 
 	}
 	return obj;
@@ -202,7 +207,7 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
  void	wsh_object_frame_delete(WObject* obj, int pos)
  {
 
-	printf("deleting frame at %d\n", pos);
+	wsh_log("deleting frame at %d\n", pos);
 	//int npos = obj->
 
  }
@@ -211,14 +216,14 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 WObject* wsh_object_copy(WObject* old)
 {
 
-	// printf("Copying object with %d lines\n", old->num);
+	// wsh_log("Copying object with %d lines\n", old->num);
 	// WObject* cpy = malloc(sizeof(WObject));
 	// cpy = (WObject*)memcpy(cpy, old, sizeof(WObject));
 
 	if (!old)
 	{
 #ifdef DEBUG
-		printf("Error, tried to copy a NULL OBject!\n");
+		wsh_log("Error, tried to copy a NULL OBject!\n");
 #endif
 		return NULL;
 	}
@@ -256,7 +261,7 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 	if (!old)
 	{
 #ifdef DEBUG
-		printf("Error, tried to copy a NULL OBject!\n");
+		wsh_log("Error, tried to copy a NULL OBject!\n");
 #endif
 		return NULL;
 	}
@@ -299,7 +304,7 @@ void wsh_object_douglaspeucker(WObject* obj, double r)
 	}
 #ifdef WOBJECT_DEBUG
 #ifdef DEBUG
-	printf("dp: %llu -> %llu\n", old, wsh_object_sum_points(obj));
+	wsh_log("dp: %llu -> %llu\n", old, wsh_object_sum_points(obj));
 #endif
 #endif
 }
@@ -374,7 +379,7 @@ void wsh_object_time_trim_head(WObject* obj)
 			}
 		}
 	}
-	//printf("earliest point is at %f\n", earliest);
+	//wsh_log("earliest point is at %f\n", earliest);
 	for (unsigned long i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
@@ -406,14 +411,14 @@ void wsh_object_time_normalize_continuous(WObject* obj)
 	if (first == INFINITY)
 	{
 #ifdef DEBUG
-		printf("no geometry? time was still INF\n");
+		wsh_log("no geometry? time was still INF\n");
 #endif
 		return;
 	}
 
-	//printf("Normalizing frame to %f->%f\n", first, last);
+	//wsh_log("Normalizing frame to %f->%f\n", first, last);
 	double delta = last - first;
-	//printf("delta %f\n", delta);
+	//wsh_log("delta %f\n", delta);
 	for (int j = 0; j < obj->num; j++)
 	{
 		WLine* l = obj->lines[j];
@@ -422,7 +427,7 @@ void wsh_object_time_normalize_continuous(WObject* obj)
 			WPoint* p = &l->data[k];
 			p->time -= first;
 			p->time /= delta;
-			//printf("%f\n", p->time);
+			//wsh_log("%f\n", p->time);
 		}
 	}
 }
@@ -455,7 +460,7 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 				last = t;
 		}
 		double delta = last - first;
-		//printf("linedelta %f\n", delta);
+		//wsh_log("linedelta %f\n", delta);
 		if (delta > longest_duration)
 		{
 			//longest_start = first;
@@ -464,9 +469,9 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 		}
 	}
 
-	//printf("longest for obj is %llu with %f\n", longest, longest_duration);
+	//wsh_log("longest for obj is %llu with %f\n", longest, longest_duration);
 	//double scale = 1 / longest_duration;
-	//printf("timescale is %f\n", scale);
+	//wsh_log("timescale is %f\n", scale);
 
 	for (int j = 0; j < obj->num; j++)
 	{
@@ -485,9 +490,9 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 		double delta = last - first;
 		//double doff =  longest_start - first;
 
-		//printf("line %d %.02f %.02f \n", j, first, last);
-		//printf("Offseting line %d by %f\n", j, doff);
-		//printf("Scaling line %d by %f\n", j, duration);
+		//wsh_log("line %d %.02f %.02f \n", j, first, last);
+		//wsh_log("Offseting line %d by %f\n", j, doff);
+		//wsh_log("Scaling line %d by %f\n", j, duration);
 		for (int k = 0; k < l->num; k++)
 		{
 			WPoint* p = &l->data[k];
@@ -514,23 +519,23 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 	 last = t;
 	 }
 
-	 printf("Longest line goes from %f %f\n", first, last);
+	 wsh_log("Longest line goes from %f %f\n", first, last);
 	 double delta = last - first;
 
-	 printf("delta %f seconds\n", delta);
+	 wsh_log("delta %f seconds\n", delta);
 	 */
 	//}
 
 	/*
 	 if ( first == INFINITY)
 	 {
-	 printf("no geometry? time was still INF\n");
+	 wsh_log("no geometry? time was still INF\n");
 	 continue;
 	 }
 
-	 printf("Normalizing frame %d to %f->%f\n", i, first, last);
+	 wsh_log("Normalizing frame %d to %f->%f\n", i, first, last);
 	 double delta = last - first;
-	 printf("delta %f\n", delta);
+	 wsh_log("delta %f\n", delta);
 	 for ( int j = 0; j < obj->num; j++ )
 	 {
 	 WLine* l = obj->lines[j];
@@ -539,7 +544,7 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 	 WPoint* p = &l->data[k];
 	 p->time -= first;
 	 p->time /= delta;
-	 printf("%f\n", p->time);
+	 wsh_log("%f\n", p->time);
 	 }
 	 }*/
 }
@@ -685,7 +690,7 @@ void wsh_object_calc_bounds(WObject* obj)
 		if (!l)
 		{
 #ifdef DEBUG
-			printf("Something went wrong!a\n");
+			wsh_log("Something went wrong!a\n");
 #endif
 			continue;
 		}
@@ -724,7 +729,7 @@ void wsh_object_calc_bounds(WObject* obj)
 		double ldy       = maxy - miny;
 		l->bounds.size.x = ldx;
 		l->bounds.size.y = ldy;
-		//printf("bnd %f %f %f %f\n", minx, miny, ldx, ldy);
+		//wsh_log("bnd %f %f %f %f\n", minx, miny, ldx, ldy);
 	}
 
 	// avgx /= total;
