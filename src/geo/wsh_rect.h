@@ -18,6 +18,9 @@ typedef struct
 	WPoint size;
 } WRect;
 
+
+WRect wsh_rect_create_impossible(void);
+void wsh_rect_union(WRect* dst, WRect a, WRect b);
 void wsh_rect_reset(WRect* bounds);
 int  wsh_rect_within_bounds(WRect* bounds, double x, double y);
 

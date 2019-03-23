@@ -669,8 +669,11 @@ void wsh_object_normalize(WObject* obj)
 void wsh_object_calc_bounds(WObject* obj)
 {
 #ifdef DEBUG
-	wsh_log("wsh was passed a null object: %s", __func__);
-	assert(obj != NULL);
+	if ( !obj )
+	{
+		wsh_log("wsh was passed a null object: %s", __func__);
+		assert(obj != NULL);
+	}
 #else
 	if (!obj)
 		return;

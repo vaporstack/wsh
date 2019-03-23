@@ -42,19 +42,43 @@ WLineHnd* wsh_line_hnd_create_with_addr(WLine* addr)
 	return hnd;
 }
 
+void wsh_line_destroy(WLine* line)
+{
+	if (!line)
+	{
+#ifdef DEBUG
+		wsh_log("I refuse to destroy something that is already "
+			"destroyed lol\n");
+#endif
+		return;
+	}
+	
+	if (line->fill)
+		free(line->fill);
+	if (line->stroke)
+		free(line->stroke);
+	if (line->data != NULL)
+		free(line->data);
+	
+	//	line->num      = 0;
+	//	line->reserved = 0;
+	//	line->data     = NULL;
+	
+	free(line);
+}
+
 WLineHnd* wsh_line_hnd_copy(WLineHnd* hnd)
 {
 	// todo implement this
-
+	
+	exit(-999);
 	return NULL;
 }
 
 void wsh_line_hnd_destroy(WLineHnd* hnd)
 {
-	free(hnd->src);
-
+	wsh_line_destroy(hnd->src);
 	free(hnd);
-	//	totally dead
 }
 
 WLine* wsh_line_create(void)
@@ -74,6 +98,9 @@ WLine* wsh_line_create(void)
 
 	WRect b;
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
+	b.pos.x = b.pos.y = INFINITY;
+	b.size.x = b.size.y = -INFINITY;
+	
 	l->bounds				= b;
 
 	/*
@@ -126,6 +153,7 @@ void wsh_line_calc_bounds(WLine* src)
 	src->bounds.size.x = maxx - minx;
 	src->bounds.size.y = maxy - miny;
 }
+
 void wsh_line_add_point2f(WLine* line, double x, double y)
 {
 	WPoint p;
@@ -381,13 +409,22 @@ WLine* wsh_line_reverse(WLine* old)
 
 void wsh_line_copy_attribs(WLine* to, WLine* from)
 {
-	memcpy(to->stroke, from->stroke, sizeof(WColor));
-	memcpy(to->fill, from->fill, sizeof(WColor));
+	if ( from->stroke)
+	{
+		to->stroke = malloc(sizeof(WColor16));
+		memcpy(to->stroke, from->stroke, sizeof(WColor16));
+
+	}
+	if ( from->fill )
+	{
+		to->fill = malloc(sizeof(WColor16));
+		memcpy(to->fill, from->fill, sizeof(WColor16));
+	}
 	
 	//to->has_stroke = from->has_stroke;
 	//to->has_fill   = from->has_fill;
-	to->stroke     = from->stroke;
-	to->fill       = from->fill;
+	//to->stroke     = from->stroke;
+	//to->fill       = from->fill;
 	
 	to->closed     = from->closed;
 	//	todo : copy brush here too?  other stuff?
@@ -406,31 +443,6 @@ WPoint* wsh_line_pop_back(WLine* line)
 	WPoint* ret = wsh_point_copy(&p);
 	;
 	return ret;
-}
-
-void wsh_line_destroy(WLine* line)
-{
-	if (!line)
-	{
-#ifdef DEBUG
-		wsh_log("I refuse to destroy something that is already "
-			"destroyed lol\n");
-#endif
-		return;
-	}
-
-	if (line->data != NULL)
-		free(line->data);
-	line->num      = 0;
-	line->reserved = 0;
-	line->data     = NULL;
-	//if (line->brush) {
-	//	w_brush_destroy(line->brush);
-	//}
-	//if (line->tess) {
-	//	w_gpc_tess_destroy(line);
-	//}
-	free(line);
 }
 
 void wsh_line_find_mins(WLine* line, double* o_x, double* o_y)

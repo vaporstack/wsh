@@ -765,7 +765,11 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		line->closed = jclosed->valueint;
 
 	if ( jwidth )
+	{
 		line->width = jwidth->valuedouble;
+	}else{
+		line->width = 32;
+	}
 	
 	if (line->num > 100000000)
 	{
@@ -787,6 +791,8 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	{
 		wsh_log("Error loading stroke!");
 //		line->has_stroke = true;
+		printf("%s", cJSON_Print(data));
+		line->stroke = malloc(sizeof(WColor16));
 		line->stroke->r   = 0;
 		line->stroke->g   = 0;
 		line->stroke->b   = 0;
