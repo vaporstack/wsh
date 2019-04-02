@@ -19,11 +19,11 @@ void scale_object_to_window(WObject* obj)
 
 	/*
 	//shift it so lower left corner is 0,0
-	wsh_object_move(obj, bounds.pos.x * -1, bounds.pos.y * -1);
+	wsh_object_translate(obj, bounds.pos.x * -1, bounds.pos.y * -1);
 	wsh_object_calc_bounds(obj);
 
-	wsh_object_move(obj, bounds.size.x * -.5, bounds.size.x * -.5);
-	wsh_object_move(obj, frame_w * .5 * dpi, frame_h * .5 * dpi);
+	wsh_object_translate(obj, bounds.size.x * -.5, bounds.size.x * -.5);
+	wsh_object_translate(obj, frame_w * .5 * dpi, frame_h * .5 * dpi);
 
 	double dx = obj->bounds.size.x / frame_h;
 	double dy = obj->bounds.size.y / frame_w;
@@ -41,7 +41,7 @@ void scale_object_to_window(WObject* obj)
 	wsh_object_calc_bounds(obj);
 	 */
 	wsh_object_scale(obj, frame_w, frame_h);
-	wsh_object_move(obj, frame_w * .5, frame_h * .5);
+	wsh_object_translate(obj, frame_w * .5, frame_h * .5);
 }
 
 void scale_sequence_to_window(WSequence* seq)

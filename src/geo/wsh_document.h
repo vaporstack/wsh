@@ -14,10 +14,11 @@
 
 enum
 {
-	WASH_DOCUMENT_STATE_UNKNOWN,
-	WASH_DOCUMENT_STATE_NEVERSAVED,
+	WASH_DOCUMENT_STATE_NEW,
+	//WASH_DOCUMENT_STATE_NEVERSAVED,
 	WASH_DOCUMENT_STATE_CLEAN,
-	WASH_DOCUMENT_STATE_DIRTY
+	WASH_DOCUMENT_STATE_DIRTY,
+	WASH_DOCUMENT_STATE_UNKNOWN
 };
 
 typedef struct EventList
@@ -42,7 +43,9 @@ typedef struct WDocumentMeta
 	//	canvas
 	int canvas_width;
 	int canvas_height;
+	WColor16 background_color;
 	int orientation;
+	double dpi;
 
 	//	info
 	int	 version;
@@ -55,6 +58,7 @@ typedef struct WDocumentMeta
 	const char* fps_repr;
 
 	//	hints
+	unsigned int playback_mode;
 	bool animated;
 	const char* theme;
 

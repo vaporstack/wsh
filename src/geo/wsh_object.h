@@ -70,7 +70,7 @@ void     wsh_object_normalize(WObject* obj);
 void     wsh_object_simplify(WObject*, double r);
 void     wsh_object_douglaspeucker(WObject*, double r);
 void     wsh_object_scale(WObject* obj, double modx, double mody);
-void     wsh_object_move(WObject* obj, double dx, double dy);
+void     wsh_object_translate(WObject* obj, double dx, double dy);
 void     wsh_object_rotate(WObject* obj, double cx, double cy, double r);
 void     wsh_object_calc_bounds(WObject*);
 void     wsh_object_set_closed(WObject* obj, bool val);

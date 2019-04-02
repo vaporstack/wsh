@@ -384,6 +384,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 
 WSequence* wsh_serial_json_unserialize_sequence_v_0_0_2(cJSON* data)
 {
+		
 	return wsh_serial_json_unserialize_sequence_v_0_0_1(data);
 }
 
@@ -395,6 +396,10 @@ WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 		return wsh_serial_json_unserialize_sequence_v_0_0_1(data);
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
+	{
+		return wsh_serial_json_unserialize_sequence_v_0_0_2(data);
+	}
+	else if (0 == strcmp(working_version, "0.0.3"))
 	{
 		return wsh_serial_json_unserialize_sequence_v_0_0_2(data);
 	}
@@ -470,15 +475,16 @@ const char* fps_to_string(double v)
 
 	if (v != vi)
 	{
-		double frac = v - vi;
-		sprintf(buf, "%d.%f\n", vi, frac);
+		//double frac = v - vi;
+		sprintf(buf, "%f", v);
 		//we got a floater
-		wsh_log("floating point.");
+		//wsh_log("floating point.");
 	}
 	else
 	{
 		printf("Integer.\n");
-		wsh_log(buf, "%d", vi);
+		sprintf(buf, "%d", vi);
+		//wsh_log(buf, "%d", vi);
 	}
 
 	wsh_log("buf:[%s]", buf);
@@ -488,6 +494,43 @@ const char* fps_to_string(double v)
 
 cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 {
+	
+	cJSON* jmeta = cJSON_CreateObject();
+	
+	//	canvas
+	cJSON* canvas = cJSON_CreateObject();
+	cJSON_AddNumberToObject(canvas, "width", meta->canvas_width);
+	cJSON_AddNumberToObject(canvas, "height", meta->canvas_height);
+	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
+	
+	cJSON_AddItemToObject(jmeta, "canvas", canvas);
+	
+	//	info
+	cJSON* info = cJSON_CreateObject();
+	if (working_version == NULL)
+		set_working_version();
+	
+	cJSON_AddStringToObject(info, "version", working_version);
+	cJSON_AddStringToObject(info, "path", meta->path);
+	cJSON_AddStringToObject(info, "uuid", meta->uuid);
+	cJSON_AddStringToObject(info, "ref", meta->ref);
+	if ( meta->theme )
+		cJSON_AddStringToObject(info, "theme", meta->theme);
+	if (!meta->fps_repr)
+	{
+		meta->fps_repr = fps_to_string(meta->fps);
+	}
+	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
+	
+	//	todo: add fps
+	cJSON_AddItemToObject(jmeta, "info", info);
+	//cJSON_AddItemToObject(ret, t, )
+	
+	return jmeta;
+}
+
+cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
+{
 
 	cJSON* jmeta = cJSON_CreateObject();
 
@@ -496,6 +539,11 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	cJSON_AddNumberToObject(canvas, "width", meta->canvas_width);
 	cJSON_AddNumberToObject(canvas, "height", meta->canvas_height);
 	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
+	cJSON_AddNumberToObject(canvas, "dpi", meta->dpi);
+	cJSON* jbg = wsh_serial_json_serialize_color16(meta->background_color);
+	cJSON_AddItemToObject(canvas, "background_color", jbg) ;
+	
+	//wsh_serial_json_serialize_color16(<#WColor16 col#>)
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
 	
 	//	info
@@ -513,6 +561,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	{
 		meta->fps_repr = fps_to_string(meta->fps);
 	}
+	cJSON_AddNumberToObject(info, "playback_mode", meta->playback_mode);
 	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
 
 	//	todo: add fps
@@ -520,6 +569,81 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 	//cJSON_AddItemToObject(ret, t, )
 
 	return jmeta;
+}
+
+int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
+{
+	wsh_log("Unserializing meta!? 03et");
+	cJSON* session = cJSON_GetObjectItem(data, "session");
+	cJSON* plugins = cJSON_GetObjectItem(data, "plugins");
+	cJSON* canvas  = cJSON_GetObjectItem(data, "canvas");
+	cJSON* info    = cJSON_GetObjectItem(data, "info");
+	
+	cJSON* v = NULL;
+	if (canvas)
+	{
+		v = cJSON_GetObjectItem(canvas, "width");
+		if (v)
+			meta->canvas_width = v->valueint;
+		
+		v = cJSON_GetObjectItem(canvas, "height");
+		if (v)
+			meta->canvas_height = v->valueint;
+		
+		v = cJSON_GetObjectItem(canvas, "orientation");
+		if (v)
+			meta->orientation = v->valueint;
+		v = cJSON_GetObjectItem(canvas, "dpi");
+		if ( v )
+			meta->dpi = v->valuedouble;
+		v = cJSON_GetObjectItem(canvas, "background_color");
+		if ( v )
+			meta->background_color = wsh_serial_json_unserialize_color16(v);
+		
+		
+	}
+	if (info)
+	{
+		v = cJSON_GetObjectItem(info, "fps");
+		if (v)
+		{
+			meta->fps_repr = v->valuestring;
+		}
+		else
+		{
+			meta->fps_repr = "29.97";
+		}
+		
+		v = cJSON_GetObjectItem(info, "version");
+		if (v)
+			meta->version_string = v->valuestring;
+		v = cJSON_GetObjectItem(info, "path");
+		if (v)
+			meta->path = v->valuestring;
+		v = cJSON_GetObjectItem(info, "uuid");
+		if (v)
+			meta->uuid = v->valuestring;
+		
+		v = cJSON_GetObjectItem(info, "theme");
+		if ( v )
+			meta->theme = v->valuestring;
+		
+		v = cJSON_GetObjectItem(info, "playback_mode");
+		if ( v )
+			meta->playback_mode = v->valueint;
+		
+		v = cJSON_GetObjectItem(info, "fps");
+		if ( v )
+		{
+			const char* s = v->valuestring;
+			sscanf( s, "%lf", &meta->fps ) ;
+			//meta->fps = v->valuedouble;
+		}
+		
+	}
+	
+	//	todo: add plugin and event decoding coder
+	return true;
 }
 
 int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
@@ -578,7 +702,18 @@ int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 
 const char* wsh_serial_json_document_serialize_v003(WDocument* doc, const char* version_string)
 {
-	return NULL;
+	cJSON* root = cJSON_CreateObject();
+	cJSON* data = cJSON_CreateObject();
+	
+	cJSON* meta = wsh_serial_json_serialize_meta_v0_0_3(&doc->meta);
+	cJSON_AddItemToObject(root, "meta", meta);
+	
+	cJSON* sequence = wsh_serialize_sequence_json(doc->sequence.src);
+	cJSON_AddItemToObject(data, "sequence", sequence);
+	cJSON_AddItemToObject(root, "data", data);
+	
+	
+	return cJSON_Print(root);
 }
 
 const char* wsh_serial_json_document_serialize_v002(WDocument* doc, const char* version_string)
@@ -594,27 +729,6 @@ const char* wsh_serial_json_document_serialize_v002(WDocument* doc, const char* 
 	cJSON_AddItemToObject(data, "sequence", sequence);
 	cJSON_AddItemToObject(root, "data", data);
 
-	//cJSON* meta = cJSON_CreateObject();
-
-	//cJSON_AddItemToObject(root, "meta", doc->meta);
-	//cJSON* info = cJSON_CreateObject();
-	/*
-	 cJSON_AddStringToObject(info, "version", strdup(version_string));
-
-	 if (doc->path)
-	 cJSON_AddStringToObject(info, "path", strdup(doc->path));
-
-	 if (doc->ref)
-	 cJSON_AddStringToObject(info, "ref", strdup(doc->ref));
-	 if (doc->uuid)
-	 cJSON_AddStringToObject(info, "uuid", doc->uuid);
-
-	 if (doc->sequence.src) {
-	 cJSON* jseq = wsh_serialize_sequence_json(doc->sequence.src);
-	 cJSON_AddItemToObject(data, "sequence", jseq);
-	 }
-	 cJSON_AddItemToObject(meta, "info", info);
-	 */
 
 	return cJSON_Print(root);
 }
@@ -690,6 +804,13 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 	{
 		wsh_log("Serialize: %s", working_version);
 		const char* res = wsh_serial_json_document_serialize_v002(doc, buf);
+		free(buf);
+		return res;
+	}
+	else if (0 == strcmp(working_version, "0.0.3"))
+	{
+		wsh_log("Serialize: %s", working_version);
+		const char* res = wsh_serial_json_document_serialize_v003(doc, buf);
 		free(buf);
 		return res;
 	}
@@ -791,12 +912,12 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	{
 		wsh_log("Error loading stroke!");
 //		line->has_stroke = true;
-		printf("%s", cJSON_Print(data));
+		//printf("%s", cJSON_Print(data));
 		line->stroke = malloc(sizeof(WColor16));
-		line->stroke->r   = 0;
+		line->stroke->r   = 1;
 		line->stroke->g   = 0;
 		line->stroke->b   = 0;
-		line->stroke->a   = 0;
+		line->stroke->a   = 1;
 	}
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
 
@@ -842,6 +963,31 @@ WObject* wsh_serial_json_unserialize_object(cJSON* data)
  return wsh_serial_document_unserialize(path);
  }
  */
+WDocument* wsh_serial_document_unserialize_v003(const char* path, cJSON* root)
+{
+	WDocument* doc = wsh_document_create();
+	
+	cJSON* meta = cJSON_GetObjectItem(root, "meta");
+	if (meta)
+	{
+		int res = wsh_serial_json_unserialize_meta_v0_0_3(meta, &doc->meta);
+		if (!res)
+		{
+			wsh_log("Error reading meta!");
+		}
+	
+	}
+	else
+	{
+		wsh_log("ALERT NO META");
+	}
+	
+	cJSON* data       = cJSON_GetObjectItem(root, "data");
+	cJSON* jseq       = cJSON_GetObjectItem(data, "sequence");
+	doc->sequence.src = wsh_serial_json_unserialize_sequence(jseq);
+	
+	return doc;
+}
 WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 {
 	WDocument* doc = wsh_document_create();
@@ -1030,6 +1176,9 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 				if (0 == strcmp(working_version, "0.0.2"))
 				{
 					doc = wsh_serial_document_unserialize_v002(path, root);
+				}else if (0 == strcmp(working_version, "0.0.3"))
+				{
+					doc = wsh_serial_document_unserialize_v003(path, root);
 				}
 				else
 				{

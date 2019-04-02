@@ -71,10 +71,6 @@ void wsh_document_destroy(WDocument* doc)
 		return;
 	}
 
-	//printf("Destroying all document attributes\n");
-	// if ( doc->art.src )
-	//	wsh_object_destroy(doc->art.src);
-
 	if (doc->sequence.src)
 		wsh_sequence_destroy(doc->sequence.src);
 }

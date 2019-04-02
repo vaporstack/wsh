@@ -14,10 +14,10 @@ typedef struct WSequence
 {
 	//	todo: clean this up!
 
-	int reserved;
-	int num_frames;
-	int current_frame_index;
-	int num_golden_frames;
+	unsigned reserved;
+	unsigned num_frames;
+	unsigned current_frame_index;
+	unsigned num_golden_frames;
 
 	int* golden_frames;
 
@@ -50,10 +50,10 @@ WSequence* wsh_sequence_copy(WSequence* seq);
 void wsh_sequence_normalize_time_continuous(WSequence* seq);
 void wsh_sequence_normalize_time_exploded(WSequence* seq);
 
-void wsh_sequence_frame_create(WSequence*, int index);
+void wsh_sequence_frame_create(WSequence*, unsigned index);
 void wsh_sequence_ensure_frame(WSequence* seq);
 
-void wsh_sequence_frame_set(WSequence*, int);
+void wsh_sequence_frame_set(WSequence*, unsigned index);
 void wsh_sequence_frame_next(WSequence* seq);
 void wsh_sequence_frame_prev(WSequence* seq);
 void wsh_sequence_frame_add(WSequence* seq);

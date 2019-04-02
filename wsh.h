@@ -15,10 +15,10 @@
 #include <stdlib.h>
 
 
-#define WSH_VERSION "0.0.2"
+#define WSH_VERSION "0.0.3"
 #define WSH_VERSION_MAJOR 0
 #define WSH_VERSION_MINOR 0
-#define WSH_VERSION_PATCH 2
+#define WSH_VERSION_PATCH 3
 
 #define WSH_VERSION_CHECK(maj, min) ((maj == WSH_VERSION_MAJOR) && (min <= WSH_VERSION_MINOR))
 

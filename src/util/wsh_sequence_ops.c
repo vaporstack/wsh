@@ -6,7 +6,6 @@
 //  Copyright © 2018 vaporstack. All rights reserved.
 //
 
-#include <wsh/wsh.h>
 #include "wsh_sequence_ops.h"
 #include <wsh/wsh.h>
 
@@ -30,7 +29,7 @@ void wsh_sequence_center_frames_independent(WSequence* seq)
 		double dx = px + wx;
 		double dy = py + wy;
 
-		wsh_object_move(frame, -dx, -dy);
+		wsh_object_translate(frame, -dx, -dy);
 	}
 }
 

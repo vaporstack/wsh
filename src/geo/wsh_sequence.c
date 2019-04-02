@@ -140,7 +140,7 @@ WSequence* wsh_sequence_copy(WSequence* old)
 	return seq;
 }
 
-void wsh_sequence_frame_create(WSequence* seq, int pos)
+void wsh_sequence_frame_create(WSequence* seq, unsigned pos)
 {
 	// WObject* seq = NULL;
 	// OLD AND BAD BUT IT FUCKING WORKED!?
@@ -171,7 +171,7 @@ void wsh_sequence_frame_create(WSequence* seq, int pos)
 	}
 }
 
-void wsh_sequence_frame_set(WSequence* seq, int ind)
+void wsh_sequence_frame_set(WSequence* seq, unsigned  index)
 {
 	if (!seq)
 	{
@@ -180,7 +180,7 @@ void wsh_sequence_frame_set(WSequence* seq, int ind)
 #endif
 		return;
 	}
-	if (ind >= seq->num_frames)
+	if (index >= seq->num_frames)
 	{
 #ifdef DEBUG
 		printf("I _really_ can't do that dave\n");
@@ -188,8 +188,8 @@ void wsh_sequence_frame_set(WSequence* seq, int ind)
 		return;
 	}
 
-	seq->current_frame_index = ind;
-	seq->current_frame       = seq->frames[ind];
+	seq->current_frame_index = index;
+	seq->current_frame       = seq->frames[index];
 
 	wsh_sequence_ensure_frame(seq);
 }
@@ -239,37 +239,6 @@ void wsh_sequence_frame_add(WSequence* seq)
 	}
 
 	seq->current_frame = seq->frames[seq->current_frame_index];
-
-	/*
-	// seq->current_frame_index;
-	seq->num_frames++;
-
-	_check_realloc(seq);
-
-	//if we aren't on the last frame, everything needs to get shifted up one.
-	if(seq->current_frame_index < seq->num_frames-1)
-	{
-		int index = seq->num_frames;
-		int delta = seq->num_frames - index;
-		memcpy(seq->frames+index, seq->frames+index+1, sizeof(WObject) * delta);
-	}
-
-	WObject* fr = wsh_object_create(NULL);
-
-	if (seq->current_frame_index < seq->num_frames - 1)
-		seq->current_frame_index++;
-
-	seq->frames[seq->current_frame_index] = fr;
-
-#ifdef DEBUG
-//printf("added frame %d (%d)\n", seq->current_frame_index, seq->num_frames);
-#endif
-
-	// seq->current_frame_index = cfi;
-	seq->current_frame = seq->frames[seq->current_frame_index];
-
-	// seq->num_frames = num;
-*/
 }
 
 void wsh_sequence_frame_duplicate(WSequence* seq)
@@ -380,11 +349,11 @@ void wsh_sequence_frame_next(WSequence* seq)
 		return;
 	}
 	seq->current_frame_index++;
-	if ( seq->current_frame_index  == seq->num_frames )
+	if (seq->current_frame_index == seq->num_frames)
 		seq->current_frame_index = 0;
-	
+
 	seq->current_frame = seq->frames[seq->current_frame_index];
-	
+
 	//wsh_sequence_ensure_frame(seq);
 }
 
@@ -630,7 +599,7 @@ void wsh_sequence_normalize(WSequence* seq)
 	double dy = maxy - miny;
 
 	//double bigger = (dx > dy) ? dx : dy;
-	double ar     = dy / dx;
+	double ar = dy / dx;
 	double rx, ry;
 	if (dx > dy)
 	{
@@ -673,7 +642,7 @@ void wsh_sequence_move(WSequence* seq, double dx, double dy)
 	for (unsigned int i = 0; i < seq->num_frames; i++)
 	{
 		WObject* frame = seq->frames[i];
-		wsh_object_move(frame, dx, dy);
+		wsh_object_translate(frame, dx, dy);
 	}
 }
 
@@ -697,8 +666,8 @@ void wsh_sequence_center(WSequence* seq)
 	for (unsigned int i = 0; i < seq->num_frames; i++)
 	{
 		WObject* frame = seq->frames[i];
-		wsh_object_move(frame, -seq->bounds.pos.x, -seq->bounds.pos.y);
-		wsh_object_move(frame, -seq->bounds.size.x * .5, -seq->bounds.size.y * .5);
+		wsh_object_translate(frame, -seq->bounds.pos.x, -seq->bounds.pos.y);
+		wsh_object_translate(frame, -seq->bounds.size.x * .5, -seq->bounds.size.y * .5);
 	}
 }
 

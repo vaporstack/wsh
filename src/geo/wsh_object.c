@@ -318,7 +318,7 @@ void wsh_object_scale(WObject* obj, double modx, double mody)
 	}
 }
 
-void wsh_object_move(WObject* obj, double dx, double dy)
+void wsh_object_translate(WObject* obj, double dx, double dy)
 {
 	for (unsigned long i = 0; i < obj->num; i++)
 	{
@@ -669,10 +669,11 @@ void wsh_object_normalize(WObject* obj)
 void wsh_object_calc_bounds(WObject* obj)
 {
 #ifdef DEBUG
-	if ( !obj )
+	if (!obj)
 	{
 		wsh_log("wsh was passed a null object: %s", __func__);
-		assert(obj != NULL);
+		return;
+		//assert(obj != NULL);
 	}
 #else
 	if (!obj)
