@@ -43,7 +43,7 @@ void wsh_player_destroy(WshPlayer* player)
 	if (!player)
 	{
 		wsh_log("Not destroying a NULL player\n");
-		
+
 		return;
 	}
 	if (player->info)
@@ -63,7 +63,7 @@ static void update_replay(WshPlayer* player, double t)
 	if (player->current_frame)
 	{
 	}
-	WObject*   dst = wsh_object_create(NULL);
+	WObject*   dst = wsh_object_create();
 	WSequence* seq = player->hnd->src->sequence.src;
 
 	WObject* src = seq->current_frame;
@@ -105,7 +105,7 @@ static void update_replay(WshPlayer* player, double t)
 		{
 			free(dst);
 			player->current_frame = NULL;
-			
+
 			wsh_sequence_frame_next(player->hnd->src->sequence.src);
 			wsh_player_stop(player, t);
 			wsh_player_start(player, t);

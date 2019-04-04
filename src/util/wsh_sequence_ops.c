@@ -41,7 +41,7 @@ WObject* wsh_sequence_ops_collapse(WSequence* seq)
 		//	assuming somethinghere
 		return wsh_object_copy(seq->frames[0]);
 	}
-	WObject* res = wsh_object_create(NULL);
+	WObject* res = wsh_object_create();
 //	wsh_sequence_frame_add(res);
 #ifdef DEBUG
 	wsh_log("Collapsing a sequence of %d frames", seq->num_frames);

@@ -152,7 +152,7 @@ void wsh_sequence_frame_create(WSequence* seq, unsigned pos)
 
 		// printf("creating frame at %d\n", seq->num_frames);
 
-		WObject* obj			 = wsh_object_create(NULL);
+		WObject* obj			 = wsh_object_create();
 		seq->frames[seq->num_frames - 1] = obj;
 		seq->current_frame_index	 = seq->num_frames - 1;
 
@@ -171,7 +171,7 @@ void wsh_sequence_frame_create(WSequence* seq, unsigned pos)
 	}
 }
 
-void wsh_sequence_frame_set(WSequence* seq, unsigned  index)
+void wsh_sequence_frame_set(WSequence* seq, unsigned index)
 {
 	if (!seq)
 	{
@@ -197,7 +197,7 @@ void wsh_sequence_frame_set(WSequence* seq, unsigned  index)
 void wsh_sequence_frame_add(WSequence* seq)
 {
 
-	WObject* fr = wsh_object_create(NULL);
+	WObject* fr = wsh_object_create();
 
 	if (seq->current_frame_index == seq->num_frames - 1)
 	{
@@ -290,7 +290,7 @@ void wsh_sequence_frame_insert(WSequence* seq)
 		seq->frames[i] = seq->frames[i - 1];
 	}
 
-	seq->frames[pos] = wsh_object_create(NULL);
+	seq->frames[pos] = wsh_object_create();
 	pos++;
 	seq->current_frame_index = pos - 1;
 	seq->current_frame       = seq->frames[seq->current_frame_index];

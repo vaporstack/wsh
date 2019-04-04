@@ -19,14 +19,14 @@
 
 #include <assert.h>
 
-WObject* wsh_object_create(WObject* parent)
+WObject* wsh_object_create(void)
 {
 	WObject* obj;
 	obj		= calloc(1, sizeof(WObject));
 	obj->lines      = NULL;
 	obj->normalized = false;
 	obj->num	= 0;
-	obj->parent     = parent;
+	//obj->parent     = parent;
 	WRect b;
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
 	obj->bounds				= b;
@@ -228,8 +228,8 @@ WObject* wsh_object_copy(WObject* old)
 		return NULL;
 	}
 
-	WObject* obj    = wsh_object_create(NULL);
-	obj->parent     = old->parent;
+	WObject* obj    = wsh_object_create();
+	//obj->parent     = old->parent;
 	obj->bounds     = old->bounds;
 	obj->transform  = old->transform;
 	obj->normalized = old->normalized;
@@ -266,8 +266,8 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 		return NULL;
 	}
 
-	WObject* obj    = wsh_object_create(NULL);
-	obj->parent     = old->parent;
+	WObject* obj    = wsh_object_create();
+	//obj->parent     = old->parent;
 	obj->bounds     = old->bounds;
 	obj->transform  = old->transform;
 	obj->normalized = old->normalized;

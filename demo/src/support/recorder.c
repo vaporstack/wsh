@@ -26,12 +26,12 @@ WLine* sanity_check(void)
 void recorder_init(void)
 {
 	work_line.src     = wsh_line_create();
-	test_geometry.src = wsh_object_create(NULL);
+	test_geometry.src = wsh_object_create();
 	/*
 	WLine* src = wsh_line_create();
 	work_line = wsh_line_hnd_create_with_addr(src);
 	test_geometry = wsh_object_hnd_create(NULL);
-	test_geometry->src = wsh_object_create(NULL);
+	test_geometry->src = wsh_object_create();
 	*/
 }
 
@@ -113,5 +113,5 @@ void recorder_clear(void)
 
 	wsh_object_destroy(test_geometry.src);
 
-	test_geometry.src = wsh_object_create(NULL);
+	test_geometry.src = wsh_object_create();
 }

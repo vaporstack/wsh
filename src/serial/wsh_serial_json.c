@@ -14,8 +14,6 @@
 
 #include <stdio.h>
 
-
-
 //	version 0.0.1 - initial draft
 //	version 0.0.2 - improvements to meta
 //	version 0.0.3 - removed has_stroke and has_fill
@@ -384,7 +382,7 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 
 WSequence* wsh_serial_json_unserialize_sequence_v_0_0_2(cJSON* data)
 {
-		
+
 	return wsh_serial_json_unserialize_sequence_v_0_0_1(data);
 }
 
@@ -494,38 +492,38 @@ const char* fps_to_string(double v)
 
 cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 {
-	
+
 	cJSON* jmeta = cJSON_CreateObject();
-	
+
 	//	canvas
 	cJSON* canvas = cJSON_CreateObject();
 	cJSON_AddNumberToObject(canvas, "width", meta->canvas_width);
 	cJSON_AddNumberToObject(canvas, "height", meta->canvas_height);
 	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
-	
+
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
-	
+
 	//	info
 	cJSON* info = cJSON_CreateObject();
 	if (working_version == NULL)
 		set_working_version();
-	
+
 	cJSON_AddStringToObject(info, "version", working_version);
 	cJSON_AddStringToObject(info, "path", meta->path);
 	cJSON_AddStringToObject(info, "uuid", meta->uuid);
 	cJSON_AddStringToObject(info, "ref", meta->ref);
-	if ( meta->theme )
+	if (meta->theme)
 		cJSON_AddStringToObject(info, "theme", meta->theme);
 	if (!meta->fps_repr)
 	{
 		meta->fps_repr = fps_to_string(meta->fps);
 	}
 	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
-	
+
 	//	todo: add fps
 	cJSON_AddItemToObject(jmeta, "info", info);
 	//cJSON_AddItemToObject(ret, t, )
-	
+
 	return jmeta;
 }
 
@@ -541,11 +539,10 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 	cJSON_AddNumberToObject(canvas, "orientation", meta->orientation);
 	cJSON_AddNumberToObject(canvas, "dpi", meta->dpi);
 	cJSON* jbg = wsh_serial_json_serialize_color16(meta->background_color);
-	cJSON_AddItemToObject(canvas, "background_color", jbg) ;
-	
-	//wsh_serial_json_serialize_color16(<#WColor16 col#>)
+	cJSON_AddItemToObject(canvas, "background_color", jbg);
+
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
-	
+
 	//	info
 	cJSON* info = cJSON_CreateObject();
 	if (working_version == NULL)
@@ -555,8 +552,8 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 	cJSON_AddStringToObject(info, "path", meta->path);
 	cJSON_AddStringToObject(info, "uuid", meta->uuid);
 	cJSON_AddStringToObject(info, "ref", meta->ref);
-	if ( meta->theme )
-			cJSON_AddStringToObject(info, "theme", meta->theme);
+	if (meta->theme)
+		cJSON_AddStringToObject(info, "theme", meta->theme);
 	if (!meta->fps_repr)
 	{
 		meta->fps_repr = fps_to_string(meta->fps);
@@ -564,9 +561,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 	cJSON_AddNumberToObject(info, "playback_mode", meta->playback_mode);
 	cJSON_AddStringToObject(info, "fps", meta->fps_repr);
 
-	//	todo: add fps
 	cJSON_AddItemToObject(jmeta, "info", info);
-	//cJSON_AddItemToObject(ret, t, )
 
 	return jmeta;
 }
@@ -578,29 +573,27 @@ int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
 	cJSON* plugins = cJSON_GetObjectItem(data, "plugins");
 	cJSON* canvas  = cJSON_GetObjectItem(data, "canvas");
 	cJSON* info    = cJSON_GetObjectItem(data, "info");
-	
+
 	cJSON* v = NULL;
 	if (canvas)
 	{
 		v = cJSON_GetObjectItem(canvas, "width");
 		if (v)
 			meta->canvas_width = v->valueint;
-		
+
 		v = cJSON_GetObjectItem(canvas, "height");
 		if (v)
 			meta->canvas_height = v->valueint;
-		
+
 		v = cJSON_GetObjectItem(canvas, "orientation");
 		if (v)
 			meta->orientation = v->valueint;
 		v = cJSON_GetObjectItem(canvas, "dpi");
-		if ( v )
+		if (v)
 			meta->dpi = v->valuedouble;
 		v = cJSON_GetObjectItem(canvas, "background_color");
-		if ( v )
+		if (v)
 			meta->background_color = wsh_serial_json_unserialize_color16(v);
-		
-		
 	}
 	if (info)
 	{
@@ -613,7 +606,7 @@ int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
 		{
 			meta->fps_repr = "29.97";
 		}
-		
+
 		v = cJSON_GetObjectItem(info, "version");
 		if (v)
 			meta->version_string = v->valuestring;
@@ -623,25 +616,24 @@ int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
 		v = cJSON_GetObjectItem(info, "uuid");
 		if (v)
 			meta->uuid = v->valuestring;
-		
+
 		v = cJSON_GetObjectItem(info, "theme");
-		if ( v )
+		if (v)
 			meta->theme = v->valuestring;
-		
+
 		v = cJSON_GetObjectItem(info, "playback_mode");
-		if ( v )
+		if (v)
 			meta->playback_mode = v->valueint;
-		
+
 		v = cJSON_GetObjectItem(info, "fps");
-		if ( v )
+		if (v)
 		{
 			const char* s = v->valuestring;
-			sscanf( s, "%lf", &meta->fps ) ;
+			sscanf(s, "%lf", &meta->fps);
 			//meta->fps = v->valuedouble;
 		}
-		
 	}
-	
+
 	//	todo: add plugin and event decoding coder
 	return true;
 }
@@ -690,9 +682,9 @@ int wsh_serial_json_unserialize_meta_v0_0_2(cJSON* data, WDocumentMeta* meta)
 		v = cJSON_GetObjectItem(info, "uuid");
 		if (v)
 			meta->uuid = v->valuestring;
-		
+
 		v = cJSON_GetObjectItem(info, "theme");
-		if ( v )
+		if (v)
 			meta->theme = v->valuestring;
 	}
 
@@ -704,15 +696,14 @@ const char* wsh_serial_json_document_serialize_v003(WDocument* doc, const char* 
 {
 	cJSON* root = cJSON_CreateObject();
 	cJSON* data = cJSON_CreateObject();
-	
+
 	cJSON* meta = wsh_serial_json_serialize_meta_v0_0_3(&doc->meta);
 	cJSON_AddItemToObject(root, "meta", meta);
-	
+
 	cJSON* sequence = wsh_serialize_sequence_json(doc->sequence.src);
 	cJSON_AddItemToObject(data, "sequence", sequence);
 	cJSON_AddItemToObject(root, "data", data);
-	
-	
+
 	return cJSON_Print(root);
 }
 
@@ -728,7 +719,6 @@ const char* wsh_serial_json_document_serialize_v002(WDocument* doc, const char* 
 	cJSON* sequence = wsh_serialize_sequence_json(doc->sequence.src);
 	cJSON_AddItemToObject(data, "sequence", sequence);
 	cJSON_AddItemToObject(root, "data", data);
-
 
 	return cJSON_Print(root);
 }
@@ -848,7 +838,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	cJSON* jrotation = cJSON_GetObjectItem(data, "rotation");
 	cJSON* jtiltx    = cJSON_GetObjectItem(data, "tilt_x");
 	cJSON* jtilty    = cJSON_GetObjectItem(data, "tilt_y");
-	cJSON* jclosed    = cJSON_GetObjectItem(data, "closed");
+	cJSON* jclosed   = cJSON_GetObjectItem(data, "closed");
 	cJSON* jwidth    = cJSON_GetObjectItem(data, "width");
 
 	int num = cJSON_GetArraySize(jx);
@@ -879,19 +869,21 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		if (jrotation)
 			p.rotation =
 			    cJSON_GetArrayItem(jrotation, i)->valuedouble;
-		
+
 		wsh_line_add_point(line, p);
 	}
-	if (jclosed )
+	if (jclosed)
 		line->closed = jclosed->valueint;
 
-	if ( jwidth )
+	if (jwidth)
 	{
 		line->width = jwidth->valuedouble;
-	}else{
+	}
+	else
+	{
 		line->width = 32;
 	}
-	
+
 	if (line->num > 100000000)
 	{
 		wsh_log("what the FACK");
@@ -911,14 +903,24 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	else
 	{
 		wsh_log("Error loading stroke!");
-//		line->has_stroke = true;
+		//		line->has_stroke = true;
 		//printf("%s", cJSON_Print(data));
-		line->stroke = malloc(sizeof(WColor16));
-		line->stroke->r   = 1;
-		line->stroke->g   = 0;
-		line->stroke->b   = 0;
-		line->stroke->a   = 1;
+		line->stroke    = malloc(sizeof(WColor16));
+		line->stroke->r = 1;
+		line->stroke->g = 0;
+		line->stroke->b = 0;
+		line->stroke->a = 1;
 	}
+	cJSON* fill = cJSON_GetObjectItem(data, "fill");
+	if ( fill )
+	{
+		line->fill = malloc(sizeof(WColor16));
+		line->fill->r = cJSON_GetArrayItem(fill, 0)->valuedouble;
+		line->fill->g = cJSON_GetArrayItem(fill, 1)->valuedouble;
+		line->fill->b = cJSON_GetArrayItem(fill, 2)->valuedouble;
+		line->fill->a = cJSON_GetArrayItem(fill, 3)->valuedouble;
+	}
+	
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
 
 	wsh_line_calc_bounds(line);
@@ -936,7 +938,7 @@ WObject* wsh_serial_json_unserialize_object_v_0_0_1(cJSON* data)
 	cJSON* jlines = cJSON_GetObjectItem(data, "lines");
 	int    num    = cJSON_GetArraySize(jlines);
 
-	WObject* obj = wsh_object_create(NULL);
+	WObject* obj = wsh_object_create();
 
 	obj->normalized = cJSON_GetObjectItem(data, "normalized")->valueint;
 
@@ -966,7 +968,7 @@ WObject* wsh_serial_json_unserialize_object(cJSON* data)
 WDocument* wsh_serial_document_unserialize_v003(const char* path, cJSON* root)
 {
 	WDocument* doc = wsh_document_create();
-	
+
 	cJSON* meta = cJSON_GetObjectItem(root, "meta");
 	if (meta)
 	{
@@ -975,17 +977,16 @@ WDocument* wsh_serial_document_unserialize_v003(const char* path, cJSON* root)
 		{
 			wsh_log("Error reading meta!");
 		}
-	
 	}
 	else
 	{
 		wsh_log("ALERT NO META");
 	}
-	
+
 	cJSON* data       = cJSON_GetObjectItem(root, "data");
 	cJSON* jseq       = cJSON_GetObjectItem(data, "sequence");
 	doc->sequence.src = wsh_serial_json_unserialize_sequence(jseq);
-	
+
 	return doc;
 }
 WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
@@ -1176,7 +1177,8 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 				if (0 == strcmp(working_version, "0.0.2"))
 				{
 					doc = wsh_serial_document_unserialize_v002(path, root);
-				}else if (0 == strcmp(working_version, "0.0.3"))
+				}
+				else if (0 == strcmp(working_version, "0.0.3"))
 				{
 					doc = wsh_serial_document_unserialize_v003(path, root);
 				}

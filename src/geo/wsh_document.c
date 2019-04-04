@@ -27,6 +27,7 @@ void wsh_document_meta_clear(WDocumentMeta* meta)
 	meta->version	= 0;
 	meta->animated       = false;
 	meta->theme = NULL;
+	
 }
 
 WDocument* wsh_document_create()
@@ -56,7 +57,7 @@ WDocument* wsh_document_create()
 	//doc->ref  = NULL;
 	//doc->meta = NULL;
 	wsh_document_meta_clear(&doc->meta);
-
+	
 	//doc->uuid = NULL;
 	// doc->tags = NULL;
 

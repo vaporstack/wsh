@@ -23,7 +23,8 @@ typedef struct WObject
 	bool		normalized;
 	unsigned long   num;
 	WLine**		lines;
-	struct WObject* parent;
+	//	removing this since I long ago decided this is purely a storage class
+	//struct WObject* parent;
 	WRect		bounds;
 	WTransform      transform;
 } WObject;
@@ -40,7 +41,7 @@ WObjectHnd wsh_object_hnd_create(WObject* parent);
 WObjectHnd wsh_object_hnd_destroy(WObjectHnd* hnd);
 WObjectHnd wsh_object_hnd_copy(WObjectHnd* hnd);
 
-WObject* wsh_object_create(WObject* parent);
+WObject* wsh_object_create(void);
 void     wsh_object_destroy(WObject* obj);
 void     wsh_object_destroy_void(void* obj);
 

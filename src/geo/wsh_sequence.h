@@ -16,7 +16,7 @@ typedef struct WSequence
 
 	unsigned reserved;
 	unsigned num_frames;
-	unsigned current_frame_index;
+	signed current_frame_index;
 	unsigned num_golden_frames;
 
 	int* golden_frames;
