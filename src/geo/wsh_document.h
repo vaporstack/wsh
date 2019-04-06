@@ -34,7 +34,8 @@ typedef struct WDocumentMeta
 	EventList* events;
 
 	//	plugins
-	// ????
+	//	this is probably going to just be json text for a while
+	void* plugins;
 
 	//	tools
 	char** tools;

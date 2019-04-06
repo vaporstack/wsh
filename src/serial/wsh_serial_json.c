@@ -529,6 +529,8 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_2(WDocumentMeta* meta)
 
 cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 {
+	if (working_version == NULL)
+		set_working_version();
 
 	cJSON* jmeta = cJSON_CreateObject();
 
@@ -543,11 +545,13 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 
 	cJSON_AddItemToObject(jmeta, "canvas", canvas);
 
+	//	plugins
+	cJSON* jplug = cJSON_Parse(meta->plugins);
+	cJSON_AddItemToObject(jmeta, "plugins", jplug);
+	
 	//	info
 	cJSON* info = cJSON_CreateObject();
-	if (working_version == NULL)
-		set_working_version();
-
+	
 	cJSON_AddStringToObject(info, "version", working_version);
 	cJSON_AddStringToObject(info, "path", meta->path);
 	cJSON_AddStringToObject(info, "uuid", meta->uuid);
@@ -571,6 +575,9 @@ int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
 	wsh_log("Unserializing meta!? 03et");
 	cJSON* session = cJSON_GetObjectItem(data, "session");
 	cJSON* plugins = cJSON_GetObjectItem(data, "plugins");
+	if ( plugins )
+		meta->plugins = cJSON_Print(plugins);
+	
 	cJSON* canvas  = cJSON_GetObjectItem(data, "canvas");
 	cJSON* info    = cJSON_GetObjectItem(data, "info");
 

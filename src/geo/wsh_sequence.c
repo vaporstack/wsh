@@ -201,14 +201,13 @@ void wsh_sequence_frame_add(WSequence* seq)
 
 	if (seq->current_frame_index == seq->num_frames - 1)
 	{
-		//this is the last frame, our job is easer
+		//this is the last frame, our job is easier
 #ifdef DEBUG
 		printf("last frame!\n");
 #endif
 		seq->num_frames++;
 		_check_realloc(seq);
 
-		//if (seq->current_frame_index < seq->num_frames - 1)
 		seq->current_frame_index++;
 
 		seq->frames[seq->current_frame_index] = fr;
@@ -224,9 +223,8 @@ void wsh_sequence_frame_add(WSequence* seq)
 		int pos   = seq->current_frame_index;
 		int delta = seq->num_frames - pos;
 #ifdef DEBUG
-		printf("shiftinng with delta %d\n", delta);
+		printf("shifting with delta %d\n", delta);
 #endif
-		//memcpy(seq->frames[pos+1], seq->frames[pos], sizeof(WObject) * (delta ));
 		for (int i = seq->num_frames - 1; i > pos; i--)
 		{
 			seq->frames[i] = seq->frames[i - 1];
@@ -234,7 +232,6 @@ void wsh_sequence_frame_add(WSequence* seq)
 
 		seq->current_frame_index++;
 		seq->frames[seq->current_frame_index] = fr;
-		//seq->current_frame = fr;
 		//this is not the last frame, we have to shuffle everything down.
 	}
 
