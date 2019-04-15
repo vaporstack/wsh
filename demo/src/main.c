@@ -61,16 +61,12 @@ GLFWwindow*   window	 = NULL;
 WshDemo* demos[NUM_DEMOS] = {&tiling, &mapping, &animation, &playback, &operations, &brush, &resize, &simulator, &session};
 WshDemo* current_demo     = NULL;
 
-
 static void calculate_retina_scale(void)
 {
 	dpi = frame_w / window_w;
-	
-	printf("dpi updated? is %f\n", dpi);
-	
-	
-}
 
+	printf("dpi updated? is %f\n", dpi);
+}
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
@@ -78,7 +74,7 @@ static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	frame_h = width;
 
 	drw_setup(frame_w, frame_w);
-	
+
 	calculate_retina_scale();
 }
 
@@ -99,8 +95,6 @@ static void window_size_callback(GLFWwindow* window, int width, int height)
 	drw_setup(window_w, window_h);
 	reset_current_demo();
 	calculate_retina_scale();
-
-	
 }
 
 // static void draw_joysticks(void);
@@ -226,21 +220,20 @@ static void key_callback(GLFWwindow* window, int key, int scan, int action, int 
 static void drop_callback(GLFWwindow* window, int num, const char** paths)
 {
 	const char* first = paths[0];
-	if ( !strstr(first, ".wash"))
+	if (!strstr(first, ".wash"))
 	{
 		printf("Error, file dragged was not a .wash file!\n");
 		return;
 	}
-	
+
 	wsh_demo_load_document(first);
 	if (!current_demo)
 		return;
-	
-	if ( !current_demo->drop)
+
+	if (!current_demo->drop)
 		return;
-	
+
 	current_demo->drop(num, paths);
-	
 }
 
 void my_tablet_prox(int v)
@@ -364,7 +357,7 @@ static void draw(void)
 
 	char buf[256];
 	sprintf(buf, "switch demo: 1-6 [%d] %s", current_demo_index, current_demo->name);
-	
+
 	wash_demo_text(buf, 32, 32);
 }
 
@@ -392,7 +385,7 @@ static void switch_demo(int i)
 	}
 
 	current_demo->init();
-	
+
 	printf("Loaded demo: %s\n", current_demo->name);
 }
 
@@ -401,8 +394,7 @@ int main(int argc, const char* argv[])
 
 	//	check build library compatibility
 	wsh_version_check(WSH_VERSION_MAJOR, WSH_VERSION_MINOR);
-	
-	
+
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
@@ -437,8 +429,7 @@ int main(int argc, const char* argv[])
 	glfwGetWindowSize(window, &ww, &wh);
 	int fw, fh;
 	glfwGetFramebufferSize(window, &fw, &fh);
-	
-	
+
 	dpi = (double)fw / ww;
 
 	recorder_init();
@@ -447,7 +438,7 @@ int main(int argc, const char* argv[])
 	printf("dpi: %f\n", dpi);
 
 	document.src = NULL;
-	//document.src = wsh_serial_document_unserialize("data/wash/squares-anim.wash");
+	//document.src = wsh_serial_document_unserialize_file("data/wash/squares-anim.wash");
 
 	drw_setup(window_w, window_h);
 

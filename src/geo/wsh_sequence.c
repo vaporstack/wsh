@@ -10,6 +10,16 @@
 #include <assert.h>
 #include <math.h>
 
+
+static void shuffle(WSequence* seq, int pos)
+{
+	for (int i = seq->num_frames-1; i > pos; i--)
+	{
+		seq->frames[i] = seq->frames[i - 1];
+	}
+}
+
+
 void wsh_sequence_ensure_frame(WSequence* seq)
 {
 
@@ -54,7 +64,7 @@ void wsh_sequence_ensure_frame(WSequence* seq)
 static void _check_realloc(WSequence* seq)
 {
 
-	if (seq->num_frames == seq->reserved)
+	if (seq->num_frames >= seq->reserved)
 	{
 		seq->reserved *= 2;
 		seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->reserved);
@@ -72,7 +82,7 @@ static void _check_realloc(WSequence* seq)
 WSequence* wsh_sequence_create()
 {
 	WSequence* seq = malloc(sizeof(WSequence));
-
+	
 	// seq->frames = calloc(seq->reserved, sizeof(WObject));
 	seq->num_frames = 0;
 	seq->anim_type  = -1;
@@ -197,6 +207,31 @@ void wsh_sequence_frame_set(WSequence* seq, unsigned index)
 void wsh_sequence_frame_add(WSequence* seq)
 {
 
+
+	
+	int pos = seq->current_frame_index;
+#ifdef DEBUG
+	printf("add frame at %d\n", pos);
+#endif
+	seq->num_frames++;
+	_check_realloc(seq);
+
+	for ( unsigned long i = seq->num_frames-1; i > pos; i-- )
+	{
+		seq->frames[i] = seq->frames[i-1];
+	}
+	
+	pos++;
+	seq->frames[pos] = wsh_object_create();
+	seq->current_frame_index = pos;
+	seq->current_frame = seq->frames[pos];
+	
+	//pos++;
+	//shuffle(seq, pos);
+	
+	//seq->frames[pos] = wsh_object_create();
+	
+	/*
 	WObject* fr = wsh_object_create();
 
 	if (seq->current_frame_index == seq->num_frames - 1)
@@ -236,30 +271,34 @@ void wsh_sequence_frame_add(WSequence* seq)
 	}
 
 	seq->current_frame = seq->frames[seq->current_frame_index];
+*/
+	
 }
+
 
 void wsh_sequence_frame_duplicate(WSequence* seq)
 {
 
-	// int num = seq->num_frames;
 	int pos = seq->current_frame_index;
-
 	seq->num_frames++;
+	
 #ifdef DEBUG
-
 	printf("duplicate frame at %d\n", pos);
 #endif
+	
 	_check_realloc(seq);
 
 	WObject* orig = seq->frames[pos];
+	
 	//	new thingy
 	WObject* cpy = wsh_object_copy(orig);
-
+	
+	shuffle(seq, pos);
 	// move everything after n up
-	for (int i = seq->num_frames; i > pos; --i)
-	{
-		seq->frames[i] = seq->frames[i - 1];
-	}
+//	for (int i = seq->num_frames; i > pos; --i)
+//	{
+//		seq->frames[i] = seq->frames[i - 1];
+//	}
 
 	seq->frames[pos] = cpy;
 	pos++;
@@ -271,15 +310,15 @@ void wsh_sequence_frame_duplicate(WSequence* seq)
 void wsh_sequence_frame_insert(WSequence* seq)
 {
 
-	// int num = seq->num_frames;
 	int pos = seq->current_frame_index;
 
 	seq->num_frames++;
+	_check_realloc(seq);
 #ifdef DEBUG
 
 	printf("insert frame at %d\n", pos);
 #endif
-	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->num_frames);
+	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->reserved);
 
 	// move everything after n up
 	for (int i = seq->num_frames - 1; i > pos; --i)

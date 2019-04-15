@@ -23,7 +23,8 @@ WColor16    wsh_serial_json_unserialize_color16(cJSON* data);
 WObject*    wsh_serial_json_unserialize_object(cJSON* data);
 WSequence*  wsh_serial_json_unserialize_sequence(cJSON* data);
 const char* wsh_serial_json_document_serialize(WDocument*);
-WDocument*  wsh_serial_json_document_unserialize(const char* path);
+WDocument* wsh_serial_json_document_unserialize_text(const char* text);
+WDocument*  wsh_serial_json_document_unserialize_file(const char* path);
 void*	wsh_serial_json_document_unserialize_cjson(const char* path);
 
 #endif

@@ -17,7 +17,6 @@
 
 //static WDocumentHnd document;
 
-
 static void tablet_prox(int v)
 {
 	printf("got tablet prox? %d\n", v);
@@ -74,47 +73,45 @@ static void update(void)
 
 static void draw(void)
 {
-	int w = frame_w;
-	int h = frame_h;
+	int w  = frame_w;
+	int h  = frame_h;
 	int sx = w / TMP_ROWS;
 	int sy = h / TMP_COLS;
-	if ( !document.src )
+	if (!document.src)
 		return;
 	WSequence* seq = document.src->sequence.src;
-	int num = seq->num_frames;
-	int idx = 0;
-	
-	
-	for ( int y = 0; y < TMP_ROWS; y++)
+	int	num = seq->num_frames;
+	int	idx = 0;
+
+	for (int y = 0; y < TMP_ROWS; y++)
 	{
-		for(int x = 0; x < TMP_COLS; x++)
+		for (int x = 0; x < TMP_COLS; x++)
 		{
-			if ( idx > num )
+			if (idx > num)
 				continue;
 			int px = x * sx;
 			int py = y * sy;
-			
+
 			WObject* frame = seq->frames[idx];
 			//safety first!
-			if ( !frame )
+			if (!frame)
 			{
 				printf("ack! something went wrong!\n");
 				continue;
 			}
 			drw_push();
-			
-			drw_translate2f(px,py);
+
+			drw_translate2f(px, py);
 			drw_scale_u(sx);
 			drw_translate2f(frame->bounds.size.x * .5, frame->bounds.size.y * .5);
 
 			drw_wobject(frame);
-			drw_color(1,0,0,1);
+			drw_color(1, 0, 0, 1);
 			drw_rect(frame->bounds.pos.x, frame->bounds.pos.y, frame->bounds.pos.x + frame->bounds.size.x, frame->bounds.pos.y + frame->bounds.size.y);
-			
+
 			drw_pop();
-			
+
 			idx++;
-			
 		}
 	}
 }
@@ -135,30 +132,27 @@ static void drop(int num, const char** paths)
 		return;
 	}
 	printf("Drop sorta thing? %s\n", first);
-	
+
 	if(document.src)
 	{
 		wsh_document_destroy(document.src);
 		document.src = NULL;
 	}
-	document.src = wsh_serial_document_unserialize(first);
-	
+	document.src = wsh_serial_document_unserialize_file(first);
+
 	if ( !document.src->sequence.src)
 	{
 		printf("Load failed!\n");
 		return;
 	}
 	 */
-	
-	
-		//do_post_drop_quirks();
-	wsh_sequence_normalize(document.src->sequence.src);
 
+	//do_post_drop_quirks();
+	wsh_sequence_normalize(document.src->sequence.src);
 }
 
-
 WshDemo tiling =
-{
+    {
 	DEMO_NICENAME,
 	1.0 / 60.0,
 	init,
@@ -172,7 +166,6 @@ WshDemo tiling =
 	tablet_down,
 	tablet_motion,
 	tablet_drag,
-	drop
-};
+	drop};
 
 #endif

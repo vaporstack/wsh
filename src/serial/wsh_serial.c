@@ -30,10 +30,15 @@ char* w_create_version_string()
 	return buf;
 }
 
-WDocument* wsh_serial_document_unserialize(const char* path)
+WDocument* wsh_serial_document_unserialize_text(const char* text)
+{
+	return wsh_serial_json_document_unserialize_text(text);
+}
+
+WDocument* wsh_serial_document_unserialize_file(const char* path)
 {
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-	return wsh_serial_json_document_unserialize(path);
+	return wsh_serial_json_document_unserialize_file(path);
 #else
 	printf("Bottleneck interface not yet connected to anything! returning NULL\n");
 	return NULL;

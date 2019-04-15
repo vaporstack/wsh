@@ -344,9 +344,9 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	seq->current_frame_index = 0;  // TODO read this back in properly?
 	seq->num_golden_frames   = 20; // don't care right now
 	seq->golden_frames       = NULL;
-	struct WObject** frames;
+	//struct WObject** frames;
 
-	frames		   = calloc(num, sizeof(struct WObject*));
+	//frames		   = calloc(num, sizeof(struct WObject*));
 	seq->current_frame = NULL;
 	seq->parent	= NULL;
 
@@ -371,10 +371,10 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	for (int i = 0; i < num; ++i)
 	{
 		cJSON* jframe = cJSON_GetArrayItem(jframes, i);
-		frames[i]     = wsh_serial_json_unserialize_object(jframe);
+		seq->frames[i]     = wsh_serial_json_unserialize_object(jframe);
 	}
 
-	seq->frames	= frames;
+	//seq->frames	= frames;
 	seq->current_frame = seq->frames[seq->current_frame_index];
 
 	return seq;
@@ -969,10 +969,10 @@ WObject* wsh_serial_json_unserialize_object(cJSON* data)
 /*
  void* wsh_serial_document_unserialize_generic(const char* path)
  {
- return wsh_serial_document_unserialize(path);
+ return wsh_serial_document_unserialize_file(path);
  }
  */
-WDocument* wsh_serial_document_unserialize_v003(const char* path, cJSON* root)
+WDocument* wsh_serial_document_unserialize_v003(cJSON* root)
 {
 	WDocument* doc = wsh_document_create();
 
@@ -996,7 +996,8 @@ WDocument* wsh_serial_document_unserialize_v003(const char* path, cJSON* root)
 
 	return doc;
 }
-WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
+
+WDocument* wsh_serial_document_unserialize_v002( cJSON* root)
 {
 	WDocument* doc = wsh_document_create();
 
@@ -1037,7 +1038,7 @@ WDocument* wsh_serial_document_unserialize_v002(const char* path, cJSON* root)
 	return doc;
 }
 
-WDocument* wsh_serial_document_unserialize_v001(const char* path, cJSON* root)
+WDocument* wsh_serial_document_unserialize_v001(cJSON* root)
 {
 	wsh_log("Unserializing at v001");
 
@@ -1131,21 +1132,15 @@ static void wsh_serial_json_postprocess_document(WDocument* doc)
 	//}
 }
 
-WDocument* wsh_serial_json_document_unserialize(const char* path)
-{
-	WDocument* doc  = NULL;
-	char*      data = wsh_read_file_as_text_nc(path);
-	cJSON*     meta = NULL;
-	if (!data)
-	{
-		//char buf[256];
-		wsh_log("An error occurred reading text file: %s", path);
-		// l_warning(buf);
-		//free(data);
-		return NULL;
-	}
+static void unserialize(void);
 
+
+WDocument* wsh_serial_json_document_unserialize_text(const char* data)
+{
+	
 	cJSON* root = cJSON_Parse(data);
+	WDocument* doc  = NULL;
+	cJSON*     meta = NULL;
 
 	//	TODO read the version number and parse accordingly
 	cJSON* info = cJSON_GetObjectItem(root, "info");
@@ -1159,12 +1154,12 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 			fixup_old_style_version_string(working_version);
 			wsh_log("version detected: %s", working_version);
 		}
-		doc = wsh_serial_document_unserialize_v001(path, root);
+		doc = wsh_serial_document_unserialize_v001( root);
 	}
 	else
 	{
 		wsh_log("No 'info' suggesting schema 2 or higher, checking for meta.: %s", working_version);
-
+		
 		meta = cJSON_GetObjectItem(root, "meta");
 		if (!meta)
 		{
@@ -1172,7 +1167,7 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 		}
 		else
 		{
-
+			
 			cJSON* info = cJSON_GetObjectItem(meta, "info");
 			if (info)
 			{
@@ -1183,11 +1178,11 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 				fixup_old_style_version_string(working_version);
 				if (0 == strcmp(working_version, "0.0.2"))
 				{
-					doc = wsh_serial_document_unserialize_v002(path, root);
+					doc = wsh_serial_document_unserialize_v002( root);
 				}
 				else if (0 == strcmp(working_version, "0.0.3"))
 				{
-					doc = wsh_serial_document_unserialize_v003(path, root);
+					doc = wsh_serial_document_unserialize_v003( root);
 				}
 				else
 				{
@@ -1196,10 +1191,10 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 			}
 		}
 	}
-
+	
 	//if (meta)
 	//{
-
+	
 	wsh_serial_json_postprocess_document(doc);
 	//}
 	/*
@@ -1210,19 +1205,29 @@ WDocument* wsh_serial_json_document_unserialize(const char* path)
 	 wsh_log("version detected: %s", working_version);
 	 }
 	 */
-
+	
 	//	todo:
 	// 	for now, we depend on the sequence for our doc structure.  this
 	// may change.
-
+	
 	free(data);
-	//cJSON_Delete(root);
+	return doc;
+}
 
-	//cJSON* meta = (cJSON*) doc->meta;
+WDocument* wsh_serial_json_document_unserialize_file(const char* path)
+{
+	WDocument* doc  = NULL;
+	char*      data = wsh_read_file_as_text_nc(path);
+	
+	if (!data)
+	{
+		wsh_log("An error occurred reading text file: %s", path);
+		return NULL;
+	}
+	
+	return wsh_serial_json_document_unserialize_text(data);
+	
 
-	//cJSON* tval = cJSON_GetObjectItem(meta, "plugins");
-	//if ( tval )
-	//	printf("plugin type: %d\n", tval->type);
 	return doc;
 }
 

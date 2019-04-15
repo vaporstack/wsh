@@ -82,7 +82,7 @@ static void init(void)
 	//WDocumentHnd document;
 	wsh_demo_load_document("data/wash/hatching.wash");
 
-	//document.src = wsh_serial_document_unserialize("data/wash/hatching.wash");
+	//document.src = wsh_serial_document_unserialize_file("data/wash/hatching.wash");
 	//if (!document.src)
 	//{
 	//	printf("Load failed!\n");

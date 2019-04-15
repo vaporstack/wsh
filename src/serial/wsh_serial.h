@@ -11,7 +11,8 @@
 
 #include "../geo/wsh_document.h"
 
-WDocument*  wsh_serial_document_unserialize(const char* path);
+WDocument*  wsh_serial_document_unserialize_file(const char* path);
+WDocument*  wsh_serial_document_unserialize_text(const char* text);
 const char* wsh_serial_document_serialize(WDocument* doc);
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 //	this marks a bit of a paradigm shift, we are passing cjson as a void*

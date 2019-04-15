@@ -56,12 +56,12 @@ static void mouse_button(int button, int action, int mods)
 
 static void init(void)
 {
-	
+
 	wsh_demo_load_document("data/wash/squares-anim.wash");
-	
+
 	/*if (!document.src)
 	{
-		document.src = wsh_serial_document_unserialize();
+		document.src = wsh_serial_document_unserialize_file();
 		if (!document.src)
 		{
 			printf("Load failed!\n");
@@ -69,7 +69,7 @@ static void init(void)
 		}
 	}
 */
-	
+
 	printf("%s init!\n", DEMO_NICENAME);
 
 	//wsh_sequence_normalize(document.src->sequence.src);

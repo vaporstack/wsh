@@ -122,7 +122,7 @@ static int load_file(const char* path)
 		wsh_document_destroy(document.src);
 		document.src = NULL;
 	}
-	document.src = wsh_serial_document_unserialize(path);
+	document.src = wsh_serial_document_unserialize_file(path);
 	if (!document.src)
 	{
 		printf("Load failed!\n");
