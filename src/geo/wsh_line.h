@@ -32,6 +32,7 @@ typedef struct WLine
 	//bool		   has_stroke;
 	//bool		   has_fill;
 	int		   z;
+	unsigned long id;
 	unsigned long long num;
 	unsigned long long reserved;
 	WPoint*		   data;
@@ -58,14 +59,21 @@ typedef struct WLine
 typedef struct WLineHnd
 {
 	WLine* src;
-
+	
 } WLineHnd;
+
+typedef struct
+{
+	const WLine* src;
+	
+} WLineHndConst;
 
 typedef unsigned long long ull;
 
 WLineHnd* wsh_line_hnd_create(void);
 WLineHnd* wsh_line_hnd_create_with_data(void);
-WLineHnd* wsh_line_hnd_create_with_addr(WLine* addr);
+WLineHndConst wsh_line_hnd_create_with_addr(const WLine* addr);
+WLineHndConst* wsh_line_hnd_ptr_create_with_addr(const WLine* addr);
 
 WLineHnd* wsh_line_hnd_copy(WLineHnd*);
 
@@ -89,8 +97,8 @@ void   wsh_line_find_maxs(WLine* src, double* x, double* y);
 WLine* wsh_line_create(void);
 WLine* wsh_line_create_with_reserved(unsigned int num);
 WLine* wsh_line_reverse(WLine*);
-WLine* wsh_line_copy(WLine*);
-WLine* wsh_line_copy_percentage(WLine*, double v);
+WLine* wsh_line_copy(const WLine*);
+WLine* wsh_line_copy_percentage(const WLine*, double v);
 void   wsh_line_concat(WLine* dst, WLine* src);
 void   wsh_line_concat_range(WLine* dst, WLine* src, long start, long end);
 WPoint* wsh_line_pop_back(WLine* line);

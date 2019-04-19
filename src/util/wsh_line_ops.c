@@ -71,6 +71,9 @@ bool wsh_line_ops_subdivide_needed(WLine* line, double delta)
 	{
 		WPoint* a = &line->data[i];
 		WPoint* b = &line->data[i + 1];
+		if (!a || !b )
+			continue;
+		
 		if (wsh_dist2d_wp(a, b) > delta)
 			return true;
 	}

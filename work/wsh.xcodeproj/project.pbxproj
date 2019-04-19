@@ -442,7 +442,6 @@
 			files = (
 				5778581020AA828600218129 /* wsh_rect.c in Sources */,
 				577857FC20AA828600218129 /* wsh_sequence_ops.c in Sources */,
-				5778582220AA828600218129 /* wsh_serial_bin.c in Sources */,
 				577857F420AA828600218129 /* wsh_color.c in Sources */,
 				577D30562220861F0019435B /* wsh_log.c in Sources */,
 				5778582520AA828600218129 /* wsh_lib.c in Sources */,
@@ -454,13 +453,9 @@
 				5778580820AA828600218129 /* wsh_point.c in Sources */,
 				5778581120AA828600218129 /* wsh_object.c in Sources */,
 				577857F720AA828600218129 /* wsh_tool.c in Sources */,
-				5778582120AA828600218129 /* wsh_serial_json_wsh_tool.c in Sources */,
-				5778582020AA828600218129 /* wsh_serial.c in Sources */,
 				577D3052222084970019435B /* wsh_tagdb.c in Sources */,
 				5778580420AA828600218129 /* wsh_color.c in Sources */,
 				5778580E20AA828600218129 /* wsh_transform.c in Sources */,
-				5778582320AA828600218129 /* wsh_serial_json.c in Sources */,
-				57D5AEA920D85D5E001736EF /* wsh_serial_svg.c in Sources */,
 				577857FE20AA828600218129 /* wsh_ops_point.c in Sources */,
 				5778580620AA828600218129 /* wsh_layer.c in Sources */,
 				5778580220AA828600218129 /* wsh_io.c in Sources */,
@@ -473,6 +468,11 @@
 				5778582420AA828600218129 /* wsh_session.c in Sources */,
 				577857FB20AA828600218129 /* wsh_anl.c in Sources */,
 				5778580920AA828600218129 /* wsh_document.c in Sources */,
+				5778582220AA828600218129 /* wsh_serial_bin.c in Sources */,
+				5778582120AA828600218129 /* wsh_serial_json_wsh_tool.c in Sources */,
+				5778582320AA828600218129 /* wsh_serial_json.c in Sources */,
+				57D5AEA920D85D5E001736EF /* wsh_serial_svg.c in Sources */,
+				5778582020AA828600218129 /* wsh_serial.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,9 +35,16 @@ WLineHnd* wsh_line_hnd_create_with_data(void)
 	return hnd;
 }
 
-WLineHnd* wsh_line_hnd_create_with_addr(WLine* addr)
+WLineHndConst wsh_line_hnd_create_with_addr(const WLine* addr)
 {
-	WLineHnd* hnd = calloc(1, sizeof(WLineHnd));
+	WLineHndConst hnd;
+	hnd.src      = addr;
+	return hnd;
+}
+
+WLineHndConst* wsh_line_hnd_ptr_create_with_addr(const WLine* addr)
+{
+	WLineHndConst* hnd= calloc(1, sizeof(WLineHndConst));
 	hnd->src      = addr;
 	return hnd;
 }
@@ -52,25 +59,25 @@ void wsh_line_destroy(WLine* line)
 #endif
 		return;
 	}
-	
+
 	if (line->fill)
 		free(line->fill);
 	if (line->stroke)
 		free(line->stroke);
 	if (line->data != NULL)
 		free(line->data);
-	
+
 	//	line->num      = 0;
 	//	line->reserved = 0;
 	//	line->data     = NULL;
-	
+
 	free(line);
 }
 
 WLineHnd* wsh_line_hnd_copy(WLineHnd* hnd)
 {
 	// todo implement this
-	
+
 	exit(-999);
 	return NULL;
 }
@@ -85,10 +92,10 @@ WLine* wsh_line_create(void)
 {
 	WLine* l = calloc(1, sizeof(WLine));
 
-	l->data       = 0;
-	l->num	= 0;
-	l->reserved   = 0;
-	
+	l->data     = 0;
+	l->num      = 0;
+	l->reserved = 0;
+
 	//l->has_fill   = false;
 	//l->has_stroke = false;
 	//l->tess       = NULL;
@@ -100,8 +107,8 @@ WLine* wsh_line_create(void)
 	b.pos.x = b.pos.y = b.size.x = b.size.y = 0;
 	b.pos.x = b.pos.y = INFINITY;
 	b.size.x = b.size.y = -INFINITY;
-	
-	l->bounds				= b;
+
+	l->bounds = b;
 
 	/*
 	 WTransform t;
@@ -134,9 +141,9 @@ void wsh_line_calc_bounds(WLine* src)
 	for (int i = 0; i < src->num; ++i)
 	{
 
-		WPoint* p = &src->data[i];
-		double  x = p->x;
-		double  y = p->y;
+		WPoint p = src->data[i];
+		double  x = p.x;
+		double  y = p.y;
 
 		if (x < minx)
 			minx = x;
@@ -258,7 +265,7 @@ void wsh_line_concat_range(WLine* dst, WLine* src, long start, long end)
 	}
 }
 
-WLine* wsh_line_copy(WLine* old)
+WLine* wsh_line_copy(const WLine* old)
 {
 
 	if (old == NULL)
@@ -276,16 +283,16 @@ WLine* wsh_line_copy(WLine* old)
 		return NULL;
 	}
 
-	WLine* new      = wsh_line_create();
-	new->num	= old->num;
-	new->reserved   = old->reserved;
-	new->width = old->width;
-	new->data       = calloc(new->reserved, sizeof(WPoint)); //(sizeof *new->data) * new->reserved);
+	WLine* new    = wsh_line_create();
+	new->num      = old->num;
+	new->reserved = old->reserved;
+	new->width    = old->width;
+	new->data     = calloc(new->reserved, sizeof(WPoint)); //(sizeof *new->data) * new->reserved);
 	//new->has_fill   = old->has_fill;
 	//new->has_stroke = old->has_stroke;
 	//new->stroke     = old->stroke;
 	//new->fill       = old->fill;
-	if ( old->stroke )
+	if (old->stroke)
 	{
 		new->stroke = calloc(1, sizeof(WColor16));
 		memcpy(new->stroke, old->stroke, sizeof(WColor16));
@@ -295,10 +302,10 @@ WLine* wsh_line_copy(WLine* old)
 		new->fill = calloc(1, sizeof(WColor16));
 		memcpy(new->fill, old->fill, sizeof(WColor16));
 	}
-	new->closed     = old->closed;
+	new->closed = old->closed;
 	//new->fill       = old->fill;
 	//new->stroke     = old->stroke;
-	new->bounds     = old->bounds;
+	new->bounds = old->bounds;
 	for (int i = 0; i < new->num; ++i)
 	{
 
@@ -322,7 +329,7 @@ WLine* wsh_line_copy(WLine* old)
 	return new;
 }
 
-WLine* wsh_line_copy_percentage(WLine* old, double v)
+WLine* wsh_line_copy_percentage(const WLine* old, double v)
 {
 	if (old == NULL)
 	{
@@ -343,16 +350,26 @@ WLine* wsh_line_copy_percentage(WLine* old, double v)
 	//new->num	= old->num;
 	//new->reserved   = old->reserved;
 	//new->data       = malloc((sizeof *new->data) * new->reserved);
-//	new->has_fill   = old->has_fill;
-//	new->has_stroke = old->has_stroke;
-//	new->stroke     = old->stroke;
-//	new->fill       = old->fill;
-	new->closed     = old->closed;
-//	new->fill       = old->fill;
-//	new->stroke     = old->stroke;
-	memcpy(new->stroke, old->stroke, sizeof(WColor));
-	memcpy(new->fill, old->fill, sizeof(WColor));
-	
+	//	new->has_fill   = old->has_fill;
+	//	new->has_stroke = old->has_stroke;
+	//	new->stroke     = old->stroke;
+	//	new->fill       = old->fill;
+	new->closed = old->closed;
+	//	new->fill       = old->fill;
+	//	new->stroke     = old->stroke;'
+	if (old->stroke)
+	{
+		new->stroke = malloc(sizeof(WColor16));
+		memcpy(new->stroke, old->stroke, sizeof(WColor16));
+		
+	}
+	if (old->fill)
+	{
+		new->fill = malloc(sizeof(WColor16));
+		memcpy(new->fill, old->fill, sizeof(WColor16));
+
+	}
+
 	for (int i = 0; i < old->num; ++i)
 	{
 
@@ -393,9 +410,19 @@ WLine* wsh_line_reverse(WLine* old)
 	//new->has_stroke = old->has_stroke;
 	//new->stroke     = old->stroke;
 	//new->fill       = old->fill;
-	memcpy(new->stroke, old->stroke, sizeof(WColor));
-	memcpy(new->fill, old->fill, sizeof(WColor));
-	new->closed     = old->closed;
+	if ( old->stroke )
+	{
+		new->stroke = malloc(sizeof(WColor16));
+		memcpy(new->stroke, old->stroke, sizeof(WColor16));
+	}
+	if ( old->fill )
+	{
+		
+		new->fill = malloc(sizeof(WColor16));
+		memcpy(new->fill, old->fill, sizeof(WColor16));
+	}
+
+	new->closed = old->closed;
 	//new->fill       = old->fill;
 	//new->stroke     = old->stroke;
 
@@ -409,24 +436,23 @@ WLine* wsh_line_reverse(WLine* old)
 
 void wsh_line_copy_attribs(WLine* to, WLine* from)
 {
-	if ( from->stroke)
+	if (from->stroke)
 	{
 		to->stroke = malloc(sizeof(WColor16));
 		memcpy(to->stroke, from->stroke, sizeof(WColor16));
-
 	}
-	if ( from->fill )
+	if (from->fill)
 	{
 		to->fill = malloc(sizeof(WColor16));
 		memcpy(to->fill, from->fill, sizeof(WColor16));
 	}
-	
+
 	//to->has_stroke = from->has_stroke;
 	//to->has_fill   = from->has_fill;
 	//to->stroke     = from->stroke;
 	//to->fill       = from->fill;
-	
-	to->closed     = from->closed;
+
+	to->closed = from->closed;
 	//	todo : copy brush here too?  other stuff?
 }
 
@@ -503,7 +529,7 @@ void wsh_line_move(WLine* line, double x, double y)
 	}
 	//	todo: take a stance on whether these methods should implicitly
 	//	recalculate bounds or if that's wasteful and up to the user
-	wsh_line_calc_bounds(line);
+	//wsh_line_calc_bounds(line);
 }
 
 void wsh_line_scale(WLine* line, double x, double y)
@@ -759,16 +785,16 @@ void wsh_line_normalize_inplace(WLine* l, double* o_dx, double* o_dy)
 double wsh_line_sum(WLine* line)
 {
 	double r = 0;
-	if ( line->num < 2 )
+	if (line->num < 2)
 	{
 #ifdef DEBUG
 		wsh_log("Can't call sum, line is degenerate.");
 #endif
 		return 0;
 	}
-	for (unsigned long long i = 0 , n = -1 + line->num; i < n; i++ )
+	for (unsigned long long i = 0, n = -1 + line->num; i < n; i++)
 	{
-		r += wsh_dist2d_wp(&line->data[i], &line->data[i+1]);
+		r += wsh_dist2d_wp(&line->data[i], &line->data[i + 1]);
 	}
 	return r;
 }
