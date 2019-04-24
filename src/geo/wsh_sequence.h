@@ -56,10 +56,23 @@ void wsh_sequence_ensure_frame(WSequence* seq);
 void wsh_sequence_frame_set(WSequence*, unsigned index);
 void wsh_sequence_frame_next(WSequence* seq);
 void wsh_sequence_frame_prev(WSequence* seq);
-void wsh_sequence_frame_add(WSequence* seq);
-void wsh_sequence_frame_insert(WSequence* seq);
-void wsh_sequence_frame_delete(WSequence* seq);
 
+/*
+ *	add a frame after the current frame
+ */
+void wsh_sequence_frame_add(WSequence* seq);
+
+/*
+ *	add a frame at an arbitrary index
+ */
+void wsh_sequence_frame_insert(WSequence* seq);
+
+/*
+ *	add a frame at an arbitrary location
+ */
+//void wsh_sequence_frame_insert_index(WSequence* seq, unsigned int );
+
+void wsh_sequence_frame_delete(WSequence* seq);
 void wsh_sequence_frame_duplicate(WSequence* seq);
 
 void wsh_sequence_calc_bounds(WSequence* seq);

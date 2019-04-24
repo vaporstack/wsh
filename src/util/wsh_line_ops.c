@@ -429,6 +429,7 @@ double wsh_line_ops_sum(WLine* line)
 	return r;
 }
 
+
 bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 {
 	for (int i = 0; i < line->num; ++i)

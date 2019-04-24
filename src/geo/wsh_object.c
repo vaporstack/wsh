@@ -104,7 +104,7 @@ void wsh_object_add_line(WObject* obj, WLine* line)
 	obj->lines[obj->num - 1] = line;
 }
 
-void wsh_object_remove_line(WObject* obj, WLine* line)
+WLine* wsh_object_remove_line(WObject* obj, WLine* line)
 {
 	int idx = -1;
 	for (int i = 0; i < obj->num; i++)
@@ -121,18 +121,23 @@ void wsh_object_remove_line(WObject* obj, WLine* line)
 #ifdef DEBUG
 		wsh_log("Error, did not find requested line.\n");
 #endif
-		return;
+		return NULL;
 	}
 #ifdef DEBUG
 	wsh_log("found line %d\n", idx);
 #endif
+	WLine* pop = obj->lines[idx];
 	for (int i = idx; i < obj->num - 1; i++)
 	{
 #ifdef DEBUG
 		wsh_log("Shuffling %d tp %d.\n", i + 1, i);
 #endif
+		obj->lines[i] = obj->lines[i+1];
 	}
+	
+	
 	obj->num--;
+	return pop;
 }
 
 /*

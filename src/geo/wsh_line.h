@@ -53,6 +53,7 @@ typedef struct WLine
 	WColor16* fill;
 	WColor16* stroke;
 	WRect    bounds;
+	unsigned long seed;
 	//WTransform transform;
 } WLine;
 

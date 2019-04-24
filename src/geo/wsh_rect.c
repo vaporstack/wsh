@@ -38,8 +38,8 @@ void wsh_rect_reset(WRect* bounds)
 	bounds->size.y = 0;
 }
 
+
 int wsh_rect_within_bounds(WRect* bounds, double x, double y)
 {
-
 	return (x >= bounds->pos.x && y >= bounds->pos.y && x <= bounds->pos.x + bounds->size.x && y <= bounds->pos.y + bounds->size.y);
 }

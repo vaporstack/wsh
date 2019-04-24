@@ -206,25 +206,30 @@ void wsh_sequence_frame_set(WSequence* seq, unsigned index)
 
 void wsh_sequence_frame_add(WSequence* seq)
 {
-
-
+	
+	//	sequence is 0 to N
 	
 	int pos = seq->current_frame_index;
 #ifdef DEBUG
 	printf("add frame at %d\n", pos);
 #endif
+	
+	//	sequences is 0 to n+1
 	seq->num_frames++;
 	_check_realloc(seq);
 
-	for ( unsigned long i = seq->num_frames-1; i > pos; i-- )
+	//	shuffle everything + 1
+	for ( unsigned long i = seq->num_frames - 1; i > pos; i-- )
 	{
-		seq->frames[i] = seq->frames[i-1];
+		seq->frames[i+1] = seq->frames[i];
+		//printf("shuffling %lu to %lu\n", i+1, i);
 	}
 	
 	pos++;
-	seq->frames[pos] = wsh_object_create();
 	seq->current_frame_index = pos;
-	seq->current_frame = seq->frames[pos];
+	seq->frames[pos] = seq->current_frame = wsh_object_create();
+	
+	// seq->frames[pos];
 	
 	//pos++;
 	//shuffle(seq, pos);
@@ -306,6 +311,33 @@ void wsh_sequence_frame_duplicate(WSequence* seq)
 	seq->current_frame       = seq->frames[seq->current_frame_index];
 	wsh_sequence_ensure_frame(seq);
 }
+
+void wsh_sequence_frame_insert_index(WSequence* seq, unsigned int idx)
+{
+	
+	//int pos = seq->current_frame_index;
+	
+	seq->num_frames++;
+	_check_realloc(seq);
+#ifdef DEBUG
+	
+	printf("insert frame at %d\n", idx);
+#endif
+	seq->frames = realloc(seq->frames, sizeof(WObject*) * seq->reserved);
+	
+	// move everything after n up
+	for (int i = seq->num_frames - 1; i > idx; --i)
+	{
+		seq->frames[i] = seq->frames[i - 1];
+	}
+	
+	seq->frames[idx] = wsh_object_create();
+	idx++;
+	seq->current_frame_index = idx + 1;
+	seq->current_frame       = seq->frames[seq->current_frame_index];
+	wsh_sequence_ensure_frame(seq);
+}
+
 
 void wsh_sequence_frame_insert(WSequence* seq)
 {
