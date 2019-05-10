@@ -211,7 +211,7 @@ void wsh_sequence_frame_add(WSequence* seq)
 	
 	int pos = seq->current_frame_index;
 #ifdef DEBUG
-	printf("add frame at %d\n", pos);
+	//printf("add frame at %d\n", pos);
 #endif
 	
 	//	sequences is 0 to n+1
@@ -228,6 +228,7 @@ void wsh_sequence_frame_add(WSequence* seq)
 	pos++;
 	seq->current_frame_index = pos;
 	seq->frames[pos] = seq->current_frame = wsh_object_create();
+	
 	
 	// seq->frames[pos];
 	

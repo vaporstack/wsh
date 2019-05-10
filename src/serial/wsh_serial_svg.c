@@ -110,8 +110,8 @@ const char* wsh_serial_svg_document_serialize(WDocument* doc)
 {
 
 	WDocumentMeta meta = doc->meta;
-	int	   w    = doc->meta.canvas_width;
-	int	   h    = doc->meta.canvas_height;
+//	int	   w    = doc->meta.canvas_width;
+//	int	   h    = doc->meta.canvas_height;
 	const char*   path = meta.path;
 
 	printf("Exporting svg for document: %s\n", path);

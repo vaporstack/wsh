@@ -446,7 +446,7 @@ void wsh_object_time_normalize_exploded(WObject* obj)
 
 	//unsigned long long longest = 0;
 	double longest_duration = -INFINITY;
-	double longest_start    = -INFINITY;
+	//double longest_start    = -INFINITY;
 	//double longest_end = -INFINITY;
 	//double leader = -INFINITY;
 	for (int j = 0; j < obj->num; j++)
