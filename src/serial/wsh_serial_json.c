@@ -572,7 +572,7 @@ cJSON* wsh_serial_json_serialize_meta_v0_0_3(WDocumentMeta* meta)
 
 int wsh_serial_json_unserialize_meta_v0_0_3(cJSON* data, WDocumentMeta* meta)
 {
-	wsh_log("Unserializing meta!? 03et");
+	//wsh_log("Unserializing meta!? 0.0.3");
 	cJSON* session = cJSON_GetObjectItem(data, "session");
 	cJSON* plugins = cJSON_GetObjectItem(data, "plugins");
 	if ( plugins )
