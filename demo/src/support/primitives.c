@@ -317,7 +317,7 @@ void drw_wline(WLine* l)
 
 	//if (!color_bypass)
 	//{
-	if (l->has_stroke)
+	if (l->stroke)
 	{
 		//WColor16 c = l->stroke;
 		//drw_color(c.r, c.g, c.b, c.a * alpha_mult);
@@ -331,7 +331,7 @@ void drw_wline(WLine* l)
 		drw_poly(l);
 		//drw_fill_pop();
 	}
-	if (l->has_stroke)
+	if (l->stroke)
 	{
 		//r_alpha_pop();
 	}
