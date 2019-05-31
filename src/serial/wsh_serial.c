@@ -8,13 +8,12 @@
 
 #include "wsh_serial.h"
 
-#include <wsh/wsh_internal.h>
-
+//#include <wsh/wsh_internal.h>
+#include <wsh/wsh_config.h>
 #include "wsh_serial_bin.h"
 #include <wsh/wsh.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-
 #include "wsh_serial_json.h"
 #endif
 

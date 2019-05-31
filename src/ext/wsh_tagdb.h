@@ -9,7 +9,8 @@
 #ifndef wsh_tagdb_h
 #define wsh_tagdb_h
 
-#include "../../wsh_internal.h"
+#include "../../../wsh_config.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
