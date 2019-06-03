@@ -11,7 +11,7 @@
 
 //#define WSH_ENABLE_SERIAL_BACKEND_SVG
 
-#include "../wsh_config.h"
+#include <wsh/wsh_config.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_SVG
 

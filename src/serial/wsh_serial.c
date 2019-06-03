@@ -31,7 +31,13 @@ char* w_create_version_string()
 
 WDocument* wsh_serial_document_unserialize_text(const char* text)
 {
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 	return wsh_serial_json_document_unserialize_text(text);
+#else
+	printf("No unserialization backends provided.\n");
+	return NULL;
+#endif
+	
 }
 
 WDocument* wsh_serial_document_unserialize_file(const char* path)
