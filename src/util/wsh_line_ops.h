@@ -40,6 +40,14 @@ WLine* wsh_line_ops_smooth(WLine* line, double delta);
 WLine* wsh_line_ops_simplify(WLine* line, double delta);
 WLine* wsh_line_ops_douglaspeucker(WLine* line, double delta);
 
+/*
+*
+*	return an imitation of the input line
+*
+*/
+
+WLine* wsh_line_imitate(WLine* line, double time_variance, double dist_variance);
+
 /**
  *
  *	return the angle of the start and end points of the line

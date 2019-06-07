@@ -9,5 +9,6 @@
 #ifndef wsh_config_h
 #define wsh_config_h
 
-
+#define WSH_ENABLE_SERIAL_BACKEND_JSON
+ 
 #endif /* wsh_config_h */
