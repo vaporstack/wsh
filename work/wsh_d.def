@@ -30,7 +30,7 @@ EXPORTS
 	wsh_line_hnd_destroy
 	wsh_line_normalize
 	wsh_line_normalize_inplace
-	wsh_line_move
+	wsh_line_translate
 	wsh_line_scale
 	*w_node_create
 	w_node_destroy
@@ -94,7 +94,7 @@ EXPORTS
 	wsh_line_ops_dedupe
 	wsh_line_ops_douglaspeucker
 	wsh_line_ops_simplify
-	wsh_line_ops_smooth
+	wsh_line_ops_smooth_inplace
 	wsh_line_ops_subdivide
 	wsh_line_ops_sum
 	w_triangle_test

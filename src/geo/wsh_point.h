@@ -69,6 +69,21 @@ WPoint* wsh_point_copy(WPoint* p);
  *
  *
  */
+void wsh_point_copy_attrs(WPoint* dst, WPoint* src);
+
+/**
+ *
+ *
+ *
+ */
 void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_degrees);
+
+/**
+ *
+ *
+ *
+ */
+
+WPoint wsh_point_calculate_perpendicular_on_line_segment(WPoint a, WPoint b, WPoint c);
 
 #endif /* wsh_point_h */

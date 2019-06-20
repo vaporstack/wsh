@@ -17,10 +17,10 @@ typedef struct WSequence
 	unsigned reserved;
 	unsigned num_frames;
 	signed current_frame_index;
-	unsigned num_golden_frames;
-
-	int* golden_frames;
-
+	
+	//unsigned num_golden_frames;
+	//int* golden_frames;
+	
 	struct WObject** frames;
 	struct WObject*  current_frame;
 	struct WObject*  parent;

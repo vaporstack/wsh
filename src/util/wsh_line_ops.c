@@ -33,19 +33,22 @@ WLine* wsh_line_ops_dedupe(WLine* line)
 	double px, py;
 	px = py = -INFINITY;
 
-	for (unsigned long long i = 0; i < line->num; ++i) {
+	for (unsigned long long i = 0; i < line->num; ++i)
+	{
 		WPoint p = line->data[i];
 		if (p.x == px && p.y == py)
 			continue;
 
 		//	todo:  add check for first and last being the same
 		//	todo: added below, debug it?
-		if (i == line->num - 1) {
+		if (i == line->num - 1)
+		{
 			//	this is the last point,
 			//	check it against the first
 
 			WPoint first = deduped->data[0];
-			if (first.x == p.x && first.y == p.y) {
+			if (first.x == p.x && first.y == p.y)
+			{
 				//	first
 				continue;
 			}
@@ -64,7 +67,8 @@ WLine* wsh_line_ops_dedupe(WLine* line)
 
 bool wsh_line_ops_subdivide_needed(WLine* line, double delta)
 {
-	for (unsigned long i = 0; i < line->num - 1; i++) {
+	for (unsigned long i = 0; i < line->num - 1; i++)
+	{
 		WPoint* a = &line->data[i];
 		WPoint* b = &line->data[i + 1];
 		if (!a || !b)
@@ -81,14 +85,16 @@ WLine* wsh_line_ops_subdivide(WLine* line, double delta)
 	WLine* res = wsh_line_create();
 	wsh_line_add_point(res, line->data[0]);
 
-	for (int i = 0; i < line->num - 1; i++) {
+	for (int i = 0; i < line->num - 1; i++)
+	{
 		WPoint* a	= &line->data[i];
 		WPoint* b	= &line->data[i + 1];
 		double  distance = wsh_dist2d_p(a, b);
 
 		//	distance is less than our desired segmentation,
 		//	append and proceed
-		if (distance <= delta) {
+		if (distance <= delta)
+		{
 			wsh_line_add_point(res, *b);
 			continue;
 		}
@@ -99,7 +105,8 @@ WLine* wsh_line_ops_subdivide(WLine* line, double delta)
 		//double frac = 1./num_required;
 		//double angle = wsh_angle_from_points_p(a, b);
 
-		if (num_required == 0) {
+		if (num_required == 0)
+		{
 			wsh_line_add_point(res, *b);
 			continue;
 		}
@@ -107,7 +114,8 @@ WLine* wsh_line_ops_subdivide(WLine* line, double delta)
 
 		//	TODO: danger? we are synthesizing data here.
 
-		for (int j = 1; j < num_required; j++) {
+		for (int j = 1; j < num_required; j++)
+		{
 			double t = ((double)j) / num_required;
 			double x = a->x * (1 - t) + b->x * t;
 			double y = a->y * (1 - t) + b->y * t;
@@ -141,6 +149,7 @@ static double angle_from_points(double ax, double ay, double bx, double by)
 }
 */
 
+/*
 static inline double angle_from_points(double x1, double y1, double x2, double y2)
 {
 	double dx    = x2 - x1;
@@ -148,12 +157,12 @@ static inline double angle_from_points(double x1, double y1, double x2, double y
 	double angle = atan2(dy, dx);
 	// return atan2(dy, dx);
 
-	/*
+ 
 	if (dy < 0)
 	{
 		angle += 1.0 * (double)M_PI;
 	}
-	*/
+ 
 	return angle;
 }
 
@@ -164,7 +173,8 @@ static inline double angle_from_points_degrees(double x1, double y1, double x2, 
 	double angle = atan2(dy, dx);
 	// return atan2(dy, dx);
 
-	if (dy < 0) {
+	if (dy < 0)
+	{
 		angle += 2 * (float)M_PI;
 	}
 	// map to [0, 1] range
@@ -173,21 +183,24 @@ static inline double angle_from_points_degrees(double x1, double y1, double x2, 
 	angle -= 270;
 	return angle;
 }
+*/
 
 double wsh_line_ops_angle(WLine* line)
 {
-	if (line->num < 2) {
+	if (line->num < 2)
+	{
 		wsh_log("Can't angle this line, not enough points!");
 		return -1;
 	}
 	WPoint a = line->data[0];
 	WPoint b = line->data[line->num - 1];
-	return angle_from_points(a.x, a.y, b.x, b.y);
+	return wsh_angle_from_points(a.x, a.y, b.x, b.y);
 }
 
 double wsh_line_ops_length_simple(WLine* line)
 {
-	if (line->num < 2) {
+	if (line->num < 2)
+	{
 		wsh_log("Can't length this line, not enough points!");
 		return -1;
 	}
@@ -197,20 +210,84 @@ double wsh_line_ops_length_simple(WLine* line)
 	return wsh_ops_point_dist(a, b);
 }
 
-WLine* wsh_line_ops_straighten(WLine* line)
+#include "wsh_math.h"
+
+static double lerp(double* a, double* b, double amt)
 {
-	if (line->num < 2) {
+	double d = *b - *a;
+	return *a + (d * amt);
+}
+
+WLine* wsh_line_ops_straighten_bruteforce(WLine* line, double theta)
+{
+	if (line->num < 2)
+	{
 		wsh_log("Can't straighten this line, not enough points!");
 		return NULL;
 	}
-	//WPoint a = line->data[0];
-	//WPoint b = line->data[line->num - 1];
 
-	//	todo:
-	//	implement this
+	WLine* res = wsh_line_create();
 
-	return NULL;
+	WPoint a = line->data[0];
+	WPoint b = line->data[line->num - 1];
+
+	for (int i = 0; i < line->num; i++)
+	{
+		WPoint p   = line->data[i];
+		WPoint prj = wsh_point_calculate_perpendicular_on_line_segment(a, b, p);
+		double x   = lerp(&p.x, &prj.x, theta);
+
+		double y = lerp(&p.y, &prj.y, theta);
+		wsh_point_copy_attrs(&prj, &p);
+		prj.x = x;
+		prj.y = y;
+		//		prj.pressure = p.pressure;
+
+		wsh_line_add_point(res, prj);
+	}
+
+	return res;
 }
+
+
+
+WLine* wsh_line_ops_remap(WLine* src, WLine* dst)
+{
+	WLine* res = wsh_line_copy(src);
+	
+	//CPoint ca;
+	wsh_line_calc_bounds(src);
+	WPoint ca;
+	ca.x = src->bounds.pos.x + src->bounds.size.x * .5;
+	ca.y = src->bounds.pos.y + src->bounds.size.y * .5;
+	
+	
+	wsh_line_calc_bounds(dst);
+	WPoint cb;
+	cb.x = dst->bounds.pos.x + dst->bounds.size.x * .5;
+	cb.y = dst->bounds.pos.y + dst->bounds.size.y * .5;
+	
+	WPoint sa = src->data[0];
+	WPoint sb = dst->data[0];
+	
+	
+	//	angle between center and first point for src
+	double anga = wsh_angle_from_points_wp(ca, sa);
+	
+	//	angle between center and first point for dst
+	double angb = wsh_angle_from_points_wp(cb, sb);
+	
+	double delta = anga - angb;
+	wsh_line_rotate(res, cb.x, cb.y, delta);
+	
+	double dx = cb.x - ca.x;
+	double dy = cb.y - ca.y;
+	
+	wsh_line_translate(res, dx, dy);
+	
+	return res;
+}
+
 
 /*
  final float weight = 18;
@@ -232,23 +309,23 @@ WLine* wsh_line_ops_straighten(WLine* line)
 //	todo: this r parameter is completely ignored, lol
 //	also it returns nothing so why does it have a WLine return type lol
 //	wtfffffff andrew
-WLine* wsh_line_ops_smooth(WLine* line, double r)
+
+void wsh_line_ops_smooth_inplace(WLine* line, double r)
 {
 	double		 weight		 = r;
 	double		 scale		 = 1.0 / (weight + 2);
 	signed long long nPointsMinusTwo = line->num - 2;
 	if (!line->data)
-		return NULL;
+		return ;
 
-	for (int i = 1; i < nPointsMinusTwo; i++) {
+	for (int i = 1; i < nPointsMinusTwo; i++)
+	{
 		WPoint* lower  = &line->data[i - 1];
 		WPoint* center = &line->data[i];
 		WPoint* upper  = &line->data[i + 1];
 		center->x      = (lower->x + weight * center->x + upper->x) * scale;
 		center->y      = (lower->y + weight * center->y + upper->y) * scale;
 	}
-
-	return NULL;
 }
 
 static double perp_dist(WPoint p, WPoint a, WPoint b)
@@ -273,13 +350,18 @@ static double perp_dist(WPoint p, WPoint a, WPoint b)
 
 	double xx, yy;
 
-	if (param < 0) {
+	if (param < 0)
+	{
 		xx = x1;
 		yy = y1;
-	} else if (param > 1) {
+	}
+	else if (param > 1)
+	{
 		xx = x2;
 		yy = y2;
-	} else {
+	}
+	else
+	{
 		xx = x1 + param * C;
 		yy = y1 + param * D;
 	}
@@ -294,17 +376,24 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 	double		   dmax  = 0;
 	int		   index = 0;
 	unsigned long long num   = line->num;
-	for (int i = 1; i < num - 1; ++i) {
+	if ( line->num == 0)
+		return wsh_line_copy(line);
+	
+	for (int i = 1; i < num - 1; ++i)
+	{
 		WPoint p = line->data[i];
 		WPoint a = line->data[0];
 		WPoint b = line->data[num - 1];
 		double d = perp_dist(p, a, b);
-		if (d > dmax) {
+		if (d > dmax)
+		{
 			index = i;
 			dmax  = d;
 		}
 	}
-	if (dmax > e) {
+	
+	if (dmax > e)
+	{
 
 		// printf("dm: %f\n", dmax);
 
@@ -314,11 +403,14 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 		WLine* l1 = wsh_line_ops_douglaspeucker(s1, e);
 
 		WLine* s2 = wsh_line_create();
-		wsh_line_concat_range(s2, line, index, num);
+		wsh_line_concat_range(s2, line, index+1, num);
 		WLine* l2 = wsh_line_ops_douglaspeucker(s2, e);
-
-		wsh_line_concat(res, l1);
-		wsh_line_concat(res, l2);
+		
+		//wsh_line_pop_back(l1);
+		if (l1)
+			wsh_line_concat(res, l1);
+		if (l2)
+			wsh_line_concat(res, l2);
 
 		free(s1);
 		free(s2);
@@ -328,9 +420,12 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 		// wsh_line_concat(res, line, index, num);
 		// WLine* l1 = //wsh_line_ops_douglaspeucker(<#WLine *line#>, e)
 		// if ( DEBUG_LINE_OPS )
-		//	printf("%llu -> %llu\n", line->num, res->num );
+		//printf("%llu -> %llu\n", line->num, res->num );
 		return res;
-	} else {
+	}
+	else
+	{
+		//	we cannot simplify any more!
 		WLine* res = wsh_line_create();
 		wsh_line_concat(res, line);
 		wsh_line_copy_attribs(res, line);
@@ -340,7 +435,8 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 
 WLine* wsh_line_imitate(WLine* line, double time_variance, double dist_variance)
 {
-	if (line->num < 2) {
+	if (line->num < 2)
+	{
 		printf("no way\n");
 		return NULL;
 	}
@@ -392,11 +488,13 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 		return NULL;
 	WLine* cpy = wsh_line_create();
 	wsh_line_add_point(cpy, line->data[0]);
-	for (int i = 0; i < line->num - 1; ++i) {
+	for (int i = 0; i < line->num - 1; ++i)
+	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
 		double d = wsh_dist2d_p(&a, &b);
-		if (d > r) {
+		if (d > r)
+		{
 			wsh_line_add_point(cpy, b);
 		}
 	}
@@ -410,7 +508,8 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 double wsh_line_ops_sum(WLine* line)
 {
 	double r = 0;
-	for (int i = 0; i < line->num - 1; ++i) {
+	for (int i = 0; i < line->num - 1; ++i)
+	{
 		WPoint a = line->data[i];
 		WPoint b = line->data[i + 1];
 		double d = wsh_dist2d_p(&a, &b);
@@ -421,7 +520,8 @@ double wsh_line_ops_sum(WLine* line)
 
 bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 {
-	for (int i = 0; i < line->num; ++i) {
+	for (int i = 0; i < line->num; ++i)
+	{
 		WPoint p = line->data[i];
 		if (wsh_rect_within_bounds(rect, p.x, p.y))
 			return true;
@@ -431,7 +531,8 @@ bool wsh_line_ops_rect_intersects(WLine* line, WRect* rect)
 
 bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
 {
-	for (int i = 0; i < line->num; i++) {
+	for (int i = 0; i < line->num; i++)
+	{
 		WPoint p = line->data[i];
 		if (!wsh_rect_within_bounds(rect, p.x, p.y))
 			return false;

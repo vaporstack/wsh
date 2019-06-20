@@ -47,7 +47,6 @@ WPoint* wsh_point_create_2f(double x, double y)
  *
  *  Zero all fields of a WPoint
  *
- *  @return Nothing.
  */
 void wsh_point_zero(WPoint* p)
 {
@@ -105,4 +104,30 @@ void wsh_point_rotate(WPoint* p, double cx, double cy, double angle_in_radians)
 	// p->x			= cos_theta * (p->x - cx) - sin_theta * (p->y - cy) + cx;
 	// p->y			= sin_theta * (p->x - cx) + cos_theta * (p->y - cy) + cy;
 	
+}
+
+void wsh_point_copy_attrs(WPoint* dst, WPoint* src)
+{
+	dst->pressure = src->pressure;
+	dst->altitude = src->altitude;
+	dst->azimuth = src->azimuth;
+	dst->tilt_x = src->tilt_x;
+	dst->tilt_y = src->tilt_y;
+	dst->time = src->time;
+	dst->x = src->x;
+	dst->y = src->y;
+}
+
+WPoint wsh_point_calculate_perpendicular_on_line_segment(WPoint a, WPoint b, WPoint c)
+{
+	double px  = b.x - a.x;
+	double py  = b.y - a.y;
+	double dAB = px * px + py * py;
+	double u   = ((c.x - a.x) * px + (c.y - a.y) * py) / dAB;
+	double x   = a.x + u * px;
+	double y   = a.y + u * py;
+	WPoint r;
+	r.x = x;
+	r.y = y;
+	return r;
 }

@@ -92,8 +92,8 @@ WSequence* wsh_sequence_create()
 	seq->anim_duration       = 1;
 	seq->current_frame       = NULL;
 	seq->current_frame_index = 0;
-	seq->golden_frames       = NULL;
-	seq->num_golden_frames   = 0;
+//	seq->golden_frames       = NULL;
+//	seq->num_golden_frames   = 0;
 	seq->bounds.pos.x = seq->bounds.size.x = 0;
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 
@@ -125,8 +125,8 @@ WSequence* wsh_sequence_copy(WSequence* old)
 	seq->anim_duration       = old->anim_duration;
 	seq->current_frame       = NULL;
 	seq->current_frame_index = old->current_frame_index;
-	seq->golden_frames       = NULL;
-	seq->num_golden_frames   = old->num_golden_frames;
+//	seq->golden_frames       = NULL;
+//	seq->num_golden_frames   = old->num_golden_frames;
 	seq->bounds.pos.x = seq->bounds.size.x = 0;
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 

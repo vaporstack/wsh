@@ -23,6 +23,14 @@
  */
 WLine* wsh_line_ops_dedupe(WLine* line);
 
+/** 	\fn wsh_line_ops_dedupe_inplace
+ *
+ *	\brief remove any duplicate points in-place
+ *	\param line  WLine to be deduplicated
+ *	\todo implement the damn thing lol
+ */
+void wsh_line_ops_dedupe_inplace(WLine* line);
+
 /**
  *
  *	method to check if the line has any line segments > delta
@@ -36,7 +44,7 @@ bool wsh_line_ops_subdivide_needed(WLine* line, double delta);
  *
  */
 WLine* wsh_line_ops_subdivide(WLine* line, double delta);
-WLine* wsh_line_ops_smooth(WLine* line, double delta);
+void wsh_line_ops_smooth_inplace(WLine* line, double delta);
 WLine* wsh_line_ops_simplify(WLine* line, double delta);
 WLine* wsh_line_ops_douglaspeucker(WLine* line, double delta);
 
@@ -74,7 +82,7 @@ double wsh_line_ops_length_simple(WLine* line);
  *	take a line and project it to be straight from start to end (copies)
  *
  */
-WLine* wsh_line_ops_straighten(WLine* line);
+WLine* wsh_line_ops_straighten_bruteforce(WLine* line, double theta);
 
 /**
  *
@@ -82,6 +90,14 @@ WLine* wsh_line_ops_straighten(WLine* line);
  *
  */
 WLine* wsh_line_ops_map(WLine* line, WPoint a, WPoint b);
+
+/*
+*
+*	take a line and try hilariusly to fit it to another line.
+*
+*/
+
+WLine* wsh_line_ops_remap(WLine* src, WLine* target);
 
 /*
  *
