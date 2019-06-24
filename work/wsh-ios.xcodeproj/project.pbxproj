@@ -63,6 +63,7 @@
 		5767768B20AB52BE00479DE5 /* wsh_ops_point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_ops_point.h; sourceTree = "<group>"; };
 		5767768C20AB52BE00479DE5 /* wsh_sequence_ops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_sequence_ops.c; sourceTree = "<group>"; };
 		5767768D20AB52BE00479DE5 /* wsh_ops_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_ops_point.c; sourceTree = "<group>"; };
+		5778E57D22A5E95C00E23FC2 /* wsh_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wsh_config.h; path = ../wsh_config.h; sourceTree = "<group>"; };
 		5779CDDC22223E1F0042485B /* wsh_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wsh_log.c; sourceTree = "<group>"; };
 		5779CDDD22223E1F0042485B /* wsh_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wsh_log.h; sourceTree = "<group>"; };
 		5781AFD32086B3A3003659FD /* wsh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = wsh.c; path = ../wsh.c; sourceTree = "<group>"; };
@@ -187,6 +188,7 @@
 			children = (
 				5781AFD32086B3A3003659FD /* wsh.c */,
 				5781AFD42086B3A3003659FD /* wsh.h */,
+				5778E57D22A5E95C00E23FC2 /* wsh_config.h */,
 				5781AFD72086B59D003659FD /* wsh_internal.h */,
 				57DFB0E91EB665EB00DDC1EF /* contrib */,
 				57F0DD5C1E49338700949D90 /* src */,

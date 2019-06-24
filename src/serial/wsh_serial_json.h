@@ -8,7 +8,7 @@
 #ifndef wsh_serial_json_h_
 #define wsh_serial_json_h_
 
-#include <wsh/wsh_internal.h>
+#include <wsh/wsh_config.h>
 
 #include <wsh/wsh.h>
 

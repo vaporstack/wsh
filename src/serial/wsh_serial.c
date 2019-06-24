@@ -8,13 +8,12 @@
 
 #include "wsh_serial.h"
 
-#include <wsh/wsh_internal.h>
-
+//#include <wsh/wsh_internal.h>
+#include <wsh/wsh_config.h>
 #include "wsh_serial_bin.h"
 #include <wsh/wsh.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
-
 #include "wsh_serial_json.h"
 #endif
 
@@ -32,7 +31,13 @@ char* w_create_version_string()
 
 WDocument* wsh_serial_document_unserialize_text(const char* text)
 {
+#ifdef WSH_ENABLE_SERIAL_BACKEND_JSON
 	return wsh_serial_json_document_unserialize_text(text);
+#else
+	printf("No unserialization backends provided.\n");
+	return NULL;
+#endif
+	
 }
 
 WDocument* wsh_serial_document_unserialize_file(const char* path)

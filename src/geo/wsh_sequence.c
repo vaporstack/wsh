@@ -92,8 +92,8 @@ WSequence* wsh_sequence_create()
 	seq->anim_duration       = 1;
 	seq->current_frame       = NULL;
 	seq->current_frame_index = 0;
-	seq->golden_frames       = NULL;
-	seq->num_golden_frames   = 0;
+//	seq->golden_frames       = NULL;
+//	seq->num_golden_frames   = 0;
 	seq->bounds.pos.x = seq->bounds.size.x = 0;
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 
@@ -125,8 +125,8 @@ WSequence* wsh_sequence_copy(WSequence* old)
 	seq->anim_duration       = old->anim_duration;
 	seq->current_frame       = NULL;
 	seq->current_frame_index = old->current_frame_index;
-	seq->golden_frames       = NULL;
-	seq->num_golden_frames   = old->num_golden_frames;
+//	seq->golden_frames       = NULL;
+//	seq->num_golden_frames   = old->num_golden_frames;
 	seq->bounds.pos.x = seq->bounds.size.x = 0;
 	seq->bounds.pos.y = seq->bounds.size.y = 0;
 
@@ -340,7 +340,7 @@ void wsh_sequence_frame_insert_index(WSequence* seq, unsigned int idx)
 }
 
 
-void wsh_sequence_frame_insert(WSequence* seq)
+void wsh_sequence_frame_add_before(WSequence* seq)
 {
 
 	int pos = seq->current_frame_index;
@@ -442,6 +442,38 @@ void wsh_sequence_frame_prev(WSequence* seq)
 	seq->current_frame_index--;
 
 	wsh_sequence_ensure_frame(seq);
+}
+
+WObject* wsh_sequence_frame_remove(WSequence* seq, int index)
+{
+	int pos = seq->current_frame_index;
+	
+	int num = seq->num_frames;
+	if (num <= 1)
+	{
+#ifdef DEBUG
+		printf("Can't delete last frame :O\n");
+#endif
+		return NULL;
+	}
+	WObject* fr = seq->frames[pos];
+	
+	for (int i = pos; i < num - 1; ++i)
+	{
+		seq->frames[i] = seq->frames[i + 1];
+	}
+	seq->current_frame_index--;
+	if (seq->current_frame_index < 0)
+		seq->current_frame_index = 0;
+	seq->current_frame = seq->frames[seq->current_frame_index];
+	seq->num_frames--;
+	wsh_sequence_ensure_frame(seq);
+	return fr;
+}
+
+void wsh_sequence_frame_insert(WSequence* seq, WObject* obj, int index)
+{
+	
 }
 
 void wsh_sequence_normalize_time_continuous(WSequence* seq)

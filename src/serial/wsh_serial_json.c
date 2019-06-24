@@ -306,7 +306,8 @@ cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq)
 
 	//	we are minimalists are we not?
 	// cJSON_AddNumberToObject(jseq, "num_frames", seq->num_frames );
-
+	
+	/*
 	if (seq->golden_frames)
 	{
 		if (seq->num_golden_frames != 0)
@@ -321,7 +322,8 @@ cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq)
 
 			cJSON_AddItemToObject(jseq, "golden_frames", jgf);
 		}
-	}
+	}*/
+	
 
 	cJSON_AddNumberToObject(jseq, "current_frame_index",
 				seq->current_frame_index);
@@ -342,8 +344,11 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 
 	seq->num_frames		 = num;
 	seq->current_frame_index = 0;  // TODO read this back in properly?
-	seq->num_golden_frames   = 20; // don't care right now
-	seq->golden_frames       = NULL;
+	
+	//nope, removing from data type, never even implemented and it
+	//	makes more sense as a plugin than in the core
+	//seq->num_golden_frames   = 20; // don't care right now
+	//seq->golden_frames       = NULL;
 	//struct WObject** frames;
 
 	//frames		   = calloc(num, sizeof(struct WObject*));
@@ -480,7 +485,7 @@ const char* fps_to_string(double v)
 	}
 	else
 	{
-		printf("Integer.\n");
+		//printf("Integer.\n");
 		sprintf(buf, "%d", vi);
 		//wsh_log(buf, "%d", vi);
 	}

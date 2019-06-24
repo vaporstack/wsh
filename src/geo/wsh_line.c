@@ -215,12 +215,12 @@ void wsh_line_add_point(WLine* line, WPoint p)
  }
 
  w_gpc_tess_create(line);
- // wsh_line_ops_smooth(line->brush->stroke->tess, 8);
+ // wsh_line_ops_smooth_inplace(line->brush->stroke->tess, 8);
  if (line->brush)
  {
  if (line->brush->stroke)
  {
- // wsh_line_ops_smooth(line->brush->stroke->tess,
+ // wsh_line_ops_smooth_inplace(line->brush->stroke->tess,
  // 8);
  }
  else
@@ -257,7 +257,7 @@ void wsh_line_concat_range(WLine* dst, WLine* src, long start, long end)
 	if (end < 0)
 		end = src->num;
 
-	assert(end > start);
+	//assert(end > start);
 	//while( start < end )
 	for (long i = start; i < end; ++i)
 	{
@@ -465,7 +465,7 @@ WPoint* wsh_line_pop_back(WLine* line)
 	}
 	WPoint  p   = line->data[line->num - 1];
 	WPoint* ret = wsh_point_copy(&p);
-	;
+
 	return ret;
 }
 

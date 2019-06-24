@@ -9,8 +9,9 @@
 #define w_serial_svg_h_
 
 
-#define WSH_ENABLE_SERIAL_BACKEND_SVG
+//#define WSH_ENABLE_SERIAL_BACKEND_SVG
 
+#include <wsh/wsh_config.h>
 
 #ifdef WSH_ENABLE_SERIAL_BACKEND_SVG
 

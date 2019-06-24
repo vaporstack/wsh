@@ -17,10 +17,10 @@ typedef struct WSequence
 	unsigned reserved;
 	unsigned num_frames;
 	signed current_frame_index;
-	unsigned num_golden_frames;
-
-	int* golden_frames;
-
+	
+	//unsigned num_golden_frames;
+	//int* golden_frames;
+	
 	struct WObject** frames;
 	struct WObject*  current_frame;
 	struct WObject*  parent;
@@ -62,11 +62,11 @@ void wsh_sequence_frame_prev(WSequence* seq);
  */
 void wsh_sequence_frame_add(WSequence* seq);
 
-void wsh_sequ
+
 /*
  *	add a frame at an arbitrary index
  */
-void wsh_sequence_frame_insert(WSequence* seq);
+void wsh_sequence_frame_add_before(WSequence* seq);
 
 /*
  *	add a frame at an arbitrary location
@@ -75,6 +75,9 @@ void wsh_sequence_frame_insert(WSequence* seq);
 
 void wsh_sequence_frame_delete(WSequence* seq);
 void wsh_sequence_frame_duplicate(WSequence* seq);
+
+WObject* wsh_sequence_frame_remove(WSequence* seq, int index);
+void wsh_sequence_frame_insert(WSequence* seq, WObject* obj, int index);
 
 void wsh_sequence_calc_bounds(WSequence* seq);
 void wsh_sequence_normalize(WSequence* seq);

@@ -7,8 +7,13 @@
 
 #include "wsh_serial_svg.h"
 
+
+#ifdef WSH_ENABLE_SERIAL_BACKEND_SVG
+
 #ifndef RPLATFORM_IOS
 #ifndef RPLATFORM_WIN
+
+
 
 #include <limits.h>
 #include <stdio.h>
@@ -153,3 +158,5 @@ WDocument* wsh_serial_svg_document_unserialize(const char* path)
 #endif
 
 #endif
+#endif //WSH_ENABLE_SERIAL_BACKEND_SVG
+
