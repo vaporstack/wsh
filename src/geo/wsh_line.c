@@ -514,7 +514,7 @@ void wsh_line_rotate_d(WLine* line, double cx, double cy, double d)
 	}
 }
 
-void wsh_line_move(WLine* line, double x, double y)
+void wsh_line_translate(WLine* line, double x, double y)
 {
 
 	unsigned long long np = line->num;

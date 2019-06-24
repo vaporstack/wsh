@@ -132,10 +132,9 @@ WLine* wsh_object_remove_line(WObject* obj, WLine* line)
 #ifdef DEBUG
 		wsh_log("Shuffling %d tp %d.\n", i + 1, i);
 #endif
-		obj->lines[i] = obj->lines[i+1];
+		obj->lines[i] = obj->lines[i + 1];
 	}
-	
-	
+
 	obj->num--;
 	return pop;
 }
@@ -233,7 +232,7 @@ WObject* wsh_object_copy(WObject* old)
 		return NULL;
 	}
 
-	WObject* obj    = wsh_object_create();
+	WObject* obj = wsh_object_create();
 	//obj->parent     = old->parent;
 	obj->bounds     = old->bounds;
 	obj->transform  = old->transform;
@@ -271,7 +270,7 @@ WObject* wsh_object_copy_from_percentage(WObject* old, double t)
 		return NULL;
 	}
 
-	WObject* obj    = wsh_object_create();
+	WObject* obj = wsh_object_create();
 	//obj->parent     = old->parent;
 	obj->bounds     = old->bounds;
 	obj->transform  = old->transform;
@@ -328,7 +327,7 @@ void wsh_object_translate(WObject* obj, double dx, double dy)
 	for (unsigned long i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
-		wsh_line_move(l, dx, dy);
+		wsh_line_translate(l, dx, dy);
 	}
 }
 

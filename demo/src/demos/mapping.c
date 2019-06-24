@@ -161,16 +161,16 @@ static void draw(void)
 			return;
 		}
 
-		//wsh_line_move(cpy)
+		//wsh_line_translate(cpy)
 		//printf("ang: %f\n", ang);
 
 		//WPoint last = cpy->data[cpy->num-1];
 
-		//wsh_line_move(cpy, last.x, last.y);
+		//wsh_line_translate(cpy, last.x, last.y);
 
 		//	move the line to 0, 0, for ease of operations
-		wsh_line_move(cpy, -first.x, -first.y);
-		wsh_line_move(refcpy, -first.x, -first.y);
+		wsh_line_translate(cpy, -first.x, -first.y);
+		wsh_line_translate(refcpy, -first.x, -first.y);
 
 		double ang = wsh_line_ops_angle(cpy);
 
@@ -179,7 +179,7 @@ static void draw(void)
 		wsh_line_rotate(cpy, 0, 0, -ang);
 
 		//	printf("cpy first: %f %f\n", cpy->data[0].x, cpy->data[0].y);
-		//wsh_line_move(cpy, first.x, first.y);
+		//wsh_line_translate(cpy, first.x, first.y);
 		drw_push();
 
 		drw_translate(cx, cy, 0);

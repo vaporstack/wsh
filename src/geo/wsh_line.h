@@ -28,11 +28,11 @@
 
 typedef struct WLine
 {
-	bool		   closed;
+	bool closed;
 	//bool		   has_stroke;
 	//bool		   has_fill;
 	int		   z;
-	unsigned long id;
+	unsigned long      id;
 	unsigned long long num;
 	unsigned long long reserved;
 	WPoint*		   data;
@@ -40,7 +40,7 @@ typedef struct WLine
 	//	to give us local strokes quickly
 	//	since the big tool refactor is still some weeks away
 	double width;
-	
+
 	//void*		   tess;
 	//	todo:
 	//	refactor to have the brush owned elsewhere, it is not a core
@@ -50,9 +50,9 @@ typedef struct WLine
 	//	no,  remove stroke and fill, this is now a pure storage class.
 	//	i changed my mind again, refactoring these to be 2 vars instead of 4 will make removing them
 	//	slightly easier in the future
-	WColor16* fill;
-	WColor16* stroke;
-	WRect    bounds;
+	WColor16*     fill;
+	WColor16*     stroke;
+	WRect	 bounds;
 	unsigned long seed;
 	//WTransform transform;
 } WLine;
@@ -60,20 +60,20 @@ typedef struct WLine
 typedef struct WLineHnd
 {
 	WLine* src;
-	
+
 } WLineHnd;
 
 typedef struct
 {
 	const WLine* src;
-	
+
 } WLineHndConst;
 
 typedef unsigned long long ull;
 
-WLineHnd* wsh_line_hnd_create(void);
-WLineHnd* wsh_line_hnd_create_with_data(void);
-WLineHndConst wsh_line_hnd_create_with_addr(const WLine* addr);
+WLineHnd*      wsh_line_hnd_create(void);
+WLineHnd*      wsh_line_hnd_create_with_data(void);
+WLineHndConst  wsh_line_hnd_create_with_addr(const WLine* addr);
 WLineHndConst* wsh_line_hnd_ptr_create_with_addr(const WLine* addr);
 
 WLineHnd* wsh_line_hnd_copy(WLineHnd*);
@@ -84,7 +84,7 @@ void wsh_line_hnd_destroy(WLineHnd*);
 void wsh_line_hnd_add_point(WLineHnd*, WPoint);
 void wsh_line_hnd_add_point2f(WLineHnd* hnd, double x, double y);
 void wsh_line_calc_bounds(WLine* src);
-void wsh_line_move(WLine* src, double x, double y);
+void wsh_line_translate(WLine* src, double x, double y);
 
 //	going forward, all rotation operations should be in radians unless otherwise specified
 //	by the _degree suffix
@@ -93,20 +93,20 @@ void wsh_line_rotate_d(WLine* line, double cx, double cy, double d);
 
 void wsh_line_scale(WLine* src, double x, double y);
 
-void   wsh_line_find_mins(WLine* src, double* x, double* y);
-void   wsh_line_find_maxs(WLine* src, double* x, double* y);
-WLine* wsh_line_create(void);
-WLine* wsh_line_create_with_reserved(unsigned int num);
-WLine* wsh_line_reverse(WLine*);
-WLine* wsh_line_copy(const WLine*);
-WLine* wsh_line_copy_percentage(const WLine*, double v);
-void   wsh_line_concat(WLine* dst, WLine* src);
-void   wsh_line_concat_range(WLine* dst, WLine* src, long start, long end);
+void    wsh_line_find_mins(WLine* src, double* x, double* y);
+void    wsh_line_find_maxs(WLine* src, double* x, double* y);
+WLine*  wsh_line_create(void);
+WLine*  wsh_line_create_with_reserved(unsigned int num);
+WLine*  wsh_line_reverse(WLine*);
+WLine*  wsh_line_copy(const WLine*);
+WLine*  wsh_line_copy_percentage(const WLine*, double v);
+void    wsh_line_concat(WLine* dst, WLine* src);
+void    wsh_line_concat_range(WLine* dst, WLine* src, long start, long end);
 WPoint* wsh_line_pop_back(WLine* line);
-void   wsh_line_destroy(WLine*);
-void   wsh_line_add_point(WLine* line, WPoint p);
-void   wsh_line_add_point2f(WLine* line, double x, double y);
-void   wsh_line_normalize_time(WLine* l);
+void    wsh_line_destroy(WLine*);
+void    wsh_line_add_point(WLine* line, WPoint p);
+void    wsh_line_add_point2f(WLine* line, double x, double y);
+void    wsh_line_normalize_time(WLine* l);
 
 WLine* wsh_line_normalize(WLine*, double* dx, double* dy);
 WLine* wsh_line_normalize_square(WLine*, double* dx, double* dy);

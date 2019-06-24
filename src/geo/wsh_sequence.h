@@ -62,6 +62,7 @@ void wsh_sequence_frame_prev(WSequence* seq);
  */
 void wsh_sequence_frame_add(WSequence* seq);
 
+void wsh_sequ
 /*
  *	add a frame at an arbitrary index
  */
