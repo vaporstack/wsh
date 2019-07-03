@@ -408,9 +408,7 @@ WSequence* wsh_serial_json_unserialize_sequence(cJSON* data)
 	}
 	else
 	{
-		wsh_log("No code to handle this version or unable to read "
-			"version.\n");
-
+		wsh_log("No code to handle this version or unable to read version.\n");
 		return NULL;
 	}
 
@@ -481,16 +479,17 @@ const char* fps_to_string(double v)
 		//double frac = v - vi;
 		sprintf(buf, "%f", v);
 		//we got a floater
-		//wsh_log("floating point.");
+
+		wsh_log("floating point.");
 	}
 	else
 	{
-		//printf("Integer.\n");
-		sprintf(buf, "%d", vi);
-		//wsh_log(buf, "%d", vi);
+		printf("Integer.\n");
+		wsh_log(buf, "%d", vi);
 	}
-
+	
 	wsh_log("buf:[%s]", buf);
+
 
 	return buf;
 }
@@ -798,13 +797,17 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 	if (0 == strcmp(working_version, "0.0.1"))
 	{
 		wsh_log("Serialize: %s", working_version);
+		
 		const char* res = wsh_serial_json_document_serialize_v001(doc, buf);
 		free(buf);
 		return res;
+
+		
 	}
 	else if (0 == strcmp(working_version, "0.0.2"))
 	{
 		wsh_log("Serialize: %s", working_version);
+
 		const char* res = wsh_serial_json_document_serialize_v002(doc, buf);
 		free(buf);
 		return res;
@@ -815,6 +818,8 @@ const char* wsh_serial_json_document_serialize(WDocument* doc)
 		const char* res = wsh_serial_json_document_serialize_v003(doc, buf);
 		free(buf);
 		return res;
+
+		
 	}
 	else
 	{
@@ -860,7 +865,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	}
 	if (DEBUG_SERIAL)
 		wsh_log("%d points.", num);
-
+	
 	for (int i = 0; i < num; ++i)
 	{
 		WPoint p;
@@ -915,6 +920,7 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 	else
 	{
 		wsh_log("Error loading stroke!");
+
 		//		line->stroke = true;
 		//printf("%s", cJSON_Print(data));
 		line->stroke    = malloc(sizeof(WColor16));
@@ -931,6 +937,8 @@ WLine* w_unserialize_line_json_v_0_0_1(cJSON* data)
 		line->fill->g = cJSON_GetArrayItem(fill, 1)->valuedouble;
 		line->fill->b = cJSON_GetArrayItem(fill, 2)->valuedouble;
 		line->fill->a = cJSON_GetArrayItem(fill, 3)->valuedouble;
+
+		
 	}
 
 	line->closed = cJSON_GetObjectItem(data, "closed")->valueint;
@@ -1146,6 +1154,17 @@ WDocument* wsh_serial_json_document_unserialize_text(const char* data)
 	WDocument* doc  = NULL;
 	cJSON*     meta = NULL;
 
+	if (!data)
+	{
+		//char buf[256];
+		wsh_log("An error occurred unserializing text file: %s", data);
+		// l_warning(buf);
+		//free(data);
+		return NULL;
+	}
+	
+	//cJSON* root = cJSON_Parse(data);
+	
 	//	TODO read the version number and parse accordingly
 	cJSON* info = cJSON_GetObjectItem(root, "info");
 	if (info)
@@ -1166,7 +1185,7 @@ WDocument* wsh_serial_json_document_unserialize_text(const char* data)
 		{
 			working_version = wsh_get_version_string_header();
 		}
-		
+
 		wsh_log("No 'info' suggesting schema 2 or higher, checking for meta.: %s", working_version);
 
 		meta = cJSON_GetObjectItem(root, "meta");

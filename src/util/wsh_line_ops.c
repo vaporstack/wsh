@@ -7,7 +7,7 @@
 
 #include "wsh_line_ops.h"
 
-//#include <gl-matrix/gl-matrix.h>
+//#include <deps/gl-matrix/gl-matrix.h>
 #include <math.h>
 #include <wsh/wsh.h>
 
@@ -537,5 +537,6 @@ bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
 		if (!wsh_rect_within_bounds(rect, p.x, p.y))
 			return false;
 	}
+	
 	return true;
 }

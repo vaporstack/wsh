@@ -463,6 +463,7 @@ WPoint* wsh_line_pop_back(WLine* line)
 		wsh_log("Error, tried to pop an empty line\n");
 		return NULL;
 	}
+	
 	WPoint  p   = line->data[line->num - 1];
 	WPoint* ret = wsh_point_copy(&p);
 
