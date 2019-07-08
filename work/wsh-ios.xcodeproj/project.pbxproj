@@ -300,7 +300,7 @@
 				TargetAttributes = {
 					57F0DCFE1E4925C000949D90 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 42R5XUY266;
+						DevelopmentTeam = W7MSG2FEA9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -469,7 +469,7 @@
 		57F0DD091E4925C000949D90 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 42R5XUY266;
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib/src",
 					"$(r4_root)/libs",
@@ -489,7 +489,7 @@
 		57F0DD0A1E4925C000949D90 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 42R5XUY266;
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib/src",
 					"$(r4_root)/libs",
