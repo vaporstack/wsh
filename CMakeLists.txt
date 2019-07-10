@@ -89,8 +89,6 @@ else()
 		${CMAKE_CURRENT_SOURCE_DIR}/contrib
 		/opt/X11/include)
 
-
-
 	macro(use_c99)
 		if (CMAKE_VERSION VERSION_LESS "3.1")
 			if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
