@@ -18,6 +18,7 @@
 //	version 0.0.2 - improvements to meta
 //	version 0.0.3 - removed has_stroke and has_fill
 //			fill and stroke are now pointers so they can be NULL
+//	version 0.0.4 - separating altitude / azimuth from tilt_x / tilt_y, adding poster frame
 
 /*
  #define REGISTER(ns, id, type)                                          \

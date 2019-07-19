@@ -48,18 +48,18 @@ void wsh_object_destroy(WObject* obj)
 {
 	if (!obj)
 	{
-
 #ifdef DEBUG
 		wsh_log("Trying to free a null\n");
 #endif
 		return;
 	}
+	
 	if (!obj->lines)
 	{
 		wsh_log("lines field was null!");
 		return;
 	}
-	for (unsigned i = 0; i < obj->num; ++i)
+	for (unsigned i = 0; i < obj->num; i++)
 	{
 		WLine* l = obj->lines[i];
 		if (!l)
