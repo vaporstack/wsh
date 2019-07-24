@@ -157,12 +157,12 @@ static inline double angle_from_points(double x1, double y1, double x2, double y
 	double angle = atan2(dy, dx);
 	// return atan2(dy, dx);
 
- 
+
 	if (dy < 0)
 	{
 		angle += 1.0 * (double)M_PI;
 	}
- 
+
 	return angle;
 }
 
@@ -249,45 +249,40 @@ WLine* wsh_line_ops_straighten_bruteforce(WLine* line, double theta)
 	return res;
 }
 
-
-
 WLine* wsh_line_ops_remap(WLine* src, WLine* dst)
 {
 	WLine* res = wsh_line_copy(src);
-	
+
 	//CPoint ca;
 	wsh_line_calc_bounds(src);
 	WPoint ca;
 	ca.x = src->bounds.pos.x + src->bounds.size.x * .5;
 	ca.y = src->bounds.pos.y + src->bounds.size.y * .5;
-	
-	
+
 	wsh_line_calc_bounds(dst);
 	WPoint cb;
 	cb.x = dst->bounds.pos.x + dst->bounds.size.x * .5;
 	cb.y = dst->bounds.pos.y + dst->bounds.size.y * .5;
-	
+
 	WPoint sa = src->data[0];
 	WPoint sb = dst->data[0];
-	
-	
+
 	//	angle between center and first point for src
 	double anga = wsh_angle_from_points_wp(ca, sa);
-	
+
 	//	angle between center and first point for dst
 	double angb = wsh_angle_from_points_wp(cb, sb);
-	
+
 	double delta = anga - angb;
 	wsh_line_rotate(res, cb.x, cb.y, delta);
-	
+
 	double dx = cb.x - ca.x;
 	double dy = cb.y - ca.y;
-	
+
 	wsh_line_translate(res, dx, dy);
-	
+
 	return res;
 }
-
 
 /*
  final float weight = 18;
@@ -316,7 +311,7 @@ void wsh_line_ops_smooth_inplace(WLine* line, double r)
 	double		 scale		 = 1.0 / (weight + 2);
 	signed long long nPointsMinusTwo = line->num - 2;
 	if (!line->data)
-		return ;
+		return;
 
 	for (int i = 1; i < nPointsMinusTwo; i++)
 	{
@@ -376,9 +371,9 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 	double		   dmax  = 0;
 	int		   index = 0;
 	unsigned long long num   = line->num;
-	if ( line->num == 0)
+	if (line->num == 0)
 		return wsh_line_copy(line);
-	
+
 	for (int i = 1; i < num - 1; ++i)
 	{
 		WPoint p = line->data[i];
@@ -391,7 +386,7 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 			dmax  = d;
 		}
 	}
-	
+
 	if (dmax > e)
 	{
 
@@ -403,9 +398,9 @@ WLine* wsh_line_ops_douglaspeucker(WLine* line, double e)
 		WLine* l1 = wsh_line_ops_douglaspeucker(s1, e);
 
 		WLine* s2 = wsh_line_create();
-		wsh_line_concat_range(s2, line, index+1, num);
+		wsh_line_concat_range(s2, line, index + 1, num);
 		WLine* l2 = wsh_line_ops_douglaspeucker(s2, e);
-		
+
 		//wsh_line_pop_back(l1);
 		if (l1)
 			wsh_line_concat(res, l1);
@@ -505,6 +500,56 @@ WLine* wsh_line_ops_simplify(WLine* line, double r)
 	return cpy;
 }
 
+static bool collinear(double x1, double y1, double x2, double y2, double x3, double y3)
+{
+	// Calculation the area of
+	// triangle. We have skipped
+	// multiplication with 0.5
+	// to avoid floating point
+	// computations
+	double a = x1 * (y2 - y3) +
+		x2 * (y3 - y1) +
+		x3 * (y1 - y2);
+
+	if (a == 0)
+		return true;
+
+	return false;
+}
+
+WLine* wsh_line_ops_remove_collinear(WLine* line)
+{
+	
+	if ( line->num < 3 )
+	{
+		printf("Cannot remove collinear points, insufficient points.\n");
+		return NULL;
+	}
+	
+	WLine* out = wsh_line_create();
+	wsh_line_add_point(out, line->data[0]);
+	int pos = 1;
+	while ( pos < line->num-1 )
+	{
+		WPoint a = line->data[pos-1];
+		WPoint b = line->data[pos+0];
+		WPoint c = line->data[pos+1];
+		if ( !collinear(a.x, a.y, b.x, b.y, c.x, c.y ))
+		{
+			wsh_line_add_point(out, b);
+		}
+		pos++;
+		
+	}
+	
+	wsh_line_add_point(out, line->data[pos]);
+#ifdef DEBUG
+	printf("%lu -> %lu\n", line->num, out->num);
+#endif
+	
+	return out;
+}
+
 double wsh_line_ops_sum(WLine* line)
 {
 	double r = 0;
@@ -537,6 +582,6 @@ bool wsh_line_ops_rect_contains(WLine* line, WRect* rect)
 		if (!wsh_rect_within_bounds(rect, p.x, p.y))
 			return false;
 	}
-	
+
 	return true;
 }

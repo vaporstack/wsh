@@ -49,6 +49,14 @@ WLine* wsh_line_ops_simplify(WLine* line, double delta);
 WLine* wsh_line_ops_douglaspeucker(WLine* line, double delta);
 
 /*
+ *
+ *	return a copy of the input line with any collinear vertices removed
+ *
+ */
+WLine* wsh_line_ops_remove_collinear(WLine* line);
+
+
+/*
 *
 *	return an imitation of the input line
 *
