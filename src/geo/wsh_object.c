@@ -557,9 +557,7 @@ void wsh_object_normalize(WObject* obj)
 {
 	double minx, miny, maxx, maxy;
 	double avgx, avgy;
-	//	todo: fetch the first one instead of this cuz this is
-	//	error prone as fuck!
-	//minx = maxx = miny = maxy = -77777;
+	
 	minx = miny = -INFINITY;
 	maxx = maxy = INFINITY;
 

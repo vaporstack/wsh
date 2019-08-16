@@ -39,7 +39,7 @@ Copyright: (C) Advanced Interfaces Group,
 #include "gpc.h"
 #include <float.h>
 #include <math.h>
-#include <r4/src/r4_platform.h>
+//#include <r4/src/r4_platform.h>
 #include <stdlib.h>
 
 #ifdef _MSC_VER

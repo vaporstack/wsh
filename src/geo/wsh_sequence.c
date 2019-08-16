@@ -79,17 +79,25 @@ static void _check_realloc(WSequence* seq)
 	}
 }
 
-WSequence* wsh_sequence_create()
+static void wsh_sequence_init(WSequence* seq )
+{
+	seq->anim_type  = -1;
+	seq->anim_duration       = 1;
+
+}
+
+WSequence* wsh_sequence_create_reserved(unsigned reserve)
 {
 	WSequence* seq = malloc(sizeof(WSequence));
 	
-	// seq->frames = calloc(seq->reserved, sizeof(WObject));
+	wsh_sequence_init(seq);
+	
+		// seq->frames = calloc(seq->reserved, sizeof(WObject));
 	seq->num_frames = 0;
 	seq->anim_type  = -1;
-	seq->reserved   = 24;
+	seq->reserved   = reserve;
 	//seq->anim_start = 0;
 	//seq->anim_end = 0;
-	seq->anim_duration       = 1;
 	seq->current_frame       = NULL;
 	seq->current_frame_index = 0;
 //	seq->golden_frames       = NULL;
@@ -99,6 +107,18 @@ WSequence* wsh_sequence_create()
 
 	seq->frames	= calloc(seq->reserved, sizeof(WObject*));
 	seq->current_frame = seq->frames[seq->current_frame_index];
+	return seq;
+}
+
+//WSequence* wsh_sequence_create(void)
+//{
+//
+//}
+
+WSequence* wsh_sequence_create_default()
+{
+	
+
 
 	/*
 	seq->num_golden_frames = 3;
@@ -108,7 +128,12 @@ WSequence* wsh_sequence_create()
 	seq->golden_frames[1] = 8;
 	seq->golden_frames[2] = 221345;
 	 */
-
+	//WSequence* seq = calloc(1, sizeof(WSequence));
+	WSequence* seq = wsh_sequence_create_reserved(24);
+	
+	//wsh_sequence_init(seq);
+	
+	//WSequence* seq = wsh_sequence_create_reserved(24);
 	wsh_sequence_frame_create(seq, -1);
 
 	return seq;

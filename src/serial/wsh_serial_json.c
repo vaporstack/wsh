@@ -336,13 +336,19 @@ cJSON* wsh_serialize_sequence_json_v_0_0_1(WSequence* seq)
 
 WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 {
-	WSequence* seq = wsh_sequence_create();
+	
 
 	int    num;
 	cJSON* jframes = cJSON_GetObjectItem(data, "frames");
-
+	WSequence* seq = wsh_sequence_create_reserved(num);
+	
 	num = cJSON_GetArraySize(jframes);
 
+	
+	if (!seq->frames)
+	{
+		printf("asdkfj\n");
+	}
 	seq->num_frames		 = num;
 	seq->current_frame_index = 0;  // TODO read this back in properly?
 	
@@ -374,10 +380,12 @@ WSequence* wsh_serial_json_unserialize_sequence_v_0_0_1(cJSON* data)
 	// seq->frames = malloc(sizeof(WObject) * num
 	if (DEBUG_SERIAL)
 		wsh_log("%d frames to read.", num);
+	
 	for (int i = 0; i < num; ++i)
 	{
 		cJSON* jframe  = cJSON_GetArrayItem(jframes, i);
-		seq->frames[i] = wsh_serial_json_unserialize_object(jframe);
+		WObject* obj =  wsh_serial_json_unserialize_object(jframe);
+		seq->frames[i] = obj;
 	}
 
 	//seq->frames	= frames;

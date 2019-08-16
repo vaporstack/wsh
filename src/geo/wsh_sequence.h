@@ -39,7 +39,11 @@ typedef struct WSequenceHnd
 	WSequence* src;
 } WSequenceHnd;
 
-WSequence* wsh_sequence_create(void);
+
+//WSequence* wsh_sequence_create(void);
+WSequence* wsh_sequence_create_default(void);
+WSequence* wsh_sequence_create_reserved(unsigned reserve);
+
 void       wsh_sequence_destroy(WSequence* seq);
 
 WSequenceHnd* wsh_sequence_hnd_create(void);

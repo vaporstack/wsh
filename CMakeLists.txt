@@ -183,8 +183,9 @@ endif()
 target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..
 	${CMAKE_CURRENT_SOURCE_DIR}/contrib)
 
+add_custom_command(TARGET ${project_name} POST_BUILD        # Adds a post-build event to MyTest
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+        "${CMAKE_BINARY_DIR}/libs/${project_name}/lib${project_name}${CMAKE_STATIC_LIBRARY_SUFFIX}"      # <--this is in-file
+        ${CMAKE_CURRENT_SOURCE_DIR}/lib/osx)                 # <--this is out-file path
 
-#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)
-#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib)
-#target_include_directories (${project_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps)
 

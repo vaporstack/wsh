@@ -67,6 +67,8 @@ void wsh_object_time_normalize_exploded_accurate(WObject* obj);
 void     wsh_object_center(WObject* obj);
 WObject* wsh_object_copy(WObject* obj);
 WObject* wsh_object_copy_from_percentage(WObject* obj, double t);
+
+//	scale the object so that it has coordinates of 1
 void     wsh_object_normalize(WObject* obj);
 void     wsh_object_simplify(WObject*, double r);
 void     wsh_object_douglaspeucker(WObject*, double r);
